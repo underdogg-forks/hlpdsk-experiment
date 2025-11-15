@@ -2,15 +2,46 @@
 
 namespace App\Model\helpdesk\Settings;
 
-use App\BaseModel;
+use App\Models\BaseModel;
 
 class CommonSettings extends BaseModel
 {
     protected $table = 'common_settings';
 
+    public $timestamps = true;
+
+    protected $casts = [
+        'status' => 'integer',
+    ];
+
+    protected $guarded = [];
+
     protected $fillable = [
         'status', 'option_name', 'option_value', 'optional_field', 'created_at', 'updated_at',
     ];
+
+    #region Static Methods
+    /*
+    |--------------------------------------------------------------------------
+    | Static Methods
+    |--------------------------------------------------------------------------
+    */
+
+    #endregion
+    #region Relationships
+    /*
+    |--------------------------------------------------------------------------
+    | Relationships
+    |--------------------------------------------------------------------------
+    */
+
+    #endregion
+    #region Accessors
+    /*
+    |--------------------------------------------------------------------------
+    | Accessors
+    |--------------------------------------------------------------------------
+    */
 
     public function getStatus($option_name)
     {
@@ -35,4 +66,39 @@ class CommonSettings extends BaseModel
 
         return $value;
     }
+
+    #endregion
+    #region Mutators
+    /*
+    |--------------------------------------------------------------------------
+    | Mutators
+    |--------------------------------------------------------------------------
+    */
+
+    #endregion
+    #region Scopes
+    /*
+    |--------------------------------------------------------------------------
+    | Scopes
+    |--------------------------------------------------------------------------
+    */
+
+    public function scopeByOption($query, $option)
+    {
+        return $query->where('option_name', $option);
+    }
+
+    public function scopeActive($query)
+    {
+        return $query->where('status', 1);
+    }
+
+    #endregion
+    #region Factory
+    /*
+    |--------------------------------------------------------------------------
+    | Factory
+    |--------------------------------------------------------------------------
+    */
+    #endregion
 }

@@ -2,25 +2,53 @@
 
 namespace App\Model\helpdesk\Ticket;
 
-use Illuminate\Database\Eloquent\Model;
+use App\Models\BaseModel;
 use Illuminate\Support\Str;
 
-class Ticket_attachments extends Model
+class Ticket_attachments extends BaseModel
 {
     protected $table = 'ticket_attachment';
+
+    public $timestamps = true;
+
+    protected $casts = [
+        'thread_id' => 'integer',
+        'size' => 'integer',
+    ];
+
+    protected $guarded = [];
 
     protected $fillable = [
         'id', 'thread_id', 'name', 'size', 'type', 'file', 'data', 'poster', 'updated_at', 'created_at',
     ];
 
-    public function setFileAttribute($value)
+    #region Static Methods
+    /*
+    |--------------------------------------------------------------------------
+    | Static Methods
+    |--------------------------------------------------------------------------
+    */
+
+    #endregion
+    #region Relationships
+    /*
+    |--------------------------------------------------------------------------
+    | Relationships
+    |--------------------------------------------------------------------------
+    */
+
+    public function thread()
     {
-        if ($value) {
-            $this->attributes['file'] = base64_encode($value);
-        } else {
-            $this->attributes['file'] = $value;
-        }
+        return $this->belongsTo(\App\Model\helpdesk\Ticket\Ticket_Thread::class, 'thread_id', 'id');
     }
+
+    #endregion
+    #region Accessors
+    /*
+    |--------------------------------------------------------------------------
+    | Accessors
+    |--------------------------------------------------------------------------
+    */
 
     public function getFileAttribute($value)
     {
@@ -67,4 +95,43 @@ class Ticket_attachments extends Model
             }
         }
     }
+
+    #endregion
+    #region Mutators
+    /*
+    |--------------------------------------------------------------------------
+    | Mutators
+    |--------------------------------------------------------------------------
+    */
+
+    public function setFileAttribute($value)
+    {
+        if ($value) {
+            $this->attributes['file'] = base64_encode($value);
+        } else {
+            $this->attributes['file'] = $value;
+        }
+    }
+
+    #endregion
+    #region Scopes
+    /*
+    |--------------------------------------------------------------------------
+    | Scopes
+    |--------------------------------------------------------------------------
+    */
+
+    public function scopeByThread($query, $threadId)
+    {
+        return $query->where('thread_id', $threadId);
+    }
+
+    #endregion
+    #region Factory
+    /*
+    |--------------------------------------------------------------------------
+    | Factory
+    |--------------------------------------------------------------------------
+    */
+    #endregion
 }
