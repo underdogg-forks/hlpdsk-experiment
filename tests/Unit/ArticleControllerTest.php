@@ -61,7 +61,7 @@ class ArticleControllerTest extends TestCase
         $response->assertStatus(200);
     }
 
-    public function testStoreArticleWithCategories()
+    public function it_stores_article_with_categories()
     {
         // Create a Category model for testing
         $data = [
@@ -134,7 +134,7 @@ class ArticleControllerTest extends TestCase
         }
     }
 
-    public function testEditArticle()
+    public function it_edits_article()
     {
             // Arrange
         $article = Article::latest()->first(); // Create a sample Article for testing
@@ -154,7 +154,7 @@ class ArticleControllerTest extends TestCase
         $response->assertStatus(200);
     }
 
-    public function testUpdateArticle()
+    public function it_updates_article()
     {
         $article = Article::latest()->first();
         $category = Category::latest()->first();
