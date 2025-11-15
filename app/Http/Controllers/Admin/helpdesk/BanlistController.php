@@ -132,7 +132,7 @@ class BanlistController extends Controller
      *
      * @return type Response
      */
-    public function update($id, User $ban, BanlistRequest $request)
+    public function update($id, BanlistRequest $request, User $ban)
     {
         try {
             $bans = $ban->whereId($id)->first();

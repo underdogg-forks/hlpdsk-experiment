@@ -103,7 +103,7 @@ class HelptopicController extends Controller
      *
      * @return type Response
      */
-    public function store(Help_topic $topic, HelptopicRequest $request)
+    public function store(HelptopicRequest $request, Help_topic $topic)
     {
         try {
             if ($request->custom_form) {

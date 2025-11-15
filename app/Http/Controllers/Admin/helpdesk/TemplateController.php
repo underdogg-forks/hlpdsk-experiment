@@ -83,7 +83,7 @@ class TemplateController extends Controller
      *
      * @return type Response
      */
-    public function store(Template $template, TemplateRequest $request)
+    public function store(TemplateRequest $request, Template $template)
     {
         try {
             /* Check whether function success or not */

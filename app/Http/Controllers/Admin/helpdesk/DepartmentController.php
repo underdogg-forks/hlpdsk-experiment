@@ -99,7 +99,7 @@ class DepartmentController extends Controller
      *
      * @return type Response
      */
-    public function store(Department $department, DepartmentRequest $request)
+    public function store(DepartmentRequest $request, Department $department)
     {
         try {
             $department->fill($request->except('group_id', 'manager', 'sla'))->save();

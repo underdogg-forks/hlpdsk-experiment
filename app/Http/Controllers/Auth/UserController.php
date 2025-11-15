@@ -160,7 +160,7 @@ class UserController extends Controller
      *
      * @return type Response
      */
-    public function store(User $user, Sys_userRequest $request)
+    public function store(Sys_userRequest $request, User $user)
     {
         try {
             /* insert the input request to sys_user table */

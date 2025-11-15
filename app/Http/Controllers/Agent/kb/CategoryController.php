@@ -141,7 +141,7 @@ class CategoryController extends Controller
      *
      * @return type Redirect
      */
-    public function store(Category $category, CategoryRequest $request)
+    public function store(CategoryRequest $request, Category $category)
     {
         /* Get the whole request from the form and insert into table via model */
         $sl = $request->input('name');

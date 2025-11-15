@@ -76,7 +76,7 @@ class SlaController extends Controller
      *
      * @return type Response
      */
-    public function store(Sla_plan $sla, SlaRequest $request)
+    public function store(SlaRequest $request, Sla_plan $sla)
     {
         try {
             /* Fill the request values to Sla_plan Table  */

@@ -84,7 +84,7 @@ class TeamController extends Controller
      *
      * @return type Response
      */
-    public function store(Teams $team, TeamRequest $request)
+    public function store(TeamRequest $request, Teams $team)
     {
         try {
             /* Check whether function success or not */

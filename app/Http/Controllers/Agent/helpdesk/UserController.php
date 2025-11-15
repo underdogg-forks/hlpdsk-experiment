@@ -277,7 +277,7 @@ class UserController extends Controller
      *
      * @return type redirect
      */
-    public function store(User $user, Sys_userRequest $request)
+    public function store(Sys_userRequest $request, User $user)
     {
         /* insert the input request to sys_user table */
         /* Check whether function success or not */
