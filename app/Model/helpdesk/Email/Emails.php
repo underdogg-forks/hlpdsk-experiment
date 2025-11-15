@@ -2,11 +2,32 @@
 
 namespace App\Model\helpdesk\Email;
 
-use App\BaseModel;
+use App\Models\BaseModel;
 
 class Emails extends BaseModel
 {
     protected $table = 'emails';
+
+    public $timestamps = true;
+
+    protected $casts = [
+        'department' => 'integer',
+        'priority' => 'integer',
+        'help_topic' => 'integer',
+        'fetching_port' => 'integer',
+        'sending_port' => 'integer',
+        'auto_response' => 'boolean',
+        'fetching_status' => 'boolean',
+        'move_to_folder' => 'boolean',
+        'delete_email' => 'boolean',
+        'do_nothing' => 'boolean',
+        'sending_status' => 'boolean',
+        'authentication' => 'boolean',
+        'header_spoofing' => 'boolean',
+        'imap_config' => 'boolean',
+    ];
+
+    protected $guarded = [];
 
     protected $fillable = [
         'email_address', 'email_name', 'department', 'priority', 'help_topic',
@@ -15,6 +36,36 @@ class Emails extends BaseModel
         'fetching_status', 'move_to_folder', 'delete_email', 'do_nothing',
         'sending_status', 'authentication', 'header_spoofing', 'imap_config',
     ];
+
+    #region Static Methods
+    /*
+    |--------------------------------------------------------------------------
+    | Static Methods
+    |--------------------------------------------------------------------------
+    */
+
+    #endregion
+    #region Relationships
+    /*
+    |--------------------------------------------------------------------------
+    | Relationships
+    |--------------------------------------------------------------------------
+    */
+
+    public function extraFieldRelation()
+    {
+        $related = \App\Model\MailJob\FaveoMail::class;
+
+        return $this->hasMany($related, 'email_id');
+    }
+
+    #endregion
+    #region Accessors
+    /*
+    |--------------------------------------------------------------------------
+    | Accessors
+    |--------------------------------------------------------------------------
+    */
 
     public function getCurrentDrive()
     {
@@ -42,23 +93,6 @@ class Emails extends BaseModel
         return $value;
     }
 
-    public function extraFieldRelation()
-    {
-        $related = \App\Model\MailJob\FaveoMail::class;
-
-        return $this->hasMany($related, 'email_id');
-    }
-
-    public function deleteExtraFields()
-    {
-        $fields = $this->extraFieldRelation()->get();
-        if ($fields->count() > 0) {
-            foreach ($fields as $field) {
-                $field->delete();
-            }
-        }
-    }
-
     public function getPasswordAttribute($value)
     {
         try {
@@ -70,6 +104,46 @@ class Emails extends BaseModel
         }
 
         return $value;
+    }
+
+    #endregion
+    #region Mutators
+    /*
+    |--------------------------------------------------------------------------
+    | Mutators
+    |--------------------------------------------------------------------------
+    */
+
+    #endregion
+    #region Scopes
+    /*
+    |--------------------------------------------------------------------------
+    | Scopes
+    |--------------------------------------------------------------------------
+    */
+
+    public function scopeActive($query)
+    {
+        return $query->where('fetching_status', 1);
+    }
+
+    #endregion
+    #region Factory
+    /*
+    |--------------------------------------------------------------------------
+    | Factory
+    |--------------------------------------------------------------------------
+    */
+    #endregion
+
+    public function deleteExtraFields()
+    {
+        $fields = $this->extraFieldRelation()->get();
+        if ($fields->count() > 0) {
+            foreach ($fields as $field) {
+                $field->delete();
+            }
+        }
     }
 
     public function delete()
