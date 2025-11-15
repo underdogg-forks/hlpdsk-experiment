@@ -3,7 +3,6 @@
 namespace App\Model\Common;
 
 use App\Models\BaseModel;
-use Illuminate\Database\Eloquent\Model;
 
 class TemplateSet extends BaseModel
 {
@@ -75,7 +74,7 @@ class TemplateSet extends BaseModel
      */
     public function scopeActive($query)
     {
-        return $query->where('active', 1);
+        return $query->where('active', true);
     }
 
     #endregion
