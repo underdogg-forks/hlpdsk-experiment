@@ -241,3 +241,213 @@ public function store(Request $request)
 - Test edge cases and error conditions
 - Keep tests independent and isolated
 - Use factories for test data generation
+
+## Model Template Standard
+
+All models should follow this consistent structure for better organization and maintainability:
+
+```php
+<?php
+
+namespace App\Models;
+
+use App\Models\BaseModel;
+use Illuminate\Database\Eloquent\Model;
+
+class ModelName extends BaseModel
+{
+    public $timestamps = false;
+
+    protected $casts = [];
+
+    protected $guarded = [];
+
+    #region Static Methods
+    /*
+    |--------------------------------------------------------------------------
+    | Static Methods
+    |--------------------------------------------------------------------------
+    */
+
+    #endregion
+    
+    #region Relationships
+    /*
+    |--------------------------------------------------------------------------
+    | Relationships
+    |--------------------------------------------------------------------------
+    */
+
+    #endregion
+    
+    #region Accessors
+    /*
+    |--------------------------------------------------------------------------
+    | Accessors
+    |--------------------------------------------------------------------------
+    */
+
+    #endregion
+    
+    #region Mutators
+    /*
+    |--------------------------------------------------------------------------
+    | Mutators
+    |--------------------------------------------------------------------------
+    */
+
+    #endregion
+    
+    #region Scopes
+    /*
+    |--------------------------------------------------------------------------
+    | Scopes
+    |--------------------------------------------------------------------------
+    */
+
+    #endregion
+    
+    #region Factory
+    /*
+    |--------------------------------------------------------------------------
+    | Factory
+    |--------------------------------------------------------------------------
+    */
+    #endregion
+}
+```
+
+**Key Points:**
+- Extend `BaseModel` instead of Eloquent's Model directly
+- Use `#region` comments for clear code organization
+- Define relationships explicitly in the Relationships section
+- Group static methods, accessors, mutators, and scopes logically
+- Keep the structure consistent across all models
+
+## Service Layer Pattern
+
+### Why Use Services?
+
+Services encapsulate business logic and provide several benefits:
+- **Separation of Concerns**: Controllers handle HTTP, Services handle business logic
+- **Reusability**: Service methods can be called from multiple controllers or commands
+- **Testability**: Easier to test business logic in isolation
+- **Maintainability**: Changes to business logic are centralized
+
+### Service Structure
+
+```php
+<?php
+
+namespace App\Services;
+
+use Exception;
+
+class ModelService
+{
+    /**
+     * Create a new resource
+     *
+     * @param array $data
+     * @return Model
+     * @throws Exception
+     */
+    public function create(array $data)
+    {
+        // Validation logic
+        // Business logic
+        // Database operations
+        return $model;
+    }
+
+    /**
+     * Update an existing resource
+     *
+     * @param int $id
+     * @param array $data
+     * @return Model
+     * @throws Exception
+     */
+    public function update($id, array $data)
+    {
+        // Find model
+        // Validate business rules
+        // Update model
+        return $model;
+    }
+
+    /**
+     * Delete a resource
+     *
+     * @param int $id
+     * @return bool
+     * @throws Exception
+     */
+    public function delete($id)
+    {
+        // Check dependencies
+        // Perform deletion
+        return true;
+    }
+
+    /**
+     * Helper methods (private)
+     */
+    private function validateBusinessRules($data)
+    {
+        // Business validation logic
+    }
+}
+```
+
+### Controller Using Service
+
+Controllers should be thin and delegate to services:
+
+```php
+<?php
+
+namespace App\Http\Controllers;
+
+use App\Services\ModelService;
+use Exception;
+
+class ModelController extends Controller
+{
+    protected $modelService;
+
+    public function __construct(ModelService $modelService)
+    {
+        $this->modelService = $modelService;
+    }
+
+    public function store(Request $request)
+    {
+        try {
+            $model = $this->modelService->create($request->all());
+            return redirect()->route('model.index')
+                ->with('success', 'Created successfully');
+        } catch (Exception $e) {
+            return redirect()->back()
+                ->with('error', $e->getMessage());
+        }
+    }
+}
+```
+
+### Benefits
+
+1. **Thin Controllers**: Controllers only handle HTTP concerns
+2. **Fat Services**: Business logic centralized in services
+3. **Testable**: Services can be mocked in controller tests
+4. **Reusable**: Same service used by web, API, and console
+5. **Single Responsibility**: Each service handles one model/domain
+
+## Example Implementation
+
+See `GroupController`, `GroupService`, and `app/Models/Group.php` for a complete example of:
+- Model template structure with regions
+- Service layer handling business logic
+- Thin controller using dependency injection
+- PHPUnit tests with `it_` prefix
+
