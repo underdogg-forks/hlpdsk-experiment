@@ -2,17 +2,30 @@
 
 namespace App\Model\helpdesk\Settings;
 
-use Illuminate\Database\Eloquent\Model;
+use App\Models\BaseModel;
 
-class SocialMedia extends Model
+class SocialMedia extends BaseModel
 {
     protected $table = 'social_media';
+
+    public $timestamps = true;
+
+    protected $casts = [];
+
+    protected $guarded = [];
 
     protected $fillable = [
         'provider',
         'key',
         'value',
     ];
+
+    #region Static Methods
+    /*
+    |--------------------------------------------------------------------------
+    | Static Methods
+    |--------------------------------------------------------------------------
+    */
 
     public function getvalueByKey($provider, $key = '', $login = true)
     {
@@ -59,4 +72,50 @@ class SocialMedia extends Model
 
         return $check;
     }
+
+    #endregion
+
+    #region Relationships
+    /*
+    |--------------------------------------------------------------------------
+    | Relationships
+    |--------------------------------------------------------------------------
+    */
+
+    #endregion
+
+    #region Accessors
+    /*
+    |--------------------------------------------------------------------------
+    | Accessors
+    |--------------------------------------------------------------------------
+    */
+
+    #endregion
+
+    #region Mutators
+    /*
+    |--------------------------------------------------------------------------
+    | Mutators
+    |--------------------------------------------------------------------------
+    */
+
+    #endregion
+
+    #region Scopes
+    /*
+    |--------------------------------------------------------------------------
+    | Scopes
+    |--------------------------------------------------------------------------
+    */
+
+    #endregion
+
+    #region Factory
+    /*
+    |--------------------------------------------------------------------------
+    | Factory
+    |--------------------------------------------------------------------------
+    */
+    #endregion
 }
