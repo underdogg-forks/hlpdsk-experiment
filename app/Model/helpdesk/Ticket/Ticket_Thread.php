@@ -2,42 +2,149 @@
 
 namespace App\Model\helpdesk\Ticket;
 
-//use App\BaseModel;
-use File;
+use App\Models\BaseModel;
 use Illuminate\Database\Eloquent\Model;
 
-class Ticket_Thread extends Model
+class Ticket_Thread extends BaseModel
 {
     protected $table = 'ticket_thread';
+
+    public $timestamps = true;
+
+    protected $casts = [
+        'ticket_id' => 'integer',
+        'staff_id' => 'integer',
+        'user_id' => 'integer',
+        'thread_type' => 'integer',
+        'source' => 'integer',
+        'is_internal' => 'boolean',
+    ];
+
+    protected $guarded = [];
 
     protected $fillable = [
         'id', 'ticket_id', 'staff_id', 'user_id', 'thread_type', 'poster', 'source', 'is_internal', 'title', 'body', 'format', 'ip_address', 'created_at', 'updated_at',
     ];
 
+    #region Static Methods
+    /*
+    |--------------------------------------------------------------------------
+    | Static Methods
+    |--------------------------------------------------------------------------
+    */
+
+    #endregion
+
+    #region Relationships
+    /*
+    |--------------------------------------------------------------------------
+    | Relationships
+    |--------------------------------------------------------------------------
+    */
+
+    /**
+     * Get ticket this thread belongs to
+     */
+    public function ticket()
+    {
+        return $this->belongsTo(\App\Model\helpdesk\Ticket\Tickets::class, 'ticket_id');
+    }
+
+    /**
+     * Get attachments for this thread
+     */
     public function attach()
     {
         return $this->hasMany(\App\Model\helpdesk\Ticket\Ticket_attachments::class, 'thread_id');
     }
 
-    public function delete()
+    /**
+     * Get user who posted this thread
+     */
+    public function user()
     {
-        $this->attach()->delete();
-        parent::delete();
+        return $this->belongsTo(\App\User::class, 'user_id');
     }
 
-//    public function setTitleAttribute($value) {
-//        $this->attributes['title'] = str_replace('"', "'", $value);
-//    }
+    /**
+     * Get staff member who posted this thread
+     */
+    public function staff()
+    {
+        return $this->belongsTo(\App\User::class, 'staff_id');
+    }
 
+    #endregion
+
+    #region Accessors
+    /*
+    |--------------------------------------------------------------------------
+    | Accessors
+    |--------------------------------------------------------------------------
+    */
+
+    /**
+     * Get title with quotes replaced
+     */
     public function getTitleAttribute($value)
     {
         return str_replace('"', "'", $value);
     }
 
-    public function thread($content)
+    #endregion
+
+    #region Mutators
+    /*
+    |--------------------------------------------------------------------------
+    | Mutators
+    |--------------------------------------------------------------------------
+    */
+
+    #endregion
+
+    #region Scopes
+    /*
+    |--------------------------------------------------------------------------
+    | Scopes
+    |--------------------------------------------------------------------------
+    */
+
+    /**
+     * Scope to get internal threads
+     */
+    public function scopeInternal($query)
     {
-        //         $porufi = $this->purify($content);
-//         dd($content,$porufi);
+        return $query->where('is_internal', 1);
+    }
+
+    /**
+     * Scope to get public threads
+     */
+    public function scopePublic($query)
+    {
+        return $query->where('is_internal', 0);
+    }
+
+    #endregion
+
+    #region Factory
+    /*
+    |--------------------------------------------------------------------------
+    | Factory
+    |--------------------------------------------------------------------------
+    */
+    #endregion
+
+    /**
+     * Override delete to cascade attachments
+     */
+    public function delete()
+    {
+        $this->attach()->delete();
+        return parent::delete();
+    }
+}
+
         //return $content;
         return $this->purify($content);
     }
