@@ -52,7 +52,7 @@ class GroupController extends Controller
 
             return view('themes.default1.admin.helpdesk.agent.groups.index', compact('departments', 'group_assign_department', 'groups'));
         } catch (Exception $e) {
-            return redirect()->back()->with('fails', Lang::get('lang.failed_to_load_the_page'));
+            return $this->redirectWithError('lang.failed_to_load_the_page');
         }
     }
 
@@ -66,7 +66,7 @@ class GroupController extends Controller
         try {
             return view('themes.default1.admin.helpdesk.agent.groups.create');
         } catch (Exception $e) {
-            return redirect()->back()->with('fails', Lang::get('lang.failed_to_load_the_page'));
+            return $this->redirectWithError('lang.failed_to_load_the_page');
         }
     }
 
@@ -81,13 +81,11 @@ class GroupController extends Controller
     public function store(Groups $group, GroupRequest $request)
     {
         try {
-            /* Check Whether function success or not */
             $group->fill($request->input())->save();
 
             return redirect('groups')->with('success', Lang::get('lang.group_created_successfully'));
         } catch (Exception $e) {
-            /* redirect to Index page with Fails Message */
-            return redirect('groups')->with('fails', Lang::get('lang.group_can_not_create').'<li>'.$e->getMessage().'</li>');
+            return $this->redirectWithError('lang.group_can_not_create', $e->getMessage());
         }
     }
 
@@ -106,7 +104,7 @@ class GroupController extends Controller
 
             return view('themes.default1.admin.helpdesk.agent.groups.edit', compact('groups'));
         } catch (Exception $e) {
-            return redirect('groups')->with('fails', Lang::get('lang.group_can_not_update').'<li>'.$e->getMessage().'</li>');
+            return $this->redirectWithError('lang.group_can_not_update', $e->getMessage());
         }
     }
 
@@ -121,63 +119,24 @@ class GroupController extends Controller
      */
     public function update($id, Groups $group, GroupUpdateRequest $request)
     {
-        // Database instannce to the current id
         $var = $group->whereId($id)->first();
-        $is_group_assigned = User::select('id')->where('assign_group', '=', $id)->count();
-        if ($is_group_assigned >= 1 && $request->input('group_status') == '0') {
-            return redirect('groups')->with('fails', Lang::get('lang.group_can_not_update').'<li>'.Lang::get('lang.can-not-inactive-group').'</li>');
+        
+        if (!$var) {
+            return $this->redirectWithError('lang.group_can_not_update', 'Group not found');
         }
-        // Updating Name
-        $var->name = $request->input('name');
-        //Updating Status
-        $status = $request->input('group_status');
-        $var->group_status = $status;
-        //Updating can_create_ticket field
-        $createTicket = $request->input('can_create_ticket');
-        $var->can_create_ticket = $createTicket;
-        //Updating can_edit_ticket field
-        $editTicket = $request->input('can_edit_ticket');
-        $var->can_edit_ticket = $editTicket;
-        //Updating can_post_ticket field
-        $postTicket = $request->input('can_post_ticket');
-        $var->can_post_ticket = $postTicket;
-        //Updating can_close_ticket field
-        $closeTicket = $request->input('can_close_ticket');
-        $var->can_close_ticket = $closeTicket;
-        //Updating can_assign_ticket field
-        $assignTicket = $request->input('can_assign_ticket');
-        $var->can_assign_ticket = $assignTicket;
-        //Updating can_delete_ticket field
-        $deleteTicket = $request->input('can_delete_ticket');
-        $var->can_delete_ticket = $deleteTicket;
-        //Updating can_ban_email field
-        $banEmail = $request->input('can_ban_email');
-        $var->can_ban_email = $banEmail;
-        //Updating can_manage_canned field
-        $manageCanned = $request->input('can_manage_canned');
-        $var->can_manage_canned = $manageCanned;
-        //Updating can_manage_faq field
-        $manageFaq = $request->input('can_manage_faq');
-        $var->can_manage_faq = $manageFaq;
-        //Updating can_view_agent_stats field
-        $viewAgentStats = $request->input('can_view_agent_stats');
-        $var->can_view_agent_stats = $viewAgentStats;
-        //Updating department_access field
-        $departmentAccess = $request->input('department_access');
-        $var->department_access = $departmentAccess;
-        //Updating admin_notes field
-        $adminNotes = $request->input('admin_notes');
-        $var->admin_notes = $adminNotes;
 
-        /* Check whether function success or not */
+        // Early return: Check if group is assigned and trying to deactivate
+        if ($this->isGroupAssignedAndInactivating($id, $request)) {
+            return $this->redirectWithError('lang.group_can_not_update', Lang::get('lang.can-not-inactive-group'));
+        }
+
         try {
+            $this->updateGroupFields($var, $request);
             $var->save();
 
-            /* redirect to Index page with Success Message */
             return redirect('groups')->with('success', Lang::get('lang.group_updated_successfully'));
         } catch (Exception $e) {
-            /* redirect to Index page with Fails Message */
-            return redirect('groups')->with('fails', Lang::get('lang.group_can_not_update').'<li>'.$e->getMessage().'</li>');
+            return $this->redirectWithError('lang.group_can_not_update', $e->getMessage());
         }
     }
 
@@ -192,24 +151,93 @@ class GroupController extends Controller
      */
     public function destroy($id, Groups $group, Group_assign_department $group_assign_department)
     {
-        $users = User::where('assign_group', '=', $id)->first();
-        if ($users) {
-            $user = '<li>'.Lang::get('lang.there_are_agents_assigned_to_this_group_please_unassign_them_from_this_group_to_delete').'</li>';
-
-            return redirect('groups')->with('fails', Lang::get('lang.group_cannot_delete').$user);
+        // Early return: Check if agents are assigned
+        if ($this->hasAssignedAgents($id)) {
+            $message = '<li>'.Lang::get('lang.there_are_agents_assigned_to_this_group_please_unassign_them_from_this_group_to_delete').'</li>';
+            return redirect('groups')->with('fails', Lang::get('lang.group_cannot_delete').$message);
         }
-        $group_assign_department->where('group_id', $id)->delete();
-        $groups = $group->whereId($id)->first();
 
-        /* Check whether function success or not */
         try {
+            $group_assign_department->where('group_id', $id)->delete();
+            $groups = $group->whereId($id)->first();
             $groups->delete();
 
-            /* redirect to Index page with Success Message */
             return redirect('groups')->with('success', Lang::get('lang.group_deleted_successfully'));
         } catch (Exception $e) {
-            /* redirect to Index page with Fails Message */
-            return redirect('groups')->with('fails', Lang::get('lang.group_cannot_delete').'<li>'.$e->getMessage().'</li>');
+            return $this->redirectWithError('lang.group_cannot_delete', $e->getMessage());
         }
+    }
+
+    /**
+     * Check if group has agents assigned and is being inactivated
+     *
+     * @param int     $id
+     * @param Request $request
+     * @return bool
+     */
+    private function isGroupAssignedAndInactivating($id, $request)
+    {
+        $is_group_assigned = User::select('id')->where('assign_group', '=', $id)->count();
+        return $is_group_assigned >= 1 && $request->input('group_status') == '0';
+    }
+
+    /**
+     * Update group fields from request
+     *
+     * @param Groups  $group
+     * @param Request $request
+     * @return void
+     */
+    private function updateGroupFields($group, $request)
+    {
+        $fields = [
+            'name',
+            'group_status',
+            'can_create_ticket',
+            'can_edit_ticket',
+            'can_post_ticket',
+            'can_close_ticket',
+            'can_assign_ticket',
+            'can_delete_ticket',
+            'can_ban_email',
+            'can_manage_canned',
+            'can_manage_faq',
+            'can_view_agent_stats',
+            'department_access',
+            'admin_notes',
+        ];
+
+        foreach ($fields as $field) {
+            if ($request->has($field)) {
+                $group->$field = $request->input($field);
+            }
+        }
+    }
+
+    /**
+     * Check if group has assigned agents
+     *
+     * @param int $id
+     * @return bool
+     */
+    private function hasAssignedAgents($id)
+    {
+        return User::where('assign_group', '=', $id)->exists();
+    }
+
+    /**
+     * Redirect back with error message
+     *
+     * @param string $langKey
+     * @param string $details
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    private function redirectWithError($langKey, $details = '')
+    {
+        $message = Lang::get($langKey);
+        if ($details) {
+            $message .= '<li>'.$details.'</li>';
+        }
+        return redirect('groups')->with('fails', $message);
     }
 }
