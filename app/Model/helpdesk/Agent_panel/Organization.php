@@ -2,37 +2,104 @@
 
 namespace App\Model\helpdesk\Agent_panel;
 
-use App\BaseModel;
+use App\Models\BaseModel;
+use Illuminate\Database\Eloquent\Model;
 
 class Organization extends BaseModel
 {
-    /* define the table name */
-
     protected $table = 'organization';
 
-    /* Define the fillable fields */
+    public $timestamps = true;
+
+    protected $casts = [];
+
+    protected $guarded = [];
+
     protected $fillable = ['id', 'name', 'phone', 'website', 'address', 'head', 'internal_notes'];
 
+    #region Static Methods
+    /*
+    |--------------------------------------------------------------------------
+    | Static Methods
+    |--------------------------------------------------------------------------
+    */
+
+    #endregion
+
+    #region Relationships
+    /*
+    |--------------------------------------------------------------------------
+    | Relationships
+    |--------------------------------------------------------------------------
+    */
+
+    /**
+     * Get user relations for this organization
+     */
     public function userRelation()
     {
-        $related = \App\Model\helpdesk\Agent_panel\User_org::class;
-
-        return $this->hasMany($related, 'org_id');
+        return $this->hasMany(\App\Model\helpdesk\Agent_panel\User_org::class, 'org_id');
     }
 
+    /**
+     * Get organization head
+     */
+    public function head()
+    {
+        return $this->belongsTo(\App\User::class, 'head');
+    }
+
+    #endregion
+
+    #region Accessors
+    /*
+    |--------------------------------------------------------------------------
+    | Accessors
+    |--------------------------------------------------------------------------
+    */
+
+    /**
+     * Get user IDs for this organization
+     */
     public function getUserIds()
     {
-        $user_relations = $this->userRelation()->pluck('user_id')->toArray();
-
-        return $user_relations;
+        return $this->userRelation()->pluck('user_id')->toArray();
     }
 
+    /**
+     * Get users query for this organization
+     */
     public function users()
     {
-        $user = new \App\User();
         $user_ids = $this->getUserIds();
-        $users = $user->whereIn('id', $user_ids);
-
-        return $users;
+        return \App\User::whereIn('id', $user_ids);
     }
+
+    #endregion
+
+    #region Mutators
+    /*
+    |--------------------------------------------------------------------------
+    | Mutators
+    |--------------------------------------------------------------------------
+    */
+
+    #endregion
+
+    #region Scopes
+    /*
+    |--------------------------------------------------------------------------
+    | Scopes
+    |--------------------------------------------------------------------------
+    */
+
+    #endregion
+
+    #region Factory
+    /*
+    |--------------------------------------------------------------------------
+    | Factory
+    |--------------------------------------------------------------------------
+    */
+    #endregion
 }
