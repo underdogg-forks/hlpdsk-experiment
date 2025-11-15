@@ -2,21 +2,29 @@
 
 namespace App\Model\MailJob;
 
-use Illuminate\Database\Eloquent\Model;
+use App\Models\BaseModel;
 use Lang;
 
-class QueueService extends Model
+class QueueService extends BaseModel
 {
     protected $table = 'queue_services';
 
+    public $timestamps = true;
+
+    protected $casts = [
+        'status' => 'boolean',
+    ];
+
+    protected $guarded = [];
+
     protected $fillable = ['name', 'short_name', 'status'];
 
-    public function extraFieldRelation()
-    {
-        $related = \App\Model\MailJob\FaveoQueue::class;
-
-        return $this->hasMany($related, 'service_id');
-    }
+    #region Static Methods
+    /*
+    |--------------------------------------------------------------------------
+    | Static Methods
+    |--------------------------------------------------------------------------
+    */
 
     public function getExtraField($key)
     {
@@ -28,6 +36,42 @@ class QueueService extends Model
 
         return $value;
     }
+
+    public function isActivate()
+    {
+        $check = true;
+        $settings = $this->extraFieldRelation()->get();
+        if ($settings->count() == 0) {
+            $check = false;
+        }
+
+        return $check;
+    }
+
+    #endregion
+
+    #region Relationships
+    /*
+    |--------------------------------------------------------------------------
+    | Relationships
+    |--------------------------------------------------------------------------
+    */
+
+    public function extraFieldRelation()
+    {
+        $related = \App\Model\MailJob\FaveoQueue::class;
+
+        return $this->hasMany($related, 'service_id');
+    }
+
+    #endregion
+
+    #region Accessors
+    /*
+    |--------------------------------------------------------------------------
+    | Accessors
+    |--------------------------------------------------------------------------
+    */
 
     public function getName()
     {
@@ -61,14 +105,36 @@ class QueueService extends Model
         return $html;
     }
 
-    public function isActivate()
-    {
-        $check = true;
-        $settings = $this->extraFieldRelation()->get();
-        if ($settings->count() == 0) {
-            $check = false;
-        }
+    #endregion
 
-        return $check;
+    #region Mutators
+    /*
+    |--------------------------------------------------------------------------
+    | Mutators
+    |--------------------------------------------------------------------------
+    */
+
+    #endregion
+
+    #region Scopes
+    /*
+    |--------------------------------------------------------------------------
+    | Scopes
+    |--------------------------------------------------------------------------
+    */
+
+    public function scopeActive($query)
+    {
+        return $query->where('status', 1);
     }
+
+    #endregion
+
+    #region Factory
+    /*
+    |--------------------------------------------------------------------------
+    | Factory
+    |--------------------------------------------------------------------------
+    */
+    #endregion
 }
