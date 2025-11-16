@@ -66,7 +66,8 @@ class="nav-link active"
                             <h4 class="modal-title">{{ trans('lang.add_plugin') }}</h4>
                         </div>
                         <div class="modal-body">
-                            {!! Form::open(['url'=>'post-plugin','files'=>true]) !!}
+                            <form method="POST" action="post-plugin" enctype="multipart/form-data">
+    @csrf
                             <label>{{ trans('lang.plugin') }} :</label> 
                             <div class="btn bg-olive btn-file" style="color:blue">
                                 {{ trans('lang.upload_file') }}<input type="file" name="plugin">

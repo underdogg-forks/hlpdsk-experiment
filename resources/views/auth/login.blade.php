@@ -109,13 +109,13 @@
     @csrf
 
                         <div class="form-group has-feedback {{ $errors->has('email') ? 'has-error' : '' }}" style="display: -webkit-box;">
-                            {!! Form::text('email',null,['placeholder'=> trans("lang.email") ,'class' => 'form-control']) !!}
+                            <input type="text" name="email" id="email" value="{{ old('email') }}" class="form-control">
                             <span class="far fa-envelope form-control-feedback" style="top: 9px;left: -25px;color: #6c757d;"></span>
                         </div>
 
                         <div class="form-group has-feedback {{ $errors->has('password') ? 'has-error' : '' }}" style="display: -webkit-box;">
 
-                            {!! Form::password('password',['placeholder'=>trans("lang.password"),'class' => 'form-control']) !!}
+                            <input type="password" name="password" id="password" class="form-control">
                             <span class="  fa fa-lock form-control-feedback" style="top: 9px;left: -25px;color: #6c757d;"></span>
                         </div>
 

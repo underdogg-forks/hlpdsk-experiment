@@ -20,9 +20,9 @@
 
 		<div class="col-xs-4 form-group {{ $errors->has('name') ? 'has-error' : '' }}">
 
-			{!! Form::label('name','Name') !!}
+			<label for="name">'Name'</label>
 			{!! $errors->first('name', '<spam class="help-block">:message</spam>') !!}
-			{!! Form::text('name',null,['class' => 'form-control']) !!}
+			<input type="text" name="name" id="name" value="{{ old('name') }}" class="form-control">
 
 		</div>
 
@@ -30,24 +30,24 @@
 
 		<div class="col-xs-4 form-group {{ $errors->has('status') ? 'has-error' : '' }}">
 
-			{!! Form::label('status','Status') !!}
+			<label for="status">'Status'</label>
 			{!! $errors->first('status', '<spam class="help-block">:message</spam>') !!}
 			<div class="row">
 				<div class="col-xs-3">
-					{!! Form::radio('status','1',true) !!}Active
+					<input type="radio" name="status" value="'1'">Active
 				</div>
 				<div class="col-xs-3">
-					{!! Form::radio('status','0',null) !!}Inactive
+					<input type="radio" name="status" value="'0'">Inactive
 				</div>
 			</div>
 		</div>
 
 	</div>
 		<div class="form-group {{ $errors->has('description') ? 'has-error' : '' }}">
-				{!! Form::label('description','Description') !!}
+				<label for="description">'Description'</label>
 				{!! $errors->first('description', '<spam class="help-block">:message</spam>') !!}
 
-					{!! Form::textarea('description',null,['class' => 'form-control','size' => '50x10','id'=>'myNicEditor','placeholder'=>'Enter the description']) !!}
+					<textarea name="description" id="myNicEditor" class="form-control" rows="10">{{ old('description') }}</textarea>
 		</div>
 </div>
 

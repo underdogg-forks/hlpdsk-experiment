@@ -15,7 +15,9 @@ class="active"
 @section('content')
 
 <!-- open a form -->
-	{!! Form::model($footer,['url' => 'post-create-footer/'.$footer->id, 'method' => 'PATCH','files'=>true]) !!}
+	<form method="POST">
+    @csrf
+    @method('PATCH')
 
 <div class="box box-primary">
 	<div class="box-header">
@@ -44,13 +46,13 @@ class="active"
             <div class="form-group {{ $errors->has('title') ? 'has-error' : '' }}">
                 {!! Form::label('title',trans('lang.title') ) !!}
                 {!! $errors->first('title', '<spam class="help-block">:message</spam>') !!}
-                {!! Form::text('title',null,['class' => 'form-control']) !!}
+                <input type="text" name="title" id="title" value="{{ old('title') }}" class="form-control">
             </div>
 
             <div class="form-group {{ $errors->has('footer') ? 'has-error' : '' }}">
                 {!! Form::label('footer', trans('lang.footer') ) !!}
                 {!! $errors->first('footer', '<spam class="help-block">:message</spam>') !!}
-                {!! Form::textarea('footer',null,['class' => 'form-control','size' => '30x5','id'=>'footer']) !!}
+                <textarea name="footer" id="footer" class="form-control" rows="5">{{ old('footer') }}</textarea>
             </div>
         </div>
         <div class="box-footer">

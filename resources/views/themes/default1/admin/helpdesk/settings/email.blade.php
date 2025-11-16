@@ -32,7 +32,9 @@ class="nav-link active"
 <!-- content -->
 @section('content')
 <!-- open a form -->
-{!! Form::model($emails,['url' => 'postemail/'.$emails->id, 'method' => 'PATCH']) !!}
+<form method="POST">
+    @csrf
+    @method('PATCH')
 <!-- check whether success or not -->
 @if(session()->has('success'))
 <div class="alert alert-success alert-dismissable">
@@ -71,7 +73,7 @@ class="nav-link active"
         <div class="row">
             <div class="col-md-6">
                 <div class="form-group">
-                    {!! Form::checkbox('all_emails',1,true) !!}&nbsp;{{ trans('lang.accept_all_email') }}
+                    <input type="checkbox" name="all_emails" value="1">&nbsp;{{ trans('lang.accept_all_email') }}
                 </div>
             </div>
         </div>
@@ -82,7 +84,7 @@ class="nav-link active"
         <div class="row">
             <div class="col-md-4">
                 <div class="form-group">
-                    {!! Form::checkbox('email_collaborator',1) !!}&nbsp;{{ trans('lang.accept_email_collab') }}
+                    <input type="checkbox" name="email_collaborator" value="1) !!}&nbsp;{{ trans('lang.accept_email_collab') }}
                 </div>
             </div>
         </div>
@@ -90,7 +92,7 @@ class="nav-link active"
         <div class="row">
             <div class="col-md-4">
                 <div class="form-group">
-                    {!! Form::checkbox('attachment',1) !!}&nbsp;{{ trans('lang.attachments') }}
+                    {!! Form::checkbox('attachment'">&nbsp;{{ trans('lang.attachments') }}
                 </div>
             </div>
         </div>

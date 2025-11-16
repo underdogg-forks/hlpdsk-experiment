@@ -73,7 +73,8 @@ if (Auth::user()->role == 'agent') {
     </div>
     @endif
     
-        {!! Form::open(['id'=>'modalpopup', 'route'=>'select_all','method'=>'post']) !!}
+        <form method="POST" action="{{ route('select_all') }}">
+    @csrf
         <!--<div class="mailbox-controls">-->
         <!-- Check all button -->
         <a class="btn btn-default btn-sm checkbox-toggle"><i class="fa fa-square-o"></i></a>
@@ -129,7 +130,9 @@ if (Auth::user()->role == 'agent') {
                     <div id="merge-body-form">
                         <div class="row">
                             <div class="col-md-6">
-                                {!! Form::open(['id'=>'merge-form','method' => 'PATCH'] )!!}
+                                <form method="POST">
+    @csrf
+    @method('PATCH')
                                 <label>{{ trans('lang.title') }}</label>
                                 <input type="text" name='title' class="form-control" value="" placeholder="Optional" />
                             </div>
@@ -175,7 +178,9 @@ if (Auth::user()->role == 'agent') {
                 <div id="assign_body">
                         <div class="row">
                             <div class="col-md-12">
-                                {!! Form::open(['id'=>'assign-form','method' => 'PATCH'] )!!}
+                                <form method="POST">
+    @csrf
+    @method('PATCH')
                                 <label>{{ trans('lang.whome_do_you_want_to_assign_ticket') }}</label>
                                 <select class="form-control" id="select-assign-agent"  name="assign_to" data-placeholder="{{ trans('lang.select_agent') }}" style="width: 100%;"><option value=""></option></select>
                             </div>

@@ -73,7 +73,8 @@ if (Auth::user()->role == 'agent') {
         </div>
         @endif
         
-        {!! Form::open(['id'=>'modalpopup', 'route'=>'select_all','method'=>'post']) !!}
+        <form method="POST" action="{{ route('select_all') }}">
+    @csrf
         <!--<div class="mailbox-controls">-->
         <!-- Check all button -->
         <a class="btn btn-default btn-sm checkbox-toggle"><i class="fa fa-square-o"></i></a>

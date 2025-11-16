@@ -30,7 +30,8 @@ class="nav-link active"
 </ol>
 @stop
 @section('content')
-{!! Form::open(['url' => 'social/media/'.$provider, 'method' => 'POST']) !!}
+<form method="POST" action="social/media/">
+    @csrf
 @if (count($errors) > 0)
 <div class="alert alert-danger">
     <strong>{{ trans('lang.woops') }}</strong> {{ trans('lang.theirisproblem') }}<br><br>

@@ -214,7 +214,8 @@
                 </div>
             </nav>
             <div id="header-search" class="site-search clearfix" style="margin-right: 90%; width: 100%"><!-- #header-search -->
-                {!!Form::open(['route' => 'client.search','class'=>'search-form clearfix'])!!}
+                <form method="POST" action="{{ route('client.search') }}">
+    @csrf
                 <div class="form-border" style="z-index: 0;width: 95%;">
                     <div class="form-inline">
                         <div  class="form-group input-group" style="width: 100%;">

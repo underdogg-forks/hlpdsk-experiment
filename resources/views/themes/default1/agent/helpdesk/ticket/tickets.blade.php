@@ -212,7 +212,8 @@ if (Request::has('assigned'))
         <div class="mailbox-messages" id="refresh">
 
             <!--datatable-->
-            {!! Form::open(['id'=>'modalpopup', 'route'=>'select_all','method'=>'post']) !!}
+            <form method="POST" action="{{ route('select_all') }}">
+    @csrf
             {!!$table->render('vendor.Chumper.template')!!}
             </form> 
 

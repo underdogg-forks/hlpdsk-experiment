@@ -36,7 +36,9 @@ class="nav-item menu-open"
 
 @section('content')
 
-{!! Form::model($article,['url' => 'article/'.$article->id , 'method' => 'PATCH'] )!!}
+<form method="POST">
+    @csrf
+    @method('PATCH')
 
 @if(session()->has('success'))
 <div class="alert alert-success alert-dismissable">
@@ -100,12 +102,12 @@ class="nav-item menu-open"
                     <div class="col-md-6 form-group {{ $errors->has('name') ? 'has-error' : '' }}" >
                         {!! Form::label('name',trans('lang.name')) !!} <span class="text-red"> *</span>
 
-                        {!! Form::text('name',null,['class' => 'form-control']) !!}
+                        <input type="text" name="name" id="name" value="{{ old('name') }}" class="form-control">
                     </div>
                     <div class="col-md-6 form-group {{ $errors->has('slug') ? 'has-error' : '' }}" >
                         {!! Form::label('slug',trans('lang.slug')) !!} <span class="text-red"> *</span>
 
-                        {!! Form::text('slug',null,['class' => 'form-control']) !!}
+                        <input type="text" name="slug" id="slug" value="{{ old('slug') }}" class="form-control">
                     </div>
                 </div>
 
@@ -113,7 +115,7 @@ class="nav-item menu-open"
                     {!! Form::label('description',trans('lang.description')) !!} <span class="text-red"> *</span>
 
                     <div class="form-group" style="background-color:white">
-                        {!! Form::textarea('description',$article->description,['class' => 'form-control article_desc','id'=>'editor','size' => '128x20','placeholder'=>trans('lang.enter_the_description')]) !!}
+                        <textarea name="description" id="editor" class="form-control article_desc" rows="20">{{ old('description') }}</textarea>
                     </div>
                 </div>
             </div>
@@ -134,13 +136,13 @@ class="nav-item menu-open"
                     {!! Form::label('type',trans('lang.status')) !!}
                     <div class="row">
                         <div class="col-sm-1">
-                            {!! Form::radio('type','1',true) !!}
+                            <input type="radio" name="type" value="'1'">
                         </div>
                         <div class="col-sm-4" style="margin: -5px;">
                             {{ trans('lang.published') }}
                         </div>
                         <div class="col-sm-1">
-                            {!! Form::radio('type','0',null) !!}
+                            <input type="radio" name="type" value="'0'">
                         </div>
                         <div class="col-sm-4" style="margin: -5px;">
                             {{ trans('lang.draft') }}
@@ -152,13 +154,13 @@ class="nav-item menu-open"
                     {!! Form::label('status',trans('lang.visibility')) !!}
                     <div class="row">
                         <div class="col-sm-1">
-                            {!! Form::radio('status','1',true) !!}
+                            <input type="radio" name="status" value="'1'">
                         </div>
                         <div class="col-sm-4" style="margin: -5px;">  
                             {{ trans('lang.public') }}
                         </div>
                         <div class="col-sm-1">
-                            {!! Form::radio('status','0',null) !!}
+                            <input type="radio" name="status" value="'0'">
                         </div>
                         <div class="col-sm-4" style="margin: -5px;"> 
                             {{ trans('lang.private') }}
@@ -188,7 +190,7 @@ class="nav-item menu-open"
                         <span class="d-flex">
                             {!! Form::selectMonth('month', $month,['class'=>'form-control mr-1','style'=>'width: 120px;'])  !!}
                             {!! Form::selectRange('day', 1, 31, $day,['class'=>'form-control mr-1','style'=>'width: 65px;'])  !!}
-                            {!! Form::text('year',$year,['class'=>'form-control mr-1','style'=>'width: 58px;'])  !!}@
+                            <input type="text" name="year" id="year" value="$year" class="form-control mr-1">@
                             &nbsp;<input type="text" name="hour" value="{{$hour}}" class="form-control" style="width: 50px;">&nbsp;:&nbsp;<input type="text" name="minute" value="{{$minute}}" class="form-control" style="width: 50px;" >
                         </span>
                     </div>
@@ -215,7 +217,7 @@ class="nav-item menu-open"
             <div class="card-body" style="height:166px; overflow-y:auto;">
 
                 <div class="form-group {{ $errors->has('category_id') ? 'has-error' : '' }}">
-                    {{-- {!! Form::label('category_id','Category') !!} --}}
+                    {{-- <label for="category_id">'Category'</label> --}}
                     @foreach($category->toArray() as $key=>$val)
                     <div class="row">
                         <div class="form-group">
@@ -240,7 +242,8 @@ class="nav-item menu-open"
                     
                         <div class="modal-content">
                     
-                            {!! Form::open(['method'=>'post','route'=>'category.store']) !!}
+                            <form method="POST" action="{{ route('category.store') }}">
+    @csrf
                     
                             <div class="modal-header">
                                 <h4 class="modal-title">{{ trans('lang.addcategory') }}</h4>

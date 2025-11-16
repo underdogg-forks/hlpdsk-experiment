@@ -78,14 +78,14 @@ class="nav-item menu-open"
                     <div class="col-md-6 form-group {{ $errors->has('name') ? 'has-error' : '' }}">
                         {!! Form::label('name',trans('lang.name')) !!}<span class="text-red"> *</span>
 
-                        {!! Form::text('name',null,['class' => 'form-control']) !!}
+                        <input type="text" name="name" id="name" value="{{ old('name') }}" class="form-control">
                     </div>
                     
                     <div class="form-group col-sm-12 {{ $errors->has('description') ? 'has-error' : '' }}">
                         {!! Form::label('description',trans('lang.description')) !!}
                         <span class="text-red"> *</span>
                         <div class="form-group" style="background-color:white">
-                            {!! Form::textarea('description',null,['class' => 'form-control color','size' => '110x15','id'=>'myNicEditor','placeholder'=>trans('lang.enter_the_description')]) !!}
+                            <textarea name="description" id="myNicEditor" class="form-control color" rows="15">{{ old('description') }}</textarea>
                         </div>
                     </div>
                 </div>
@@ -106,10 +106,10 @@ class="nav-item menu-open"
                     {!! Form::label('status',trans('lang.status')) !!}
                     <div class="row">
                         <div class="col-sm-5">
-                            {!! Form::radio('status','1',true) !!} {{ trans('lang.published') }}
+                            <input type="radio" name="status" value="'1'"> {{ trans('lang.published') }}
                         </div>
                         <div class="col-sm-5">
-                            {!! Form::radio('status','0',null) !!} {{ trans('lang.draft') }}
+                            <input type="radio" name="status" value="'0'"> {{ trans('lang.draft') }}
                         </div>
                     </div>
                 </div>
@@ -117,10 +117,10 @@ class="nav-item menu-open"
                     {!! Form::label('visibility',trans('lang.visibility')) !!}
                     <div class="row">
                         <div class="col-sm-5">
-                            {!! Form::radio('visibility','1',true) !!} {{ trans('lang.public') }}
+                            <input type="radio" name="visibility" value="'1'"> {{ trans('lang.public') }}
                         </div>
                         <div class="col-sm-5">
-                            {!! Form::radio('visibility','0',null) !!} {{ trans('lang.private') }}
+                            <input type="radio" name="visibility" value="'0'"> {{ trans('lang.private') }}
                         </div>
                     </div>
                 </div>

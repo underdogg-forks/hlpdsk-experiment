@@ -32,7 +32,8 @@ class="nav-link active"
 <!-- content -->
 @section('content')
 <!-- open a form -->
-{!! Form::open(['route' => 'sla.store', 'method' => 'post']) !!}
+<form method="POST" action="{{ route('sla.store') }}">
+    @csrf
 @if(session()->has('errors'))
 <?php //dd($errors); ?>
 <div class="alert alert-danger alert-dismissable">
@@ -61,7 +62,7 @@ class="nav-link active"
             <div class="col-md-4">
                 <div class="form-group {{ $errors->has('name') ? 'has-error' : '' }}">
                     {!! Form::label('name',trans('lang.name')) !!} <span class="text-red"> *</span>
-                    {!! Form::text('name',null,['class' => 'form-control']) !!}
+                    <input type="text" name="name" id="name" value="{{ old('name') }}" class="form-control">
                 </div>
             </div>
             <!-- Grace Period text form Required -->
@@ -75,8 +76,8 @@ class="nav-link active"
             <div class="col-md-4">
                 <div class="form-group {{ $errors->has('status') ? 'has-error' : '' }}">
                     {!! Form::label('status',trans('lang.status')) !!}&nbsp;<br/>
-                    {!! Form::radio('status','1',true) !!} {{ trans('lang.active') }}&nbsp;&nbsp;
-                    {!! Form::radio('status','0') !!} {{ trans('lang.inactive') }}
+                    <input type="radio" name="status" value="'1'"> {{ trans('lang.active') }}&nbsp;&nbsp;
+                    <input type="radio" name="status" value="'0'"> {{ trans('lang.inactive') }}
                 </div>
             </div>
         </div>
@@ -85,7 +86,7 @@ class="nav-link active"
             <div class="col-md-12">
                 <div class="form-group">
                     {!! Form::label('admin_note',trans('lang.admin_notes')) !!}
-                    {!! Form::textarea('admin_note',null,['class' => 'form-control','size' => '30x5']) !!}
+                    <textarea name="admin_note" id="admin_note" class="form-control" rows="5">{{ old('admin_note') }}</textarea>
                 </div>
             </div>
         </div>

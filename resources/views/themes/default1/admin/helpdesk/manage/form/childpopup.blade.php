@@ -7,7 +7,8 @@
             <div class="modal-header">
                 <h4 class="modal-title">Add Child</h4>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                {!! Form::model($field,['url'=>'forms/field/'.$field->id.'/child','method'=>'POST']) !!}
+                <form method="POST">
+    @csrf
             </div>
             <div class="modal-body">
                 <!-- Form  -->

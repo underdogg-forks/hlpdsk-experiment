@@ -239,7 +239,8 @@ class="nav-link active"
                             <?php $open = count(App\Model\helpdesk\Ticket\Tickets::whereIn('user_id', $user_orga_relation_id)->where('status', '=', '1')->get()); ?>
                             
                             <div>
-                                {!! Form::open(['route'=>'select_all','method'=>'post']) !!}
+                                <form method="POST" action="{{ route('select_all') }}">
+    @csrf
                                 <div class="mailbox-controls p-0 mt-2 mb-2">
                                     <!-- Check all button -->
                                     <a class="btn btn-default btn-sm checkbox-toggle"><i class="far fa-square"></i></a>
@@ -344,7 +345,8 @@ class="nav-link active"
                             <?php $closed = count(App\Model\helpdesk\Ticket\Tickets::whereIn('user_id', $user_orga_relation_id)->where('status', 2)->get()); ?>
                             
                             <div>
-                                {!! Form::open(['route'=>'select_all','method'=>'post']) !!}
+                                <form method="POST" action="{{ route('select_all') }}">
+    @csrf
                                 <div class="mailbox-controls p-0 mt-2 mb-2">
                                     <!-- Check all button -->
                                     <a class="btn btn-default btn-sm checkbox-toggle"><i class="far fa-square"></i></a>
@@ -450,7 +452,8 @@ class="nav-link active"
                             <?php $deleted = count(App\Model\helpdesk\Ticket\Tickets::whereIn('user_id', $user_orga_relation_id)->where('status', '=', '5')->get()); ?>
                             <div>
 
-                                {!! Form::open(['route'=>'select_all','method'=>'post']) !!}
+                                <form method="POST" action="{{ route('select_all') }}">
+    @csrf
                                 <div class="mailbox-controls p-0 mt-2 mb-2">
                                     <!-- Check all button -->
                                     <a class="btn btn-default btn-sm checkbox-toggle"><i class="far fa-square"></i></a>
@@ -567,7 +570,7 @@ class="nav-link active"
                         <div class="row">
                             <div class='col-sm-3'>
                                 {!! Form::label('date', trans("lang.start_date").':') !!}
-                                {!! Form::text('start_date',null,['class'=>'form-control','id'=>'datepicker4'])!!}
+                                <input type="text" name="start_date" id="datepicker4" value="{{ old('start_date') }}" class="form-control">
                             </div>
                             <?php
                             $start_date = App\Model\helpdesk\Ticket\Tickets::where('id', '=', '1')->first();
@@ -594,7 +597,7 @@ class="nav-link active"
                             </script>
                             <div class='col-sm-3'>
                                 {!! Form::label('start_time', trans("lang.end_date").':') !!}
-                                {!! Form::text('end_date',null,['class'=>'form-control','id'=>'datetimepicker3'])!!}
+                                <input type="text" name="end_date" id="datetimepicker3" value="{{ old('end_date') }}" class="form-control">
                             </div>
                             <script type="text/javascript">
                                 $(function() {
@@ -608,7 +611,7 @@ class="nav-link active"
                                 });
                             </script>
                             <div class='col-sm-2'>
-                                {!! Form::label('filter', 'Filter:',['style' => 'visibility:hidden;']) !!}<br>
+                                <label for="filter">'Filter:'</label><br>
                                 <input type="submit" value="{{ trans('lang.submit') }}" class="btn btn-primary">
                             </div>
                             
@@ -908,7 +911,9 @@ class="nav-link active"
 <div class="modal fade" id="assign_head">
     <div class="modal-dialog">
         <div class="modal-content">
-            {!! Form::model($orgs->id, ['id'=>'org_head','method' => 'PATCH'] )!!}
+            <form method="POST">
+    @csrf
+    @method('PATCH')
             <div class="modal-header">
                 <h4 class="modal-title">{{ trans('lang.assign') }}</h4>
                 <button type="button" class="close" data-dismiss="modal" id="dismiss" aria-label="Close"><span aria-hidden="true">&times;</span></button>

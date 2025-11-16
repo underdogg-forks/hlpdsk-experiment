@@ -65,7 +65,8 @@ class="nav-link active"
         <h3 class="card-title">{{ trans('lang.queues') }}</h3>
     </div>
     <div class="card-body">
-        {!! Form::open(['url'=>'queue/'.$queue->id,'method'=>'post','id'=>'form']) !!}
+        <form method="POST" action="queue/">
+    @csrf
         <div id="response">
 
         </div>

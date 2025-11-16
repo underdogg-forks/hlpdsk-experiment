@@ -4,13 +4,15 @@
     <div class="row">
     <div class="col-md-6">
 
-{!! Form::model($user,['url'=>'post-profile' , 'method' => 'PATCH','files'=>true]) !!}
+<form method="POST">
+    @csrf
+    @method('PATCH')
 
 <div class="box box-primary">
 
 	<div class="content-header">
 
-	 	<h4>Profile	{!! Form::submit('Save',['class'=>'form-group btn btn-primary pull-right'])!!}</h4>
+	 	<h4>Profile	<button type="submit" class="form-group btn btn-primary pull-right">'Save'</button></h4>
 
 	</div>
 
@@ -39,14 +41,14 @@
 
 			{!! Form::label('firstname',trans('lang.firstname')) !!}
 			{!! $errors->first('firstname', '<spam class="help-block">:message</spam>') !!}
-			{!! Form::text('firstname',null,['class' => 'form-control']) !!}
+			<input type="text" name="firstname" id="firstname" value="{{ old('firstname') }}" class="form-control">
 
 		</div>
 		<div class="form-group col-md-6 {{ $errors->has('lastname') ? 'has-error' : '' }}">
 
 			{!! Form::label('lastname',trans('lang.lastname')) !!}
 			{!! $errors->first('lastname', '<spam class="help-block">:message</spam>') !!}
-			{!! Form::text('lastname',null,['class' => 'form-control']) !!}
+			<input type="text" name="lastname" id="lastname" value="{{ old('lastname') }}" class="form-control">
 
 		</div>
 	</div>
@@ -57,10 +59,10 @@
 			{!! Form::label('gender',trans('lang.gender')) !!}
 			<div class="row">
 				<div class="col-xs-6">
-					{!! Form::radio('gender','1',true) !!}{{ trans('lang.male') }}
+					<input type="radio" name="gender" value="'1'">{{ trans('lang.male') }}
 				</div>
 				<div class="col-xs-6">
-					{!! Form::radio('gender','0') !!}{{ trans('lang.female') }}
+					<input type="radio" name="gender" value="'0'">{{ trans('lang.female') }}
 				</div>
 			</div>
 		</div>
@@ -88,7 +90,7 @@
 
 			{!! Form::label('company',trans('lang.company')) !!}
 			{!! $errors->first('company', '<spam class="help-block">:message</spam>') !!}
-			{!! Form::text('company',null,['class' => 'form-control']) !!}
+			<input type="text" name="company" id="company" value="{{ old('company') }}" class="form-control">
 
 		</div>
 
@@ -97,7 +99,7 @@
 
 				{!! Form::label('ext',trans('lang.ext')) !!}
 				{!! $errors->first('ext', '<spam class="help-block">:message</spam>') !!}
-				{!! Form::text('ext',null,['class' => 'form-control']) !!}
+				<input type="text" name="ext" id="ext" value="{{ old('ext') }}" class="form-control">
 
 			</div>
 
@@ -105,7 +107,7 @@
 
 				{!! Form::label('phone_number',trans('lang.phone')) !!}
 				{!! $errors->first('phone_number', '<spam class="help-block">:message</spam>') !!}
-				{!! Form::text('phone_number',null,['class' => 'form-control']) !!}
+				<input type="text" name="phone_number" id="phone_number" value="{{ old('phone_number') }}" class="form-control">
 
 			</div>
 		</div>
@@ -114,7 +116,7 @@
 
 				{!! Form::label('mobile',trans('lang.mobile')) !!}
 				{!! $errors->first('mobile', '<spam class="help-block">:message</spam>') !!}
-				{!! Form::text('mobile',null,['class' => 'form-control']) !!}
+				<input type="text" name="mobile" id="mobile" value="{{ old('mobile') }}" class="form-control">
 
 			</div>
 
@@ -123,24 +125,35 @@
 	<div class="btn btn-default btn-file">
 		{!! Form::label('profile_pic',trans('lang.profilepicture')) !!}
 		{!! $errors->first('profile_pic', '<spam class="help-block">:message</spam>') !!}
-		{!! Form::file('profile_pic') !!}
+		<input type="file" name="profile_pic') !!}
 	</div>
 	</div>
 
-	{!! Form::token() !!}
+	@csrf
 	</form>
 </div>
 </div>
 </div>
 <div class="col-md-6">
 
-    {!! Form::model($user,['url'=>'post-profile-password/'.$user->id, 'method' => 'PATCH']) !!}
+    {!! Form::model($user" id="profile_pic') !!}
+	</div>
+	</div>
+
+	@csrf
+	</form>
+</div>
+</div>
+</div>
+<div class="col-md-6">
+
+    {!! Form::model($user">
 
 <div class="box box-primary">
 
 	<div class="content-header">
 
-	 	<h4>Change Password	{!! Form::submit('Save',['class'=>'form-group btn btn-primary pull-right'])!!}</h4>
+	 	<h4>Change Password	<button type="submit" class="form-group btn btn-primary pull-right">'Save'</button></h4>
 
 	</div>
 
@@ -165,21 +178,21 @@
 
 	<div class="form-group has-feedback {{ $errors->has('old_password') ? 'has-error' : '' }}">
 			{!! Form::label('old_password',trans('lang.oldpassword')) !!}
-            {!! Form::password('old_password',['placeholder'=>'Password','class' => 'form-control']) !!}
+            <input type="password" name="old_password" id="old_password" class="form-control">
 			{!! $errors->first('old_password', '<spam class="help-block">:message</spam>') !!}
             <span class="glyphicon glyphicon-lock form-control-feedback"></span>
     </div>
 
     <div class="form-group has-feedback {{ $errors->has('new_password') ? 'has-error' : '' }}">
     		{!! Form::label('new_password',trans('lang.newpassword')) !!}
-            {!! Form::password('new_password',['placeholder'=>'New Password','class' => 'form-control']) !!}
+            <input type="password" name="new_password" id="new_password" class="form-control">
 			{!! $errors->first('new_password', '<spam class="help-block">:message</spam>') !!}
             <span class="glyphicon glyphicon-lock form-control-feedback"></span>
     </div>
 
     <div class="form-group has-feedback {{ $errors->has('confirm_password') ? 'has-error' : '' }}">
     		{!! Form::label('confirm_password',trans('lang.confirmpassword')) !!}
-            {!! Form::password('confirm_password',['placeholder'=>'Confirm Password','class' => 'form-control']) !!}
+            <input type="password" name="confirm_password" id="confirm_password" class="form-control">
 			{!! $errors->first('confirm_password', '<spam class="help-block">:message</spam>') !!}
             <span class="glyphicon glyphicon-lock form-control-feedback"></span>
     </div>

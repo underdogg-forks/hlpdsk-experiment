@@ -60,10 +60,11 @@
 @endif
 
 <!-- form open -->
-{!!  Form::open(['route'=> 'otp-verification', 'method'=>'post']) !!}
+<form method="POST" action="{{ route('otp-verification') }}">
+    @csrf
 <!-- Email -->
 <div class="form-group has-feedback {{ $errors->has('email') ? 'has-error' : '' }}">
-    {!! Form::hidden('email',null,['placeholder'=> trans("lang.email") ,'class' => 'form-control']) !!}
+    <input type="hidden" name="email" value="null">
     <!-- {!! $errors->first('email', '<spam class="help-block">:message</spam>') !!} -->
 </div>
 

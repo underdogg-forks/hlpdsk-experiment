@@ -82,24 +82,30 @@ class="nav-link active"
             <!-- username -->
             <div class="col-sm-4 form-group {{ $errors->has('language-name') ? 'has-error' : '' }}">
                 {!! Form::label('language-name',trans('lang.language-name')) !!} <span class="text-red"> *</span>
-                {!! Form::text('language-name',null,['placeholder'=>'English','class' => 'form-control']) !!}
+                <input type="text" name="language-name" id="language-name" value="{{ old('language-name') }}" class="form-control">
             </div>
             <div class="col-sm-4 form-group {{ $errors->has('iso-code') ? 'has-error' : '' }}">
                 {!! Form::label('iso-code',trans('lang.iso-code')) !!} <span class="text-red"> *</span>
-                {!! Form::text('iso-code',null,['placeholder'=>'en','class' => 'form-control']) !!}
+                <input type="text" name="iso-code" id="iso-code" value="{{ old('iso-code') }}" class="form-control">
             </div>
         </div>
         <div class="row">
             <div class="col-sm-4 form-group {{ $errors->has('File') ? 'has-error' : '' }}">
                 {!! Form::label('File',trans('lang.file')) !!} <span class="text-red"> *</span>&nbsp
                 <div class="btn bg-olive btn-file" style="color:blue"> {{ trans('lang.upload_file') }}
-                    {!! Form::file('File') !!}
+                    <input type="file" name="File') !!}
                 </div>
             </div>
         </div>
     </div>
     <div class="card-footer">
-        {!! Form::submit(trans('lang.submit'),['class'=>'btn btn-primary'])!!}
+        {!! Form::submit(trans('lang.submit')" id="File') !!}
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="card-footer">
+        {!! Form::submit(trans('lang.submit')" class="btn btn-primary">
     </div>
 </div>
 @stop

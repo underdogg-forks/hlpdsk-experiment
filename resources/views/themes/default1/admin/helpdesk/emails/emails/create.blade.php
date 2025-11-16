@@ -51,25 +51,25 @@ class="nav-link active"
                 <div class="col-sm-6 form-group {!! $errors->has('email_address') ? 'has-error' : '' !!}" id = "email_address_error">
                     {!! Form::label('email_address',trans('lang.email_address')) !!} <span class="text-red"> *</span>
                     {!! $errors->first('email_address', '<spam class="help-block">:message</spam>') !!}
-                    {!! Form::text('email_address',null,['class' => 'form-control', 'id' => 'email_address']) !!}
+                    <input type="text" name="email_address" id="email_address" value="{{ old('email_address') }}" class="form-control">
                 </div>
                 <!-- user name -->
                 <div class="col-sm-6 form-group {{ $errors->has('user_name') ? 'has-error' : '' }}" id="user_name_error">
                     {!! Form::label('user_name',trans('lang.user_name')) !!}
                     {!! $errors->first('user_name', '<spam class="help-block">:message</spam>') !!}
-                    {!! Form::text('user_name',null,['class' => 'form-control']) !!}
+                    <input type="text" name="user_name" id="user_name" value="{{ old('user_name') }}" class="form-control">
                 </div>
                 <!-- Email name -->
                 <div class="col-sm-6 form-group {!! $errors->has('email_name') ? 'has-error' : ''!!}" id="email_name_error">
                     {!! Form::label('email_name',trans('lang.from_name')) !!} <span class="text-red"> *</span>
                     {!! $errors->first('email_name', '<spam class="help-block">:message</spam>') !!}
-                    {!! Form::text('email_name',null,['class' => 'form-control', 'id' => 'email_name']) !!}
+                    <input type="text" name="email_name" id="email_name" value="{{ old('email_name') }}" class="form-control">
                 </div>
                 <!-- password -->
                 <div class="col-sm-6 form-group {!! $errors->has('password') ? 'has-error' : ''!!}" id="password_error">
                     {!! Form::label('password',trans('lang.password')) !!} <span class="text-red"> *</span>
                     {!! $errors->first('password', '<spam class="help-block">:message</spam>') !!}
-                    {!! Form::password('password',['class' => 'form-control', 'id' => 'password']) !!}
+                    <input type="password" name="password" id="password" class="form-control">
                 </div>
             </div>
         
@@ -134,12 +134,12 @@ class="nav-link active"
                         <div class="col-sm-2 form-group  {!! $errors->has('fetching_host') ? 'has-error' : ''!!}" id="fetching_host_error">
                             {!! Form::label('fetching_host',trans('lang.host_name')) !!}
                             {!! $errors->first('fetching_host', '<spam class="help-block">:message</spam>') !!}
-                            {!! Form::text('fetching_host',null,['class' => 'form-control', 'id' => 'fetching_host']) !!}
+                            <input type="text" name="fetching_host" id="fetching_host" value="{{ old('fetching_host') }}" class="form-control">
                         </div>
                         <div class="col-sm-2 form-group {!! $errors->has('fetching_port') ? 'has-error' : ''!!}" id="fetching_port_error">
                             {!! Form::label('fetching_port',trans('lang.port_number')) !!}
                             {!! $errors->first('fetching_port', '<spam class="help-block">:message</spam>') !!}
-                            {!! Form::text('fetching_port',null,['class' => 'form-control', 'id' => 'fetching_port']) !!}
+                            <input type="text" name="fetching_port" id="fetching_port" value="{{ old('fetching_port') }}" class="form-control">
                         </div>
                         <div class="col-sm-2 form-group {!! $errors->has('fetching_encryption') ? 'has-error' : ''!!}" id="fetching_encryption_error">
                             {!! Form::label('fetching_encryption',trans('lang.encryption')) !!}
@@ -182,13 +182,13 @@ class="nav-link active"
                         <div class="col-sm-2 form-group {!! $errors->has('sending_host') ? 'has-error' : ''!!}" id="sending_host_error">
                             {!! Form::label('sending_host',trans('lang.host_name')) !!}
                             {!! $errors->first('sending_host', '<spam class="help-block">:message</spam>') !!} 
-                            {!! Form::text('sending_host',null,['class' => 'form-control']) !!}
+                            <input type="text" name="sending_host" id="sending_host" value="{{ old('sending_host') }}" class="form-control">
                         </div> 
                         <!-- sending port -->
                         <div class="col-sm-2 form-group {!! $errors->has('sending_port') ? 'has-error' : ''!!}" id="sending_port_error">
                             {!! Form::label('sending_port',trans('lang.port_number')) !!}
                             {!! $errors->first('sending_port', '<spam class="help-block">:message</spam>') !!}
-                            {!! Form::text('sending_port',null,['class' => 'form-control']) !!}
+                            <input type="text" name="sending_port" id="sending_port" value="{{ old('sending_port') }}" class="form-control">
                         </div>
                         <!-- Encryption -->
                         <div class="col-sm-2 form-group {!! $errors->has('sending_encryption') ? 'has-error' : ''!!}" id="sending_encryption_error">
@@ -209,7 +209,7 @@ class="nav-link active"
                     <!-- Internal notes -->
                     <div class="form-group">
                         {!! Form::label('internal_notes',trans('lang.internal_notes')) !!}
-                        {!! Form::textarea('internal_notes',null,['class' => 'form-control','size' => '30x10']) !!}
+                        <textarea name="internal_notes" id="internal_notes" class="form-control" rows="10">{{ old('internal_notes') }}</textarea>
                     </div>
                 </div>    
             </div>

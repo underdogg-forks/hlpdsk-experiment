@@ -68,17 +68,17 @@ class="nav-link active"
             <!-- name -->
             <div class="col-sm-6 form-group {{ $errors->has('name') ? 'has-error' : '' }}">
                 {!! Form::label('name',trans('lang.name')) !!}  <span class="text-red"> *</span>
-                {!! Form::text('name',null,['class' => 'form-control']) !!}
+                <input type="text" name="name" id="name" value="{{ old('name') }}" class="form-control">
             </div>
             <!-- account status -->
             <div class="col-sm-6 form-group {{ $errors->has('account_status') ? 'has-error' : '' }}">
                 {!! Form::label('type',trans('lang.type')) !!}
                 <div class="row">
                     <div class="col-sm-2">
-                        {!! Form::radio('type','1',true) !!} {{ trans('lang.public') }}
+                        <input type="radio" name="type" value="'1'"> {{ trans('lang.public') }}
                     </div>
                     <div class="col-sm-3">
-                        {!! Form::radio('type','0',null) !!} {{ trans('lang.private') }}
+                        <input type="radio" name="type" value="'0'"> {{ trans('lang.private') }}
                     </div>
                 </div>
             </div>

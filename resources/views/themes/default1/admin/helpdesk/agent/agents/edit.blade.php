@@ -35,7 +35,9 @@ class="nav-link active"
 
 <!-- open a form -->
 <?php //dd($user->agent_tzone); ?>
-{!! Form::model($user, ['url' => 'agents/'.$user->id,'method' => 'PATCH'] )!!}
+<form method="POST">
+    @csrf
+    @method('PATCH')
 
 @if(session()->has('errors'))
 <?php //dd($errors); ?>
@@ -107,7 +109,7 @@ class="nav-link active"
 
                 {!! Form::label('user_name',trans('lang.user_name')) !!} <span class="text-red"> *</span>
 
-                {!! Form::text('user_name',null,['class' => 'form-control']) !!}
+                <input type="text" name="user_name" id="user_name" value="{{ old('user_name') }}" class="form-control">
 
             </div>
 
@@ -116,7 +118,7 @@ class="nav-link active"
 
                 {!! Form::label('first_name',trans('lang.first_name')) !!} <span class="text-red"> *</span>
 
-                {!! Form::text('first_name',null,['class' => 'form-control']) !!}
+                <input type="text" name="first_name" id="first_name" value="{{ old('first_name') }}" class="form-control">
 
             </div>
 
@@ -125,7 +127,7 @@ class="nav-link active"
 
                 {!! Form::label('last_name',trans('lang.last_name')) !!} <span class="text-red"> *</span>
 
-                {!! Form::text('last_name',null,['class' => 'form-control']) !!}
+                <input type="text" name="last_name" id="last_name" value="{{ old('last_name') }}" class="form-control">
 
             </div>
 
@@ -137,7 +139,7 @@ class="nav-link active"
 
                 {!! Form::label('email',trans('lang.email_address')) !!} <span class="text-red"> *</span>
 
-                {!! Form::email('email',null,['class' => 'form-control']) !!}
+                <input type="email" name="email" id="email" value="{{ old('email') }}" class="form-control">
 
             </div>
 
@@ -145,14 +147,14 @@ class="nav-link active"
 
                 <label for="ext">EXT</label>	
 
-                {!! Form::text('ext',null,['class' => 'form-control']) !!}
+                <input type="text" name="ext" id="ext" value="{{ old('ext') }}" class="form-control">
 
             </div>
             <!--country code-->
             <div class="col-sm-1 form-group {{ session()->has('country_code') ? 'has-error' : '' }}">
 
                 {!! Form::label('country_code',trans('lang.country-code')) !!}
-                {!! Form::text('country_code',null,['class' => 'form-control', 'placeholder' => $phonecode, 'title' => trans('lang.enter-country-phone-code')]) !!}
+                <input type="text" name="country_code" id="country_code" value="{{ old('country_code') }}" class="form-control">
 
             </div>
             <!-- phone -->
@@ -160,7 +162,7 @@ class="nav-link active"
 
                 {!! Form::label('phone_number',trans('lang.phone')) !!}
 
-                {!! Form::text('phone_number',null,['class' => 'form-control']) !!}
+                <input type="text" name="phone_number" id="phone_number" value="{{ old('phone_number') }}" class="form-control">
 
             </div>
 
@@ -207,10 +209,10 @@ class="nav-link active"
 
                     <div class="row">
                         <div class="col-sm-3">
-                            {!! Form::radio('active','1',true) !!} {{ trans('lang.active') }}
+                            <input type="radio" name="active" value="'1'"> {{ trans('lang.active') }}
                         </div>
                         <div class="col-sm-3">
-                            {!! Form::radio('active','0',null) !!} {{ trans('lang.inactive') }}
+                            <input type="radio" name="active" value="'0'"> {{ trans('lang.inactive') }}
                         </div>
                     </div>
 
@@ -225,10 +227,10 @@ class="nav-link active"
 
                     <div class="row">
                         <div class="col-sm-3">
-                            {!! Form::radio('role','admin',true) !!} {{ trans('lang.admin') }}
+                            <input type="radio" name="role" value="'admin'"> {{ trans('lang.admin') }}
                         </div>
                         <div class="col-sm-3">
-                            {!! Form::radio('role','agent',null) !!} {{ trans('lang.agent') }}
+                            <input type="radio" name="role" value="'agent'"> {{ trans('lang.agent') }}
                         </div>
                     </div>
                 </div>
@@ -253,7 +255,7 @@ class="nav-link active"
 
          <div>
             {!! Form::label('agent_signature',trans('lang.agent_signature')) !!}
-            {!! Form::textarea('agent_sign',null,['class' => 'form-control','size' => '30x5']) !!}
+            <textarea name="agent_sign" id="agent_sign" class="form-control" rows="5">{{ old('agent_sign') }}</textarea>
         </div>
     </div>
     <div class="card-footer">

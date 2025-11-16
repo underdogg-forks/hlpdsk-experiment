@@ -24,7 +24,7 @@
 
 			{!! Form::label('name',trans('lang.name')) !!}
 			{!! $errors->first('name', '<spam class="help-block">:message</spam>') !!}
-			{!! Form::text('name',null,['class' => 'form-control']) !!}
+			<input type="text" name="name" id="name" value="{{ old('name') }}" class="form-control">
 		</div>
 
 		<div class="col-sm-5 form-group {{ $errors->has('status') ? 'has-error' : '' }}">
@@ -34,10 +34,10 @@
 			
 			<div class="row">
 				<div class="col-sm-6">
-					{!! Form::radio('status','1',true) !!}{{ trans('lang.active') }}
+					<input type="radio" name="status" value="'1'">{{ trans('lang.active') }}
 				</div>
 				<div class="col-sm-6">
-					{!! Form::radio('status','0',null) !!}{{ trans('lang.inactive') }}
+					<input type="radio" name="status" value="'0'">{{ trans('lang.inactive') }}
 				</div>
 		</div>
 	</div>
@@ -46,7 +46,7 @@
 		{!! Form::label('description',trans('lang.description')) !!}
 		{!! $errors->first('description', '<spam class="help-block">:message</spam>') !!}
 
-		{!! Form::textarea('description',null,['class' => 'form-control','size' => '50x10','id'=>'myNicEditor','placeholder'=>trans('lang.enter_the_description')]) !!}
+		<textarea name="description" id="myNicEditor" class="form-control" rows="10">{{ old('description') }}</textarea>
 	</div>
 </div>
 

@@ -35,7 +35,9 @@ class="nav-link active"
 @stop
 
 @section('content')
-{!! Form::model($category,['url' => 'category/'.$category->id , 'method' => 'PATCH'] )!!}
+<form method="POST">
+    @csrf
+    @method('PATCH')
 @if(session()->has('success'))
 <div class="alert alert-success alert-dismissable">
     <i class="far fa-check-circle"></i>
@@ -85,7 +87,7 @@ class="nav-link active"
             <div class="col-sm-3 {{ $errors->has('name') ? 'has-error' : '' }}">
                 {!! Form::label('name',trans('lang.name')) !!}<span class="text-red"> *</span>
 
-                {!! Form::text('name',null,['class' => 'form-control']) !!}
+                <input type="text" name="name" id="name" value="{{ old('name') }}" class="form-control">
             </div>
             <div class="col-sm-3 {{ $errors->has('parent') ? 'has-error' : '' }}">
                 {!! Form::label('parent',trans('lang.parent')) !!}
@@ -97,17 +99,17 @@ class="nav-link active"
 
                 <div class="row">
                     <div class="col-sm-4">
-                        {!! Form::radio('status','1',true) !!} {{ trans('lang.active') }}
+                        <input type="radio" name="status" value="'1'"> {{ trans('lang.active') }}
                     </div>
                     <div class="col-sm-6">
-                        {!! Form::radio('status','0',null) !!} {{ trans('lang.inactive') }}
+                        <input type="radio" name="status" value="'0'"> {{ trans('lang.inactive') }}
                     </div>
                 </div>
             </div>
             <div class="col-md-12 {{ $errors->has('description') ? 'has-error' : '' }}">
                 {!! Form::label('description',trans('lang.description')) !!}<span class="text-red"> *</span>
 
-                {!! Form::textarea('description',null,['class' => 'form-control','size' => '128x10','id'=>'description','placeholder'=>'Enter the description']) !!}
+                <textarea name="description" id="description" class="form-control" rows="10">{{ old('description') }}</textarea>
             </div>
         </div>
     </div>

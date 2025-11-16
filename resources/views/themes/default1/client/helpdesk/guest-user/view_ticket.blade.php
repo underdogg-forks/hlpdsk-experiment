@@ -221,7 +221,9 @@ echo UTC::usertimezone(date_format($time, 'd/m/Y H:i:s'));
                         </br>
                     </div>
 
-                    {!! Form::model($tickets->id, ['id'=>'form3','method' => 'PATCH', 'enctype'=>'multipart/form-data'] )!!}
+                    <form method="POST">
+    @csrf
+    @method('PATCH')
                     <div id="t1">
 
                         <div class="form-group">
@@ -230,10 +232,10 @@ echo UTC::usertimezone(date_format($time, 'd/m/Y H:i:s'));
                                 <input type="hidden" name="ticket_ID" value="{{$tickets->id}}">
                                 <div class="form-group {{ $errors->has('title') ? 'has-error' : '' }}">
                                     <div class="col-md-2">
-                                        {!! Form::label('To', 'To:') !!}
+                                        <label for="To">'To:'</label>
                                     </div>
                                     <div class="col-md-10">
-                                        {!! Form::text('To',$user->email,['id'=>'email','class'=>'form-control','style'=>'width:55%'])!!}
+                                        <input type="text" name="To" id="email" value="$user->email" class="form-control">
                                         {!! $errors->first('To', '<spam class="help-block text-red">:message</spam>') !!}
                         
                                         <input type="checkbox"> <a href="#" onclick="AddCcc()" data-toggle="modal" data-target="#addccc"> Add Ccc </a>
@@ -261,7 +263,7 @@ echo UTC::usertimezone(date_format($time, 'd/m/Y H:i:s'));
                             <!-- reply content -->
                                 <div class="form-group {{ $errors->has('title') ? 'has-error' : '' }}">
                                     <div class="col-md-2">
-                                        {!! Form::label('Reply Content', 'reply_content:') !!}
+                                        <label for="Reply Content">'reply_content:'</label>
                                     </div>
                                     <div class="col-md-10">
                                         <textarea style="width:98%;height:200px;" name="reply_content" id="reply_content"></textarea>
@@ -289,7 +291,9 @@ echo UTC::usertimezone(date_format($time, 'd/m/Y H:i:s'));
 
                     <!-- Internal Content -->
                     <div id="t2" style="display:none">
-                        {!! Form::model($tickets->id, ['id'=>'form2','method' => 'PATCH'] )!!}
+                        <form method="POST">
+    @csrf
+    @method('PATCH')
                         <div id="t4">
                             <div class="form-group">
                                 <div class="row">
@@ -605,7 +609,9 @@ $data = $ConvDate[0];
     <div class="modal fade" id="Edit" >
         <div class="modal-dialog" style="width:60%;height:70%;">
             <div class="modal-content">
-                {!! Form::model($tickets->id, ['id'=>'form','method' => 'PATCH'] )!!}
+                <form method="POST">
+    @csrf
+    @method('PATCH')
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                     <h4 class="modal-title">Edit <b>[#{!! $tickets->ticket_number !!}]</b>[{!! $user->user_name !!}]</h4>
@@ -663,7 +669,9 @@ $data = $ConvDate[0];
     <div class="modal fade" id="ChangeOwner">
         <div class="modal-dialog">
             <div class="modal-content">
-                {!! Form::model($tickets->id, ['id'=>'form4','method' => 'PATCH'] )!!}
+                <form method="POST">
+    @csrf
+    @method('PATCH')
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                     <h4 class="modal-title">Change Owner for ticket <b>#{!! $tickets->ticket_number !!}</b></h4>
@@ -709,7 +717,9 @@ $data = $ConvDate[0];
     <div class="modal fade" id="{{$tickets->id}}assign">
         <div class="modal-dialog">
             <div class="modal-content">
-                {!! Form::open(['id'=>'form1','method' => 'PATCH'] )!!}
+                <form method="POST">
+    @csrf
+    @method('PATCH')
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                     <h4 class="modal-title">Assign</h4>

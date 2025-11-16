@@ -32,7 +32,9 @@ class="nav-link active"
 <!-- content -->
 @section('content')
 <!-- open a form -->
-{!! Form::model($tickets,['url' => 'postticket/'.$tickets->id, 'method' => 'PATCH']) !!}
+<form method="POST">
+    @csrf
+    @method('PATCH')
 <!-- check whether success or not -->
 @if(session()->has('success'))
 <div class="alert alert-success alert-dismissable">
@@ -117,7 +119,7 @@ class="nav-link active"
             <div class="form-group col-md-6 {{ $errors->has('num_format') ? 'has-error' : '' }}">
                 {!! Form::label('num_format',trans('lang.format')) !!} 
                  <a href="#" data-toggle="tooltip" data-placement="right" title="{{ trans('lang.ticket-number-format') }}"><i class="fa fa-question-circle" style="padding: 0px;"></i></a>
-                {!! Form::text('num_format',null,['class'=>'form-control','id'=>'format']) !!}
+                <input type="text" name="num_format" id="format" value="{{ old('num_format') }}" class="form-control">
 
                 <div id="result"></div>
             </div>

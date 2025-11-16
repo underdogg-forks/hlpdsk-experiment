@@ -67,7 +67,7 @@ class="nav-link active"
             <!-- email Address : Text form : Required -->
             <div class="form-group col-sm-6 {{ $errors->has('email') ? 'has-error' : '' }}">
                 {!! Form::label('email',trans('lang.email_address')) !!} <span class="text-red"> *</span>
-                {!! Form::text('email',null,['class' => 'form-control']) !!}
+                <input type="text" name="email" id="email" value="{{ old('email') }}" class="form-control">
 
             </div>
 
@@ -75,10 +75,10 @@ class="nav-link active"
                 {!! Form::label('ban',trans('lang.ban_status')) !!} <span class="text-red"> *</span>
                 <div class="row">
                     <div class="col-sm-3">
-                        {!! Form::radio('ban',1) !!} {{ trans('lang.active') }}
+                        <input type="radio" name="ban" value="1) !!} {{ trans('lang.active') }}
                     </div>
                     <div class="col-sm-3">
-                        {!! Form::radio('ban',0) !!} {{ trans('lang.inactive') }}
+                        {!! Form::radio('ban'"> {{ trans('lang.inactive') }}
                     </div>
                 </div>
             </div>
@@ -86,7 +86,7 @@ class="nav-link active"
         <!-- intrnal Notes : Textarea :  -->
         <div class="form-group">
             {!! Form::label('internal_note',trans('lang.internal_notes')) !!}
-            {!! Form::textarea('internal_note',null,['class' => 'form-control']) !!}
+            <textarea name="internal_note" id="internal_note" class="form-control">{{ old('internal_note') }}</textarea>
         </div>
     </div>
     <div class="card-footer">

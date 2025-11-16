@@ -3,7 +3,8 @@
 <div class="box box-primary">
 
     <div class="content-header">
-        {!! Form::open(['route'=>'templates.store','method'=>'post']) !!}
+        <form method="POST" action="{{ route('templates.store') }}">
+    @csrf
         <h4>{{ trans('lang.templates') }}	{!! Form::submit(trans('lang.save'),['class'=>'form-group btn btn-primary pull-right'])!!}</h4>
 
     </div>
@@ -48,7 +49,7 @@
                     <div class="col-md-6 form-group {{ $errors->has('name') ? 'has-error' : '' }}">
                         <!-- first name -->
                         {!! Form::label('name',trans('lang.name'),['class'=>'required']) !!}
-                        {!! Form::text('name',null,['class' => 'form-control']) !!}
+                        <input type="text" name="name" id="name" value="{{ old('name') }}" class="form-control">
 
                     </div>
 
@@ -65,7 +66,7 @@
                     <div class="col-md-12 form-group {{ $errors->has('subject') ? 'has-error' : '' }}">
          
                         {!! Form::label('subject',trans('lang.subject')) !!}
-                        {!! Form::text('subject',null,['class' => 'form-control']) !!}
+                        <input type="text" name="subject" id="subject" value="{{ old('subject') }}" class="form-control">
 
                     </div>
                 </div>-->
@@ -75,7 +76,7 @@
                        
                         
                         {!! Form::label('message',trans('lang.content'),['class'=>'required']) !!}
-                        {!! Form::textarea('message',null,['class'=>'form-control','id'=>'textarea']) !!}
+                        <textarea name="message" id="textarea" class="form-control">{{ old('message') }}</textarea>
                        
                     </div>
 

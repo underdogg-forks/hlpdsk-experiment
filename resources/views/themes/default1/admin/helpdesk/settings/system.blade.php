@@ -32,7 +32,9 @@ class="nav-link active"
 <!-- content -->
 @section('content')
 <!-- open a form -->
-{!! Form::model($systems,['url' => 'postsystem/'.$systems->id, 'method' => 'PATCH' , 'id'=>'formID']) !!}
+<form method="POST">
+    @csrf
+    @method('PATCH')
 <!-- check whether success or not -->
 @if(session()->has('success'))
 <div class="alert alert-success alert-dismissable">
@@ -83,7 +85,7 @@ class="nav-link active"
                 <div class="form-group {{ $errors->has('name') ? 'has-error' : '' }}">
                     {!! Form::label('name',trans('lang.name/title')) !!}
                     {!! $errors->first('name', '<spam class="help-block">:message</spam>') !!}
-                    {!! Form::text('name',$systems->name,['class' => 'form-control']) !!}
+                    <input type="text" name="name" id="name" value="$systems->name" class="form-control">
                 </div>
             </div>
              <!-- Helpdesk URL:      text   Required -->
@@ -91,7 +93,7 @@ class="nav-link active"
                 <div class="form-group {{ $errors->has('url') ? 'has-error' : '' }}">
                     {!! Form::label('url',trans('lang.url')) !!}
                     {!! $errors->first('url', '<spam class="help-block">:message</spam>') !!}
-                    {!! Form::text('url',$systems->url,['class' => 'form-control']) !!}
+                    <input type="text" name="url" id="url" value="$systems->url" class="form-control">
                 </div>
             </div>
             <!-- Default Time Zone: Drop down: timezones table : Required -->
@@ -118,10 +120,10 @@ class="nav-link active"
                     {!! Form::label('status',trans('lang.status')) !!}
                     <div class="row">
                         <div class="col-sm-5">
-                            {!! Form::radio('status','1',true) !!} {{ trans('lang.online') }}
+                            <input type="radio" name="status" value="'1'"> {{ trans('lang.online') }}
                         </div>
                         <div class="col-sm-6">
-                            {!! Form::radio('status','0') !!} {{ trans('lang.offline') }}
+                            <input type="radio" name="status" value="'0'"> {{ trans('lang.offline') }}
                         </div>
                     </div>
                 </div>

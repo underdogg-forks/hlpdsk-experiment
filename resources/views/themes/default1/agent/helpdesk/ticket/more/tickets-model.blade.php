@@ -55,7 +55,9 @@
                     <div id="merge-body-form">
                         <div class="row">
                             <div class="col-md-6">
-                                {!! Form::open(['id'=>'merge-form','method' => 'PATCH'] )!!}
+                                <form method="POST">
+    @csrf
+    @method('PATCH')
                                 <label>{{ trans('lang.title') }}</label>
                                 <input type="text" name='title' class="form-control" value="" placeholder="{{trans('lang.optional')}}" />
                             </div>

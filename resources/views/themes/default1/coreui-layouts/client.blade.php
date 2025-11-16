@@ -147,7 +147,7 @@
                             
                             <div class="form-group {{ $errors->has('email') ? 'has-error' : '' }}">
                                 <div class="input-group">
-                                    {!! Form::text('email', null, ['placeholder'=>'Email', 'class' => 'form-control']) !!}
+                                    <input type="text" name="email" id="email" value="{{ old('email') }}" class="form-control">
                                     <div class="input-group-append">
                                         <span class="input-group-text"><i class="fa fa-envelope"></i></span>
                                     </div>
@@ -157,7 +157,7 @@
                             
                             <div class="form-group {{ $errors->has('password') ? 'has-error' : '' }}">
                                 <div class="input-group">
-                                    {!! Form::password('password', ['placeholder'=>'Password', 'class' => 'form-control']) !!}
+                                    <input type="password" name="password" id="password" class="form-control">
                                     <div class="input-group-append">
                                         <span class="input-group-text"><i class="fa fa-lock"></i></span>
                                     </div>

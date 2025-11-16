@@ -2,7 +2,9 @@
 @section('content')
 <!-- open a form -->
 
-	{!! Form::model($faq,['url' => 'post-create-faq/'.$faq->id, 'method' => 'PATCH','files'=>true]) !!}
+	<form method="POST">
+    @csrf
+    @method('PATCH')
 
 <!-- <div class="form-group {{ $errors->has('company_name') ? 'has-error' : '' }}"> -->
 	<!-- table  -->
@@ -13,7 +15,7 @@
 	<div class="content-header">
 
 		<div>
-        	<h4>Faqs {!! Form::submit('save',['class'=>'form-group btn btn-primary pull-right'])!!}</h4>
+        	<h4>Faqs <button type="submit" class="form-group btn btn-primary pull-right">'save'</button></h4>
     	</div>
 
     </div>
@@ -44,10 +46,10 @@
             <div class="row">
 
         <div class="col-md-10 form-group {{ $errors->has('faq') ? 'has-error' : '' }}">
-        {!! Form::label('faq','Description') !!}
+        <label for="faq">'Description'</label>
         {!! $errors->first('faq', '<spam class="help-block">:message</spam>') !!}
 
-            {!! Form::textarea('faq',null,['class' => 'form-control','size' => '30x5','id'=>'faq']) !!}
+            <textarea name="faq" id="faq" class="form-control" rows="5">{{ old('faq') }}</textarea>
 
         </div>
             <script language="JavaScript" type="text/javascript">

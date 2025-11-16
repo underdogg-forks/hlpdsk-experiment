@@ -69,7 +69,7 @@ class="nav-link active"
                 </div>
                 <div  class="col-md-9">
                     <div class="callout callout-default" style="font-style: oblique;">{{ trans('lang.security_msg1') }}</div>
-                    {!! Form::textarea('lockout_message',null,['class'=>'form-control'])!!}
+                    <textarea name="lockout_message" id="lockout_message" class="form-control">{{ old('lockout_message') }}</textarea>
                 </div>
             </div>
         </div>
@@ -80,7 +80,7 @@ class="nav-link active"
                 </div>
                 <div class="col-md-9">
                     <div class="callout callout-default" style="font-style: oblique;">{{ trans('lang.security_msg2') }}</div>
-                    <span>{!! Form::text('backlist_threshold',null,['class'=>'form-control'])!!} {{ trans('lang.lockouts') }}</span>
+                    <span><input type="text" name="backlist_threshold" id="backlist_threshold" value="{{ old('backlist_threshold') }}" class="form-control"> {{ trans('lang.lockouts') }}</span>
                 </div>     
             </div>
         </div>
@@ -91,7 +91,7 @@ class="nav-link active"
                 </div>
                 <div class="col-md-8">
                     <div class="callout callout-default" style="font-style: oblique;">{{ trans('lang.security_msg3') }}</div>
-                    <span> {!! Form::text('lockout_period',null,['class'=>'form-control'])!!} {{ trans('lang.minutes') }}</span>
+                    <span> <input type="text" name="lockout_period" id="lockout_period" value="{{ old('lockout_period') }}" class="form-control"> {{ trans('lang.minutes') }}</span>
                 </div>
             </div>
         </div>

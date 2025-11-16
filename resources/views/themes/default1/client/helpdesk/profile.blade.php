@@ -72,7 +72,9 @@ class="nav-item active"
 
                 <div class="col-md-6">
 
-                     {!! Form::model($user,['url'=>'client-profile-edit', 'id' => 'client-profile', 'method' => 'PATCH','files'=>true]) !!}
+                     <form method="POST">
+    @csrf
+    @method('PATCH')
 
                     <div id="form-border" class="comment-respond form-border" style="background : #fff">
 
@@ -89,23 +91,23 @@ class="nav-item active"
                                     <!-- first name -->
                                     {!! Form::label('first_name',trans('lang.first_name')) !!}<span class="text-red"> *</span>
 
-                                    {!! Form::text('first_name',null,['class' => 'form-control']) !!}
+                                    <input type="text" name="first_name" id="first_name" value="{{ old('first_name') }}" class="form-control">
                                 </div>
                                 <div class="form-group {{ $errors->has('last_name') ? 'has-error' : '' }}">
                                     <!-- last name -->
                                     {!! Form::label('last_name',trans('lang.last_name')) !!}
 
-                                    {!! Form::text('last_name',null,['class' => 'form-control']) !!}
+                                    <input type="text" name="last_name" id="last_name" value="{{ old('last_name') }}" class="form-control">
                                 </div>
                                 <div class="form-group">
                                     <!-- gender -->
                                     {!! Form::label('gender',trans('lang.gender')) !!}
                                     <div class="row">
                                         <div class="col-sm-3">
-                                            {!! Form::radio('gender','1',true) !!}&nbsp;&nbsp;{{ trans('lang.male') }}
+                                            <input type="radio" name="gender" value="'1'">&nbsp;&nbsp;{{ trans('lang.male') }}
                                         </div>
                                         <div class="col-sm-3">
-                                            {!! Form::radio('gender','0') !!}&nbsp;&nbsp;{{ trans('lang.female') }}
+                                            <input type="radio" name="gender" value="'0'">&nbsp;&nbsp;{{ trans('lang.female') }}
                                         </div>
                                     </div>
                                 </div>
@@ -120,26 +122,26 @@ class="nav-item active"
                                     <!-- company -->
                                     {!! Form::label('company',trans('lang.company')) !!}
 
-                                    {!! Form::text('company',null,['class' => 'form-control']) !!}
+                                    <input type="text" name="company" id="company" value="{{ old('company') }}" class="form-control">
                                 </div>
                                 <div class="row">
                                     <div class="col-sm-2 form-group {{ $errors->has('country_code') ? 'has-error' : '' }}">
                                         <!-- phone extensionn -->
                                         {!! Form::label('country_code',trans('lang.country-code')) !!}
-                                        {!! Form::text('country_code',null,['class' => 'form-control', 'placeholder' => $phonecode, 'title' => trans('lang.enter-country-phone-code'), 'id' => 'code']) !!}
+                                        <input type="text" name="country_code" id="code" value="{{ old('country_code') }}" class="form-control">
 
                                     </div>
                                     <div class="col-sm-2 form-group {{ $errors->has('ext') ? 'has-error' : '' }}">
                                         <!-- phone extensionn -->
                                         {!! Form::label('ext',trans('lang.ext')) !!}
 
-                                        {!! Form::text('ext',null,['class' => 'form-control']) !!}
+                                        <input type="text" name="ext" id="ext" value="{{ old('ext') }}" class="form-control">
                                     </div>
                                     <div class="col-sm-8 form-group {{ $errors->has('phone_number') ? 'has-error' : '' }}">
                                         <!-- phone number -->
                                         {!! Form::label('phone_number',trans('lang.phone')) !!}
 
-                                        {!! Form::text('phone_number',null,['class' => 'form-control']) !!}
+                                        <input type="text" name="phone_number" id="phone_number" value="{{ old('phone_number') }}" class="form-control">
                                     </div>
                                 </div>
                                 <div class="form-group {{ $errors->has('mobile') ? 'has-error' : '' }}">
@@ -152,10 +154,10 @@ class="nav-item active"
                                     <!-- profile pic -->
                                     {!! Form::label('profile_pic',trans('lang.profile_pic')) !!}
 
-                                    {!! Form::file('profile_pic') !!}
+                                    <input type="file" name="profile_pic') !!}
                                 </div>
 
-                                {!! Form::token() !!}
+                                @csrf
                                 </form>
 
                                 <div class="form-group" style="padding-bottom: 10px;">
@@ -171,7 +173,26 @@ class="nav-item active"
 
                 <div class="col-md-6">
 
-                    {!! Form::model($user,['url'=>'client-profile-password' , 'method' => 'PATCH']) !!}
+                    {!! Form::model($user" id="profile_pic') !!}
+                                </div>
+
+                                @csrf
+                                </form>
+
+                                <div class="form-group" style="padding-bottom: 10px;">
+
+
+                                    <button type="submit" class="btn btn-primary float-right" style="background-color: #337ab7 !important; border-color: #337ab7 !important; color: white;">
+                                        <i class="fas fa-sync"></i> {{ trans('lang.update') }}
+                                    </button>                                </div>
+                            </div>
+                        </section>
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+
+                    {!! Form::model($user">
 
                     <div id="form-border" class="comment-respond form-border" style="background : #fff">
 
@@ -185,19 +206,19 @@ class="nav-item active"
                             <div>
                                  {!! Form::label('old_password',trans('lang.old_password')) !!}<span class="text-red"> *</span>
                                 <div class="form-group has-feedback {{ $errors->has('old_password') ? 'has-error' : '' }}" style="display: -webkit-box;">
-                                    {!! Form::password('old_password',['class' => 'form-control']) !!}
+                                    <input type="password" name="old_password" id="old_password" class="form-control">
                                     <span class="fa fa-lock form-control-feedback" style="top: 9px;left: -25px;color: #6c757d !important;"></span> <!--change the "glyphicon glyphicon-lock form-control-feedback" to "fa fa-lock form-control-feedback" bcoz bs5 has removed the Glyphicons icon font that was included in earlier versions of Bootstrap-->
                                 </div>
                                 <!-- new password -->
                                   {!! Form::label('new_password',trans('lang.new_password')) !!}<span class="text-red"> *</span>
                                 <div class="form-group has-feedback {{ $errors->has('new_password') ? 'has-error' : '' }}" style="display: -webkit-box;">
-                                    {!! Form::password('new_password',['class' => 'form-control']) !!}
+                                    <input type="password" name="new_password" id="new_password" class="form-control">
                                     <span class="fa fa-lock form-control-feedback" style="top: 9px;left: -25px;color: #6c757d !important;"></span>
                                 </div>
                                 <!-- cofirm password -->
                                  {!! Form::label('confirm_password',trans('lang.confirm_password')) !!}<span class="text-red"> *</span>
                                 <div class="form-group has-feedback {{ $errors->has('confirm_password') ? 'has-error' : '' }}" style="display: -webkit-box;">
-                                    {!! Form::password('confirm_password',['class' => 'form-control']) !!}
+                                    <input type="password" name="confirm_password" id="confirm_password" class="form-control">
                                     <span class="fa fa-lock form-control-feedback" style="top: 9px;left: -25px;color: #6c757d !important;"></span>
                                 </div>
 
@@ -245,13 +266,14 @@ class="nav-item active"
                         </div>
                     </div>
                     <div id="verify-number-form">
-                    {!! Form::open(['id'=>'verify-otp','method' => 'POST'] )!!}
+                    <form method="POST">
+    @csrf
                         <div class="row">
                             <div class="col-md-8">
                                 {{ trans('lang.get-verify-message') }}
                             </div>
                             <div class="col-md-4">
-                                {!! Form::text('token','',['class' => 'form-control', 'required' => true, 'placeholder' => trans('lang.enter-otp'), 'id' => 'otp']) !!}
+                                <input type="text" name="token" id="otp" value="''" class="form-control" required>
                             </div>
                         </div>
                     </div>

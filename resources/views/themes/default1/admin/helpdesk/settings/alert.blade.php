@@ -34,7 +34,9 @@ class="nav-link active"
 <!-- content -->
 @section('content')
 <!-- open a form -->
-{!! Form::model($alerts,['url' => 'postalert/'.$alerts->id, 'method' => 'PATCH']) !!}
+<form method="POST">
+    @csrf
+    @method('PATCH')
 @if(session()->has('success'))
 <div class="alert alert-success alert-dismissable">
     <i class="fas fa-check-circle"></i>
@@ -69,16 +71,16 @@ class="nav-link active"
                         <div class="form-group">
                             <!-- Status:     Enable   Disable     -->
                             {!! Form::label('ticket_status',trans('lang.status').":") !!}&nbsp;&nbsp;
-                            {!! Form::radio('ticket_status',1) !!} {{ trans('lang.enable') }} &nbsp;&nbsp; {!! Form::radio('ticket_status',0) !!}  {{ trans('lang.disable') }}
+                            <input type="radio" name="ticket_status" value="1) !!} {{ trans('lang.enable') }} &nbsp;&nbsp; {!! Form::radio('ticket_status'">  {{ trans('lang.disable') }}
                         </div>
                         <div class="form-group">
                             <!-- Admin Email -->
-                            {!! Form::checkbox('ticket_admin_email',1) !!}
+                            <input type="checkbox" name="ticket_admin_email" value="1">
                             {!! Form::label('ticket_admin_email',trans('lang.admin_email_2')) !!}
                         </div>
                         <!-- Department Members -->
                         <div class="form-group">
-                            {!! Form::checkbox('ticket_department_member',1) !!}
+                            <input type="checkbox" name="ticket_department_member" value="1">
                             {!! Form::label('ticket_department_member',trans('lang.department_members')) !!}
                         </div>
                     </div><!-- /.box-body -->
@@ -94,16 +96,16 @@ class="nav-link active"
                         <!-- Status:     Enable      Disable      -->
                         <div class="form-group">
                             {!! Form::label('assignment_status',trans('lang.status').":") !!}
-                            {!! Form::radio('assignment_status',1) !!} {{ trans('lang.enable') }} &nbsp;&nbsp; {!! Form::radio('assignment_status',0) !!}  {{ trans('lang.disable') }}
+                            <input type="radio" name="assignment_status" value="1) !!} {{ trans('lang.enable') }} &nbsp;&nbsp; {!! Form::radio('assignment_status'">  {{ trans('lang.disable') }}
                         </div>
                         <!-- Assigned Agent / Team -->
                         <div class="form-group">
-                            {!! Form::checkbox('assignment_assigned_agent',1) !!}
+                            <input type="checkbox" name="assignment_assigned_agent" value="1">
                             {!! Form::label('assignment_assigned_agent',trans('lang.agent')) !!}
                         </div>
                         <!-- Team Members -->
                         <div class="form-group">
-                            {!! Form::checkbox('assignment_team_member',1) !!}
+                            <input type="checkbox" name="assignment_team_member" value="1">
                             {!! Form::label('assignment_team_member',trans('lang.team_members')) !!}
                         </div>
                     </div><!-- /.box-body -->

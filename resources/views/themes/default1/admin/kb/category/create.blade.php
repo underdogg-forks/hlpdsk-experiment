@@ -12,7 +12,7 @@
 {!! Form::open(array('route' => 'category.store' , 'method' => 'post') )!!}
 <div class="box box-primary">
 	<div class="box-header">
-	 	<h4 class="box-title">Add Category</h4> {!! Form::submit('save',['class'=>'form-group btn btn-primary pull-right'])!!}
+	 	<h4 class="box-title">Add Category</h4> <button type="submit" class="form-group btn btn-primary pull-right">'save'</button>
 	</div>
 	<div class="box-body">
 	@if(session()->has('success'))
@@ -37,7 +37,7 @@
 
 			{!! Form::label('name',trans('lang.name')) !!}
 			{!! $errors->first('name', '<spam class="help-block">:message</spam>') !!}
-			{!! Form::text('name',null,['class' => 'form-control']) !!}
+			<input type="text" name="name" id="name" value="{{ old('name') }}" class="form-control">
 
 		</div>
 
@@ -45,7 +45,7 @@
 
 			{!! Form::label('slug',trans('lang.slug')) !!}
 			{!! $errors->first('slug', '<spam class="help-block">:message</spam>') !!}
-			{!! Form::text('slug',null,['class' => 'form-control']) !!}
+			<input type="text" name="slug" id="slug" value="{{ old('slug') }}" class="form-control">
 
 		</div>
 
@@ -65,9 +65,9 @@
 			<br/>
 			
 				
-					{!! Form::radio('status','1',true) !!} {{ trans('lang.active') }}
+					<input type="radio" name="status" value="'1'"> {{ trans('lang.active') }}
 					
-					{!! Form::radio('status','0',null) !!} {{ trans('lang.inactive') }}
+					<input type="radio" name="status" value="'0'"> {{ trans('lang.inactive') }}
 				
 			
 		</div>
@@ -76,7 +76,7 @@
 			
 			{!! Form::label('description',trans('lang.description')) !!}
 			{!! $errors->first('description', '<spam class="help-block">:message</spam>') !!}
-			{!! Form::textarea('description',null,['class' => 'form-control','id'=>'description','placeholder'=>'Enter the description']) !!}
+			<textarea name="description" id="description" class="form-control">{{ old('description') }}</textarea>
 			
 		</div>
 

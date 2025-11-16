@@ -20,7 +20,8 @@ class="active"
 <!-- content -->
 @section('content')
 <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/bootstrap.daterangepicker/2/daterangepicker.css" />
-{!! Form::open(['url'=>'user-export','method'=>'post']) !!}
+<form method="POST" action="user-export">
+    @csrf
 <div class="box box-primary">
     @if (count($errors) > 0)
     <div class="alert alert-danger">
@@ -60,8 +61,8 @@ class="active"
                 </div>
             </div>
             <div class="col-md-6">
-                {!! Form::hidden('date',null,['id'=>'hidden']) !!}
-                {!! Form::submit('Export',['class'=>'btn btn-success','id'=>'submit']) !!}
+                <input type="hidden" name="date" value="null" id="hidden">
+                <button type="submit" class="btn btn-success">'Export'</button>
             </div>
         </div>
     </div>

@@ -285,10 +285,10 @@
                                         <?php b: ?>
                                         @endif
                                         <div class="form-group has-feedback @if(isset($errors)) {!! $errors->has('email') ? 'has-error' : '' !!} @endif">
-                                            {!! Form::text('email',null,['placeholder'=>trans('lang.e-mail'),'class' => 'form-control']) !!}
+                                            <input type="text" name="email" id="email" value="{{ old('email') }}" class="form-control">
                                         </div>
                                         <div class="form-group has-feedback @if(isset($errors)) {!! $errors->has('password') ? 'has-error' : '' !!} @endif">
-                                            {!! Form::password('password',['placeholder'=>trans('lang.password'),'class' => 'form-control']) !!}
+                                            <input type="password" name="password" id="password" class="form-control">
                                             <?php \Illuminate\Support\Facades\Event::dispatch('auth.login.form'); ?>
                                             <a href="{{url('password/email')}}" style="font-size: .8em" class="pull-left">{{ trans('lang.forgot_password') }}</a>
                                         </div>
@@ -316,7 +316,8 @@
                     </nav>
 
                     <div id="header-search" class="site-search clearfix" style="margin-right: 90%; width: 100%"><!-- #header-search -->
-                        {!!Form::open(['route' => 'client.search','class'=>'search-form clearfix'])!!}
+                        <form method="POST" action="{{ route('client.search') }}">
+    @csrf
                         <div class="form-border" style="z-index: 0;width: 85%;">
                             <div class="form-inline ">
                                 <div class="form-group input-group " style="width: 98% ">

@@ -453,9 +453,11 @@ foreach ($conversations as $conversation) {
 
                     <h3 id="reply-title" class="comment-reply-title section-title"><i class="line"></i>{{ trans('lang.leave_a_reply') }}</h3>
                     @if(Auth::user())
-                        {!! Form::open(['url'=>'post/reply/'.$id2.'#formabc']) !!}
+                        <form method="POST" action="post/reply/">
+    @csrf
                     @else
-                        {!! Form::open(['url'=>'post-ticket-reply/'.$tickets->id.'#formabc']) !!}
+                        <form method="POST" action="post-ticket-reply/">
+    @csrf
                     @endif
                     <div class="row">
                         <div class="col-md-12">

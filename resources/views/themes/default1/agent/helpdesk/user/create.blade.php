@@ -82,12 +82,12 @@ class="nav-link active"
             <!-- First name : first name : Required -->
             <div class="col-sm-6 form-group {{ $errors->has('first_name') ? 'has-error' : '' }}">
                 {!! Form::label('first_name',trans('lang.first_name')) !!}<span class="text-red"> *</span>
-                {!! Form::text('first_name',null,['class' => 'form-control']) !!}
+                <input type="text" name="first_name" id="first_name" value="{{ old('first_name') }}" class="form-control">
             </div>
             <!-- Last name : last name : Required -->
             <div class="col-sm-6 form-group {{ $errors->has('last_name') ? 'has-error' : '' }}">
                 {!! Form::label('last_name',trans('lang.last_name')) !!}
-                {!! Form::text('last_name',null,['class' => 'form-control']) !!}
+                <input type="text" name="last_name" id="last_name" value="{{ old('last_name') }}" class="form-control">
             </div>
             <!-- User Name : Text : Required-->
         </div>
@@ -98,12 +98,12 @@ class="nav-link active"
                 @if ($email_mandatory->status == 1 || $email_mandatory->status == '1')
                 <span class="text-red"> *</span>
                 @endif
-                {!! Form::email('email',null,['class' => 'form-control']) !!}
+                <input type="email" name="email" id="email" value="{{ old('email') }}" class="form-control">
             </div>
             
             <div class="col-sm-6 form-group {{ $errors->has('user_name') ? 'has-error' : '' }}">
                 {!! Form::label('user_name',trans('lang.user_name')) !!}<span class="text-red"> *</span>
-                {!! Form::text('user_name',null,['class' => 'form-control']) !!}
+                <input type="text" name="user_name" id="user_name" value="{{ old('user_name') }}" class="form-control">
             </div>
         </div>
         <div class="row">
@@ -120,7 +120,7 @@ class="nav-link active"
                      <span class="text-red"> *</span>
                 @endif
                 <!-- {!! $errors->first('country_code', '<spam class="help-block">:message</spam>') !!} -->
-                {!! Form::text('country_code',null,['class' => 'form-control', 'placeholder' => $phonecode, 'title' => trans('lang.enter-country-phone-code')]) !!}
+                <input type="text" name="country_code" id="country_code" value="{{ old('country_code') }}" class="form-control">
             </div>
             <!-- mobile Number : Text :  -->
             <div class="col-md-3 form-group {{ $errors->has('mobile') ? 'has-error' : '' }}">
@@ -132,20 +132,20 @@ class="nav-link active"
             </div>
             <div class="col-sm-1 form-group {{ $errors->has('ext') ? 'has-error' : '' }}">
                 <label for="ext">{{ trans('lang.ext') }}</label>  
-                {!! Form::text('ext',null,['class' => 'form-control']) !!}
+                <input type="text" name="ext" id="ext" value="{{ old('ext') }}" class="form-control">
             </div>
             <div class="col-sm-3 form-group {{ $errors->has('phone_number') ? 'has-error' : '' }}">
                 <label for="phone_number">{{ trans('lang.phone') }}</label>
-                {!! Form::text('phone_number',null,['class' => 'form-control']) !!}
+                <input type="text" name="phone_number" id="phone_number" value="{{ old('phone_number') }}" class="form-control">
             </div>
             <div class="col-md-3 form-group {{ $errors->has('active') ? 'has-error' : '' }}">
                 {!! Form::label('active',trans('lang.status')) !!}
                 <div class="row">
                     <div class="col-sm-4">
-                        {!! Form::radio('active','1',true) !!} {{ trans('lang.active') }}
+                        <input type="radio" name="active" value="'1'"> {{ trans('lang.active') }}
                     </div>
                     <div class="col-sm-6">
-                        {!! Form::radio('active','0') !!} {{ trans('lang.inactive') }}
+                        <input type="radio" name="active" value="'0'"> {{ trans('lang.inactive') }}
                     </div>
                 </div>
             </div>
@@ -153,7 +153,7 @@ class="nav-link active"
         <!-- Internal Notes : Textarea -->
         <div class="form-group">
             {!! Form::label('internal_note',trans('lang.internal_notes')) !!}
-            {!! Form::textarea('internal_note',null,['class' => 'form-control', 'size' => '30x5']) !!}
+            <textarea name="internal_note" id="internal_note" class="form-control" rows="5">{{ old('internal_note') }}</textarea>
         </div>
         <!-- Send email to user about registration password -->
         <div>

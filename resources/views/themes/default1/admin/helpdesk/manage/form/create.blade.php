@@ -45,7 +45,7 @@ class="active"
                     <div class="form-group {{ $errors->has('title') ? 'has-error' : '' }}">
                         {!! Form::label('title',trans('lang.title')) !!}
                         {!! $errors->first('title', '<spam class="help-block">:message</spam>') !!}
-                        {!! Form::text('title',null,['class' => 'form-control']) !!}
+                        <input type="text" name="title" id="title" value="{{ old('title') }}" class="form-control">
                     </div>
                 </div>
                 <!-- declare table head Label -->
@@ -53,7 +53,7 @@ class="active"
                     <div class="form-group {{ $errors->has('label') ? 'has-error' : '' }}">
                         {!! Form::label('label',trans('lang.label')) !!}
                         {!! $errors->first('label', '<spam class="help-block">:message</spam>') !!}
-                        {!! Form::text('label',null,['class' => 'form-control']) !!}
+                        <input type="text" name="label" id="label" value="{{ old('label') }}" class="form-control">
                     </div>
                 </div>
                 <!-- declare table head type -->
@@ -76,14 +76,14 @@ class="active"
                 <div class="col-md-4">
                     <div class="form-group">
                         {!! Form::label('variable',trans('lang.variable')) !!}
-                        {!! Form::text('variable',null,['class' => 'form-control']) !!}
+                        <input type="text" name="variable" id="variable" value="{{ old('variable') }}" class="form-control">
                     </div>
                 </div>
                 <!-- instruction: textarea -->
                 <div class="col-md-6">
                     <div class="form-group">
                         {!! Form::label('instruction',trans('lang.instruction')) !!}
-                        {!! Form::textarea('instruction',null,['class' => 'form-control','size' => '10x5']) !!}
+                        <textarea name="instruction" id="instruction" class="form-control" rows="5">{{ old('instruction') }}</textarea>
                     </div>
                 </div>
 
@@ -93,7 +93,7 @@ class="active"
                 <div class="col-md-6">
                     <div class="form-group">
                         {!! Form::label('internal_notes',trans('lang.internal_notes')) !!}
-                        {!! Form::textarea('internal_notes',null,['class' => 'form-control','size' => '10x5']) !!}
+                        <textarea name="internal_notes" id="internal_notes" class="form-control" rows="5">{{ old('internal_notes') }}</textarea>
                     </div>
                 </div>
             </div>

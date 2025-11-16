@@ -124,7 +124,8 @@ $category_id = $all->pluck('category_id')->toArray();
 {{--                <i class="line" style="border-color: rgb(0, 154, 186);"<></i>{{ trans('lang.leave_a_reply') }}--}}
 {{--            </h3>--}}
 
-            {!! Form::open(['method'=>'post','url'=>'postcomment/'.$arti->slug,'id'=>'comment-form']) !!}
+            <form method="POST" action="postcomment/">
+    @csrf
             {!! csrf_field() !!}
 
             <div id="respond" class="comment-respond form-border">
@@ -151,7 +152,7 @@ $category_id = $all->pluck('category_id')->toArray();
                         <div class="col-md-10" style="width: 65%">
                             <div class="form-group {{ $errors->has('comment') ? 'has-error' : '' }}">
                                 {!! Form::label('comment',trans('lang.message'),['class' => 'label']) !!}
-                                {!! Form::textarea('comment',null,['class' => 'form-control','size' => '30x8','id'=>'comment']) !!}
+                                <textarea name="comment" id="comment" class="form-control" rows="8">{{ old('comment') }}</textarea>
                                 {!! $errors->first('comment', '<spam class="help-block">:message</spam>') !!}
                             </div>
                             <button type="submit" class="btn btn-custom btn-lg float-right" style="background-color: #009aba; hov: #00c0ef; color: #fff">
@@ -208,24 +209,25 @@ $category_id = $all->pluck('category_id')->toArray();
                     </script></div>
                     </form>
                 @else
-                    {!! Form::open(['method'=>'post','url'=>'postcomment/'.$arti->slug,'id'=>'comment-form']) !!}
+                    <form method="POST" action="postcomment/">
+    @csrf
                     <div class="row">
                         <div class="col-md-4">
                             <div class="form-group {{ $errors->has('name') ? 'has-error' : '' }}">
                                 {!! Form::label('name', trans('lang.name'), ['class' => 'label']) !!}
-                                {!! Form::text('name', null, ['class' => 'form-control', 'id' => 'comment-name']) !!}
+                                <input type="text" name="name" id="comment-name" value="{{ old('name') }}" class="form-control">
                                 {!! $errors->first('name', '<span class="help-block">:message</span>') !!}
                             </div>
 
                             <div class="form-group {{ $errors->has('email') ? 'has-error' : '' }}">
                                 {!! Form::label('email', trans('lang.email'), ['class' => 'label']) !!}
-                                {!! Form::text('email', null, ['class' => 'form-control', 'id' => 'comment-email']) !!}
+                                <input type="text" name="email" id="comment-email" value="{{ old('email') }}" class="form-control">
                                 {!! $errors->first('email', '<span class="help-block">:message</span>') !!}
                             </div>
 
                             <div class="form-group {{ $errors->has('website') ? 'has-error' : '' }}">
                                 {!! Form::label('website', trans('lang.website'), ['class' => 'label']) !!}
-                                {!! Form::text('website', null, ['class' => 'form-control']) !!}
+                                <input type="text" name="website" id="website" value="{{ old('website') }}" class="form-control">
                                 {!! $errors->first('website', '<span class="help-block">:message</span>') !!}
                             </div>
 
@@ -234,7 +236,7 @@ $category_id = $all->pluck('category_id')->toArray();
                         <div class="col-md-10" style="width: 65%">
                             <div class="form-group {{ $errors->has('comment') ? 'has-error' : '' }}">
                                 {!! Form::label('comment',trans('lang.message'),['class' => 'label']) !!}
-                                {!! Form::textarea('comment',null,['class' => 'form-control','size' => '30x8','id'=>'comment']) !!}
+                                <textarea name="comment" id="comment" class="form-control" rows="8">{{ old('comment') }}</textarea>
                                 {!! $errors->first('comment', '<spam class="help-block">:message</spam>') !!}
                             </div>
                             <button type="submit" class="btn btn-custom btn-lg float-right" style="background-color: #009aba; hov: #00c0ef; color: #fff">

@@ -100,7 +100,7 @@ class="nav-link active"
             <!-- Admin Note : Textarea : -->
             <div>
                 {!! Form::label('admin_note',trans('lang.admin_notes')) !!}
-                {!! Form::textarea('admin_note',null,['class' => 'form-control','size' => '30x5']) !!}
+                <textarea name="admin_note" id="admin_note" class="form-control" rows="5">{{ old('admin_note') }}</textarea>
             </div>
 
             <div>

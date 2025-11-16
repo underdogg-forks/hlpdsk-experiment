@@ -74,7 +74,7 @@ class="nav-link active"
             <div class="col-md-4">
                 <div class="form-group {{ $errors->has('name') ? 'has-error' : '' }}">
                     <label>{{ trans('lang.name') }}: <span class="text-red"> *</span></label><br>
-                    {!! Form::text('name',null,['class'=>'form-control'])!!}
+                    <input type="text" name="name" id="name" value="{{ old('name') }}" class="form-control">
                 </div>
             </div>
             <div class="col-md-4">
@@ -160,10 +160,10 @@ class="nav-link active"
             <div class="callout callout-default" style="font-style: oblique;">{{ trans('lang.status_msg3') }}</div>
             <div class="row">
                 <div class="col-sm-3">
-                    {!! Form::radio('state','closed',true) !!} {{ trans('lang.yes') }}
+                    <input type="radio" name="state" value="'closed'"> {{ trans('lang.yes') }}
                 </div>
                 <div class="col-sm-3">
-                    {!! Form::radio('state','open') !!} {{ trans('lang.no') }}
+                    <input type="radio" name="state" value="'open'"> {{ trans('lang.no') }}
                 </div>
             </div>
         </div>
@@ -173,10 +173,10 @@ class="nav-link active"
             <div class="callout callout-default" style="font-style: oblique;">{{ trans('lang.status_msg2') }}</div>
             <div class="row">
                 <div class="col-sm-3">
-                    {!! Form::radio('delete','yes') !!} {{ trans('lang.yes') }}
+                    <input type="radio" name="delete" value="'yes') !!} {{ trans('lang.yes') }}
                 </div>
                 <div class="col-sm-3">
-                    {!! Form::radio('delete','no') !!} {{ trans('lang.no') }}
+                    {!! Form::radio('delete'"> {{ trans('lang.no') }}
                 </div>
             </div>        
         </div>
@@ -186,10 +186,10 @@ class="nav-link active"
             <div class="callout callout-default" style="font-style: oblique;">{{ trans('lang.status_msg1') }}</div>
             <div class="row">
                 <div class="col-sm-3">
-                    {!! Form::radio('email_user','yes') !!} {{ trans('lang.yes') }}
+                    <input type="radio" name="email_user" value="'yes') !!} {{ trans('lang.yes') }}
                 </div>
                 <div class="col-sm-3">
-                    {!! Form::radio('email_user','no') !!} {{ trans('lang.no') }}
+                    {!! Form::radio('email_user'"> {{ trans('lang.no') }}
                 </div>
             </div>        
         </div>

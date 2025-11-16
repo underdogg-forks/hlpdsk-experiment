@@ -60,7 +60,7 @@ class="active"
 
 				<!-- <div class="box-body"> -->
 
-                  {!! Form::textarea('templatedata',$contents,['class'=>'form-control'])!!}
+                  <textarea name="templatedata" id="templatedata" class="form-control">{{ old('templatedata') }}</textarea>
 
 <!-- </div> -->
   </form>

@@ -51,14 +51,14 @@
 
 					{!! Form::label('name',trans('lang.name')) !!}
 					{!! $errors->first('name', '<spam class="help-block">:message</spam>') !!}
-					{!! Form::text('name',null,['class' => 'form-control']) !!}
+					<input type="text" name="name" id="name" value="{{ old('name') }}" class="form-control">
 				</div>
 
 				<div class="col-md-6 form-group {{ $errors->has('slug') ? 'has-error' : '' }}" >
 
 					{!! Form::label('slug',trans('lang.slug')) !!}
 					{!! $errors->first('slug', '<spam class="help-block">:message</spam>') !!}
-					{!! Form::text('slug',null,['class' => 'form-control']) !!}
+					<input type="text" name="slug" id="slug" value="{{ old('slug') }}" class="form-control">
 				</div>
 			</div>
 
@@ -66,7 +66,7 @@
 				{!! Form::label('description',trans('lang.description')) !!}
 				{!! $errors->first('description', '<spam class="help-block">:message</spam>') !!}
 				<div class="form-group" style="background-color:white">
-					{!! Form::textarea('description',null,['class' => 'form-control color','size' => '128x20','id'=>'myNicEditor','placeholder'=>'Enter the description']) !!}
+					<textarea name="description" id="myNicEditor" class="form-control color" rows="20">{{ old('description') }}</textarea>
 				</div>
 				</div>
 			</div>
@@ -88,10 +88,10 @@
 						{!! $errors->first('type', '<spam class="help-block">:message</spam>') !!}
 						<div class="row">
 							<div class="col-xs-4">
-								{!! Form::radio('type','1',true) !!}{{ trans('lang.published') }}
+								<input type="radio" name="type" value="'1'">{{ trans('lang.published') }}
 							</div>
 							<div class="col-xs-3">
-								{!! Form::radio('type','0',null) !!}{{ trans('lang.draft') }}
+								<input type="radio" name="type" value="'0'">{{ trans('lang.draft') }}
 							</div>
 						</div>
 					</div>
@@ -103,11 +103,11 @@
 						{!! $errors->first('status', '<spam class="help-block">:message</spam>') !!}
 						<div class="row">
 							<div class="col-xs-3">
-								{!! Form::radio('status','1',true) !!}{{ trans('lang.public') }}
+								<input type="radio" name="status" value="'1'">{{ trans('lang.public') }}
 								</div>
 								<div class="row">
 							<div class="col-xs-3">
-								{!! Form::radio('status','0',null) !!}{{ trans('lang.private') }}
+								<input type="radio" name="status" value="'0'">{{ trans('lang.private') }}
 								</div>
 					</div>
 
@@ -133,7 +133,7 @@
 			<div class="box-body" style="height:190px; overflow-y:auto;">
 
 				<div class="form-group {{ $errors->has('category_id') ? 'has-error' : '' }}">
-		{{-- {!! Form::label('category_id','Category') !!} --}}
+		{{-- <label for="category_id">'Category'</label> --}}
 				{!! $errors->first('category_id', '<spam class="help-block">:message</spam>') !!}
 					@while (list($key, $val) = each($category))
 					<div class="row">
@@ -157,7 +157,8 @@
 				<div class="modal" id="j">
                     <div class="modal-dialog">
                         <div class="modal-content">
-                        {!! Form::open(['method'=>'post','action'=>'Admin\kb\CategoryController@store']) !!}
+                        <form method="POST">
+    @csrf
                             <div class="modal-header">
                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                                 <h4 class="modal-title">{{ trans('lang.addcategory') }}</h4>
@@ -167,7 +168,7 @@
                             </div>
                             <div class="modal-footer">
                               	<div class="form-group">
-                                    {!! Form::submit('Add')!!}
+                                    <button type="submit">'Add'</button>
                                 </div>
                             	<button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
                             </div>

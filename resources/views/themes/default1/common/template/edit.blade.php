@@ -21,7 +21,9 @@ class="nav-link active"
 @stop
 
 @section('content')
-{!! Form::model($template,['url'=>'templates/'.$template->id,'method'=>'patch']) !!}
+<form method="POST">
+    @csrf
+    @method('PATCH')
 @if (count($errors) > 0)
 <div class="alert alert-danger">
     <i class="fa fa-ban"></i>  
@@ -69,19 +71,19 @@ class="nav-link active"
         <div class="row">
             <div class="col-md-8 form-group {{ $errors->has('subject') ? 'has-error' : '' }}">
                 {!! Form::label('subject',trans('lang.subject')) !!}
-                {!! Form::text('subject',null,['class' => 'form-control', 'id' =>'subject']) !!}
+                <input type="text" name="subject" id="subject" value="{{ old('subject') }}" class="form-control">
             </div>
             <div class="col-md-3 form-group" id = "use-subject" style="margin-top: 15px;">
                 <br/>
-                {!! Form::hidden('variable','0') !!}
-                {!! Form::checkbox('variable','1') !!}
+                <input type="hidden" name="variable" value="'0'">
+                <input type="checkbox" name="variable" value="'1'">
                 {!! Form::label('subject',trans('lang.use_subject')) !!}
             </div>
         </div>
         <div class="row">
             <div class="col-md-12 form-group {{ $errors->has('message') ? 'has-error' : '' }}">
                 {!! Form::label('message',trans('lang.content'),['class'=>'required']) !!}<span style="color:red;">*</span>
-                {!! Form::textarea('message',null,['class'=>'form-control','id'=>'textarea']) !!}
+                <textarea name="message" id="textarea" class="form-control">{{ old('message') }}</textarea>
             </div>
         </div>
     </div>

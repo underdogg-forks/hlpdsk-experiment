@@ -23,7 +23,8 @@
         <hr>
         <p></p>
     </article>
-    {!! Form::open(['method'=>'post','action'=>'Client\kb\UserController@postContact']) !!}
+    <form method="POST">
+    @csrf
     @if(session()->has('success'))
     <div class="alert alert-success alert-dismissable">
         <i class="fa  fa-check-circle"></i>
@@ -42,37 +43,37 @@
 
     <div class="form-group {{ $errors->has('name') ? 'has-error' : '' }}">
 
-        {!! Form::label('name','Name') !!}
+        <label for="name">'Name'</label>
         {!! $errors->first('name', '<spam class="help-block">:message</spam>') !!}
-        {!! Form::text('name',null,['class' => 'form-control']) !!}
+        <input type="text" name="name" id="name" value="{{ old('name') }}" class="form-control">
 
     </div>
 
     <div class="form-group {{ $errors->has('email') ? 'has-error' : '' }}">
 
-        {!! Form::label('email','Email') !!}
+        <label for="email">'Email'</label>
         {!! $errors->first('email', '<spam class="help-block">:message</spam>') !!}
-        {!! Form::text('email',null,['class' => 'form-control']) !!}
+        <input type="text" name="email" id="email" value="{{ old('email') }}" class="form-control">
 
     </div>
 
     <div class="form-group {{ $errors->has('subject') ? 'has-error' : '' }}">
 
-        {!! Form::label('subject','Subject') !!}
+        <label for="subject">'Subject'</label>
         {!! $errors->first('subject', '<spam class="help-block">:message</spam>') !!}
-        {!! Form::text('subject',null,['class' => 'form-control']) !!}
+        <input type="text" name="subject" id="subject" value="{{ old('subject') }}" class="form-control">
 
     </div>
 
     <div class="form-group {{ $errors->has('message') ? 'has-	error' : '' }}">
-        {!! Form::label('message','Messege', ['style' => 'display: block']) !!}
+        <label for="message">'Messege'</label>
         {!! $errors->first('message', '<spam class="help-block">:message</spam>') !!}
-        {!! Form::textarea('message',null,['class' => 'form-control','size' => '30x7','id'=>'message']) !!}
+        <textarea name="message" id="message" class="form-control" rows="7">{{ old('message') }}</textarea>
 
     </div>
     <div>
 
-        {!! Form::submit('Send Message',['class'=>'form-group btn btn-primary'])!!}
+        <button type="submit" class="form-group btn btn-primary">'Send Message'</button>
 
     </div>
 

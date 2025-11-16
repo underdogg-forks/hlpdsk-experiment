@@ -63,7 +63,7 @@
                                                 </div>
                                                 <div class="modal-footer">
                                                     <div class="form-group">
-                                                        {!! Form::submit('Update Song',['class'=>'btn btn-primary'])!!}
+                                                        <button type="submit" class="btn btn-primary">'Update Song'</button>
                                                     </div>
                                                     <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
                                                 </div>

@@ -15,15 +15,16 @@
 	<div class="banner-wrapper text-center clearfix">
 		<h3 class="banner-title text-info h4">Have a Ticket?</h3>
         <div class="banner-content">
-        {!! Form::open(['url' => 'checkmyticket' , 'method' => 'POST'] )!!}
+        <form method="POST" action="checkmyticket">
+    @csrf
 
             {!! Form::label('email',trans('lang.email')) !!}
     		{!! $errors->first('email', '<spam class="help-block">:message</spam>') !!}
-    		{!! Form::text('email',null,['class' => 'form-control']) !!}
+    		<input type="text" name="email" id="email" value="{{ old('email') }}" class="form-control">
 
             {!! Form::label('ticket_number',trans('lang.ticket_number'),['style' => 'display: block']) !!}
     		{!! $errors->first('ticket_number', '<spam class="help-block">:message</spam>') !!}
-    		{!! Form::text('ticket_number',null,['class' => 'form-control']) !!}
+    		<input type="text" name="ticket_number" id="ticket_number" value="{{ old('ticket_number') }}" class="form-control">
             <br/><input type="submit" value="Check Ticket Status" class="btn btn-info">
 
         </form>
@@ -56,7 +57,8 @@
         $encrypted_token = $encrypter->encrypt(csrf_token());
  ?>
 <input id="token" type="hidden" value="{{$encrypted_token}}">
-{!! Form::open(['route'=>'client.form.post','method'=>'post']) !!}
+<form method="POST" action="{{ route('client.form.post') }}">
+    @csrf
 <div>
     <div class="content-header">
         <h4>Ticket {!! Form::submit(trans('lang.send'),['class'=>'form-group btn btn-info pull-right'])!!}</h4>
@@ -77,7 +79,7 @@
         @endif
 
 		<div class="form-group {{ $errors->has('help_topic') ? 'has-error' : '' }}">
-			{!! Form::label('help_topic', 'Choose a Help Topic') !!}
+			<label for="help_topic">'Choose a Help Topic'</label>
 			{!! $errors->first('help_topic', '<spam class="help-block">:message</spam>') !!}
             <select name="help_topic" class="form-control" id="selectid">
                 <option>--Select--</option>

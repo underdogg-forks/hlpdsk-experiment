@@ -45,9 +45,9 @@ class="active"
                      <div class="modal-body">
                               <div class="form-group {{ $errors->has('title') ? 'has-error' : '' }}">
 
-    {!! Form::label('folder_name', 'Template Set Name:',['style'=>'display: block']) !!}
+    <label for="folder_name">'Template Set Name:'</label>
 
-    {!! Form::text('folder_name',null,['class'=>'form-control'])!!}
+    <input type="text" name="folder_name" id="folder_name" value="{{ old('folder_name') }}" class="form-control">
 
     {!! $errors->first('folder', '<spam class="help-block">:message</spam>') !!}
   
@@ -55,7 +55,7 @@ class="active"
                                      </div>
                                                                         <div class="modal-footer">
                                                                             <div class="form-group">
-                                                                                {!! Form::submit('Create Template Set',['class'=>'btn btn-primary'])!!}
+                                                                                <button type="submit" class="btn btn-primary">'Create Template Set'</button>
                                                                             
                                                                             <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
                                                                         </div></div>

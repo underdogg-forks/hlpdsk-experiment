@@ -99,7 +99,7 @@ class="nav-link active"
                     <label>{{ trans('lang.to') }} <span class="text-red">*</span> :</label>
                 </div>
                 <div class="col-md-4">
-                    {!! Form::text('to',null,['class' => 'form-control']) !!}
+                    <input type="text" name="to" id="to" value="{{ old('to') }}" class="form-control">
                 </div>
             </div>
             <div class="row form-group no-padding {!! $errors->has('subject') ? 'has-error' : '' !!}">
@@ -107,7 +107,7 @@ class="nav-link active"
                     <label>{{ trans('lang.subject') }} <span class="text-red">*</span> :</label>
                 </div>
                 <div class="col-md-8">
-                    {!! Form::text('subject',null,['class' => 'form-control']) !!}
+                    <input type="text" name="subject" id="subject" value="{{ old('subject') }}" class="form-control">
                 </div>
             </div>
             <div class="row form-group no-padding {!! $errors->has('message') ? 'has-error' : '' !!}">

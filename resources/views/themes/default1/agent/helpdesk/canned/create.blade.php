@@ -23,7 +23,9 @@ class="nav-link active"
 <!-- content -->
 @section('content')
 <!-- open a form -->
-{!! Form::open(['route'=>'canned.store','method' => 'patch']) !!}
+<form method="POST" action="{{ route('canned.store') }}">
+    @csrf
+    @method('PATCH')
 <div class="card card-light">
     <div class="card-header">
         <h3 class="card-title">{{ trans('lang.create') }} </h3>
@@ -48,12 +50,12 @@ class="nav-link active"
             <!-- username -->
             <div class="col-sm-6 form-group {{ $errors->has('title') ? 'has-error' : '' }}">
                 {!! Form::label('title',trans('lang.title')) !!}    <span class="text-red"> *</span>           
-                {!! Form::text('title',null,['class' => 'form-control']) !!}
+                <input type="text" name="title" id="title" value="{{ old('title') }}" class="form-control">
             </div>
             <!-- firstname -->
             <div class="col-sm-12 form-group {{ $errors->has('message') ? 'has-error' : '' }}">
                 {!! Form::label('message',trans('lang.message')) !!}<span class="text-red"> *</span>
-                {!! Form::textarea('message',null,['class' => 'form-control']) !!}
+                <textarea name="message" id="message" class="form-control">{{ old('message') }}</textarea>
             </div>
         </div>
     </div>

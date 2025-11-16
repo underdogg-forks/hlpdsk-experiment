@@ -20,7 +20,8 @@ active
  <div id="form-content">
 <div ng-app="myApp">
         <h1 style="text-align: center;">Locale Information</h1>
-        {!! Form::open(['url'=>route('postaccount'), 'id' => 'postaccount']) !!}
+        <form method="POST">
+    @csrf
         
 
         <!-- checking if the form submit fails -->
@@ -70,7 +71,7 @@ active
                                 : red;font-size:12px;">*</span></label>
                         </td>
                         <td>
-                            {!! Form::text('firstname',null,['style' =>'margin-left:250px', 'required' => true]) !!}
+                            <input type="text" name="firstname" id="firstname" value="{{ old('firstname') }}" required>
                         </td>
                         <td>
                             <button type="button" data-toggle="popover" data-placement="right" data-arrowcolor="#eeeeee" data-bordercolor="#bbbbbb" data-title-backcolor="#cccccc" data-title-bordercolor="#bbbbbb" data-title-textcolor="#444444" data-content-backcolor="#eeeeee" data-content-textcolor="#888888" title="@{{Nametitle}}" data-content="@{{Namecontent}}" style="padding: 0px;border: 0px; border-radius: 5px;"><i class="fa fa-question-circle" style="padding: 0px;"></i>
@@ -83,7 +84,7 @@ active
                                 : red;font-size:12px;">*</span></label>
                         </td>
                         <td>
-                            {!! Form::text('Lastname',null,['style' =>'margin-left:250px', 'required' => true]) !!}
+                            <input type="text" name="Lastname" id="Lastname" value="{{ old('Lastname') }}" required>
                         </td>
                         <td>
                             <button type="button" data-toggle="popover" data-placement="right" data-arrowcolor="#eeeeee" data-bordercolor="#bbbbbb" data-title-backcolor="#cccccc" data-title-bordercolor="#bbbbbb" data-title-textcolor="#444444" data-content-backcolor="#eeeeee" data-content-textcolor="#888888" title="@{{Lasttitle}}" data-content="@{{Lastcontent}}" style="padding: 0px;border: 0px; border-radius: 5px;"><i class="fa fa-question-circle" style="padding: 0px;"></i>
@@ -96,7 +97,7 @@ active
                                 : red;font-size:12px;">*</span></label>
                         </td>
                         <td>
-                            {!! Form::email('email',null,['style' =>'margin-left:250px', 'required' => true]) !!}
+                            <input type="email" name="email" id="email" value="{{ old('email') }}">
                         </td>
                         <td>
                             <button type="button" data-toggle="popover" data-placement="right" data-arrowcolor="#eeeeee" data-bordercolor="#bbbbbb" data-title-backcolor="#cccccc" data-title-bordercolor="#bbbbbb" data-title-textcolor="#444444" data-content-backcolor="#eeeeee" data-content-textcolor="#888888" title="@{{Emailtitle}}" data-content="@{{Emailcontent}}" style="padding: 0px;border: 0px; border-radius: 5px;"><i class="fa fa-question-circle" style="padding: 0px;"></i>
@@ -117,7 +118,7 @@ active
                             </label>
                         </td>
                         <td>
-                            {!! Form::text('username',null,['style' =>'margin-left:195px', 'required' => true]) !!}
+                            <input type="text" name="username" id="username" value="{{ old('username') }}" required>
                         </td>
                         <td>
                             <button type="button" data-toggle="popover" data-placement="right" data-arrowcolor="#eeeeee" data-bordercolor="#bbbbbb" data-title-backcolor="#cccccc" data-title-bordercolor="#bbbbbb" data-title-textcolor="#444444" data-content-backcolor="#eeeeee" data-content-textcolor="#888888" title="@{{UserNametitle}}" data-content="@{{UserNamecontent}}" style="padding: 0px;border: 0px; border-radius: 5px;"><i class="fa fa-question-circle" style="padding: 0px;"></i>

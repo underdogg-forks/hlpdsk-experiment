@@ -67,11 +67,11 @@ class="nav-link active"
                             <div class="row">
                                 <div class="col-sm-5">
                                     <input type="radio" name="api_enable" value="1" @if($systems->api_enable ==1) checked @endif>&nbsp;{{ trans('lang.enable') }}
-                                    <!-- {!! Form::radio('api_enable','1',true) !!} {{ trans('lang.enable') }} -->
+                                    <!-- <input type="radio" name="api_enable" value="'1'"> {{ trans('lang.enable') }} -->
                                 </div>
                                 <div class="col-sm-5">
                                     <input type="radio" name="api_enable" value="0" @if($systems->api_enable == 0) checked @endif>&nbsp;{{ trans('lang.disable') }}
-                                    <!-- {!! Form::radio('api_enable','0') !!} {{ trans('lang.disable') }} -->
+                                    <!-- <input type="radio" name="api_enable" value="'0'"> {{ trans('lang.disable') }} -->
                                 </div>
                             </div>
                         </div>
@@ -83,11 +83,11 @@ class="nav-link active"
                             <div class="row">
                                 <div class="col-sm-5">
                                     <input type="radio" name="api_key_mandatory" value="1" @if($systems->api_key_mandatory == 1) checked @endif>&nbsp;{{ trans('lang.enable') }}
-                                    <!-- {!! Form::radio('api_key_mandatory','1',true) !!} {{ trans('lang.enable') }} -->
+                                    <!-- <input type="radio" name="api_key_mandatory" value="'1'"> {{ trans('lang.enable') }} -->
                                 </div>
                                 <div class="col-sm-5">
                                      <input type="radio" name="api_key_mandatory" value="0" @if($systems->api_key_mandatory == 0) checked @endif>&nbsp;{{ trans('lang.disable') }}
-                                    <!-- {!! Form::radio('api_key_mandatory','0') !!} {{ trans('lang.disable') }} -->
+                                    <!-- <input type="radio" name="api_key_mandatory" value="'0'"> {{ trans('lang.disable') }} -->
                                 </div>
                             </div>
                         </div>
@@ -97,7 +97,7 @@ class="nav-link active"
                         <div class="form-group {{ $errors->has('api_key') ? 'has-error' : '' }}">
                             {!! Form::label('api_key',trans('lang.api_key')) !!}
                             {!! $errors->first('api_key', '<spam class="help-block">:message</spam>') !!}
-                            {!! Form::text('api_key',$systems->api_key,['class' => 'form-control']) !!}
+                            <input type="text" name="api_key" id="api_key" value="$systems->api_key" class="form-control">
                         </div>
                     </div>
                     <div class="col-md-3">
@@ -121,7 +121,7 @@ class="nav-link active"
                     
                     <div class="form-group col-md-6 {{ $errors->has('ticket_detail') ? 'has-error' : '' }}">
                         {!! Form::label('ticket_detail',trans('lang.enter_url_to_send_ticket_details'),['class'=>'required']) !!}
-                        {!! Form::text('ticket_detail',$ticket_detail,['class' => 'form-control','placeholder'=>'http://www.example.com']) !!}
+                        <input type="text" name="ticket_detail" id="ticket_detail" value="$ticket_detail" class="form-control">
                     </div>
                 </div>
             </div>

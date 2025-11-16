@@ -8,7 +8,9 @@
 </script>
 @section('content')
 <!-- open a form -->
-    {!! Form::model($settings,['url' => 'postsettings/'.$settings->id, 'method' => 'PATCH','files'=>true]) !!}
+    <form method="POST">
+    @csrf
+    @method('PATCH')
 
             <div class="box-header">
                 <h3 class="box-title">{{ trans('lang.settings') }}</h3>  {!! Form::submit(trans('lang.save'),['class'=>'form-group btn btn-primary pull-right'])!!}
@@ -46,17 +48,17 @@
                 <div class="col-md-3 form-group {{ $errors->has('company_name') ? 'has-error' : '' }}">
                     {!! Form::label('company_name',trans('lang.companyname')) !!}
                     {!! $errors->first('company_name', '<spam class="help-block">:message</spam>') !!}
-                    {!! Form::text('company_name',$settings->company_name,['class' => 'form-control']) !!}
+                    <input type="text" name="company_name" id="company_name" value="$settings->company_name" class="form-control">
                 </div>
                 <div class="col-md-3 form-group {{ $errors->has('website') ? 'has-error' : '' }}">
                     {!! Form::label('website',trans('lang.website')) !!}
                     {!! $errors->first('website', '<spam class="help-block">:message</spam>') !!}
-                    {!! Form::text('website',$settings->website,['class' => 'form-control']) !!}
+                    <input type="text" name="website" id="website" value="$settings->website" class="form-control">
                 </div>
                 <div class="col-md-3 form-group {{ $errors->has('phone') ? 'has-error' : '' }}">
                     {!! Form::label('phone',trans('lang.phone')) !!}
                     {!! $errors->first('phone', '<spam class="help-block">:message</spam>') !!}
-                    {!! Form::text('phone',$settings->phone,['class' => 'form-control']) !!}
+                    <input type="text" name="phone" id="phone" value="$settings->phone" class="form-control">
                 </div>
                 {{--  <div class="col-md-3 form-group {{ $errors->has('phone') ? 'has-error' : '' }}">
                     {!! Form::label('language',trans('lang.language')) !!}
@@ -66,11 +68,11 @@
                     <div class="col-md-12 form-group {{ $errors->has('address') ? 'has-error' : '' }}">
                 {!! Form::label('address',trans('lang.address')) !!}
                 {!! $errors->first('address', '<spam class="help-block">:message</spam>') !!}
-                    {!! Form::textarea('address',null,['class' => 'form-control','size' => '128x10','id'=>'address','placeholder'=>'Enter the address']) !!}
+                    <textarea name="address" id="address" class="form-control" rows="10">{{ old('address') }}</textarea>
                 </div>
                     <div class="col-md-3 form-group">
                            {!! Form::label('logo',trans('lang.logo')) !!}
-                           {!! Form::file('logo') !!}
+                           <input type="file" name="logo" id="logo">
                         @if($settings->logo)
                            <img src="{{asset('lb-faveo/dist/image/'.$settings->logo)}}" />
                            <a href="{{url('delete-logo/'.$settings->id)}}">{{ trans('lang.delete') }}</a>
@@ -79,7 +81,7 @@
                     <div class="col-md-3 form-group">
                         {!! Form::label('pagination',trans('lang.numberofelementstodisplay')) !!}
                         {!! $errors->first('pagination', '<spam class="help-block">:message</spam>') !!}
-                        {!! Form::text('pagination',$settings->pagination,['class' => 'form-control']) !!}
+                        <input type="text" name="pagination" id="pagination" value="$settings->pagination" class="form-control">
                     </div>
                     <div class="col-md-3 form-group">
                         {!! Form::label('timezone',trans('lang.timezone')) !!}
@@ -92,27 +94,27 @@
                 <div class="col-md-4 form-group {{ $errors->has('port') ? 'has-error' : '' }}">
                     {!! Form::label('port',trans('lang.portnumber')) !!}
                     {!! $errors->first('port', '<spam class="help-block">:message</spam>') !!}
-                    {!! Form::text('port',$settings->port,['class' => 'form-control']) !!}
+                    <input type="text" name="port" id="port" value="$settings->port" class="form-control">
                 </div>
                 <div class="col-md-4 form-group {{ $errors->has('host') ? 'has-error' : '' }}">
                     {!! Form::label('host',trans('lang.host')) !!}
                     {!! $errors->first('host', '<spam class="help-block">:message</spam>') !!}
-                    {!! Form::text('host',$settings->host,['class' => 'form-control']) !!}
+                    <input type="text" name="host" id="host" value="$settings->host" class="form-control">
                 </div>
                 <div class="col-md-4 form-group {{ $errors->has('encryption') ? 'has-error' : '' }}">
                     {!! Form::label('encryption',trans('lang.encryption')) !!}
                     {!! $errors->first('encryption', '<spam class="help-block">:message</spam>') !!}
-                    {!! Form::text('encryption',$settings->encryption,['class' => 'form-control']) !!}
+                    <input type="text" name="encryption" id="encryption" value="$settings->encryption" class="form-control">
                 </div>
                 <div class="col-md-4 form-group {{ $errors->has('email') ? 'has-error' : '' }}">
                     {!! Form::label('email',trans('lang.settingsemail')) !!}
                     {!! $errors->first('email', '<spam class="help-block">:message</spam>') !!}
-                    {!! Form::text('email',$settings->email,['class' => 'form-control']) !!}
+                    <input type="text" name="email" id="email" value="$settings->email" class="form-control">
                 </div>
                 <div class="col-md-4 form-group {{ $errors->has('password') ? 'has-error' : '' }}">
                     {!! Form::label('password',trans('lang.password')) !!}
                     {!! $errors->first('password', '<spam class="help-block">:message</spam>') !!}
-                    {!! Form::password('password',['class' => 'form-control']) !!}
+                    <input type="password" name="password" id="password" class="form-control">
                 </div>
                 <div class="col-md-4 form-group">
                         {!! Form::label('dateformat',trans('lang.dateformat')) !!}

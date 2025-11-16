@@ -32,7 +32,8 @@ class="active"
 @section('content')
 
 <!-- Main content -->
-{!! Form::open(['route'=>'post.newticket','method'=>'post','id'=>'form']) !!}
+<form method="POST" action="{{ route('post.newticket') }}">
+    @csrf
 @if(session()->has('success'))       
 <div class="alert alert-success alert-dismissable">
     <i class="fas fa-check-circle"></i>
@@ -105,7 +106,7 @@ class="active"
                                 <span class="text-red"> *</span>
                                 @endif
 
-                                {!! Form::text('email',null,['class' => 'form-control', 'id' => 'email']) !!}
+                                <input type="text" name="email" id="email" value="{{ old('email') }}" class="form-control">
                             </div>
                         </div>
                         
@@ -134,7 +135,7 @@ class="active"
                                  <span class="text-red"> *</span>
                             @endif
 
-                            {!! Form::text('code',null,['class' => 'form-control', 'id' => 'country_code', 'placeholder' => $phonecode, 'title' => trans('lang.enter-country-phone-code')]) !!}
+                            <input type="text" name="code" id="country_code" value="{{ old('code') }}" class="form-control">
                             </div>
                         </div>
                         <div class="col-md-5">
@@ -200,7 +201,7 @@ class="active"
                             <!-- due date -->
                             <div class="form-group" id="duedate">
                                 <label>{{ trans('lang.due_date') }}:</label>
-                                {!! Form::text('duedate',null,['class' => 'form-control','id'=>'datemask']) !!}
+                                <input type="text" name="duedate" id="datemask" value="{{ old('duedate') }}" class="form-control">
                                 <button class="btn  clear-input" id="duedates" style="display: none" type="button"><i class="fas fa-times"></i></button>
                             </div>
                         </div>
@@ -238,7 +239,7 @@ class="active"
                                 <label>{{ trans('lang.subject') }}:<span class="text-red"> *</span></label>
                             </div>
                             <div class="col-md-11">
-                                {!! Form::text('subject',null,['class' => 'form-control']) !!}
+                                <input type="text" name="subject" id="subject" value="{{ old('subject') }}" class="form-control">
                             </div>
                         </div>
                     </div>
@@ -249,7 +250,7 @@ class="active"
                                 <label>{{ trans('lang.detail') }}:<span class="text-red"> *</span></label>
                             </div>
                             <div class="col-md-11">
-                                {!! Form::textarea('body',null,['class' => 'form-control','id' => 'body', 'style'=>"width:100%; height:150px;"]) !!}
+                                <textarea name="body" id="body" class="form-control">{{ old('body') }}</textarea>
 
                             </div>
                         </div>

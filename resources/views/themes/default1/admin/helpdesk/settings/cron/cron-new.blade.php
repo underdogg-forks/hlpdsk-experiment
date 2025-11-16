@@ -1,4 +1,6 @@
-{!! Form::model($emails,['url' => 'post-scheduler', 'method' => 'PATCH']) !!}
+<form method="POST">
+    @csrf
+    @method('PATCH')
 @if (count($errors) > 0)
 <div class="alert alert-danger">
     <strong>{{ trans('lang.woops') }}</strong> {{ trans('lang.theirisproblem') }}<br><br>

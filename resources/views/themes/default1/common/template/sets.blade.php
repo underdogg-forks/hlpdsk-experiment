@@ -105,13 +105,13 @@ class="nav-link active"
                                         <div class="form-group">
                                             <div class="form-control">
                                                 <label for="title">Name:</label><br>
-                                                {!! Form::text('name',null,['class'=>'form-control'])!!}
+                                                <input type="text" name="name" id="name" value="{{ old('name') }}" class="form-control">
                                             </div>
                                         </div>
                                     </div>
                                     <div class="modal-footer justify-content-between">
                                         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                                        {!! Form::submit('Update Details',['class'=>'btn btn-primary'])!!}
+                                        <button type="submit" class="btn btn-primary">'Update Details'</button>
                                     </div>
                                     </form>
                                 </div> 
@@ -177,7 +177,7 @@ class="nav-link active"
                 @endforeach 
                 <div class="form-group {{ $errors->has('name') ? 'has-error' : '' }}">
                     <label for="title">{{ trans('lang.name') }}:<span style="color:red;">*</span></label><br>
-                    {!! Form::text('name',null,['class'=>'form-control'])!!}
+                    <input type="text" name="name" id="name" value="{{ old('name') }}" class="form-control">
                 </div>
             </div>
             <div class="modal-footer justify-content-between">

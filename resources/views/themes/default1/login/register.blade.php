@@ -15,7 +15,7 @@
           <!-- fullname -->
            <div class="form-group has-feedback {{ $errors->has('full_name') ? 'has-error' : '' }}">
 			
-			{!! Form::text('full_name',null,['placeholder'=>'Full Name','class' => 'form-control']) !!}
+			<input type="text" name="full_name" id="full_name" value="{{ old('full_name') }}" class="form-control">
 			{!! $errors->first('full_name', '<spam class="help-block">:message</spam>') !!}
 			<span class="glyphicon glyphicon-user form-control-feedback"></span>
           
@@ -24,7 +24,7 @@
           <!-- Email -->
           <div class="form-group has-feedback {{ $errors->has('email') ? 'has-error' : '' }}">
 			
-			{!! Form::text('email',null,['placeholder'=>'Email','class' => 'form-control']) !!}
+			<input type="text" name="email" id="email" value="{{ old('email') }}" class="form-control">
 			{!! $errors->first('email', '<spam class="help-block">:message</spam>') !!}
 			<span class="far fa-envelope text-muted form-control-feedback"></span>
           
@@ -32,13 +32,13 @@
 
 
           <div class="form-group has-feedback {{ $errors->has('password') ? 'has-error' : '' }}">
-            {!! Form::password('password',['placeholder'=>'Password','class' => 'form-control']) !!}
+            <input type="password" name="password" id="password" class="form-control">
 			{!! $errors->first('password', '<spam class="help-block">:message</spam>') !!}
             <span class="fa fa-lock form-control-feedback"></span>
           </div>
 
           <div class="form-group has-feedback {{ $errors->has('password_confirmation') ? 'has-error' : '' }}">
-            {!! Form::password('password_confirmation',['placeholder'=>'Retype Password','class' => 'form-control']) !!}
+            <input type="password" name="password_confirmation" id="password_confirmation" class="form-control">
 			{!! $errors->first('password_confirmation', '<spam class="help-block">:message</spam>') !!}
             <span class="fas fa-sign-in-alt form-control-feedback"></span>
           </div>

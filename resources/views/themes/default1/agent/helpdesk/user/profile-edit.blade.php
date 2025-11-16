@@ -70,7 +70,9 @@ class="nav-link active"
 @endif
 <div class="row">
     <div class="col-md-6">
-        {!! Form::model($user,['url'=>'agent-profile', 'id' => 'agent-profile', 'method' => 'PATCH','files'=>true]) !!}
+        <form method="POST">
+    @csrf
+    @method('PATCH')
         <div class="card card-light">
             <div class="card-header">
                 <h3 class="card-title">
@@ -81,22 +83,22 @@ class="nav-link active"
                 <!-- first name -->
                 <div class="form-group {{ $errors->has('first_name') ? 'has-error' : '' }}">
                     {!! Form::label('first_name',trans('lang.first_name')) !!} <span class="text-red"> *</span>
-                    {!! Form::text('first_name',null,['class' => 'form-control']) !!}
+                    <input type="text" name="first_name" id="first_name" value="{{ old('first_name') }}" class="form-control">
                 </div>
                 <!-- last name -->
                 <div class="form-group {{ $errors->has('last_name') ? 'has-error' : '' }}">
                     {!! Form::label('last_name',trans('lang.last_name')) !!}
-                    {!! Form::text('last_name',null,['class' => 'form-control']) !!}
+                    <input type="text" name="last_name" id="last_name" value="{{ old('last_name') }}" class="form-control">
                 </div>
                 <!-- gender -->
                 <div class="form-group">
                     {!! Form::label('gender',trans('lang.gender')) !!}
                     <div class="row">
                         <div class="col-sm-3">
-                            {!! Form::radio('gender','1',true) !!} {{ trans('lang.male') }}
+                            <input type="radio" name="gender" value="'1'"> {{ trans('lang.male') }}
                         </div>
                         <div class="col-sm-3">
-                            {!! Form::radio('gender','0') !!} {{ trans('lang.female') }}
+                            <input type="radio" name="gender" value="'0'"> {{ trans('lang.female') }}
                         </div>
                     </div>
                 </div>
@@ -110,22 +112,22 @@ class="nav-link active"
                 <div class="form-group {{ $errors->has('company') ? 'has-error' : '' }}">
                     <!-- company -->
                     {!! Form::label('company',trans('lang.company')) !!}
-                    {!! Form::text('company',null,['class' => 'form-control']) !!}
+                    <input type="text" name="company" id="company" value="{{ old('company') }}" class="form-control">
                 </div>
                 <div class="row">
                     <!-- phone extension -->
                     <div class="col-sm-2 form-group {{ session()->has('country_code_error') ? 'has-error' : '' }}">
                         {!! Form::label('country_code',trans('lang.country-code')) !!}
-                        {!! Form::text('country_code',null,['class' => 'form-control', 'placeholder' => $phonecode, 'title' => trans('lang.enter-country-phone-code'), 'id' => 'code']) !!}
+                        <input type="text" name="country_code" id="code" value="{{ old('country_code') }}" class="form-control">
                     </div>
                     <!-- phone number -->
                     <div class="col-sm-8 form-group {{ $errors->has('phone_number') ? 'has-error' : '' }}">
                         {!! Form::label('phone_number',trans('lang.phone')) !!}
-                        {!! Form::text('phone_number',null,['class' => 'form-control']) !!}
+                        <input type="text" name="phone_number" id="phone_number" value="{{ old('phone_number') }}" class="form-control">
                     </div>
                     <div class="col-sm-2 form-group {{ $errors->has('ext') ? 'has-error' : '' }}">
                         {!! Form::label('ext',trans('lang.ext')) !!}
-                        {!! Form::text('ext',null,['class' => 'form-control']) !!}
+                        <input type="text" name="ext" id="ext" value="{{ old('ext') }}" class="form-control">
                     </div>
                 </div>
                 <!-- mobile -->
@@ -135,17 +137,17 @@ class="nav-link active"
                 </div>
                 <div class="form-group {{ $errors->has('agent_sign') ? 'has-error' : '' }}">
                     {!! Form::label('agent_sign',trans('lang.agent_sign')) !!}
-                    {!! Form::textarea('agent_sign',null,['class' => 'form-control']) !!}
+                    <textarea name="agent_sign" id="agent_sign" class="form-control">{{ old('agent_sign') }}</textarea>
                 </div>
                 <div class="form-group {{ $errors->has('profile_pic') ? 'has-error' : '' }}">
                     <!-- profile pic -->
                     <div type="file" class="btn btn-default btn-file" style="color:orange">
                         <i class="fa fa-user"> </i>
                         {!! Form::label('profile_pic',trans('lang.profile_pic'),['style'=>'font-weight:400;margin-bottom:0px;']) !!}
-                        {!! Form::file('profile_pic',['class' => 'form-file']) !!}
+                        <input type="file" name="profile_pic" id="profile_pic" class="form-file">
                     </div>
                 </div>
-                {!! Form::token() !!}
+                @csrf
                 </form>
             </div>
             <div class="card-footer">
@@ -154,7 +156,9 @@ class="nav-link active"
         </div>
     </div>
     <div class="col-md-6">
-        {!! Form::model($user,['url'=>'agent-profile-password/'.$user->id , 'method' => 'PATCH']) !!}
+        <form method="POST">
+    @csrf
+    @method('PATCH')
         <div class="card card-light">
             <div class="card-header">
                 <h3 class="card-title">{{ trans('lang.change_password') }}</h3> 
@@ -163,21 +167,21 @@ class="nav-link active"
                 <!-- old password -->
                 <div class="form-group has-feedback {{ $errors->has('old_password') ? 'has-error' : '' }}">
                     {!! Form::label('old_password',trans('lang.old_password')) !!} <span class="text-red"> *</span>
-                    {!! Form::password('old_password',['class' => 'form-control']) !!}
+                    <input type="password" name="old_password" id="old_password" class="form-control">
                     {!! $errors->first('old_password', '<spam class="help-block">:message</spam>') !!}
                     <span class="glyphicon glyphicon-lock form-control-feedback" style="float: right;top: -46px;left: -10px;"></span>
                 </div>
                 <!-- new password -->
                 <div class="form-group has-feedback {{ $errors->has('new_password') ? 'has-error' : '' }}">
                     {!! Form::label('new_password',trans('lang.new_password')) !!} <span class="text-red"> *</span>
-                    {!! Form::password('new_password',['class' => 'form-control']) !!}
+                    <input type="password" name="new_password" id="new_password" class="form-control">
                     {!! $errors->first('new_password', '<spam class="help-block">:message</spam>') !!}
                     <span class="glyphicon glyphicon-lock form-control-feedback" style="float: right;top: -46px;left: -10px;"></span>
                 </div>
                 <!-- confirm password -->
                 <div class="form-group has-feedback {{ $errors->has('confirm_password') ? 'has-error' : '' }}">
                     {!! Form::label('confirm_password',trans('lang.confirm_password')) !!} <span class="text-red"> *</span>
-                    {!! Form::password('confirm_password',['class' => 'form-control']) !!}
+                    <input type="password" name="confirm_password" id="confirm_password" class="form-control">
                     {!! $errors->first('confirm_password', '<spam class="help-block">:message</spam>') !!}
                     <span class="glyphicon glyphicon-lock form-control-feedback" style="float: right;top: -46px;left: -10px;"></span>
                 </div>
@@ -218,13 +222,14 @@ class="nav-link active"
                         </div>
                     </div>
                     <div id="verify-number-form">
-                    {!! Form::open(['id'=>'verify-otp','method' => 'POST'] )!!}
+                    <form method="POST">
+    @csrf
                         <div class="row">
                             <div class="col-md-8">
                                 {{ trans('lang.get-verify-message') }}
                             </div>
                             <div class="col-md-4">
-                                {!! Form::text('token','',['class' => 'form-control', 'required' => true, 'placeholder' => trans('lang.enter-otp'), 'id' => 'otp']) !!}
+                                <input type="text" name="token" id="otp" value="''" class="form-control" required>
                             </div>
                         </div>
                     </div>

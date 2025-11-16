@@ -18,7 +18,9 @@ class="active"
 <!-- /breadcrumbs -->
 <!-- content -->
 @section('content')
-{!! Form::model($settings,['url'=>'post-smtp','method'=>'PATCH']) !!}
+<form method="POST">
+    @csrf
+    @method('PATCH')
 <div class="box box-primary">
     <div class="box-header">
         <h3 class="box-title">{{ trans('lang.outgoing_emails') }}</h3>
@@ -60,13 +62,13 @@ class="active"
             <div class="col-md-3 form-group {{ $errors->has('host') ? 'has-error' : '' }}">
                 {!! Form::label('host',trans('lang.host')) !!}
                 {!! $errors->first('host', '<spam class="help-block">:message</spam>') !!}
-                {!! Form::text('host',null,['class' => 'form-control']) !!}
+                <input type="text" name="host" id="host" value="{{ old('host') }}" class="form-control">
             </div>
 
             <div class="col-md-3 form-group {{ $errors->has('port') ? 'has-error' : '' }}">
                 {!! Form::label('port',trans('lang.port')) !!}
                 {!! $errors->first('port', '<spam class="help-block">:message</spam>') !!}
-                {!! Form::text('port',null,['class' => 'form-control']) !!}
+                <input type="text" name="port" id="port" value="{{ old('port') }}" class="form-control">
             </div>
 
             <div class="col-md-3 form-group {{ $errors->has('encryption') ? 'has-error' : '' }}">
@@ -85,13 +87,13 @@ class="active"
             <div class="col-md-4 form-group {{ $errors->has('name') ? 'has-error' : '' }}">
                 {!! Form::label('name',trans('lang.name')) !!}
                 {!! $errors->first('name', '<spam class="help-block">:message</spam>') !!}
-                {!! Form::text('name',null,['class' => 'form-control']) !!}
+                <input type="text" name="name" id="name" value="{{ old('name') }}" class="form-control">
             </div>
 
             <div class="col-md-4 form-group {{ $errors->has('email') ? 'has-error' : '' }}">
                 {!! Form::label('email',trans('lang.email')) !!}
                 {!! $errors->first('email', '<spam class="help-block">:message</spam>') !!}
-                {!! Form::text('email',null,['class' => 'form-control']) !!}
+                <input type="text" name="email" id="email" value="{{ old('email') }}" class="form-control">
             </div>
 
             <div class="col-md-4 form-group {{ $errors->has('password') ? 'has-error' : '' }}">

@@ -1,4 +1,6 @@
-{!! Form::model($emails,['url' => 'post-scheduler', 'method' => 'PATCH']) !!}
+<form method="POST">
+    @csrf
+    @method('PATCH')
 <div class="box box-primary">
     <div class="box-header with-border">
         <h3 class="box-title">{{ trans('lang.cron_settings') }}</h3>
@@ -51,7 +53,7 @@
                     <div class="col-md-6">
                         <div class="form-group">
                             {!! Form::label('email_fetching',trans('lang.email_fetch')) !!}<br>
-                            {!! Form::checkbox('email_fetching',1,true) !!}&nbsp;{{ trans('lang.fetch_auto-corn') }}
+                            <input type="checkbox" name="email_fetching" value="1">&nbsp;{{ trans('lang.fetch_auto-corn') }}
                         </div>
                     </div>
                     <div class="col-md-12">
@@ -70,7 +72,7 @@
                     <div class="col-md-8">
                         <div class="form-group">
                             {!! Form::label('notification_cron',trans('lang.notification-email')) !!}<br>
-                            {!! Form::checkbox('notification_cron',1,true) !!}&nbsp;{{ trans('lang.cron_notification') }}
+                            <input type="checkbox" name="notification_cron" value="1">&nbsp;{{ trans('lang.cron_notification') }}
                         </div>
                     </div>
                     <div class="col-md-12">

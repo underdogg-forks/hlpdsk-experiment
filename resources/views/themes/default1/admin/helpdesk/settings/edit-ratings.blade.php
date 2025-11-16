@@ -69,11 +69,11 @@ class="nav-link active"
         <div class="row">
             <div class="col-md-6 form-group {{ $errors->has('name') ? 'has-error' : '' }}">
                 {!! Form::label('name',trans('lang.rating_label')) !!}<span style="color:red;">*</span>
-                {!! Form::text('name',null,['class' => 'form-control']) !!}
+                <input type="text" name="name" id="name" value="{{ old('name') }}" class="form-control">
             </div>
             <div class="col-md-6 form-group {{ $errors->has('display_order') ? 'has-error' : '' }}">
                 {!! Form::label('display_order',trans('lang.display_order')) !!}<span style="color:red;">*</span>
-                {!! Form::text('display_order',null,['class' => 'form-control']) !!}
+                <input type="text" name="display_order" id="display_order" value="{{ old('display_order') }}" class="form-control">
             </div>
         </div>
         <div class="form-group {{ $errors->has('rating_scale') ? 'has-error' : '' }}">
@@ -97,10 +97,10 @@ class="nav-link active"
             <div class="callout callout-default" style="font-style: oblique;">{{ trans('lang.rating-msg3') }}</div>
             <div class="row">
                 <div class="col-sm-2">
-                    {!! Form::radio('allow_modification','1') !!} {{ trans('lang.yes') }}
+                    <input type="radio" name="allow_modification" value="'1') !!} {{ trans('lang.yes') }}
                 </div>
                 <div class="col-sm-2">
-                    {!! Form::radio('allow_modification','0') !!} {{ trans('lang.no') }}
+                    {!! Form::radio('allow_modification'"> {{ trans('lang.no') }}
                 </div>
             </div>        
         </div>

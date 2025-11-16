@@ -19,7 +19,9 @@ class="nav-link active"
 
 @section('content')
 <!-- open a form -->
-{!! Form::model($settings,['url' => 'postsettings/'.$settings->id, 'method' => 'PATCH','files'=>true]) !!}
+<form method="POST">
+    @csrf
+    @method('PATCH')
 
 <!-- check whether success or not -->
 @if(session()->has('success'))

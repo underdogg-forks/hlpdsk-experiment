@@ -32,7 +32,9 @@ class="nav-link active"
 <!-- content -->
 @section('content')
 <!-- open a form -->
-{!! Form::model($slas,['url' => 'sla/'.$slas->id, 'method' => 'PATCH']) !!}
+<form method="POST">
+    @csrf
+    @method('PATCH')
 @if(session()->has('errors'))
 <?php //dd($errors); ?>
 <div class="alert alert-danger alert-dismissable">
@@ -61,7 +63,7 @@ class="nav-link active"
             <div class="col-md-4">
                 <div class="form-group {{ $errors->has('name') ? 'has-error' : '' }}">
                     {!! Form::label('name',trans('lang.name')) !!} <span class="text-red"> *</span>
-                    {!! Form::text('name',null,['class' => 'form-control']) !!}
+                    <input type="text" name="name" id="name" value="{{ old('name') }}" class="form-control">
                 </div>
             </div>
             <!-- Grace Period text form Required -->
@@ -75,8 +77,8 @@ class="nav-link active"
             <div class="col-md-4">
                 <div class="form-group {{ $errors->has('status') ? 'has-error' : '' }}">
                     {!! Form::label('status',trans('lang.status')) !!}&nbsp;<br/>
-                    {!! Form::radio('status','1',true) !!} &nbsp; {{ trans('lang.active') }}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    {!! Form::radio('status','0') !!} &nbsp; {{ trans('lang.inactive') }}
+                    <input type="radio" name="status" value="'1'"> &nbsp; {{ trans('lang.active') }}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <input type="radio" name="status" value="'0'"> &nbsp; {{ trans('lang.inactive') }}
                 </div>
             </div>
         </div>
@@ -85,7 +87,7 @@ class="nav-link active"
             <div class="col-md-12">
                 <div class="form-group">
                     {!! Form::label('admin_note',trans('lang.admin_notes')) !!}
-                    {!! Form::textarea('admin_note',null,['class' => 'form-control','size' => '30x5']) !!}
+                    <textarea name="admin_note" id="admin_note" class="form-control" rows="5">{{ old('admin_note') }}</textarea>
                 </div>
             </div>
         </div>

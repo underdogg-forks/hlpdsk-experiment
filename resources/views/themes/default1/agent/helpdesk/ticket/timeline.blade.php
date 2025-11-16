@@ -391,7 +391,7 @@ if ($thread->title != "") {
                                         </div>
                                         <div class="col-md-10">
                                             <div id="refreshTo">
-                                            {!! Form::text('To',$user->email,['disabled'=>'disabled','id'=>'email','class'=>'form-control','style'=>'width:55%'])!!}
+                                            <input type="text" name="To" id="email" value="$user->email" class="form-control">
                                             {!! $errors->first('To', '<spam class="help-block text-red">:message</spam>') !!}
                                                 <a href="#" data-toggle="modal" data-target="#addccc"> {{ trans('lang.add_cc') }} </a>
                                                 <div id="recepients">
@@ -481,7 +481,9 @@ if ($thread->title != "") {
                         
                     </div>
                     <div id="t2">
-                        {!! Form::model($tickets->id, ['id'=>'form2','method' => 'PATCH'] )!!}
+                        <form method="POST">
+    @csrf
+    @method('PATCH')
                         <div id="t4">
                             <div class="form-group {{ $errors->has('title') ? 'has-error' : '' }}" id="internal_content_class">
                                 <div class="row">
@@ -818,7 +820,9 @@ if ($thread->title != "") {
         <div class="modal fade" id="Edit">
             <div class="modal-dialog modal-lg" style="width:60%;height:70%;">
                 <div class="modal-content">
-                    {!! Form::model($tickets->id, ['id'=>'form','method' => 'PATCH'] )!!}
+                    <form method="POST">
+    @csrf
+    @method('PATCH')
                     <div class="modal-header">
                         <h4 class="modal-title">{{ trans('lang.edit') }} <b>[#{!! $tickets->ticket_number !!}]</b></h4>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidd en="true">&times;</span></button>
@@ -944,7 +948,9 @@ if ($thread->title != "") {
     <div class="modal fade" id="ChangeOwner">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
-                {!! Form::open(['id'=>'form4','method' => 'PATCH'] )!!}
+                <form method="POST">
+    @csrf
+    @method('PATCH')
                 <div class="modal-header">
                     <h4 class="modal-title">{{ trans('lang.change_owner_for_ticket') }} <b>#{!! $tickets->ticket_number !!}</b></h4>
                     <button type="button" class="close" id="close101" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
@@ -1009,7 +1015,9 @@ if ($thread->title != "") {
                                 <label>{{ trans('lang.add_new_user') }}</label>            
              
                                 <div id="here2"></div>
-                                {!! Form::model($tickets->id, ['id'=>'change-add-owner','method' => 'PATCH'] )!!} 
+                                <form method="POST">
+    @csrf
+    @method('PATCH') 
                                 <div id="add-change-loader" class="text-center" style="display:none;">
                                     <img src="{{asset("lb-faveo/media/images/gifloader.gif")}}"> 
                                 </div>
@@ -1034,7 +1042,9 @@ if ($thread->title != "") {
         <div class="modal fade" id="assign{{$tickets->id}}">
             <div class="modal-dialog">
                 <div class="modal-content">
-                    {!! Form::open(['id'=>'form1','method' => 'PATCH'] )!!}
+                    <form method="POST">
+    @csrf
+    @method('PATCH')
                     <div class="modal-header">
                         <h4 class="modal-title">{{ trans('lang.assign') }}</h4>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
@@ -1116,7 +1126,9 @@ if ($thread->title != "") {
                                    <img src="{{asset("lb-faveo/media/images/gifloader.gif")}}"> 
                                 </div>
                                 
-                                {!! Form::model($tickets->id, ['id'=>'search-user','method' => 'PATCH'] )!!}    
+                                <form method="POST">
+    @csrf
+    @method('PATCH')    
                                 <div id="hide1234">
                                     <input type="text" class="form-control" name="search" id="tags" placeholder="{{ trans('lang.search_by_email') }}">
                                     <input type="hidden" name="ticket_id" value="{!! $tickets->id !!}">
@@ -1128,7 +1140,9 @@ if ($thread->title != "") {
                         <div class="tab-pane" id="haha">
                             <div class="modal-body" id="abc">           
                                 <div id="here_new"></div>
-                                {!! Form::model($tickets->id, ['id'=>'add-user','method' => 'PATCH'] )!!} 
+                                <form method="POST">
+    @csrf
+    @method('PATCH') 
                                 <div id="show8" style="display:none;text-align:center;">
                                     <img src="{{asset("lb-faveo/media/images/gifloader.gif")}}"> 
                                 </div>
@@ -1225,7 +1239,9 @@ if ($thread->title != "") {
                     <div id="merge-body-form">
                         <div class="row">
                             <div class="col-md-6">
-                                {!! Form::open(['id'=>'merge-form','method' => 'PATCH'] )!!}
+                                <form method="POST">
+    @csrf
+    @method('PATCH')
                                 <label>{{ trans('lang.title') }}</label>
                                 <input type="text" name='title' class="form-control" value="<?php
                                        $ticket_data = App\Model\helpdesk\Ticket\Ticket_Thread::select('title')->where('ticket_id', "=", $tickets->id)->first();

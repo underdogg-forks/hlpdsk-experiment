@@ -32,7 +32,9 @@ class="nav-link active"
 <!-- content -->
 @section('content')
 <!-- open a form -->
-{!! Form::model($responders,['url' => 'postresponder/'.$responders->id, 'method' => 'PATCH']) !!}
+<form method="POST">
+    @csrf
+    @method('PATCH')
 <!-- check whether success or not -->
 @if(session()->has('success'))
 <div class="alert alert-success alert-dismissable">
@@ -58,12 +60,12 @@ class="nav-link active"
     <div class="card-body">
         
         <div class="form-group">
-            {!! Form::checkbox('new_ticket',1) !!} &nbsp;
+            <input type="checkbox" name="new_ticket" value="1"> &nbsp;
             {!! Form::label('new_ticket',trans('lang.new_ticket')) !!}
         </div>
         <!-- New Ticket by Agent: CHECKBOX	 Ticket Owner   -->
         <div>
-            {!! Form::checkbox('agent_new_ticket',1) !!}&nbsp;
+            <input type="checkbox" name="agent_new_ticket" value="1">&nbsp;
             {!! Form::label('agent_new_ticket',trans('lang.new_ticket_by_agent')) !!}
         </div>
     </div>

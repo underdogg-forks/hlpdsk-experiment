@@ -36,7 +36,9 @@
             @endif
 
             <div class="box-body no-padding">
-                {!! Form::model($setting,['url'=>'settings','method'=>'patch','files'=>true]) !!}
+                <form method="POST">
+    @csrf
+    @method('PATCH')
 
                 <table class="table table-condensed">
 
@@ -53,7 +55,7 @@
                             <div class="form-group {{ $errors->has('company') ? 'has-error' : '' }}">
 
 
-                                {!! Form::text('company',null,['class' => 'form-control']) !!}
+                                <input type="text" name="company" id="company" value="{{ old('company') }}" class="form-control">
                                 <p><i> {{ trans('message.enter-the-company-name') }}</i> </p>
 
 
@@ -68,7 +70,7 @@
                             <div class="form-group {{ $errors->has('website') ? 'has-error' : '' }}">
 
 
-                                {!! Form::text('website',null,['class' => 'form-control']) !!}
+                                <input type="text" name="website" id="website" value="{{ old('website') }}" class="form-control">
                                 <p><i> {{ trans('message.enter-the-company-website') }}</i> </p>
 
                             </div>
@@ -82,7 +84,7 @@
                             <div class="form-group {{ $errors->has('phone') ? 'has-error' : '' }}">
 
 
-                                {!! Form::text('phone',null,['class' => 'form-control']) !!}
+                                <input type="text" name="phone" id="phone" value="{{ old('phone') }}" class="form-control">
                                 <p><i> {{ trans('message.enter-the-company-phone-number') }}</i> </p>
 
                             </div>
@@ -95,7 +97,7 @@
                         <td>
                             <div class="form-group {{ $errors->has('address') ? 'has-error' : '' }}">
 
-                                {!! Form::textarea('address',null,['class' => 'form-control','size' => '128x10','id'=>'address']) !!}
+                                <textarea name="address" id="address" class="form-control" rows="10">{{ old('address') }}</textarea>
                                 <p><i> {{ trans('message.enter-company-address') }}</i> </p>
                             </div>
                         </td>
@@ -107,7 +109,7 @@
                         <td>
                             <div class="form-group {{ $errors->has('logo') ? 'has-error' : '' }}">
 
-                                {!! Form::file('logo') !!}
+                                <input type="file" name="logo" id="logo">
                                 <p><i> {{ trans('message.enter-the-company-logo') }}</i> </p>
                                 @if($setting->logo) 
                                 <img src="{{asset('cart/img/logo/'.$setting->logo)}}" class="img-thumbnail" style="height: 100px;">
@@ -143,7 +145,7 @@
                             <div class="form-group {{ $errors->has('port') ? 'has-error' : '' }}">
 
 
-                                {!! Form::text('port',null,['class' => 'form-control']) !!}
+                                <input type="text" name="port" id="port" value="{{ old('port') }}" class="form-control">
                                 <p><i> {{ trans('message.enter-email-port') }}</i> </p>
 
                             </div>
@@ -157,7 +159,7 @@
                             <div class="form-group {{ $errors->has('host') ? 'has-error' : '' }}">
 
 
-                                {!! Form::text('host',null,['class' => 'form-control']) !!}
+                                <input type="text" name="host" id="host" value="{{ old('host') }}" class="form-control">
                                 <p><i> {{ trans('message.enter-email-host') }}</i> </p>
 
                             </div>
@@ -170,7 +172,7 @@
                         <td>
                             <div class="form-group {{ $errors->has('encryption') ? 'has-error' : '' }}">
 
-                                {!! Form::text('encryption',null,['class' => 'form-control']) !!}
+                                <input type="text" name="encryption" id="encryption" value="{{ old('encryption') }}" class="form-control">
                                 <p><i> {{ trans('message.select-email-encryption-method') }}</i> </p>
 
                             </div>
@@ -183,7 +185,7 @@
                         <td>
                             <div class="form-group {{ $errors->has('email') ? 'has-error' : '' }}">
 
-                                {!! Form::text('email',null,['class' => 'form-control']) !!}
+                                <input type="text" name="email" id="email" value="{{ old('email') }}" class="form-control">
                                 <p><i> {{ trans('message.enter-email') }}</i> </p>
 
                             </div>
@@ -196,7 +198,7 @@
                         <td>
                             <div class="form-group {{ $errors->has('password') ? 'has-error' : '' }}">
 
-                                {!! Form::password('password',['class' => 'form-control']) !!}
+                                <input type="password" name="password" id="password" class="form-control">
                                 <p><i> {{ trans('message.enter-email-password') }}</i> </p>
 
                             </div>
@@ -216,8 +218,8 @@
                             <div class="form-group {{ $errors->has('error_log') ? 'has-error' : '' }}">
 
 
-                                {!! Form::radio('error_log','1',true) !!}<span>   {{ trans('message.yes') }}</span>
-                                {!! Form::radio('error_log','0') !!}<span>   {{ trans('message.no') }}</span>
+                                <input type="radio" name="error_log" value="'1'"><span>   {{ trans('message.yes') }}</span>
+                                <input type="radio" name="error_log" value="'0'"><span>   {{ trans('message.no') }}</span>
                                 <p><i> {{ trans('message.enable-error-logging') }}</i> </p>
 
 
@@ -233,7 +235,7 @@
                             <div class="form-group {{ $errors->has('error_email') ? 'has-error' : '' }}">
 
 
-                                {!! Form::text('error_email',null,['class' => 'form-control']) !!}
+                                <input type="text" name="error_email" id="error_email" value="{{ old('error_email') }}" class="form-control">
                                 <p><i> {{ trans('message.provide-error-reporting-email') }}</i> </p>
 
 

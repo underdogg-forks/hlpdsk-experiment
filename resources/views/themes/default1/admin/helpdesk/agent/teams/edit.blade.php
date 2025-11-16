@@ -32,7 +32,9 @@ class="nav-link active"
 <!-- content -->
 @section('content')
 <!-- open a form -->
-{!!Form::model($teams, ['url'=>'teams/'.$teams->id , 'method'=> 'PATCH'])!!}
+<form method="POST">
+    @csrf
+    @method('PATCH')
 
 @if(session()->has('errors'))
 <div class="alert alert-danger alert-dismissable">
@@ -64,7 +66,7 @@ class="nav-link active"
             <!-- name -->
             <div class="col-sm-5 form-group {{ $errors->has('name') ? 'has-error' : '' }}">
                 {!! Form::label('name',trans('lang.name')) !!} <span class="text-red"> *</span>
-                {!! Form::text('name',null,['class' => 'form-control']) !!}
+                <input type="text" name="name" id="name" value="{{ old('name') }}" class="form-control">
             </div>
             <!-- team lead -->
             <div class="col-sm-4 form-group {{ $errors->has('team_lead') ? 'has-error' : '' }}">
@@ -78,10 +80,10 @@ class="nav-link active"
                     {!! Form::label('status',trans('lang.status')) !!}
                     <div class="row">
                         <div class="col-sm-6">
-                            {!! Form::radio('status','1',true) !!} {{ trans('lang.active') }}
+                            <input type="radio" name="status" value="'1'"> {{ trans('lang.active') }}
                         </div>
                         <div class="col-sm-6">
-                            {!! Form::radio('status','0',null) !!} {{ trans('lang.inactive') }}
+                            <input type="radio" name="status" value="'0'"> {{ trans('lang.inactive') }}
                         </div>
                     </div>
                 </div>
@@ -90,7 +92,7 @@ class="nav-link active"
         <!-- admin notes -->
         <div>
             {!! Form::label('admin_notes',trans('lang.admin_notes')) !!}
-            {!! Form::textarea('admin_notes',null,['class' => 'form-control','size' => '30x5']) !!}
+            <textarea name="admin_notes" id="admin_notes" class="form-control" rows="5">{{ old('admin_notes') }}</textarea>
         </div>
     </div>
     <div class="card-footer">

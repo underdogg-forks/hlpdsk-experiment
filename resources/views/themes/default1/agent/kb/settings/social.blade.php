@@ -10,7 +10,9 @@
 @section('content')
 <!-- open a form -->
 
-	{!! Form::model($social,['url' => 'postsocial', 'method' => 'PATCH','files'=>true]) !!}
+	<form method="POST">
+    @csrf
+    @method('PATCH')
 
 <!-- <div class="form-group {{ $errors->has('company_name') ? 'has-error' : '' }}"> -->
 	<!-- table  -->
@@ -49,25 +51,25 @@
 
                 <div class=" col-xs-4 form-group {{ $errors->has('google') ? 'has-error' : '' }}">
 
-                    {!! Form::label('google','google') !!}
+                    <label for="google">'google'</label>
                     {!! $errors->first('google', '<spam class="help-block">:message</spam>') !!}
-			        {!! Form::text('google',null,['class' => 'form-control']) !!}
+			        <input type="text" name="google" id="google" value="{{ old('google') }}" class="form-control">
 
                 </div>
 
                 <div class=" col-xs-4 form-group {{ $errors->has('twitter') ? 'has-error' : '' }}">
 
-                    {!! Form::label('twitter','twitter') !!}
+                    <label for="twitter">'twitter'</label>
                     {!! $errors->first('twitter', '<spam class="help-block">:message</spam>') !!}
-                    {!! Form::text('twitter',null,['class' => 'form-control']) !!}
+                    <input type="text" name="twitter" id="twitter" value="{{ old('twitter') }}" class="form-control">
 
                 </div>
 
                 <div class=" col-xs-4 form-group {{ $errors->has('facebook') ? 'has-error' : '' }}">
 
-                    {!! Form::label('facebook','facebook') !!}
+                    <label for="facebook">'facebook'</label>
                     {!! $errors->first('facebook', '<spam class="help-block">:message</spam>') !!}
-                    {!! Form::text('facebook',null,['class' => 'form-control']) !!}
+                    <input type="text" name="facebook" id="facebook" value="{{ old('facebook') }}" class="form-control">
 
                 </div>
 
@@ -77,25 +79,25 @@
 
                 <div class=" col-xs-4 form-group {{ $errors->has('linkedin') ? 'has-error' : '' }}">
 
-                    {!! Form::label('linkedin','linkedin') !!}
+                    <label for="linkedin">'linkedin'</label>
                     {!! $errors->first('linkedin', '<spam class="help-block">:message</spam>') !!}
-                    {!! Form::text('linkedin',null,['class' => 'form-control']) !!}
+                    <input type="text" name="linkedin" id="linkedin" value="{{ old('linkedin') }}" class="form-control">
 
                 </div>
 
                 <div class=" col-xs-4 form-group {{ $errors->has('stumble') ? 'has-error' : '' }}">
 
-                    {!! Form::label('stumble','stumble') !!}
+                    <label for="stumble">'stumble'</label>
                     {!! $errors->first('stumble', '<spam class="help-block">:message</spam>') !!}
-                    {!! Form::text('stumble',null,['class' => 'form-control']) !!}
+                    <input type="text" name="stumble" id="stumble" value="{{ old('stumble') }}" class="form-control">
 
                 </div>
 
                 <div class=" col-xs-4 form-group {{ $errors->has('deviantart') ? 'has-error' : '' }}">
 
-                    {!! Form::label('deviantart','deviantart') !!}
+                    <label for="deviantart">'deviantart'</label>
                     {!! $errors->first('deviantart', '<spam class="help-block">:message</spam>') !!}
-                    {!! Form::text('deviantart',null,['class' => 'form-control']) !!}
+                    <input type="text" name="deviantart" id="deviantart" value="{{ old('deviantart') }}" class="form-control">
 
                 </div>
 
@@ -105,25 +107,25 @@
 
                 <div class=" col-xs-4 form-group {{ $errors->has('flickr') ? 'has-error' : '' }}">
 
-                    {!! Form::label('flickr','flickr') !!}
+                    <label for="flickr">'flickr'</label>
                     {!! $errors->first('flickr', '<spam class="help-block">:message</spam>') !!}
-                    {!! Form::text('flickr',null,['class' => 'form-control']) !!}
+                    <input type="text" name="flickr" id="flickr" value="{{ old('flickr') }}" class="form-control">
 
                 </div>
 
                 <div class=" col-xs-4 form-group {{ $errors->has('skype') ? 'has-error' : '' }}">
 
-                    {!! Form::label('skype','skype') !!}
+                    <label for="skype">'skype'</label>
                     {!! $errors->first('skype', '<spam class="help-block">:message</spam>') !!}
-                    {!! Form::text('skype',null,['class' => 'form-control']) !!}
+                    <input type="text" name="skype" id="skype" value="{{ old('skype') }}" class="form-control">
 
                 </div>
 
                 <div class=" col-xs-4 form-group {{ $errors->has('rss') ? 'has-error' : '' }}">
 
-                    {!! Form::label('rss','rss') !!}
+                    <label for="rss">'rss'</label>
                     {!! $errors->first('rss', '<spam class="help-block">:message</spam>') !!}
-                    {!! Form::text('rss',null,['class' => 'form-control']) !!}
+                    <input type="text" name="rss" id="rss" value="{{ old('rss') }}" class="form-control">
 
                 </div>
 
@@ -133,25 +135,25 @@
 
                 <div class=" col-xs-4 form-group {{ $errors->has('youtube') ? 'has-error' : '' }}">
 
-                    {!! Form::label('youtube','youtube') !!}
+                    <label for="youtube">'youtube'</label>
                     {!! $errors->first('youtube', '<spam class="help-block">:message</spam>') !!}
-                    {!! Form::text('youtube',null,['class' => 'form-control']) !!}
+                    <input type="text" name="youtube" id="youtube" value="{{ old('youtube') }}" class="form-control">
 
                 </div>
 
                 <div class=" col-xs-4 form-group {{ $errors->has('vimeo') ? 'has-error' : '' }}">
 
-                    {!! Form::label('vimeo','vimeo') !!}
+                    <label for="vimeo">'vimeo'</label>
                     {!! $errors->first('vimeo', '<spam class="help-block">:message</spam>') !!}
-                    {!! Form::text('vimeo',null,['class' => 'form-control']) !!}
+                    <input type="text" name="vimeo" id="vimeo" value="{{ old('vimeo') }}" class="form-control">
 
                 </div>
 
                 <div class=" col-xs-4 form-group {{ $errors->has('pinterest') ? 'has-error' : '' }}">
 
-                    {!! Form::label('pinterest','pinterest') !!}
+                    <label for="pinterest">'pinterest'</label>
                     {!! $errors->first('pinterest', '<spam class="help-block">:message</spam>') !!}
-                    {!! Form::text('pinterest',null,['class' => 'form-control']) !!}
+                    <input type="text" name="pinterest" id="pinterest" value="{{ old('pinterest') }}" class="form-control">
 
                 </div>
 
@@ -161,17 +163,17 @@
 
                 <div class=" col-xs-6 form-group {{ $errors->has('dribbble') ? 'has-error' : '' }}">
 
-                    {!! Form::label('dribbble','dribbble') !!}
+                    <label for="dribbble">'dribbble'</label>
                     {!! $errors->first('dribbble', '<spam class="help-block">:message</spam>') !!}
-                    {!! Form::text('dribbble',null,['class' => 'form-control']) !!}
+                    <input type="text" name="dribbble" id="dribbble" value="{{ old('dribbble') }}" class="form-control">
 
                 </div>
 
                 <div class=" col-xs-6 form-group {{ $errors->has('instagram') ? 'has-error' : '' }}">
 
-                    {!! Form::label('instagram','instagram') !!}
+                    <label for="instagram">'instagram'</label>
                     {!! $errors->first('instagram', '<spam class="help-block">:message</spam>') !!}
-                    {!! Form::text('instagram',null,['class' => 'form-control']) !!}
+                    <input type="text" name="instagram" id="instagram" value="{{ old('instagram') }}" class="form-control">
 
                 </div>
 

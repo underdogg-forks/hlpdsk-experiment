@@ -10,13 +10,15 @@
 </script>
 
 @section('content')
-{!! Form::model($category,['url' => 'category/'.$category->slug , 'method' => 'PATCH'] )!!}
+<form method="POST">
+    @csrf
+    @method('PATCH')
 
 
 <div class="box box-primary">
 	<div class="content-header">
 
-	 	<h4>Edit	{!! Form::submit('save',['class'=>'form-group btn btn-primary pull-right'])!!}</h4>
+	 	<h4>Edit	<button type="submit" class="form-group btn btn-primary pull-right">'save'</button></h4>
 
 	</div>
 
@@ -43,7 +45,7 @@
 
 			{!! Form::label('name',trans('lang.name')) !!}
 			{!! $errors->first('name', '<spam class="help-block">:message</spam>') !!}
-			{!! Form::text('name',null,['class' => 'form-control']) !!}
+			<input type="text" name="name" id="name" value="{{ old('name') }}" class="form-control">
 
 		</div>
 
@@ -51,7 +53,7 @@
 
 			{!! Form::label('slug',trans('lang.slug')) !!}
 			{!! $errors->first('slug', '<spam class="help-block">:message</spam>') !!}
-			{!! Form::text('slug',null,['class' => 'form-control']) !!}
+			<input type="text" name="slug" id="slug" value="{{ old('slug') }}" class="form-control">
 
 		</div>
 
@@ -70,10 +72,10 @@
 			{!! $errors->first('status', '<spam class="help-block">:message</spam>') !!}
 			<div class="row">
 				<div class="col-xs-3">
-					{!! Form::radio('status','1',true) !!}{{ trans('lang.active') }}
+					<input type="radio" name="status" value="'1'">{{ trans('lang.active') }}
 				</div>
 				<div class="col-xs-3">
-					{!! Form::radio('status','0',null) !!}{{ trans('lang.inactive') }}
+					<input type="radio" name="status" value="'0'">{{ trans('lang.inactive') }}
 				</div>
 			</div>
 		</div>
@@ -81,7 +83,7 @@
 		<div class="col-md-12 form-group {{ $errors->has('description') ? 'has-error' : '' }}">
 			{!! Form::label('description',trans('lang.description')) !!}
 			{!! $errors->first('description', '<spam class="help-block">:message</spam>') !!}
-			{!! Form::textarea('description',null,['class' => 'form-control','size' => '128x10','id'=>'description','placeholder'=>'Enter the description']) !!}
+			<textarea name="description" id="description" class="form-control" rows="10">{{ old('description') }}</textarea>
 		</div>
 
 	</div>

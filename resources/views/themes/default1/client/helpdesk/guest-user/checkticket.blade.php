@@ -156,10 +156,10 @@ class="active"
                                                 <input type="hidden" name="ticket_ID" value="{{$tickets->id}}">
                                                     <div class="form-group {{ $errors->has('title') ? 'has-error' : '' }}">
                                                         <div class="col-md-2">
-                                                            {!! Form::label('To', 'To:') !!}
+                                                            <label for="To">'To:'</label>
                                                         </div>
                                                         <div class="col-md-10">
-                                                            {!! Form::text('To',$user->email,['class'=>'form-control','style'=>'width:55%'])!!}
+                                                            <input type="text" name="To" id="To" value="$user->email" class="form-control">
                                                             {!! $errors->first('To', '<spam class="help-block text-red">:message</spam>') !!}
                                                         </div>
                                                     </div>
@@ -170,7 +170,7 @@ class="active"
                                                 <div class="row">
                                                     <div class="form-group {{ $errors->has('title') ? 'has-error' : '' }}">
                                                         <div class="col-md-2">
-                                                            {!! Form::label('Reply Content', 'reply_content:') !!}
+                                                            <label for="Reply Content">'reply_content:'</label>
                                                         </div>
                                                         <div class="col-md-10">
                                                             <textarea name="reply_content"></textarea> 
@@ -211,7 +211,7 @@ class="active"
                                                             <label>Subject</label>
                                                         </div>
                                                         <div class="col-md-10">
-                                                            {!! Form::text('To',$user->email,['class'=>'form-control','style'=>'width:55%'])!!}
+                                                            <input type="text" name="To" id="To" value="$user->email" class="form-control">
                                                             {!! $errors->first('To', '<spam class="help-block text-red">:message</spam>') !!}
                                                         </div>
                                                     </div>

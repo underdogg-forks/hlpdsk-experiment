@@ -73,7 +73,7 @@ class="active"
 
                     <div class='col-sm-2 form-group' id="start_date">
                         {!! Form::label('date', trans('lang.start_date').':') !!}
-                        {!! Form::text('start_date',null,['class'=>'form-control','id'=>'datepicker4'])!!}
+                        <input type="text" name="start_date" id="datepicker4" value="{{ old('start_date') }}" class="form-control">
                     </div>
                     <?php
                     $start_date = App\Model\helpdesk\Ticket\Tickets::where('id', '=', '1')->first();
@@ -100,7 +100,7 @@ class="active"
 
                     <div class='col-sm-2 form-group' id="end_date">
                         {!! Form::label('start_time', trans('lang.end_date').':') !!}
-                        {!! Form::text('end_date',null,['class'=>'form-control','id'=>'datetimepicker3'])!!}
+                        <input type="text" name="end_date" id="datetimepicker3" value="{{ old('end_date') }}" class="form-control">
                     </div>
                     <script type="text/javascript">
                         $(function() {
@@ -137,13 +137,13 @@ class="active"
                     </div>
 
                     <div class='col-sm-1'>
-                        {!! Form::label('filter', 'Filter:',['style' => 'visibility:hidden;']) !!}<br>
+                        <label for="filter">'Filter:'</label><br>
                         <input type="submit" class="btn btn-primary" value="{{trans('lang.submit')}}" id="submit">
                     </div>
                     <br/>
                     <div class="col-md-4">
 
-                        {!! Form::label('filter', 'Filter:',['style' => 'visibility:hidden;']) !!}<br>
+                        <label for="filter">'Filter:'</label><br>
 
                         <a class="btn btn-primary" href="#" id="pdf">{{ trans('lang.generate_pdf') }}</a>
 

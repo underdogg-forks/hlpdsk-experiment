@@ -167,8 +167,8 @@ class="active"
             <div  class="form-group">
                 <div class="row">
                     <div class='col-sm-2'>
-                        {!! Form::label('date', 'Start Date:',['class' => 'lead']) !!}
-                        {!! Form::text('start_date',null,['class'=>'form-control','id'=>'datepicker4'])!!}
+                        <label for="date" class="lead">'Start Date:'</label>
+                        <input type="text" name="start_date" id="datepicker4" value="{{ old('start_date') }}" class="form-control">
                     </div>
                     <?php
                     $start_date = App\Model\helpdesk\Ticket\Tickets::where('id', '=', '1')->first();
@@ -194,8 +194,8 @@ class="active"
                         });
                     </script>
                     <div class='col-sm-2'>
-                        {!! Form::label('start_time', 'End Date:' ,['class' => 'lead']) !!}
-                        {!! Form::text('end_date',null,['class'=>'form-control','id'=>'datetimepicker3'])!!}
+                        <label for="start_time" class="lead">'End Date:' </label>
+                        <input type="text" name="end_date" id="datetimepicker3" value="{{ old('end_date') }}" class="form-control">
                     </div>
                     <script type="text/javascript">
                         $(function() {
@@ -209,7 +209,7 @@ class="active"
                         });
                     </script>
                     <div class='col-sm-1'>
-                        {!! Form::label('filter', 'Filter:',['class' => 'lead']) !!}<br>
+                        <label for="filter" class="lead">'Filter:'</label><br>
                         <input type="submit" class="btn btn-primary">
                     </div>
                 </div>

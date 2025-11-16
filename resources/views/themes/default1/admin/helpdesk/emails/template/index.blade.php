@@ -92,11 +92,7 @@ class="active"
     @method('DELETE')
 			<a href="{{route('template.edit',$template->id)}}" class="btn btn-info btn-xs btn-flat"><i class="fa fa-edit" style="color:black;"> </i> Edit</a>
 			<!-- To pop up a confirm Message -->
-				{!! Form::button('<i class="fa fa-trash" style="color:black;"> </i> Delete',
-            		['type' => 'submit',
-            		'class'=> 'btn btn-warning btn-xs btn-flat',
-            		'onclick'=>'return confirm("Are you sure?")'])
-            	!!}
+				<button type="submit" class="btn btn-warning btn-xs btn-flat">'<i class="fa fa-trash" style="color:black;"> </i> Delete'</button>
 			</form>
 		</td>
 		@endforeach

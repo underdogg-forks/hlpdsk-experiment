@@ -32,7 +32,8 @@ class="nav-link active"
 <!-- content -->
 @section('content')
 <!-- open a form -->
-{!! Form::open(['route' => 'organizations.store','method'=>'post']) !!}
+<form method="POST" action="{{ route('organizations.store') }}">
+    @csrf
 
 @if(session()->has('errors'))
 <?php //dd($errors); ?>
@@ -61,28 +62,28 @@ class="nav-link active"
         <div class="row">
             <div class="col-sm-4 form-group {{ $errors->has('name') ? 'has-error' : '' }}">
                 {!! Form::label('name',trans('lang.name')) !!} <span class="text-red"> *</span>
-                {!! Form::text('name',null,['class' => 'form-control']) !!}
+                <input type="text" name="name" id="name" value="{{ old('name') }}" class="form-control">
             </div>
             <!-- phone : Text : -->
             <div class="col-sm-4 form-group {{ $errors->has('phone') ? 'has-error' : '' }}">
                 {!! Form::label('phone',trans('lang.phone')) !!}
-                {!! Form::text('phone',null,['class' => 'form-control']) !!}
+                <input type="text" name="phone" id="phone" value="{{ old('phone') }}" class="form-control">
             </div>
             <!-- website : Text :  -->
             <div class="col-sm-4 form-group {{ $errors->has('website') ? 'has-error' : '' }}">
                 {!! Form::label('website',trans('lang.website')) !!}
-                {!! Form::text('website',null,['class' => 'form-control']) !!}
+                <input type="text" name="website" id="website" value="{{ old('website') }}" class="form-control">
             </div>
         </div>
         <!-- Internal Notes : Textarea -->
         <div class="row">
             <div class="col-sm-6 form-group">
                 {!! Form::label('address',trans('lang.address')) !!}
-                {!! Form::textarea('address',null,['class' => 'form-control']) !!}
+                <textarea name="address" id="address" class="form-control">{{ old('address') }}</textarea>
             </div>
             <div class="col-sm-6 form-group">
                 {!! Form::label('internal_notes',trans('lang.internal_notes')) !!}
-                {!! Form::textarea('internal_notes',null,['class' => 'form-control']) !!}
+                <textarea name="internal_notes" id="internal_notes" class="form-control">{{ old('internal_notes') }}</textarea>
             </div>
         </div>
     </div>

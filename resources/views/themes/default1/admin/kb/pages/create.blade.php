@@ -29,7 +29,7 @@
 
             {!! Form::label('name',trans('lang.name')) !!}
             {!! $errors->first('name', '<spam class="help-block">:message</spam>') !!}
-            {!! Form::text('name',null,['class' => 'form-control']) !!}
+            <input type="text" name="name" id="name" value="{{ old('name') }}" class="form-control">
 
         </div>
 
@@ -37,7 +37,7 @@
 
             {!! Form::label('slug',trans('lang.slug')) !!}
             {!! $errors->first('slug', '<spam class="help-block">:message</spam>') !!}
-            {!! Form::text('slug',null,['class' => 'form-control']) !!}
+            <input type="text" name="slug" id="slug" value="{{ old('slug') }}" class="form-control">
 
         </div>
     </div>
@@ -48,7 +48,7 @@
                     {!! $errors->first('description', '<spam class="help-block">:message</spam>') !!}
 
                     <div class="form-group" style="background-color:white">
-                    {!! Form::textarea('description',null,['class' => 'form-control color','size' => '110x15','id'=>'myNicEditor','placeholder'=>'Enter the description']) !!}
+                    <textarea name="description" id="myNicEditor" class="form-control color" rows="15">{{ old('description') }}</textarea>
                 </div>
                 </div>
 
@@ -68,10 +68,10 @@
                         {!! $errors->first('status', '<spam class="help-block">:message</spam>') !!}
                         <div class="row">
                             <div class="col-xs-4">
-                                {!! Form::radio('status','1',true) !!}{{ trans('lang.published') }}
+                                <input type="radio" name="status" value="'1'">{{ trans('lang.published') }}
                             </div>
                             <div class="col-xs-3">
-                                {!! Form::radio('status','0',null) !!}{{ trans('lang.draft') }}
+                                <input type="radio" name="status" value="'0'">{{ trans('lang.draft') }}
                             </div>
                         </div>
                     </div>
@@ -83,11 +83,11 @@
                         {!! $errors->first('visibility', '<spam class="help-block">:message</spam>') !!}
                         <div class="row">
                             <div class="col-xs-3">
-                                {!! Form::radio('visibility','1',true) !!}{{ trans('lang.public') }}
+                                <input type="radio" name="visibility" value="'1'">{{ trans('lang.public') }}
                                 </div>
                                 <div class="row">
                             <div class="col-xs-3">
-                                {!! Form::radio('visibility','0',null) !!}{{ trans('lang.private') }}
+                                <input type="radio" name="visibility" value="'0'">{{ trans('lang.private') }}
                                 </div>
                     </div>
 

@@ -75,7 +75,7 @@ class="nav-link active"
             <div class="form-group col-sm-6">
 
                 <label>{{ trans('lang.form_name') }}: <span class="text-red"> *</span></label>
-                 {!! Form::text('formname',null,['class'=>'form-control']) !!}
+                 <input type="text" name="formname" id="formname" value="{{ old('formname') }}" class="form-control">
             </div>
         </div>
         
@@ -116,7 +116,7 @@ class="nav-link active"
                             <td>{!! Form::select('type[]',['text'=>'text','email'=>'email','password'=>'password','textarea'=>'textarea','select'=>'select','radio'=>'radio','checkbox'=>'checkbox','hidden'=>'hidden'],$field->type,['class'=>'form-control']) !!}</td>
                             <td><input type="text" name="value[]" value="{{$field->valuesAsString()}}" class="form-control"></td>
                             
-                            <td>{!! Form::radio('required['.$key.']',1,true) !!}&nbsp;&nbsp;{{ trans("lang.yes") }}&nbsp;&nbsp;{!! Form::radio('required['.$key.']',0,$field->nonRequiredFieldForCheck()) !!}&nbsp;&nbsp;{{ trans("lang.no") }}</td>
+                            <td><input type="radio" name="required['.$key.']" value="1">&nbsp;&nbsp;{{ trans("lang.yes") }}&nbsp;&nbsp;{!! Form::radio('required['.$key.']',0,$field->nonRequiredFieldForCheck()) !!}&nbsp;&nbsp;{{ trans("lang.no") }}</td>
                             <td><button type="button" class="remove_field btn btn-danger"><i class="fas fa-trash"></i></button></td>
                         </tr> 
                         @empty 

@@ -87,7 +87,7 @@ class="nav-link active"
             <div class="row">
                 <div class="form-group col-sm-6 {!! $errors->has('name') ? 'has-error' : '' !!}">
                     <label for="inputName">{{ trans('lang.name') }} <span class="text-red"> *</span></label>
-                    {!! Form::text('name',null,['class' => 'form-control', 'placeholder' => trans('lang.name'), 'id' => 'name']) !!}
+                    <input type="text" name="name" id="name" value="{{ old('name') }}" class="form-control">
                 </div>
 
                 <div class="form-group col-sm-6 {!! $errors->has('status') ? 'has-error' : '' !!}">

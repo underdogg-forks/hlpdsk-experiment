@@ -11,7 +11,9 @@
     bkLib.onDomLoaded(function() { nicEditors.allTextAreas() });
 </script>
 @section('content')
-	{!! Form::model($footer,['url' => 'post-create-footer/'.$footer->id, 'method' => 'PATCH','files'=>true]) !!}
+	<form method="POST">
+    @csrf
+    @method('PATCH')
 <!-- <div class="form-group {{ $errors->has('company_name') ? 'has-error' : '' }}"> -->
 	<!-- table  -->
 <div class="box box-primary">
@@ -26,14 +28,14 @@
 
             {!! Form::label('title',trans('lang.title')) !!}
             {!! $errors->first('title', '<spam class="help-block">:message</spam>') !!}
-            {!! Form::text('title',null,['class' => 'form-control']) !!}
+            <input type="text" name="title" id="title" value="{{ old('title') }}" class="form-control">
 
         </div>
 
         <div class="form-group {{ $errors->has('footer') ? 'has-error' : '' }}">
             {!! Form::label('footer',trans('lang.footer')) !!}
             {!! $errors->first('footer', '<spam class="help-block">:message</spam>') !!}
-            {!! Form::textarea('footer',null,['class' => 'form-control','size' => '128x10','id'=>'footer','placeholder'=>'Enter the description']) !!}
+            <textarea name="footer" id="footer" class="form-control" rows="10">{{ old('footer') }}</textarea>
         </div>
 
     </div>

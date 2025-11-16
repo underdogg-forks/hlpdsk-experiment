@@ -64,7 +64,8 @@ class="nav-item active"
 
         <div class="tab-content">
             <div class="tab-pane active" id="tab_1">
-                {!! Form::open(['route'=>'select_all','method'=>'post']) !!}
+                <form method="POST" action="{{ route('select_all') }}">
+    @csrf
                 <div class="mailbox-controls mt-3">
                     <!-- Check all button -->
                     <a class="btn btn-light btn-sm checkbox-toggle" style="background-color: whitesmoke"><i class="far fa-square"></i></a>
@@ -154,7 +155,8 @@ class="nav-item active"
             </div><!-- /.box-body -->
             {{-- /.tab_1 --}}
             <div class="tab-pane" id="tab_2">
-                {!! Form::open(['route'=>'select_all','method'=>'post']) !!}
+                <form method="POST" action="{{ route('select_all') }}">
+    @csrf
                 <div class="mailbox-controls mt-3">
                     <!-- Check all button -->
                     <a class="btn btn-light btn-sm checkbox-toggle" style="background-color: whitesmoke"><i class="far fa-square" ></i></a>

@@ -32,7 +32,9 @@ class="nav-link active"
 <!-- content -->
 @section('content')
 <!-- open a form -->
-{!! Form::model($topics,['url' => 'helptopic/'.$topics->id, 'method' => 'PATCH']) !!}
+<form method="POST">
+    @csrf
+    @method('PATCH')
 @if(session()->has('errors'))
 <?php //dd($errors); ?>
 <div class="alert alert-danger alert-dismissable">
@@ -79,23 +81,23 @@ class="nav-link active"
             <div class="col-md-6">
                 <div class="form-group {{ $errors->has('topic') ? 'has-error' : '' }}">
                     {!! Form::label('topic',trans('lang.topic')) !!} <span class="text-red"> *</span>
-                    {!! Form::text('topic',null,['class' => 'form-control']) !!}
+                    <input type="text" name="topic" id="topic" value="{{ old('topic') }}" class="form-control">
                 </div>
             </div>
             <!-- status radio: required: Active|Dissable -->
             <div class="col-md-3">
                 <div class="form-group {{ $errors->has('ticket_status') ? 'has-error' : '' }}">
                     {!! Form::label('ticket_status',trans('lang.status')) !!}&nbsp;&nbsp;<br/>
-                    {!! Form::radio('status','1',true) !!} {{ trans('lang.active') }}&nbsp;&nbsp;&nbsp;
-                    {!! Form::radio('status','0') !!} {{ trans('lang.inactive') }}
+                    <input type="radio" name="status" value="'1'"> {{ trans('lang.active') }}&nbsp;&nbsp;&nbsp;
+                    <input type="radio" name="status" value="'0'"> {{ trans('lang.inactive') }}
                 </div>
             </div>
             <!-- Type : Radio : required : Public|private -->
             <div class="col-md-3">
                 <div class="form-group {{ $errors->has('type') ? 'has-error' : '' }}">
                     {!! Form::label('type',trans('lang.type')) !!}&nbsp;&nbsp;<br/>
-                    {!! Form::radio('type','1',true) !!} {{ trans('lang.public') }}&nbsp;&nbsp;&nbsp;
-                    {!! Form::radio('type','0') !!} {{ trans('lang.private') }}
+                    <input type="radio" name="type" value="'1'"> {{ trans('lang.public') }}&nbsp;&nbsp;&nbsp;
+                    <input type="radio" name="type" value="'0'"> {{ trans('lang.private') }}
                 </div>
             </div>
         </div>
@@ -151,7 +153,7 @@ class="nav-link active"
                 <!-- intrnal Notes : Textarea :  -->
                 <div class="form-group">
                     {!! Form::label('internal_notes',trans('lang.internal_notes')) !!}
-                    {!! Form::textarea('internal_notes',null,['class' => 'form-control','size' => '10x5']) !!}
+                    <textarea name="internal_notes" id="internal_notes" class="form-control" rows="5">{{ old('internal_notes') }}</textarea>
                 </div>
             </div>
             <!-- Submit button -->

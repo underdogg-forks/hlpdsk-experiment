@@ -73,7 +73,7 @@ class="nav-link active"
                 </div>
                 <div  class="col-md-9">
                     <div class="callout callout-default" style="font-style: oblique;">{{ trans('lang.close-msg1') }}</div>
-                    {!! Form::text('days',null,['class'=>'form-control'])!!}
+                    <input type="text" name="days" id="days" value="{{ old('days') }}" class="form-control">
                 </div>
             </div>
         </div>
@@ -86,10 +86,10 @@ class="nav-link active"
                     <div class="callout callout-default" style="font-style: oblique;">{{ trans('lang.close-msg4') }}</div>
                     <div class="row">
                         <div class="col-sm-3">
-                            {!! Form::radio('send_email','1') !!} {{ trans('lang.yes') }}
+                            <input type="radio" name="send_email" value="'1') !!} {{ trans('lang.yes') }}
                         </div>
                         <div class="col-sm-3">
-                            {!! Form::radio('send_email','0') !!} {{ trans('lang.no') }}
+                            {!! Form::radio('send_email'"> {{ trans('lang.no') }}
                         </div>
                     </div>       
                 </div>

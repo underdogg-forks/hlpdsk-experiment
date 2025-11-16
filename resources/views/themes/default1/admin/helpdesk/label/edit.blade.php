@@ -71,32 +71,34 @@ class="active"
         <div class="box-title">
             {!! $label->titleWithColor() !!}
         </div>
-        {!! Form::model($label,['url'=>'labels/'.$label->id,'method'=>'patch', 'id' => 'label-form']) !!}
+        <form method="POST">
+    @csrf
+    @method('PATCH')
     </div>
     <div class="box-body">
         <table class="table table-borderless">
             
            <tr>
                 <div class="form-group {{ $errors->has('title') ? 'has-error' : '' }}">
-                <td>{!! Form::label('title','Title') !!}<span class="text-red"> *</span></td>
+                <td><label for="title">'Title'</label><span class="text-red"> *</span></td>
                 <td>
                     <div class="form-group {{ $errors->has('title') ? 'has-error' : '' }}">
-                        {!! Form::text('title',null,['class'=>'form-control']) !!}
+                        <input type="text" name="title" id="title" value="{{ old('title') }}" class="form-control">
                     </div>
                 </td>
                 </div>
             </tr>
              <tr>
-                <td>{!! Form::label('color','Color') !!}<span class="text-red"> *</span></td>
+                <td><label for="color">'Color'</label><span class="text-red"> *</span></td>
                 <td>
                     <div class="form-group {{ $errors->has('color') ? 'has-error' : '' }}">
-                    {!! Form::text('color', null,['class'=>'form-control my-colorpicker1 colorpicker-element']) !!}
+                    <input type="text" name="color" id="color" value="{{ old('color') }}" class="form-control my-colorpicker1 colorpicker-element">
                     </div>
                 </td>
             </tr>
             
              <tr>
-                <td>{!! Form::label('order','Order') !!}<span class="text-red"> *</span></td>
+                <td><label for="order">'Order'</label><span class="text-red"> *</span></td>
                 <td>
                     <div class="form-group {{ $errors->has('order') ? 'has-error' : '' }}">
                     {!! Form::input('number', 'order', null, array('class' => 'form-control')) !!}
@@ -105,14 +107,14 @@ class="active"
             </tr>
             
              <tr>
-                <td>{!! Form::label('status','Status') !!}</td>
+                <td><label for="status">'Status'</label></td>
                 <td><p>{!! Form::checkbox('status') !!}  {{ trans('lang.enable') }}</p></td>
             </tr>
             
         </table>
     </div>
     <div class="box-footer">
-        {!! Form::submit('Save',['class'=>'btn btn-success']) !!}
+        <button type="submit" class="btn btn-success">'Save'</button>
         </form>
     </div>
 </div>

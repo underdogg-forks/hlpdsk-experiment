@@ -31,7 +31,9 @@ class="active"
 
 <!-- open a form -->
 
-	{!! Form::model($accesses,['url' => 'postaccess/'.$accesses->id, 'method' => 'PATCH']) !!}
+	<form method="POST">
+    @csrf
+    @method('PATCH')
 
 
 	<div class="row">
@@ -82,7 +84,7 @@ class="active"
 			<div class="col-md-4">
              <div class="form-group">
 				{!! Form::label('reset_ticket_expire',trans('lang.reset_token_expiration')) !!}
-				{!! Form::text('reset_ticket_expire',$accesses->reset_ticket_expire,['class' => 'form-control']) !!}
+				<input type="text" name="reset_ticket_expire" id="reset_ticket_expire" value="$accesses->reset_ticket_expire" class="form-control">
 
 			</div>
 			</div>
@@ -101,7 +103,7 @@ class="active"
 			<div class="col-md-4">
 			    <div class="form-group">
 				{!! Form::label('agent_session',trans('lang.agent_session_timeout')) !!}
-				{!! Form::text('agent_session',$accesses->agent_session,['class' => 'form-control']) !!}
+				<input type="text" name="agent_session" id="agent_session" value="$accesses->agent_session" class="form-control">
 
 			</div>
 			</div>
@@ -111,7 +113,7 @@ class="active"
 			<div class="col-md-4">
 				<div class="form-group">
 				{!! Form::label('password_reset',trans('lang.allow_password_resets')) !!}
-				{!! Form::checkbox('password_reset',1) !!}
+				<input type="checkbox" name="password_reset" value="1">
 
 			</div>
 			</div>
@@ -143,7 +145,7 @@ class="active"
 			<div class="col-md-6">
                  <div class="form-group">
 				{!! Form::label('user_session',trans('lang.user_session_timeout')) !!}
-				{!! Form::text('user_session',$accesses->user_session,['class' => 'form-control']) !!}
+				<input type="text" name="user_session" id="user_session" value="$accesses->user_session" class="form-control">
 
 			</div>
 			</div>
@@ -153,7 +155,7 @@ class="active"
 			<div class="row">
 			<div class="col-md-4">
 				<div class="form-group">
-				{!! Form::checkbox('bind_agent_ip',1,true) !!} &nbsp;
+				<input type="checkbox" name="bind_agent_ip" value="1"> &nbsp;
 				{!! Form::label('bind_agent_ip',trans('lang.bind_agent_session_IP')) !!}
 
 
@@ -165,7 +167,7 @@ class="active"
 			<div class="row">
 			<div class="col-md-4">
                   <div class="form-group">
-                  {!! Form::checkbox('reg_require',1,true,['class' => 'form-control']) !!}&nbsp;
+                  <input type="checkbox" name="reg_require" value="1" class="form-control">&nbsp;
 				{!! Form::label('reg_require',trans('lang.registration_required')) !!}
 
 
@@ -179,7 +181,7 @@ class="active"
 			<div class="row">
 			<div class="col-md-4">
 			<div class="form-group">
-			{!! Form::checkbox('quick_access',1,true) !!}&nbsp;
+			<input type="checkbox" name="quick_access" value="1">&nbsp;
 				{!! Form::label('quick_access',trans('lang.client_quick_access')) !!}
 
 

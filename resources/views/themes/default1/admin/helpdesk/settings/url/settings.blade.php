@@ -30,7 +30,9 @@ class="nav-link active"
 @stop
 
 @section('content')
-{!! Form::open(['url' => 'url/settings', 'method' => 'PATCH']) !!}
+<form method="POST" action="url/settings">
+    @csrf
+    @method('PATCH')
 
 @if (count($errors) > 0)
 <div class="alert alert-danger">
@@ -70,16 +72,16 @@ class="nav-link active"
         <div class="row">
 
             <div class="col-md-3">
-                {!! Form::label('www','WWW/non-WWW') !!}<br/>
-                {!! Form::radio('www','yes',$www['www'],['class'=>'option']) !!} WWW&nbsp;&nbsp;
-                {!! Form::radio('www','no',$www['nonwww'],['class'=>'option']) !!} Non WWW
+                <label for="www">'WWW/non-WWW'</label><br/>
+                <input type="radio" name="www" value="'yes'" class="option"> WWW&nbsp;&nbsp;
+                <input type="radio" name="www" value="'no'" class="option"> Non WWW
             </div>
  
             <div class="col-md-3">
                 
-                {!! Form::label('option','SSl') !!}<br/>
-                {!! Form::radio('ssl','yes',$https['https'],['class'=>'option']) !!} HTTPS&nbsp;&nbsp;
-                {!! Form::radio('ssl','no',$https['http'],['class'=>'option']) !!} HTTP
+                <label for="option">'SSl'</label><br/>
+                <input type="radio" name="ssl" value="'yes'" class="option"> HTTPS&nbsp;&nbsp;
+                <input type="radio" name="ssl" value="'no'" class="option"> HTTP
             </div>
         </div>
     </div>

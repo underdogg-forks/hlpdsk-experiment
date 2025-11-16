@@ -106,13 +106,13 @@ class="nav-item menu-open"
                     
                     <div class="col-md-12 form-group {{ $errors->has('name') ? 'has-error' : '' }}" >
                         {!! Form::label('name',trans('lang.name')) !!}<span class="text-red"> *</span>
-                        {!! Form::text('name',null,['class' => 'form-control']) !!}
+                        <input type="text" name="name" id="name" value="{{ old('name') }}" class="form-control">
                     </div>
 
                     <div class="form-group col-md-12 {{ $errors->has('description') ? 'has-error' : '' }}">
                         {!! Form::label('description',trans('lang.description')) !!}<span class="text-red"> *</span>
                         <div class="form-group" style="background-color:white">
-                            {!! Form::textarea('description',null,['class' => 'form-control article_desc','id'=>'editor','size' => '128x20','placeholder'=>trans('lang.enter_the_description')]) !!}
+                            <textarea name="description" id="editor" class="form-control article_desc" rows="20">{{ old('description') }}</textarea>
                         </div>
                     </div>
                 </div>
@@ -134,13 +134,13 @@ class="nav-item menu-open"
                     {!! Form::label('type',trans('lang.status')) !!}
                     <div class="row">
                         <div class="col-sm-1">
-                            {!! Form::radio('type','1',true) !!}
+                            <input type="radio" name="type" value="'1'">
                         </div>
                         <div class="col-sm-4">
                             {{ trans('lang.published') }}
                         </div>
                         <div class="col-sm-1">
-                            {!! Form::radio('type','0',null) !!}
+                            <input type="radio" name="type" value="'0'">
                         </div>
                         <div class="col-sm-4">
                             {{ trans('lang.draft') }}
@@ -152,13 +152,13 @@ class="nav-item menu-open"
                     {!! Form::label('status',trans('lang.visibility')) !!}
                     <div class="row">
                         <div class="col-sm-1">
-                            {!! Form::radio('status','1',true) !!}
+                            <input type="radio" name="status" value="'1'">
                         </div>
                         <div class="col-sm-4">  
                             {{ trans('lang.public') }}
                         </div>
                          <div class="col-sm-1">
-                            {!! Form::radio('status','0',null) !!}
+                            <input type="radio" name="status" value="'0'">
                         </div>
                         <div class="col-sm-4"> 
                             {{ trans('lang.private') }}
@@ -215,7 +215,7 @@ class="nav-item menu-open"
             
                 <div class="form-group {{ $errors->has('category_id') ? 'has-error' : '' }}">
             
-                    {{-- {!! Form::label('category_id','Category') !!} --}}
+                    {{-- <label for="category_id">'Category'</label> --}}
 
                     @foreach($category->toArray() as $key=>$val)
                     <div class="row">
@@ -237,7 +237,8 @@ class="nav-item menu-open"
                     <div class="modal-dialog">
                     
                         <div class="modal-content">
-                            {!! Form::open(['method'=>'post','route'=>'category.store']) !!}
+                            <form method="POST" action="{{ route('category.store') }}">
+    @csrf
                             
                             <div class="modal-header">          
                                 <h4 class="modal-title">{{ trans('lang.addcategory') }}</h4>
@@ -251,7 +252,7 @@ class="nav-item menu-open"
                             <div class="modal-footer justify-content-between" style="margin: -15px;">
                                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                                 <div class="form-group">
-                                    {!! Form::submit('Add',['class'=>'btn btn-primary'])!!}
+                                    <button type="submit" class="btn btn-primary">'Add'</button>
                                 </div>
                             </div>
                             </form>

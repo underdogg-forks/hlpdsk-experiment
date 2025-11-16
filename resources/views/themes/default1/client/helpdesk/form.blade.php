@@ -52,11 +52,12 @@ class = "nav-item active"
                 @endif
 
                 <div>
-                     {!! Form::open(['url' => 'checkmyticket' , 'method' => 'POST'] )!!}
+                     <form method="POST" action="checkmyticket">
+    @csrf
                     {!! Form::label('email',trans('lang.email')) !!}<span class="text-red"> *</span>
-                    {!! Form::text('email_address',null,['class' => 'form-control form-group']) !!}
+                    <input type="text" name="email_address" id="email_address" value="{{ old('email_address') }}" class="form-control form-group">
                     {!! Form::label('ticket_number',trans('lang.ticket_number')) !!}<span class="text-red"> *</span>
-                    {!! Form::text('ticket_number',null,['class' => 'form-control form-group']) !!}
+                    <input type="text" name="ticket_number" id="ticket_number" value="{{ old('ticket_number') }}" class="form-control form-group">
                     <button type="submit" class="btn btn-info" style=" border-color: rgb(0, 192, 239); background-color: rgb(0, 154, 186) !important; color: white">
                         <i class="fas fa-save"></i> {{ trans('lang.check_ticket_status') }}
                     </button>
@@ -102,7 +103,8 @@ class = "nav-item active"
         $encrypted_token = $encrypter->encrypt(csrf_token());
         ?>
         <input id="token" type="hidden" value="{{$encrypted_token}}">
-        {!! Form::open(['route'=>'client.form.post','method'=>'post', 'enctype'=>'multipart/form-data']) !!}
+        <form method="POST" action="{{ route('client.form.post') }}">
+    @csrf
 
         <article class="hentry">
 
@@ -125,7 +127,7 @@ class = "nav-item active"
 
                         <div class="col-md-12 form-group {{ $errors->has('Name') ? 'has-error' : '' }}">
                             {!! Form::label('Name',trans('lang.name')) !!}<span class="text-red"> *</span>
-                            {!! Form::text('Name',null,['class' => 'form-control']) !!}
+                            <input type="text" name="Name" id="Name" value="{{ old('Name') }}" class="form-control">
                         </div>
                         @endif
 
@@ -139,7 +141,7 @@ class = "nav-item active"
                             @if($email_mandatory->status == 1 || $email_mandatory->status == '1')
                                 <span class="text-red"> *</span>
                             @endif
-                            {!! Form::email('Email',null,['class' => 'form-control']) !!}
+                            <input type="email" name="Email" id="Email" value="{{ old('Email') }}" class="form-control">
                         </div>
                         @endif
 
@@ -151,18 +153,18 @@ class = "nav-item active"
                                     <span class="text-red"> *</span>
                                     @endif
 
-                            {!! Form::text('Code',null,['class' => 'form-control', 'placeholder' => $phonecode, 'title' => trans('lang.enter-country-phone-code')]) !!}
+                            <input type="text" name="Code" id="Code" value="{{ old('Code') }}" class="form-control">
                         </div>
                         <div class="col-md-5 form-group {{ $errors->has('mobile') ? 'has-error' : '' }}">
                             {!! Form::label('mobile',trans('lang.mobile_number')) !!}
                              @if($email_mandatory->status == 0 || $email_mandatory->status == '0')
                                     <span class="text-red"> *</span>
                                     @endif
-                            {!! Form::text('mobile',null,['class' => 'form-control']) !!}
+                            <input type="text" name="mobile" id="mobile" value="{{ old('mobile') }}" class="form-control">
                         </div>
                         <div class="col-md-5 form-group {{ $errors->has('Phone') ? 'has-error' : '' }}">
                             {!! Form::label('Phone',trans('lang.phone')) !!}
-                            {!! Form::text('Phone',null,['class' => 'form-control']) !!}
+                            <input type="text" name="Phone" id="Phone" value="{{ old('Phone') }}" class="form-control">
                         </div>
                         @else
                             {!! Form::hidden('mobile',Auth::user()->mobile,['class' => 'form-control']) !!}
@@ -211,11 +213,11 @@ class = "nav-item active"
                         @endif
                         <div class="col-md-12 form-group {{ $errors->has('Subject') ? 'has-error' : '' }}">
                             {!! Form::label('Subject',trans('lang.subject')) !!}<span class="text-red"> *</span>
-                            {!! Form::text('Subject',null,['class' => 'form-control']) !!}
+                            <input type="text" name="Subject" id="Subject" value="{{ old('Subject') }}" class="form-control">
                         </div>
                         <div class="col-md-12 form-group {{ $errors->has('Details') ? 'has-error' : '' }}">
                             {!! Form::label('Details',trans('lang.message')) !!}<span class="text-red"> *</span>
-                            {!! Form::textarea('Details',null,['class' => 'form-control']) !!}
+                            <textarea name="Details" id="Details" class="form-control">{{ old('Details') }}</textarea>
                         </div>
                         <div class="col-md-12 form-group">
                             <input type="file" name="attachment[]" multiple/><br/>

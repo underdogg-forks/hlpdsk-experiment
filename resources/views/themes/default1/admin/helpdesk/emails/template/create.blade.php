@@ -51,10 +51,10 @@ class="active"
 			</div>
 			<div class="row">
 				<div class="col-xs-3">
-					{!! Form::radio('ban_status','active',true) !!}{{ trans('lang.active') }}
+					<input type="radio" name="ban_status" value="'active'">{{ trans('lang.active') }}
 				</div>
 				<div class="col-xs-3">
-					{!! Form::radio('ban_status','disabled') !!}{{ trans('lang.disabled') }}
+					<input type="radio" name="ban_status" value="'disabled'">{{ trans('lang.disabled') }}
 				</div>
 			</div>
 			</div>
@@ -66,7 +66,7 @@ class="active"
 		        <div class="form-group {{ $errors->has('name') ? 'has-error' : '' }}">
 			      {!! Form::label('name',trans('lang.name')) !!}
 			      {!! $errors->first('name', '<spam class="help-block">:message</spam>') !!}
-			       {!! Form::text('name',null,['class' => 'form-control']) !!}
+			       <input type="text" name="name" id="name" value="{{ old('name') }}" class="form-control">
 			</div>
 		</div>
 
@@ -93,7 +93,7 @@ class="active"
              <div class="col-md-12">
 		      <div class="form-group">
 			     {!! Form::label('internal_note',trans('lang.internal_notes')) !!}
-			     {!! Form::textarea('internal_note',null,['class' => 'form-control']) !!}
+			     <textarea name="internal_note" id="internal_note" class="form-control">{{ old('internal_note') }}</textarea>
 		     </div>
            </div>
 

@@ -104,60 +104,61 @@
                 </div>      
 
                 <!-- form open -->
-                {!!  Form::open(['url'=>'auth/register', 'method'=>'post']) !!}
+                <form method="POST" action="auth/register">
+    @csrf
 
                 <!-- fullname -->
                 <div class="form-group has-feedback {{ $errors->has('full_name') ? 'has-error' : '' }}" style="display: -webkit-box;">
             
-                    {!! Form::text('full_name',null,['placeholder'=>trans('lang.full_name'),'class' => 'form-control']) !!}
+                    <input type="text" name="full_name" id="full_name" value="{{ old('full_name') }}" class="form-control">
                     <span class="fas fa-user   form-control-feedback" style="top: 9px;left: -25px;color: #6c757d;"></span>
                 </div>
 
                 <!-- Email -->
                 @if (($email_mandatory->status == 1 || $email_mandatory->status == '1'))
                 <div class="form-group has-feedback {{ $errors->has('email') ? 'has-error' : '' }}" style="display: -webkit-box;">
-                    {!! Form::text('email',null,['placeholder'=>trans('lang.email'),'class' => 'form-control']) !!}
+                    <input type="text" name="email" id="email" value="{{ old('email') }}" class="form-control">
                     <span class="far fa-envelope text-muted form-control-feedback" style="top: 9px;left: -25px;color: #6c757d;"></span>
                 </div>
                 @elseif (($settings->status == 0 || $settings->status == '0') && ($email_mandatory->status == 0 || $email_mandatory->status == '0'))
                 <div class="form-group has-feedback {{ $errors->has('email') ? 'has-error' : '' }}" style="display: -webkit-box;">
-                    {!! Form::text('email',null,['placeholder'=>trans('lang.email'),'class' => 'form-control']) !!}
+                    <input type="text" name="email" id="email" value="{{ old('email') }}" class="form-control">
                     <span class="far fa-envelope text-muted form-control-feedback" style="top: 9px;left: -25px;color: #6c757d;"></span>
                 </div>
                 @else
-                    {!! Form::hidden('email', null) !!}
+                    <input type="hidden" name="email" value="null">
                 @endif
 
                 @if($settings->status == '1' || $settings->status == 1)
                 <div class='row'>
                     <div class="col-md-3">
                         <div class="form-group {{ $errors->has('code') ? 'has-error' : '' }}">
-                        {!! Form::text('code',null,['placeholder'=>91,'class' => 'form-control']) !!}
+                        <input type="text" name="code" id="code" value="{{ old('code') }}" class="form-control">
                         </div>    
                     </div>
                     <div class="col-md-9">
                         <div class="form-group has-feedback {{ $errors->has('mobile') ? 'has-error' : '' }}" style="display: -webkit-box;">
-                        {!! Form::text('mobile',null,['placeholder'=>trans('lang.mobile'),'class' => 'form-control']) !!}
+                        <input type="text" name="mobile" id="mobile" value="{{ old('mobile') }}" class="form-control">
                         <span class="fas fa-phone  form-control-feedback" style="top: 9px;left: -25px;color: #6c757d;"></span>
                         </div>
                     </div>
                 </div>
                 @else
-                    {!! Form::hidden('mobile', null) !!}
-                    {!! Form::hidden('code', null) !!}
+                    <input type="hidden" name="mobile" value="null">
+                    <input type="hidden" name="code" value="null">
 
                 @endif
                 <!-- Password -->
                 <div class="form-group has-feedback {{ $errors->has('password') ? 'has-error' : '' }}" style="display: -webkit-box;">
                            
-                    {!! Form::password('password',['placeholder'=>trans('lang.password'),'class' => 'form-control']) !!}
+                    <input type="password" name="password" id="password" class="form-control">
                     <span class="fa fa-lock  form-control-feedback" style="top: 9px;left: -25px;color: #6c757d;"></span>
 
                 </div>
                 <!-- Confirm password -->
                 <div class="form-group has-feedback {{ $errors->has('password_confirmation') ? 'has-error' : '' }}" style="display: -webkit-box;">
                            
-                    {!! Form::password('password_confirmation',['placeholder'=>trans('lang.retype_password'),'class' => 'form-control']) !!}
+                    <input type="password" name="password_confirmation" id="password_confirmation" class="form-control">
                     <span class="fas fa-sign-in-alt form-control-feedback" style="top: 9px;left: -25px;color: #6c757d;"></span>
 
                 </div>

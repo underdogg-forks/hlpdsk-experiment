@@ -13,7 +13,9 @@
 
 @section('content')
 
-	{!! Form::model($side,['url' => 'side1/'.$side->id, 'method' => 'PATCH','files'=>true]) !!}
+	<form method="POST">
+    @csrf
+    @method('PATCH')
 
 <!-- <div class="form-group {{ $errors->has('company_name') ? 'has-error' : '' }}"> -->
 	<!-- table  -->
@@ -49,14 +51,14 @@
 
             {!! Form::label('title',trans('lang.title')) !!}
             {!! $errors->first('title', '<spam class="help-block">:message</spam>') !!}
-            {!! Form::text('title',null,['class' => 'form-control']) !!}
+            <input type="text" name="title" id="title" value="{{ old('title') }}" class="form-control">
 
         </div>
 
         <div class="form-group {{ $errors->has('content') ? 'has-error' : '' }}">
             {!! Form::label('content',trans('lang.content')) !!}
             {!! $errors->first('content', '<spam class="help-block">:message</spam>') !!}
-            {!! Form::textarea('content',null,['class' => 'form-control','size' => '128x10','id'=>'footer','placeholder'=>'Enter the description']) !!}
+            <textarea name="content" id="footer" class="form-control" rows="10">{{ old('content') }}</textarea>
         </div>
 
     </div>

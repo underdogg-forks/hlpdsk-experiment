@@ -32,7 +32,9 @@ class="nav-link active"
 <!-- content -->
 @section('content')
 <!-- open a form -->
-{!! Form::model($companys,['url' => 'postcompany/'.$companys->id, 'method' => 'PATCH','files'=>true]) !!}
+<form method="POST">
+    @csrf
+    @method('PATCH')
 <!-- check whether success or not -->
 @if(session()->has('success'))
 <div class="alert alert-success alert-dismissable">
@@ -80,7 +82,7 @@ class="nav-link active"
                 <!-- comapny name -->
                 <div class="form-group {{ $errors->has('company_name') ? 'has-error' : '' }}">
                     {!! Form::label('company_name',trans('lang.name')) !!} <span class="text-red"> *</span>
-                    {!! Form::text('company_name',$companys->company_name,['class' => 'form-control']) !!}
+                    <input type="text" name="company_name" id="company_name" value="$companys->company_name" class="form-control">
                 </div>
             </div>
             <div class="col-md-4">
@@ -94,14 +96,14 @@ class="nav-link active"
                 <!-- phone -->
                 <div class="form-group {{ $errors->has('phone') ? 'has-error' : '' }}">
                     {!! Form::label('phone',trans('lang.phone')) !!}
-                    {!! Form::text('phone',$companys->phone,['class' => 'form-control']) !!}
+                    <input type="text" name="phone" id="phone" value="$companys->phone" class="form-control">
                 </div>
             </div>
         </div>
 
          <div class="{{ $errors->has('address') ? 'has-error' : '' }}">
             {!! Form::label('address',trans('lang.address')) !!}
-            {!! Form::textarea('address',$companys->address,['class' => 'form-control','size' => '30x5']) !!}
+            <textarea name="address" id="address" class="form-control" rows="5">{{ old('address') }}</textarea>
         </div>
 
         <div class="row">
@@ -109,7 +111,7 @@ class="nav-link active"
                 <!-- logo -->
                 {!! Form::label('logo',trans('lang.logo')) !!}
                 <div class="btn bg-olive btn-file" style="color:blue"> {{ trans('lang.upload_file') }}
-                    {!! Form::file('logo') !!}
+                    <input type="file" name="logo') !!}
                 </div>
             </div>
             <div class="col-sm-10">
@@ -117,7 +119,15 @@ class="nav-link active"
                     <div class="row">
                         @if($companys->logo != null)
                         <div class="col-sm-2">
-                            {!! Form::checkbox('use_logo') !!} <label> {{ trans('lang.use_logo') }}</label>
+                            {!! Form::checkbox('use_logo" id="logo') !!}
+                </div>
+            </div>
+            <div class="col-sm-10">
+                <div id="logo-display" style="display: block;">
+                    <div class="row">
+                        @if($companys->logo != null)
+                        <div class="col-sm-2">
+                            {!! Form::checkbox('use_logo"> <label> {{ trans('lang.use_logo') }}</label>
                         </div>
                         @endif
                         <?php $company = App\Model\helpdesk\Settings\Company::where('id', '=', '1')->first(); ?>

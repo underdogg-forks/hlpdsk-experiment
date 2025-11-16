@@ -56,7 +56,8 @@ class="nav-link active"
 
     <!-- Helpdesk Status: radio Online Offline -->
     <div class="card-body">
-        {!! Form::open(['url' => route('post.error.debug.settings'), 'method' => 'POST']) !!}
+        <form method="POST">
+    @csrf
         <div class="row">
             <div class="col-md-4">
                 <div class="form-group">
