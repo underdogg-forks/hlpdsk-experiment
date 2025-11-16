@@ -44,7 +44,7 @@ class="nav-link active"
             <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
         </div>
 
-        @if(Session::has('success'))
+        @if(session()->has('success'))
         <div id="success-alert" class="alert alert-success alert-dismissable" style="margin-top: 15px;">
             <i class="fas fa-check-circle"> </i>
             <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
@@ -52,7 +52,7 @@ class="nav-link active"
         </div>
         @endif
         <!-- failure message -->
-        @if(Session::has('fails'))
+        @if(session()->has('fails'))
         <div class="alert alert-danger alert-dismissable" style="margin-top: 15px;">
             <i class="fas fa-ban"> </i> <b> {{ trans('lang.alert') }} ! </b>
             <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
@@ -334,7 +334,7 @@ class="nav-link active"
                                         <?php echo $tickets->setPath(url('/organizations/' . $orgs->id))->render(); ?>&nbsp;
                                     </div>
                                 </div><!-- /.mail-box-messages -->
-                                {!! Form::close() !!}
+                                </form>
 
                                 {{-- end deleted tickets --}}
                             </div>
@@ -440,7 +440,7 @@ class="nav-link active"
                                         <?php echo $tickets->setPath(url('/organizations/' . $orgs->id))->render(); ?>&nbsp;
                                     </div>
                                 </div><!-- /.mail-box-messages -->
-                                {!! Form::close() !!}
+                                </form>
 
                                 {{-- end deleted tickets --}}
                             </div>
@@ -546,7 +546,7 @@ class="nav-link active"
                                         <?php echo $tickets->setPath(url('/organizations/' . $orgs->id))->render(); ?>&nbsp;
                                     </div>
                                 </div><!-- /.mail-box-messages -->
-                                {!! Form::close() !!}
+                                </form>
                             </div><!-- /.tab-pane -->
                         </div><!-- /.tab-content -->
                     </div><!-- nav-tabs-custom -->
@@ -940,7 +940,7 @@ class="nav-link active"
                 <button type="button" class="btn btn-default" data-dismiss="modal" id="dismis4">{{ trans('lang.close') }}</button>
                 <button type="submit" class="btn btn-success" id="submt2">{{ trans('lang.assign') }}</button>
             </div>
-            {!! Form::close()!!}
+            </form>
         </div><!-- /.modal-content -->
     </div><!-- /.modal-dialog -->
 </div><!-- /.modal -->

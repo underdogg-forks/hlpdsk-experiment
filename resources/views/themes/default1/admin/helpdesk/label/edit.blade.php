@@ -28,20 +28,20 @@ class="active"
 <!-- content -->
 @section('content')
 
-@if(Session::has('success'))
+@if(session()->has('success'))
 <div class="alert alert-success alert-dismissable">
     <i class="fa fa-check-circle"></i>
     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
     {{ session('success') }}
 </div>
 @endif
-@if(Session::has('fails'))
+@if(session()->has('fails'))
 <div class="alert alert-danger alert-dismissable">
     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
     {{ session('fails') }}
 </div>
 @endif
-@if(Session::has('errors'))
+@if(session()->has('errors'))
         <br><br>
         <div class="alert alert-danger alert-dismissable">
             <i class="fa fa-ban"></i>
@@ -59,7 +59,7 @@ class="active"
             @endif
         </div>
         @endif
-@if(Session::has('warn'))
+@if(session()->has('warn'))
 <div class="alert alert-warning alert-dismissable">
     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
     {{ session('warn') }}
@@ -113,7 +113,7 @@ class="active"
     </div>
     <div class="box-footer">
         {!! Form::submit('Save',['class'=>'btn btn-success']) !!}
-        {!! Form::close() !!}
+        </form>
     </div>
 </div>
 @stop

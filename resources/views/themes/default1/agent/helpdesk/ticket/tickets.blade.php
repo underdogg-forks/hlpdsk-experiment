@@ -138,7 +138,7 @@ if (Request::has('assigned'))
     </div><!-- /.box-header -->
 
     <div class="card-body ">
-        @if(Session::has('success'))
+        @if(session()->has('success'))
         <div class="alert alert-success alert-dismissable">
             <i class="fas fa-check-circle"> </i>
             <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
@@ -146,7 +146,7 @@ if (Request::has('assigned'))
         </div>
         @endif
         <!-- failure message -->
-        @if(Session::has('fails'))
+        @if(session()->has('fails'))
         <div class="alert alert-danger alert-dismissable">
             <i class="fas fa-ban"> </i> <b> {{ trans('lang.alert') }}! </b>
             <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
@@ -214,7 +214,7 @@ if (Request::has('assigned'))
             <!--datatable-->
             {!! Form::open(['id'=>'modalpopup', 'route'=>'select_all','method'=>'post']) !!}
             {!!$table->render('vendor.Chumper.template')!!}
-            {!! Form::close() !!} 
+            </form> 
 
             <!-- /.datatable -->
         </div><!-- /.mail-box-messages -->

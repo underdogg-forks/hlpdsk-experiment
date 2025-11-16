@@ -206,7 +206,7 @@ $category_id = $all->pluck('category_id')->toArray();
 
 
                     </script></div>
-                    {!! Form::close() !!}
+                    </form>
                 @else
                     {!! Form::open(['method'=>'post','url'=>'postcomment/'.$arti->slug,'id'=>'comment-form']) !!}
                     <div class="row">
@@ -316,7 +316,7 @@ $category_id = $all->pluck('category_id')->toArray();
                     </div>
                 @endif
             </div><!-- #respond -->
-            {!! Form::close() !!}
+            </form>
 
 
 

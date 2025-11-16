@@ -112,7 +112,7 @@ $thread = App\Model\helpdesk\Ticket\Ticket_Thread::where('ticket_id', '=', \Cryp
                         </div>
                     </div>
                     @endif
-                {!! Form::close() !!}
+                </form>
                 </div>
             </div>
 
@@ -471,7 +471,7 @@ $thread = App\Model\helpdesk\Ticket\Ticket_Thread::where('ticket_id', '=', \Cryp
             <br/><br/>
             </div>
 
-            @if(Session::has('success1'))
+            @if(session()->has('success1'))
             <div class="alert alert-success alert-dismissable" id='formabc'>
                 <i class="fa  fa-check-circle"></i>
                 <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
@@ -479,7 +479,7 @@ $thread = App\Model\helpdesk\Ticket\Ticket_Thread::where('ticket_id', '=', \Cryp
             </div>
             @endif
             <!-- failure message -->
-            @if(Session::has('fails1'))
+            @if(session()->has('fails1'))
             <div class="alert alert-danger alert-dismissable" id='formabc'>
                 <i class="fa fa-ban"></i>
                 <b>{{ trans('lang.alert') }}!</b>
@@ -510,7 +510,7 @@ $thread = App\Model\helpdesk\Ticket\Ticket_Thread::where('ticket_id', '=', \Cryp
 
                     <button type="submit" onClick="return checkFunction();" class="btn btn-custom btn-lg" style="background-color: #009aba; hov: #00c0ef; color: #fff">{{ trans('lang.post_comment') }}</button>
                 </div>
-            {!! Form::close() !!}
+            </form>
             </div>
         </div>
     </article>

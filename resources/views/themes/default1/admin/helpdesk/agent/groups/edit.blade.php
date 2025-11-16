@@ -33,7 +33,7 @@ class="nav-link active"
 @section('content')
 <!-- open a form -->
 {!!Form::model($groups, ['url'=>'groups/'.$groups->id , 'method'=> 'PATCH'])!!}
-@if(Session::has('errors'))
+@if(session()->has('errors'))
 <div class="alert alert-danger alert-dismissable">
     <i class="fa fa-ban"></i>
     <b>{{ trans('lang.alert') }}!</b>
@@ -122,5 +122,5 @@ class="nav-link active"
         {!! Form::submit(trans('lang.update'),['class'=>'btn btn-primary'])!!}
     </div>
 </div>
-{!!Form::close()!!}
+</form>
 @stop

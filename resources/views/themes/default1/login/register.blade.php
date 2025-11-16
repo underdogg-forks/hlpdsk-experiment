@@ -9,7 +9,8 @@
       <div class="login-box-body">
         <p class="login-box-msg">Registration</p>
         <!-- form open -->
-        {!!  Form::open(['action'=>'Auth\AuthController@postRegister', 'method'=>'post']) !!}
+        <form method="POST" action="{{ action('Auth\AuthController@postRegister') }}">
+    @csrf
            
           <!-- fullname -->
            <div class="form-group has-feedback {{ $errors->has('full_name') ? 'has-error' : '' }}">
@@ -64,7 +65,7 @@
 
       </div><!-- /.login-box-body -->
     </div><!-- /.login-box -->
-    {!! Form::close()!!}
+    </form>
 
 
         

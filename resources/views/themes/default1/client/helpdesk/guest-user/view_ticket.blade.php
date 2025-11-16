@@ -285,7 +285,7 @@ echo UTC::usertimezone(date_format($time, 'd/m/Y H:i:s'));
                             </div>
                         </div>
                     </div>
-                    {!!Form::close()!!}
+                    </form>
 
                     <!-- Internal Content -->
                     <div id="t2" style="display:none">
@@ -316,7 +316,7 @@ echo UTC::usertimezone(date_format($time, 'd/m/Y H:i:s'));
                                 </div>
                             </div>
                         </div>
-                        {!!Form::close()!!}
+                        </form>
                     </div>
                 </div>
                 <!-- ticket foreward -->
@@ -635,7 +635,7 @@ $data = $ConvDate[0];
                     <button type="button" class="btn btn-default pull-left" data-dismiss="modal" id="dismis">Close</button>
                     <input type="submit" class="btn btn-primary pull-right" value="Update">
                 </div>
-                {!! Form::close() !!}
+                </form>
             </div><!-- /.modal-content -->
         </div><!-- /.modal-dialog -->
     </div><!-- /.modal -->
@@ -701,7 +701,7 @@ $data = $ConvDate[0];
                     <button type="button" class="btn btn-default pull-left" data-dismiss="modal" id="dismis2">Close</button>
                     <button id="ban" type="button" class="btn btn-warning pull-right" >Submit</button>
                 </div>
-                {!! Form::close() !!}
+                </form>
             </div><!-- /.modal-content -->
         </div><!-- /.modal-dialog -->
     </div><!-- /.modal -->
@@ -728,7 +728,7 @@ $data = $ConvDate[0];
                     <button type="button" class="btn btn-default pull-left" data-dismiss="modal" id="dismis4">Close</button>
                     <button type="submit" class="btn btn-success pull-right" id="submt2">Assign</button>
                 </div>
-                {!! Form::close()!!}
+                </form>
             </div><!-- /.modal-content -->
         </div><!-- /.modal-dialog -->
     </div><!-- /.modal -->

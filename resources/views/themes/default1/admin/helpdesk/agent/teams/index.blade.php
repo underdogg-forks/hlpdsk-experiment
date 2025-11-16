@@ -32,7 +32,7 @@ class="nav-link active"
 <!-- content -->
 @section('content')
 <!-- check whether success or not -->
-@if(Session::has('success'))
+@if(session()->has('success'))
 <div class="alert alert-success alert-dismissable">
     <i class="fa  fa-check-circle"></i>
     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
@@ -40,7 +40,7 @@ class="nav-link active"
 </div>
 @endif
 <!-- failure message -->
-@if(Session::has('fails'))
+@if(session()->has('fails'))
 <div class="alert alert-danger alert-dismissable">
     <i class="fa fa-ban"></i>
     <b>Fail!</b>
@@ -93,7 +93,9 @@ class="nav-link active"
                 <td>{{count($assign_team_agent->where('team_id',$team->id))}}</td>
                 <td>{{ $team_lead }}</td>
                 <td>
-                    {!! Form::open(['route'=>['teams.destroy', $team->id],'method'=>'DELETE']) !!}
+                    <form method="POST" action="{{ route('teams.destroy', $team->id) }}">
+    @csrf
+    @method('DELETE')
 
                     <!-- To pop up a confirm Message -->
                    @if ($team->status == 0) 
@@ -112,7 +114,7 @@ class="nav-link active"
                     'class'=> 'btn btn-danger btn-xs',
                     'onclick'=>'return confirm("Are you sure?")'])
                     !!}
-                    {!! Form::close() !!}
+                    </form>
                 </td>
             </tr>
             @endforeach

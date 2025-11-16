@@ -18,7 +18,7 @@
 
 <div class="box-body">
 			
-					@if(Session::has('success1'))
+					@if(session()->has('success1'))
                     <div class="alert alert-success alert-dismissable">
                         <i class="fa fa-ban"></i>
                         <b>Success</b>
@@ -27,7 +27,7 @@
                     </div>
                     @endif
                     <!-- fail message -->
-                    @if(Session::has('fails1'))
+                    @if(session()->has('fails1'))
                     <div class="alert alert-danger alert-dismissable">
                         <i class="fa fa-ban"></i>
                         <b>Fail!</b>
@@ -130,7 +130,7 @@
 	</div>
 
 	{!! Form::token() !!}
-	{!! Form::close() !!}
+	</form>
 </div>
 </div>
 </div>
@@ -147,7 +147,7 @@
 	</div>
 
 <div class="box-body">
-					@if(Session::has('success2'))
+					@if(session()->has('success2'))
                     <div class="alert alert-success alert-dismissable">
                         <i class="fa fa-ban"></i>
                         <b>Alert!</b> Success.
@@ -156,7 +156,7 @@
                     </div>
                     @endif
                     <!-- fail message -->
-                    @if(Session::has('fails2'))
+                    @if(session()->has('fails2'))
                     <div class="alert alert-danger alert-dismissable">
                         <i class="fa fa-ban"></i>
                         <b>Alert!</b> Failed.
@@ -195,5 +195,5 @@
 </div>
 
 
-{!! Form::close() !!}
+</form>
 @stop

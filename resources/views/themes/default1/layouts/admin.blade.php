@@ -192,7 +192,7 @@
                 @yield('PageHeader')
                 
                 <!-- Flash Messages -->
-                @if(Session::has('success'))
+                @if(session()->has('success'))
                     <div class="alert alert-success flex items-center justify-between mb-4">
                         <div class="flex items-center">
                             <i class="fas fa-check-circle mr-2"></i>
@@ -204,7 +204,7 @@
                     </div>
                 @endif
                 
-                @if(Session::has('fails'))
+                @if(session()->has('fails'))
                     <div class="alert alert-danger flex items-center justify-between mb-4">
                         <div class="flex items-center">
                             <i class="fas fa-exclamation-circle mr-2"></i>
@@ -427,7 +427,7 @@
                 @yield('PageHeader')
                 
                 <!-- Flash Messages -->
-                @if(Session::has('success'))
+                @if(session()->has('success'))
                     <div class="alert alert-success alert-dismissible fade show">
                         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
@@ -436,7 +436,7 @@
                     </div>
                 @endif
                 
-                @if(Session::has('fails'))
+                @if(session()->has('fails'))
                     <div class="alert alert-danger alert-dismissible fade show">
                         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                             <span aria-hidden="true">&times;</span>

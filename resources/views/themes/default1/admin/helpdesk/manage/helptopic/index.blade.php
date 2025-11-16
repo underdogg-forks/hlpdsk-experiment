@@ -33,7 +33,7 @@ class="nav-link active"
 <!-- content -->
 @section('content')
 <!-- check whether success or not -->
-@if(Session::has('success'))
+@if(session()->has('success'))
 <div class="alert alert-success alert-dismissable">
     <i class="fa  fa-check-circle"></i>
     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
@@ -41,7 +41,7 @@ class="nav-link active"
 </div>
 @endif
 <!-- failure message -->
-@if(Session::has('fails'))
+@if(session()->has('fails'))
 <div class="alert alert-danger alert-dismissable">
     <i class="fa fa-ban"></i>
     <b>{{ trans('lang.alert') }} !</b>
@@ -126,7 +126,9 @@ class="nav-link active"
                 <td> {!! UTC::usertimezone($topic->updated_at) !!} </td>
                 <!-- Deleting Fields -->
                 <td>
-                    {!! Form::open(['route'=>['helptopic.destroy', $topic->id],'method'=>'DELETE']) !!}
+                    <form method="POST" action="{{ route('helptopic.destroy', $topic->id) }}">
+    @csrf
+    @method('DELETE')
                     <a href="{{route('helptopic.edit',$topic->id)}}" class="btn btn-primary btn-xs"><i class="fas fa-edit"> </i> {{ trans('lang.edit') }}</a>
                     <!-- To pop up a confirm Message -->
                     @if($topic->id == $default_helptopic)
@@ -141,7 +143,7 @@ class="nav-link active"
                         !!}
                     @endif
                     </div>
-                    {!! Form::close() !!}
+                    </form>
                 </td>
                 @endforeach
             </tr>

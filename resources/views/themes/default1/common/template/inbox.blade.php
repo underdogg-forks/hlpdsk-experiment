@@ -22,7 +22,7 @@
     </div>
     @endif
 
-    @if(Session::has('success'))
+    @if(session()->has('success'))
     <div class="alert alert-success alert-dismissable">
         <i class="fa fa-ban"></i>
         <b>{{ trans('message.alert') }}!</b> {{ trans('message.success') }}.
@@ -31,7 +31,7 @@
     </div>
     @endif
     <!-- fail message -->
-    @if(Session::has('fails'))
+    @if(session()->has('fails'))
     <div class="alert alert-danger alert-dismissable">
         <i class="fa fa-ban"></i>
         <b>{{ trans('message.alert') }}!</b> {{ trans('message.failed') }}.

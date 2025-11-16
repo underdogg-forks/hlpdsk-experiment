@@ -38,7 +38,7 @@ class="nav-link active"
 
 @section('content')
 {!! Form::model($status,['route'=>['statuss.update', $status->id],'method'=>'PATCH','files' => true]) !!}
- @if(Session::has('errors'))
+ @if(session()->has('errors'))
 <div class="alert alert-danger alert-dismissable">
     <i class="fas fa-ban"></i>
     <b>{{ trans('lang.alert') }}!</b>
@@ -49,14 +49,14 @@ class="nav-link active"
     @endforeach 
 </div>
 @endif
-@if(Session::has('success'))
+@if(session()->has('success'))
 <div class="alert alert-success alert-dismissable">
     <i class="fas fa-check-circle"></i>
     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
     {{ session('success') }}
 </div>
 @endif
-@if(Session::has('failed'))
+@if(session()->has('failed'))
 <div class="alert alert-danger alert-dismissable">
     <i class="fas fa-ban"></i>
     <b>{{ trans('lang.alert') }} !</b>
@@ -197,7 +197,7 @@ class="nav-link active"
     <div class="card-footer">
         {!! Form::submit(trans('lang.update'),['class'=>'btn btn-primary'])!!}
     </div>
-    {!! Form::close() !!}
+    </form>
 </div> 
 <script src="{{asset("lb-faveo/plugins/select2/select2.full.min.js")}}" type="text/javascript"></script>
 <script type="text/javascript">

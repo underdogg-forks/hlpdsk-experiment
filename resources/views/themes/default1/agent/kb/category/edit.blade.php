@@ -36,7 +36,7 @@ class="nav-link active"
 
 @section('content')
 {!! Form::model($category,['url' => 'category/'.$category->id , 'method' => 'PATCH'] )!!}
-@if(Session::has('success'))
+@if(session()->has('success'))
 <div class="alert alert-success alert-dismissable">
     <i class="far fa-check-circle"></i>
     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
@@ -44,7 +44,7 @@ class="nav-link active"
 </div>
 @endif
 <!-- failure message -->
-@if(Session::has('fails'))
+@if(session()->has('fails'))
 <div class="alert alert-danger alert-dismissable">
     <i class="fas fa-ban"></i>
     <b>{{ trans('lang.alert') }}!</b>
@@ -52,7 +52,7 @@ class="nav-link active"
     {{ session('fails') }}
 </div>
 @endif
-@if(Session::has('errors'))
+@if(session()->has('errors'))
 <?php //dd($errors); ?>
 <div class="alert alert-danger alert-dismissable">
     <i class="fas fa-ban"></i>

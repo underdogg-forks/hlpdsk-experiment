@@ -34,7 +34,7 @@ class="nav-link active"
 @section('content')
 
 <!-- check whether success or not -->
-@if(Session::has('success'))
+@if(session()->has('success'))
 <div class="alert alert-success alert-dismissable">
     <i class="fa  fa-check-circle"></i>
     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
@@ -42,7 +42,7 @@ class="nav-link active"
 </div>
 @endif
 <!-- failure message -->
-@if(Session::has('fails'))
+@if(session()->has('fails'))
 <div class="alert alert-danger alert-dismissable">
     <i class="fa fa-ban"></i>
     <b>{{ trans('lang.fails') }}!</b>
@@ -118,7 +118,9 @@ class="nav-link active"
                 <td>{{ $sla }}</td>
                 <td>{{ $manager }}</td>
                 <td>
-                    {!! Form::open(['route'=>['departments.destroy', $department->id],'method'=>'DELETE']) !!}
+                    <form method="POST" action="{{ route('departments.destroy', $department->id) }}">
+    @csrf
+    @method('DELETE')
                     <a href="{{route('departments.edit', $department->id)}}" class="btn btn-primary btn-xs"><i class="fas fa-edit"> </i> {{ trans('lang.edit') }}</a>
                     {{-- @if($default_department == $department->id) --}}
                     {{-- @else --}}
@@ -138,7 +140,7 @@ class="nav-link active"
 
                     {{-- @endif --}}
 
-                    {!! Form::close() !!}
+                    </form>
                 </td>
             </tr>
             @endforeach

@@ -32,8 +32,9 @@ class="nav-link active"
 <!-- content -->
 @section('content')
 <!-- open a form -->
-{!! Form::open(array('url'=>'language/add' , 'method' => 'post', 'files'=>true) )!!}
-@if(Session::has('success'))
+<form method="POST" action="language/add" enctype="multipart/form-data">
+    @csrf
+@if(session()->has('success'))
 <div class="alert alert-success alert-dismissable">
     <i class="fas fa-check-circle"></i>
     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
@@ -41,20 +42,20 @@ class="nav-link active"
 </div>
 @endif
 <!-- failure message -->
-@if(Session::has('fails'))
+@if(session()->has('fails'))
 <div class="alert alert-danger alert-dismissable">
     <i class="fas fa-ban"></i>
     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
     {{ session('fails') }}
-    @if(Session::has('link'))
+    @if(session()->has('link'))
     <a href="{{url(Session::get('link'))}}">{{ trans('lang.enable_lang') }}</a>
     @endif
-    @if(Session::has('link2'))
+    @if(session()->has('link2'))
     <a href="{{url(Session::get('link2'))}}" target="blank">{{ trans('lang.read-more') }}</a>
     @endif
 </div>
 @endif
-@if(Session::has('errors'))
+@if(session()->has('errors'))
 <?php //dd($errors); ?>
 <div class="alert alert-danger alert-dismissable">
     <i class="fas fa-ban"></i>

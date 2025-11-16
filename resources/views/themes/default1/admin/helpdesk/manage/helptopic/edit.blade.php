@@ -33,7 +33,7 @@ class="nav-link active"
 @section('content')
 <!-- open a form -->
 {!! Form::model($topics,['url' => 'helptopic/'.$topics->id, 'method' => 'PATCH']) !!}
-@if(Session::has('errors'))
+@if(session()->has('errors'))
 <?php //dd($errors); ?>
 <div class="alert alert-danger alert-dismissable">
     <i class="fas fa-ban"></i>
@@ -166,5 +166,5 @@ class="nav-link active"
     </div>
 </div>
 <!-- close form -->
-{!! Form::close() !!}
+</form>
 @stop

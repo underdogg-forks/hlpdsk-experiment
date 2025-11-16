@@ -33,7 +33,7 @@ class="nav-link active"
 @section('content')
 <!-- open a form -->
 {!! Form::open(['route' => 'helptopic.store', 'method' => 'post']) !!}
-@if(Session::has('errors'))
+@if(session()->has('errors'))
 <?php //dd($errors); ?>
 <div class="alert alert-danger alert-dismissable">
     <i class="fas fa-ban"></i>
@@ -162,5 +162,5 @@ class="nav-link active"
         {!! Form::submit(trans('lang.submit'),['class'=>'btn btn-primary'])!!}
     </div>
 </div>
-{!! Form::close() !!}
+</form>
 @stop

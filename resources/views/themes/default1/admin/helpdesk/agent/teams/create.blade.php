@@ -33,9 +33,10 @@ class="nav-link active"
 <!-- content -->
 @section('content')
 <!-- open a form -->
-{!! Form::open(array('route' => 'teams.store') )!!}
+<form method="POST" action="{{ route('teams.store') }}">
+    @csrf
 
-@if(Session::has('errors'))
+@if(session()->has('errors'))
     <div class="alert alert-danger alert-dismissable">
         <i class="fa fa-ban"></i>
         <b>Alert!</b>
@@ -98,5 +99,5 @@ class="nav-link active"
         {!! Form::submit(trans('lang.submit'),['class'=>'btn btn-primary'])!!}
     </div>
 </div>
-{!!Form::close()!!}
+</form>
 @stop

@@ -29,7 +29,7 @@ class="nav-link active"
         <h3 class="card-title">{{ trans('lang.create') }} </h3>
     </div>
     <div class="card-body">
-        @if(Session::has('errors'))
+        @if(session()->has('errors'))
         <?php //dd($errors); ?>
         <div class="alert alert-danger alert-dismissable">
             <i class="fas fa-ban"></i>

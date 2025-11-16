@@ -38,7 +38,7 @@ class="nav-item menu-open"
 
 {!! Form::open(array('route' => 'page.store' , 'method' => 'post') )!!}
 
-@if(Session::has('errors'))
+@if(session()->has('errors'))
 <?php //dd($errors); ?>
 <div class="alert alert-danger alert-dismissable">
     <i class="fa fa-ban"></i>

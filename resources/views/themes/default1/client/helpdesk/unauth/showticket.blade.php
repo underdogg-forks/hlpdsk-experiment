@@ -83,7 +83,7 @@ $thread = App\Model\helpdesk\Ticket\Ticket_Thread::where('ticket_id', '=', $tick
                                 </a>
                             </div>
                         </div>
-                    {!! Form::close() !!}
+                    </form>
                 </div>
             </div>
         <br/>
@@ -431,7 +431,7 @@ foreach ($conversations as $conversation) {
     <?php echo $conversations->setPath(route('show.ticket', ['ids' => $tickets->id, 'code' => $token]))->render(); ?>
 </div>
 <br/><br/>
-@if(Session::has('success1'))
+@if(session()->has('success1'))
 <div class="alert alert-success alert-dismissable" id='formabc'>
     <i class="fa  fa-check-circle"></i>
     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
@@ -439,7 +439,7 @@ foreach ($conversations as $conversation) {
 </div>
 @endif
 <!-- failure message -->
-@if(Session::has('fails1'))
+@if(session()->has('fails1'))
 <div class="alert alert-danger alert-dismissable" id='formabc'>
     <i class="fa fa-ban"></i>
     <b>{{ trans('lang.alert') }}!</b>
@@ -469,7 +469,7 @@ foreach ($conversations as $conversation) {
 
                         <button type="submit" onClick="return checkFunction();" class="btn btn-custom btn-lg" style="background-color: #009aba; hov: #00c0ef; color: #fff">{{ trans('lang.post_comment') }}</button>
                     </div>
-                    {!! Form::close() !!}
+                    </form>
                 </div>
             </div>
         </div>

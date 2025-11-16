@@ -23,7 +23,7 @@ class="nav-link active"
 <!-- /header -->
 <!-- content -->
 @section('content')
-@if(Session::has('fails'))
+@if(session()->has('fails'))
 <div class="alert alert-danger alert-dismissable">
     <i class="fas fa-ban"></i>
     <b>{{ trans('lang.alert') }}!</b>
@@ -32,7 +32,7 @@ class="nav-link active"
 </div>
 @endif
 
-@if(Session::has('errors'))
+@if(session()->has('errors'))
 <div class="alert alert-danger alert-dismissable">
     <i class="fa fa-ban"></i>
     <b>{{ trans('lang.alert') }}!</b>
@@ -68,7 +68,8 @@ class="nav-link active"
 </div>
 @endif    
 <!-- open a form -->
-{!! Form::open(['route' => 'user.store']) !!}
+<form method="POST" action="{{ route('user.store') }}">
+    @csrf
 <div class="card card-light">
     <div class="card-header">
         <h3 class="card-title">

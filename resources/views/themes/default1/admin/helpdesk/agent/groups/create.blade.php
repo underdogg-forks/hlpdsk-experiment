@@ -34,7 +34,7 @@ class="nav-link active"
 @section('content')
 <!-- open a form -->
 {!! Form::open(array('route' => 'groups.store' , 'method' => 'post') )!!}
-@if(Session::has('errors'))
+@if(session()->has('errors'))
 <div class="alert alert-danger alert-dismissable">
     <i class="fas fa-ban"></i>
     <b> {{ trans('lang.alert') }}</b>
@@ -124,5 +124,5 @@ class="nav-link active"
         {!! Form::submit(trans('lang.submit'),['class'=>'btn btn-primary'])!!}
     </div>
 </div>
-{!!Form::close()!!}
+</form>
 @stop

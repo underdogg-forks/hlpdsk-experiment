@@ -7,7 +7,8 @@
       <div class="login-box-body">
         <p class="login-box-msg">Sign in to start your session</p>
         <!-- form open -->
-        {!!  Form::open(['route' => 'post.login']) !!}
+        <form method="POST" action="{{ route('post.login') }}">
+    @csrf
           <!-- Email -->
           <div class="form-group has-feedback {{ $errors->has('email') ? 'has-error' : '' }}">
 			

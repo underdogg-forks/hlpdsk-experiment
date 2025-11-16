@@ -16,7 +16,7 @@
 <section class="content">
     <div class="row">
         <div class="col-xs-12">
-            @if(Session::has('success'))
+            @if(session()->has('success'))
             <div class="alert alert-success alert-dismissable">
                 <i class="fa fa-ban"></i>
                 <b>Alert!</b> Failed.
@@ -67,7 +67,7 @@
                                                     </div>
                                                     <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
                                                 </div>
-                                                {!! Form::close() !!}
+                                                </form>
                                             </div><!-- /.modal-content -->
                                         </div><!-- /.modal-dialog -->
                                     </div><!-- /.modal -->

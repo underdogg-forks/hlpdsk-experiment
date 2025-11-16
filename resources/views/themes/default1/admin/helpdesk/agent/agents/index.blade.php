@@ -32,7 +32,7 @@ class="nav-link active"
 <!-- content -->
 @section('content')
      <!-- check whether success or not -->
-@if(Session::has('success'))
+@if(session()->has('success'))
 <div class="alert alert-success alert-dismissable">
     <i class="fas  fa-check-circle"></i>
     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
@@ -40,7 +40,7 @@ class="nav-link active"
 </div>
 @endif
 <!-- failure message -->
-@if(Session::has('fails'))
+@if(session()->has('fails'))
 <div class="alert alert-danger alert-dismissable">
     <i class="fas fa-ban"></i>
     <b>{{ trans('lang.fails') }}!</b>
@@ -49,7 +49,7 @@ class="nav-link active"
 </div>
 @endif
 <!-- Warning Message -->
-@if(Session::has('warning'))
+@if(session()->has('warning'))
 <div class="alert alert-warning alert-dismissable">
     <i class="fas fa-exclamation-triangle"></i>
     <b>{{ trans('lang.warning') }}!</b>
@@ -114,11 +114,13 @@ class="nav-link active"
                 <td>{{ UTC::usertimezone($use->created_at) }}</td>
                 {{-- <td>{{$use->Lastlogin_at}}</td> --}}
                 <td>
-                    {!! Form::open(['route'=>['agents.destroy', $use->id],'method'=>'DELETE']) !!}
+                    <form method="POST" action="{{ route('agents.destroy', $use->id) }}">
+    @csrf
+    @method('DELETE')
                     <a href="{{route('agents.edit', $use->id)}}" class="btn btn-primary btn-xs"><i class="fas fa-edit"> </i> {{ trans('lang.edit') }} </a>
                     <!-- To pop up a confirm Message -->
                     {{-- {!! Form::button(' <i class="fas fa-trash"> </i> '  . trans('lang.delete') ,['type' => 'submit', 'class'=> 'btn btn-danger btn-xs','onclick'=>'return confirm("Are you sure?")']) !!} --}}
-                    {!! Form::close() !!}
+                    </form>
                 </td>
             </tr>
             @endif

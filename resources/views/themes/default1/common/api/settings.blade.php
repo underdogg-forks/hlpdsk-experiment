@@ -29,21 +29,22 @@ class="nav-link active"
     </ul>
 </div>
 @endif
-@if(Session::has('success'))
+@if(session()->has('success'))
 <div class="alert alert-success alert-dismissable">
     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
     {{ session('success') }}
 </div>
 @endif
 <!-- fail message -->
-@if(Session::has('fails'))
+@if(session()->has('fails'))
 <div class="alert alert-danger alert-dismissable">
     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
     {{ session('fails') }}
 </div>
 @endif
 
-{!! Form::open(['url'=>'api','method'=>'post','files'=>true]) !!}
+<form method="POST" action="api" enctype="multipart/form-data">
+    @csrf
 <div class="card card-light">
     <div class="card-header">
         <h3 class="card-title">{{ trans('lang.api_settings') }}</h3>     
@@ -130,7 +131,7 @@ class="nav-link active"
     <div class="card-footer">
         {!! Form::submit(trans('lang.update'),['class'=>'btn btn-primary'])!!} 
     </div>
-    {!! Form::close() !!}   
+    </form>   
 </div>
 
 <a href="#" id="clickGenerate" data-toggle="modal" data-target="#generateModal"></a>    

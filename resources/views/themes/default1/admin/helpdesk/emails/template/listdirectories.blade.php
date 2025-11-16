@@ -36,7 +36,8 @@ class="active"
                                   <div class="modal fade" id="createtemp">
                                        <div class="modal-dialog">
                                           <div class="modal-content">
-                                  {!! Form::open(['route'=>'template.createnew']) !!}
+                                  <form method="POST" action="{{ route('template.createnew') }}">
+    @csrf
                     <div class="modal-header">
                  <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
             <h4 class="modal-title">{{ trans('lang.create_template') }}</h4>
@@ -58,7 +59,7 @@ class="active"
                                                                             
                                                                             <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
                                                                         </div></div>
-                                                                        {!! Form::close() !!}
+                                                                        </form>
                                                                     </div> 
                                                                 </div>
                                                             </div></div>
@@ -67,7 +68,7 @@ class="active"
 
 <!-- check whether success or not -->
 
-@if(Session::has('success'))
+@if(session()->has('success'))
     <div class="alert alert-success alert-dismissable">
         <i class="fa  fa-check-circle"></i>
         <b>Success!</b>
@@ -76,7 +77,7 @@ class="active"
     </div>
     @endif
     <!-- failure message -->
-    @if(Session::has('fails'))
+    @if(session()->has('fails'))
     <div class="alert alert-danger alert-dismissable">
         <i class="fa fa-ban"></i>
         <b>Fail!</b>

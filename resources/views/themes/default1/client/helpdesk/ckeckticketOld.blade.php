@@ -33,7 +33,7 @@ $thread = App\Model\helpdesk\Ticket\Ticket_Thread::where('ticket_id', '=', \Cryp
                             <li><a href="#" id="resolved"><i class="fa fa-check-circle " style="color:#0EF1BE;"> </i> {{ trans('lang.resolved') }}</a></li>
                         </ul>
                     </div>@endif
-                    {!! Form::close() !!}
+                    </form>
                 </div>
             </div>
         </div>
@@ -329,7 +329,7 @@ foreach ($conversations as $conversation) {
     <?php echo $conversations->setPath(url('check_ticket/{' . $id . '}'))->render(); ?>
 </div>
 <br/><br/>
-@if(Session::has('success1'))
+@if(session()->has('success1'))
 <div class="alert alert-success alert-dismissable" id='formabc'>
     <i class="fa  fa-check-circle"></i>
     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
@@ -337,7 +337,7 @@ foreach ($conversations as $conversation) {
 </div>
 @endif
 <!-- failure message -->
-@if(Session::has('fails1'))
+@if(session()->has('fails1'))
 <div class="alert alert-danger alert-dismissable" id='formabc'>
     <i class="fa fa-ban"></i>
     <b>{{ trans('lang.alert') }}!</b>
@@ -365,7 +365,7 @@ foreach ($conversations as $conversation) {
     <div class="text-right">
         <button type="submit" class="btn btn-custom btn-lg">{{ trans('lang.post_comment') }}</button>
     </div>
-    {!! Form::close() !!}
+    </form>
 </div>
 
 <script type="text/javascript">

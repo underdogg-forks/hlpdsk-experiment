@@ -28,7 +28,7 @@ class="nav-link active"
 <!-- check whether success or not -->
 <form method="POST" action="{!! route('postdiagno') !!}">
     <input type="hidden" name="_token" value="{{ csrf_token() }}">
-    @if(Session::has('success') && !Session::has('fails'))
+    @if(session()->has('success') && !session()->has('fails'))
     <div class="alert alert-success alert-dismissable">
         <i class="fas fa-check-circle"></i>
         <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
@@ -36,7 +36,7 @@ class="nav-link active"
     </div>
     @endif
     <!-- failure message -->
-    @if(Session::has('fails'))
+    @if(session()->has('fails'))
     <div class="alert alert-warning alert-dismissable">
         <i class="fas fa-ban"></i>
         <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
@@ -44,7 +44,7 @@ class="nav-link active"
         <li class="error-message-padding">{{ session('fails') }}</li>
     </div>
     @endif
-    @if(Session::has('errors'))
+    @if(session()->has('errors'))
     <?php //dd($errors); ?>
     <div class="alert alert-danger alert-dismissable">
         <i class="fas fa-ban"></i>

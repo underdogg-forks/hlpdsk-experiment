@@ -19,5 +19,5 @@
         'id' => 'btn-add-setting',
     ) ) !!}
      
-    {!! Form::close() !!}
+    </form>
 

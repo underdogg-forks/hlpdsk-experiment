@@ -471,7 +471,7 @@ if ($thread->title != "") {
                             </div>
                         </div>
                     </div>
-                    {!!Form::close()!!}
+                    </form>
                 </div>
 
                 <div class="tab-pane" id="Internal">
@@ -508,7 +508,7 @@ if ($thread->title != "") {
                                 </div>
                             </div>
                         </div>
-                        {!!Form::close()!!}
+                        </form>
                     </div>
                 </div>
                 <?php \Illuminate\Support\Facades\Event::dispatch('timeline.tab.content',[$tickets]); ?>
@@ -911,7 +911,7 @@ if ($thread->title != "") {
                         <button type="button" class="btn btn-default" data-dismiss="modal" id="dismis">{{ trans('lang.close') }}</button>
                         <input type="submit" class="btn btn-primary" value="{{ trans('lang.update') }}">
                     </div>
-                    {!! Form::close() !!}
+                    </form>
                 </div><!-- /.modal-content -->
             </div><!-- /.modal-dialog -->
         </div><!-- /.modal -->
@@ -997,7 +997,7 @@ if ($thread->title != "") {
                                 <!--<input type='checkbox' name='send-mail' class='icheckbox_flat-blue' value='".$ticket->id."'><span disabled class="btn btn-sm">Check to notify user</span></input>-->
                                 <button type="submit" class="btn btn-primary" id="submt2">{{ trans('lang.update') }}</button>
                             </div>
-                            {!! Form::close()!!}
+                            </form>
                         </div><!--tab-pane active-->
                         <div class="tab-pane" id="haha2">
                             <div id="change_alert2" class="alert alert-danger alert-dismissable" style="display:none;">
@@ -1020,7 +1020,7 @@ if ($thread->title != "") {
                                     <input type="hidden" name="action" value="change-add-owner">
                                     <input type="submit" class="btn btn-primary" value="{{ trans('lang.submit') }}">
                                 </div>
-                                {!! Form::close() !!}
+                                </form>
                             </div>
                         </div>
                     </div><!--tab-content-->    
@@ -1070,7 +1070,7 @@ if ($thread->title != "") {
                         <button type="button" class="btn btn-default" data-dismiss="modal" id="dismis4">{{ trans('lang.close') }}</button>
                         <button type="submit" class="btn btn-success" id="submt2">{{ trans('lang.assign') }}</button>
                     </div>
-                    {!! Form::close()!!}
+                    </form>
                 </div><!-- /.modal-content -->
             </div><!-- /.modal-dialog -->
         </div><!-- /.modal -->
@@ -1122,7 +1122,7 @@ if ($thread->title != "") {
                                     <input type="hidden" name="ticket_id" value="{!! $tickets->id !!}">
                                     <input type="submit" class="btn btn-primary" value="{{ trans('lang.submit') }}">
                                 </div>
-                                {!! Form::close() !!}
+                                </form>
                             </div>
                         </div>
                         <div class="tab-pane" id="haha">
@@ -1138,7 +1138,7 @@ if ($thread->title != "") {
                                     <input type="hidden" name="ticket_id" value="{!! $tickets->id !!}">
                                     <input type="submit" class="btn btn-primary" value="{{ trans('lang.submit') }}">
                                 </div>
-                                {!! Form::close() !!}
+                                </form>
                             </div>
                         </div>
                     </div>
@@ -1268,7 +1268,7 @@ if ($thread->title != "") {
             <div class="modal-footer justify-content-between">
                 <button type="button" class="btn btn-default" data-dismiss="modal" id="dismis2">{{ trans('lang.close') }}</button>
                 <input  type="submit" id="merge-btn" class="btn btn-primary" value="{{ trans('lang.merge') }}"></input>
-                {!! Form::close() !!}
+                </form>
             </div><!-- /.modal-footer -->
         </div><!-- /.modal-content -->
     </div><!-- /.modal-dialog -->

@@ -1,7 +1,7 @@
 @extends('themes.default1.layouts.login')
 
 @section('body')
-@if(Session::has('status'))
+@if(session()->has('status'))
 <div class="alert alert-success alert-dismissable">
     <i class="fa fa-check-circle"> </i> <b> {{ trans('lang.success') }} </b>
     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>

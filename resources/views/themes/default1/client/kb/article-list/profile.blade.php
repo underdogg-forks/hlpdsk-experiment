@@ -17,7 +17,7 @@
                     <h4>{{ trans('lang.pofile') }} </h4>
                 </div>
                 <div class="box-body">
-                    @if(Session::has('success1'))
+                    @if(session()->has('success1'))
                     <div class="alert alert-success alert-dismissable">
                         <i class="fa fa-ban"></i>
                         <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
@@ -25,7 +25,7 @@
                     </div>
                     @endif
                     <!-- fail message -->
-                    @if(Session::has('fails1'))
+                    @if(session()->has('fails1'))
                     <div class="alert alert-danger alert-dismissable">
                         <i class="fa fa-ban"></i>
                         <b>{{ trans('lang.alert') }}!</b>
@@ -99,7 +99,7 @@
                         </div>
                     </div>
                     {!! Form::token() !!}
-                    {!! Form::close() !!}
+                    </form>
                 </div>
                 <div class="box-footer">
                     {!! Form::submit(trans('lang.update'),['class'=>'btn btn-primary'])!!}
@@ -113,7 +113,7 @@
                     <h4>{{ trans('lang.change_password') }}	{!! Form::submit(trans('lang.update'),['class'=>'form-group btn btn-primary pull-right'])!!}</h4>
                 </div>
                 <div class="box-body">
-                    @if(Session::has('success2'))
+                    @if(session()->has('success2'))
                     <div class="alert alert-success alert-dismissable">
                         <i class="fa fa-ban"></i>
                         <b>Alert!</b> Success.
@@ -122,7 +122,7 @@
                     </div>
                     @endif
                     <!-- fail message -->
-                    @if(Session::has('fails2'))
+                    @if(session()->has('fails2'))
                     <div class="alert alert-danger alert-dismissable">
                         <i class="fa fa-ban"></i>
                         <b>Alert!</b> Failed.
@@ -158,6 +158,6 @@
     </div>
 
 
-    {!! Form::close() !!}
+    </form>
 </div>
 @stop

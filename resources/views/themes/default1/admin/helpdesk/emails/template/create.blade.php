@@ -29,7 +29,8 @@ class="active"
 <!-- content -->
 @section('content')
 
-{!! Form::open(['action' => 'Admin\helpdesk\TemplateController@store','method' => 'post']) !!}
+<form method="POST" action="{{ action('Admin\helpdesk\TemplateController@store') }}">
+    @csrf
 	<div class="row">
 <div class="col-md-12">
 <div class="box box-primary">

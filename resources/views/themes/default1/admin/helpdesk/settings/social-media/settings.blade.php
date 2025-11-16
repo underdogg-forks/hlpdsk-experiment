@@ -43,14 +43,14 @@ class="nav-link active"
 @endif
 
 <!-- check whether success or not -->
-@if(Session::has('warn'))
+@if(session()->has('warn'))
 <div class="alert alert-warning alert-dismissable">
     <i class="fas fa-check-circle"></i>
     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
     {{ session('warn') }}
 </div>
 @endif
-@if(Session::has('success'))
+@if(session()->has('success'))
 <div class="alert alert-success alert-dismissable">
     <i class="fas fa-check-circle"></i>
     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
@@ -58,7 +58,7 @@ class="nav-link active"
 </div>
 @endif
 <!-- failure message -->
-@if(Session::has('fails'))
+@if(session()->has('fails'))
 <div class="alert alert-danger alert-dismissable">
     <i class="fas fa-ban"></i>
     <b>{{ trans('lang.alert') }}!</b>
@@ -122,5 +122,5 @@ class="nav-link active"
         {!! Form::submit(trans('lang.submit'),['class'=>'btn btn-primary'])!!}
     </div>
 </div>
-{!! Form::close() !!}
+</form>
 @stop

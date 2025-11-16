@@ -33,8 +33,9 @@ class="nav-link active"
 <!-- content -->
 @section('content')
 <!-- open a form -->
-{!! Form::open(array('route' => 'departments.store') )!!}
-@if(Session::has('errors'))
+<form method="POST" action="{{ route('departments.store') }}">
+    @csrf
+@if(session()->has('errors'))
 <?php //dd($errors); ?>
 <div class="alert alert-danger alert-dismissable">
     <i class="fa fa-ban"></i>
@@ -109,6 +110,6 @@ class="nav-link active"
     <div class="card-footer">
         {!! Form::submit(trans('lang.submit'),['class'=>'btn btn-primary'])!!}    
     </div>
-    {!!Form::close()!!}
+    </form>
 </div>
 @stop

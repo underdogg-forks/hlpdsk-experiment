@@ -24,14 +24,14 @@ class="nav-link active"
 @stop
 
 @section('content')
-@if(Session::has('success'))
+@if(session()->has('success'))
 <div class="alert alert-success alert-dismissable">
     <i class="fas fa-check-circle"></i>
     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
     {{ session('success') }}
 </div>
 @endif
-@if(Session::has('failed'))
+@if(session()->has('failed'))
 <div class="alert alert-danger alert-dismissable">
     <i class="fas fa-ban"></i>
     <b>{{ trans('lang/alert') }}!</b>
@@ -39,7 +39,7 @@ class="nav-link active"
     <p>{{ session('failed') }}</p>                
 </div>
 @endif
-@if(Session::has('errors'))
+@if(session()->has('errors'))
 <div class="alert alert-danger alert-dismissable">
     <i class="fas fa-ban"></i>
     <b>{{ trans('lang.alert') }}!</b>
@@ -99,6 +99,6 @@ class="nav-link active"
     <div class="card-footer">
         <button type="submit" class="btn btn-primary">{!! lang::get('lang.submit') !!}</button>
     </div>
-    {!! Form::close() !!}
+    </form>
 </div>
 @stop

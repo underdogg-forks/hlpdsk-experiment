@@ -55,7 +55,7 @@ if (Auth::user()->role == 'agent') {
         <h3 class="box-title">{{ trans('lang.trash') }} </h3> <small id="title_refresh">{!! $tickets !!} {{ trans('lang.tickets') }}</small>
     </div><!-- /.box-header -->
     <div class="box-body">
-        @if(Session::has('success'))
+        @if(session()->has('success'))
         <div class="alert alert-success alert-dismissable">
             <i class="fa  fa-check-circle"> </i> 
             <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
@@ -63,7 +63,7 @@ if (Auth::user()->role == 'agent') {
         </div>
         @endif
         <!-- failure message -->
-        @if(Session::has('fails'))
+        @if(session()->has('fails'))
         <div class="alert alert-danger alert-dismissable">
             <i class="fa fa-ban"> </i> 
             <b> {{ trans('lang.alert') }}! </b>
@@ -99,7 +99,7 @@ if (Auth::user()->role == 'agent') {
             {!!$table->render('vendor.Chumper.template')!!}
 
         </div><!-- /.mail-box-messages -->
-        {!! Form::close() !!}
+        </form>
     </div><!-- /.box-body -->
 </div><!-- /. box -->
 <!-- Modal -->   

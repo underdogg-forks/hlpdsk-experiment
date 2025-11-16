@@ -34,7 +34,7 @@ class="nav-link active"
 <!-- open a form -->
 {!!Form::model($teams, ['url'=>'teams/'.$teams->id , 'method'=> 'PATCH'])!!}
 
-@if(Session::has('errors'))
+@if(session()->has('errors'))
 <div class="alert alert-danger alert-dismissable">
     <i class="fa fa-ban"></i>
     <b>Alert!</b>
@@ -96,6 +96,6 @@ class="nav-link active"
     <div class="card-footer">
         {!! Form::submit(trans('lang.update'),['class'=>'btn btn-primary'])!!}
     </div>
-    {!!Form::close()!!}
+    </form>
 </div>
 @stop

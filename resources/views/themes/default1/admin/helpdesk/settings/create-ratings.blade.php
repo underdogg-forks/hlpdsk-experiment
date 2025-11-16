@@ -33,15 +33,16 @@ class="nav-link active"
 <!-- /breadcrumbs -->
 <!-- content -->
 @section('content')
-{!! Form::open(['route'=>'rating.store']) !!}
- @if(Session::has('success'))
+<form method="POST" action="{{ route('rating.store') }}">
+    @csrf
+ @if(session()->has('success'))
 <div class="alert alert-success alert-dismissable">
     <i class="fas fa-check-circle"></i>
     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
     {{ session('success') }}
 </div>
 @endif
-@if(Session::has('errors'))
+@if(session()->has('errors'))
 <?php //dd($errors); ?>
 <div class="alert alert-danger alert-dismissable">
     <i class="fas fa-ban"></i>

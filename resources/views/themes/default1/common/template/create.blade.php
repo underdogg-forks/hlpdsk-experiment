@@ -25,7 +25,7 @@
                 </div>
                 @endif
 
-                @if(Session::has('success'))
+                @if(session()->has('success'))
                 <div class="alert alert-success alert-dismissable">
                     <i class="fa fa-ban"></i>
                     <b>{{ trans('lang.alert') }}!</b> {{ trans('lang.success') }}.
@@ -34,7 +34,7 @@
                 </div>
                 @endif
                 <!-- fail lang -->
-                @if(Session::has('fails'))
+                @if(session()->has('fails'))
                 <div class="alert alert-danger alert-dismissable">
                     <i class="fa fa-ban"></i>
                     <b>{{ trans('lang.alert') }}!</b> {{ trans('lang.failed') }}.
@@ -91,5 +91,5 @@
 </div>
 
 
-{!! Form::close() !!}
+</form>
 @stop

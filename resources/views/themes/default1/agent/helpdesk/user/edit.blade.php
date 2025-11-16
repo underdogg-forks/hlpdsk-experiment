@@ -25,7 +25,7 @@ class="nav-link active"
 
 <!-- content -->
 @section('content')
-@if(Session::has('fails'))
+@if(session()->has('fails'))
 <div class="alert alert-danger alert-dismissable">
     <i class="fas fa-ban"></i>
     <b>{{ trans('lang.alert') }}!</b>
@@ -34,7 +34,7 @@ class="nav-link active"
 </div>
 @endif
 
-@if(Session::has('errors'))
+@if(session()->has('errors'))
     <div class="alert alert-danger alert-dismissable">
         <i class="fas fa-ban"></i>
         <b>{{ trans('lang.alert') }}!</b>
@@ -115,7 +115,7 @@ class="nav-link active"
             </div>
         </div>
         <div class="row">     
-            <div class="col-sm-1 form-group {{ Session::has('country_code_error') ? 'has-error' : '' }}">
+            <div class="col-sm-1 form-group {{ session()->has('country_code_error') ? 'has-error' : '' }}">
                 {!! Form::label('country_code',trans('lang.country-code')) !!}
                 {!! $errors->first('country_code', '<spam class="help-block">:message</spam>') !!}
                 {!! Form::text('country_code',null,['class' => 'form-control', 'placeholder' => $phonecode, 'title' => trans('lang.enter-country-phone-code')]) !!}

@@ -96,14 +96,14 @@
             <div class="card">
                 <div class="card-body p-4">
                     <!-- Alert Messages -->
-                    @if(Session::has('success'))
+                    @if(session()->has('success'))
                         <div class="alert alert-success alert-dismissible fade show">
                             <button type="button" class="close" data-dismiss="alert">&times;</button>
                             <i class="fa fa-check-circle"></i> <strong>Success!</strong> {{ session('success') }}
                         </div>
                     @endif
                     
-                    @if(Session::has('fails'))
+                    @if(session()->has('fails'))
                         <div class="alert alert-danger alert-dismissible fade show">
                             <button type="button" class="close" data-dismiss="alert">&times;</button>
                             <i class="fa fa-ban"></i> <strong>Error!</strong> {{ session('fails') }}

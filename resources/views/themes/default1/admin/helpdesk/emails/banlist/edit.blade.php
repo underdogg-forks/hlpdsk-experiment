@@ -32,7 +32,7 @@ class="nav-link active"
 <!-- content -->
 @section('content')
 {!! Form::model($bans,['url'=>'banlist/'.$bans->id,'method'=>'PATCH']) !!}
-@if(Session::has('errors'))
+@if(session()->has('errors'))
 <div class="alert alert-danger alert-dismissable">
     <i class="fas fa-ban"></i>
     <b>{{ trans('lang.alert') }}!</b>

@@ -67,7 +67,7 @@ class="active"
                                     </ul>
                                 </div>
                                 
-                                {!! Form::close() !!}
+                                </form>
                             </div>
                         </div>
 
@@ -146,7 +146,8 @@ class="active"
 
                                     <div class="tab-pane active" id="General">
                                         <div id="t1">
-                                            {!! Form::open(['route'=>'ticket.reply']) !!}
+                                            <form method="POST" action="{{ route('ticket.reply') }}">
+    @csrf
                                         <div class="form-group">
 
                                         </div>
@@ -189,11 +190,12 @@ class="active"
                                                         </div>
                                                     </div>
                                                 </div>
-                                        {!!Form::close()!!}
+                                        </form>
                                         </div>
 
                                         <div id="t2" style="display:none">
-                                            {!! Form::open(['route'=>'ticket.reply']) !!}
+                                            <form method="POST" action="{{ route('ticket.reply') }}">
+    @csrf
                                             <div class="form-group">
                                                 <button type="submit" id="tt1" class="btn btn-default"><i class="fa fa-check-square-o" style="color:green;"> </i> Update</button>
                                                 <button style="display:none;" type="submit" id="tt2" class="btn btn-default"><i class="fa fa-check-square-o" style="color:blue;"> </i> Update</button>
@@ -228,7 +230,7 @@ class="active"
                                                     </div>
                                                 </div>
                                             </div>
-                                            {!!Form::close()!!}
+                                            </form>
                                         </div>
 
                                     </div>

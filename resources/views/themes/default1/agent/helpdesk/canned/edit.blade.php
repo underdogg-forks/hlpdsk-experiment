@@ -24,7 +24,7 @@ class="nav-link active"
 @section('content')
 <!-- open a form -->
 {!! Form::model($canned, ['url' => 'canned/update/'.$canned->id,'method' => 'PATCH'] )!!}
-@if(Session::has('errors'))
+@if(session()->has('errors'))
         <?php //dd($errors); ?>
         <div class="alert alert-danger alert-dismissable">
             <i class="fas fa-ban"></i>

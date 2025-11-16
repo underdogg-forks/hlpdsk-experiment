@@ -27,14 +27,14 @@ class="nav-link active"
 <!-- content -->
 @section('content')
 {!! Form::model($rating,['route'=>['settings.rating', $rating->id],'method'=>'PATCH','files' => true]) !!}
-@if(Session::has('success'))
+@if(session()->has('success'))
 <div class="alert alert-success alert-dismissable">
     <i class="fas fa-check-circle"></i>
     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
     {{ session('success') }}
 </div>
 @endif
-@if(Session::has('errors'))
+@if(session()->has('errors'))
 <?php //dd($errors); ?>
 <div class="alert alert-danger alert-dismissable">
     <i class="fas fa-ban"></i>
@@ -109,5 +109,5 @@ class="nav-link active"
         {!! Form::submit(trans('lang.update'),['class'=>'btn btn-primary'])!!}
     </div>
 </div>
-{!! Form::close() !!}
+</form>
 @stop

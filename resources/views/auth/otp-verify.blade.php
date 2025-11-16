@@ -3,7 +3,7 @@
 @section('body')
 <h4  id="otp-screen" class="login-box-msg">
 <p>Hello
-@if (Session::has('name'))
+@if(session()->has('name'))
     {{ session('name') }}
 @endif!</p><br/>
 <span style='font-size: .8em'>
@@ -39,11 +39,11 @@
 </div>
 
 <!-- failure message -->
-@if(Session::has('errors'))
+@if(session()->has('errors'))
 <div class="alert alert-danger alert-dismissable">
     <i class="fa fa-ban"> </i> <b> {{ trans('lang.alert') }}! </b>
     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-    @if(Session::has('error'))    
+    @if(session()->has('error'))    
     <li>{{ session('error') }}</li>
     @else
     <li>{{ trans('lang.please_fill_all_required_feilds') }}</li>
@@ -51,7 +51,7 @@
 </div>
 @endif
 <!-- failure message -->
-@if(Session::has('fails'))
+@if(session()->has('fails'))
 <div class="alert alert-danger alert-dismissable">
     <i class="fa fa-ban"> </i> <b> {{ trans('lang.alert') }}! </b>
     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
@@ -76,9 +76,9 @@
     {!! Form::input('text','otp',null,['placeholder'=> trans("lang.enter-otp") ,'class' => 'form-control' , 'required' => true, 'pattern' => "[0-9]{6}", "title" => trans('lang.otp-input-title')]) !!}
     <!-- {!! $errors->first('email', '<spam class="help-block">:message</spam>') !!} -->
 </div>
-@if (Session::has('referer'))
+@if(session()->has('referer'))
     <input type='hidden' name="referer" value="{{ session('referer') }}">
-@elseif(Session::has('errors'))
+@elseif(session()->has('errors'))
     <input type='hidden' name="referer" value="form">
 @endif
 <div class="row">

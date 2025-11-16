@@ -45,7 +45,7 @@
 <!-- content -->
 @section('content')
 <!-- failure message -->
-@if(Session::has('fails'))
+@if(session()->has('fails'))
 <div class="alert alert-danger alert-dismissable">
     <i class="fas fa-ban"> </i> <b> {{ trans('lang.alert') }}! </b>
     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>

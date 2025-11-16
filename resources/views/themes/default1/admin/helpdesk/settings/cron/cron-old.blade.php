@@ -22,7 +22,7 @@
         </div>
         @endif
         <!-- check whether success or not -->
-        @if(Session::has('success'))
+        @if(session()->has('success'))
         <div class="alert alert-success alert-dismissable">
             <i class="fa  fa-check-circle"></i>
             <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
@@ -30,7 +30,7 @@
         </div>
         @endif
         <!-- failure message -->
-        @if(Session::has('fails'))
+        @if(session()->has('fails'))
         <div class="alert alert-danger alert-dismissable">
             <i class="fa fa-ban"></i>
             <b>{{ trans('lang.alert') }}!</b>

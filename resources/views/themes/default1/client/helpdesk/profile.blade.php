@@ -24,7 +24,7 @@ class="nav-item active"
 
         <div class="entry-content clearfix">
 
-            @if(Session::has('success1'))
+            @if(session()->has('success1'))
             <div class="alert alert-success alert-dismissable">
                 <i class="fa fa-check-circle"></i>
                 <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
@@ -42,7 +42,7 @@ class="nav-item active"
             </div>
             @endif
             <!-- fail message -->
-            @if(Session::has('fails1'))
+            @if(session()->has('fails1'))
             <div class="alert alert-danger alert-dismissable">
                 <i class="fa fa-ban"></i>
                 <b>{{ trans('lang.alert') }}!</b>
@@ -51,7 +51,7 @@ class="nav-item active"
             </div>
             @endif
 
-             @if(Session::has('success2'))
+             @if(session()->has('success2'))
             <div class="alert alert-success alert-dismissable">
                 <i class="fa fa-check-circle"></i>
                 <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
@@ -59,7 +59,7 @@ class="nav-item active"
             </div>
             @endif
             <!-- fail message -->
-            @if(Session::has('fails2'))
+            @if(session()->has('fails2'))
             <div class="alert alert-danger alert-dismissable">
                 <i class="fa fa-ban"></i>
                 <b>{{ trans('lang.alert') }} !</b>
@@ -156,7 +156,7 @@ class="nav-item active"
                                 </div>
 
                                 {!! Form::token() !!}
-                                {!! Form::close() !!}
+                                </form>
 
                                 <div class="form-group" style="padding-bottom: 10px;">
 
@@ -201,7 +201,7 @@ class="nav-item active"
                                     <span class="fa fa-lock form-control-feedback" style="top: 9px;left: -25px;color: #6c757d !important;"></span>
                                 </div>
 
-                                {!! Form::close() !!}
+                                </form>
 
                                 <div class="form-group" style="padding-bottom: 10px;">
 
@@ -260,7 +260,7 @@ class="nav-item active"
                     <button type="button" id="close-last" class="btn btn-default closemodal float-left">{{ trans('lang.close') }}</button>
                     <div id="last-submit"><input  type="submit" id="merge-btn" class="btn btn-primary float-right" value="{{ trans('lang.verify') }}"></input></div>
                 </div>
-                {!! Form::close() !!}
+                </form>
             </div>
         </div>
     </div>

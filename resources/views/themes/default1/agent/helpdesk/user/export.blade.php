@@ -33,14 +33,14 @@ class="active"
     </div>
     @endif
 
-    @if(Session::has('success'))
+    @if(session()->has('success'))
     <div class="alert alert-success alert-dismissable">
         <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
         {{ session('success') }}
     </div>
     @endif
     <!-- fail message -->
-    @if(Session::has('fails'))
+    @if(session()->has('fails'))
     <div class="alert alert-danger alert-dismissable">
         <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
         {{ session('fails') }}
@@ -66,7 +66,7 @@ class="active"
         </div>
     </div>
 </div>
-{!! Form::close() !!}
+</form>
 @stop
 @section('FooterInclude')
 <script type="text/javascript" src="//cdn.jsdelivr.net/bootstrap.daterangepicker/2/daterangepicker.js"></script>

@@ -13,7 +13,7 @@
 
 @section('content')
 
-    @if(Session::has('status'))
+    @if(session()->has('status'))
     <div class="col-sm-12">
         <div class="alert alert-success alert-dismissable">
             <i class="fa  fa-check-circle"> </i> <b> {{ trans('lang.success') }} </b>

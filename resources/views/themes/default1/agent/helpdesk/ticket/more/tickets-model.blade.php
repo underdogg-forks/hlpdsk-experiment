@@ -77,7 +77,7 @@
             <div class="modal-footer justify-content-between">
                 <button type="button" class="btn btn-default" data-dismiss="modal" id="dismis2">{{ trans('lang.close') }}</button>
                 <input  type="submit" id="merge-btn" class="btn btn-primary" value="{{ trans('lang.merge') }}"></input>
-                {!! Form::close() !!}
+                </form>
             </div><!-- /.modal-footer -->
         </div><!-- /.modal-content -->
     </div><!-- /.modal-dialog -->
@@ -132,7 +132,7 @@
             <div class="modal-footer justify-content-between">
                 <button type="button" class="btn btn-default" data-dismiss="modal" id="dismis2">{{ trans('lang.close') }}</button>
                 <input  type="submit" id="merge-btn" class="btn btn-primary" value="{{ trans('lang.assign') }}"></input>
-                {!! Form::close() !!}
+                </form>
             </div><!-- /.modal-footer -->
         </div><!-- /.modal-content -->
     </div><!-- /.modal-dialog -->

@@ -41,20 +41,20 @@ class="nav-link active"
     </ul>
 </div>
 @endif
-@if(Session::has('success'))
+@if(session()->has('success'))
 <div class="alert alert-success alert-dismissable">
     <i class="fa fa-check-circle"></i>
     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
     {{ session('success') }}
 </div>
 @endif
-@if(Session::has('fails'))
+@if(session()->has('fails'))
 <div class="alert alert-danger alert-dismissable">
     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
     {{ session('fails') }}
 </div>
 @endif
-@if(Session::has('warn'))
+@if(session()->has('warn'))
 <div class="alert alert-warning alert-dismissable">
     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
     {{ session('warn') }}
@@ -73,7 +73,7 @@ class="nav-link active"
 
     <div class="card-footer">
         {!! Form::submit(trans('lang.save'),['class'=>'btn btn-primary']) !!}
-        {!! Form::close() !!}
+        </form>
     </div>
 </div>
 <script>

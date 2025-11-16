@@ -37,7 +37,7 @@ class="nav-link active"
 <?php //dd($user->agent_tzone); ?>
 {!! Form::model($user, ['url' => 'agents/'.$user->id,'method' => 'PATCH'] )!!}
 
-@if(Session::has('errors'))
+@if(session()->has('errors'))
 <?php //dd($errors); ?>
 <div class="alert alert-danger alert-dismissable">
     <i class="fa fa-ban"></i>
@@ -85,7 +85,7 @@ class="nav-link active"
     @endif 
 </div>
 @endif
-@if(Session::has('fails2'))
+@if(session()->has('fails2'))
     <div class="alert alert-danger alert-dismissable">
     <i class="fa fa-ban"></i>
     <b>Alert!</b>
@@ -149,7 +149,7 @@ class="nav-link active"
 
             </div>
             <!--country code-->
-            <div class="col-sm-1 form-group {{ Session::has('country_code') ? 'has-error' : '' }}">
+            <div class="col-sm-1 form-group {{ session()->has('country_code') ? 'has-error' : '' }}">
 
                 {!! Form::label('country_code',trans('lang.country-code')) !!}
                 {!! Form::text('country_code',null,['class' => 'form-control', 'placeholder' => $phonecode, 'title' => trans('lang.enter-country-phone-code')]) !!}
@@ -260,5 +260,5 @@ class="nav-link active"
         {!! Form::submit(trans('lang.update'),['class'=>'btn btn-primary'])!!}
     </div>
 </div>
-{!!Form::close()!!}
+</form>
 @stop

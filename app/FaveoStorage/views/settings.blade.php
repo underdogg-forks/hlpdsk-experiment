@@ -35,14 +35,14 @@ class="nav-link active"
 </div>
 @endif
 
-@if(Session::has('success'))
+@if(session()->has('success'))
 <div class="alert alert-success alert-dismissable">
     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
     {{ session('success') }}
 </div>
 @endif
 <!-- fail message -->
-@if(Session::has('fails'))
+@if(session()->has('fails'))
 <div class="alert alert-danger alert-dismissable">
     <i class="fa fa-ban"></i>
     <b>{{ trans('message.alert') }}!</b> {{ trans('message.failed') }}.
@@ -115,7 +115,7 @@ class="nav-link active"
     </div>
     <div class="card-footer">
         {!! Form::submit(trans('storage::lang.save'),['class'=>'btn btn-success']) !!}
-        {!! Form::close() !!}
+        </form>
     </div>
     <!-- /.box -->
 </div>

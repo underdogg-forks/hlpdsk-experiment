@@ -46,7 +46,7 @@ class="nav-link active"
         }
  ?>
 <!-- Main content -->
-   @if(Session::has('success'))
+   @if(session()->has('success'))
     <div class="alert alert-success alert-dismissable">
         <i class="fa fa-check-circle"> </i>
         <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
@@ -54,7 +54,7 @@ class="nav-link active"
     </div>
     @endif
     <!-- failure message -->
-    @if(Session::has('fails'))
+    @if(session()->has('fails'))
     <div class="alert alert-danger alert-dismissable">
         <i class="fa fa-ban"> </i> <b> {{ trans('lang.alert') }}! </b>
         <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
@@ -87,7 +87,7 @@ class="nav-link active"
             
             <!-- /.datatable -->
         </div><!-- /.mail-box-messages -->
-        {!! Form::close() !!}
+        </form>
     </div><!-- /.box-body -->
 </div><!-- /. box -->
 
@@ -149,7 +149,7 @@ class="nav-link active"
             <div class="modal-footer justify-content-between">
                 <button type="button" class="btn btn-default" data-dismiss="modal" id="dismis2">{{ trans('lang.close') }}</button>
                 <input  type="submit" id="merge-btn" class="btn btn-primary" value="{{ trans('lang.merge') }}">
-                {!! Form::close() !!}
+                </form>
             </div><!-- /.modal-footer -->
         </div><!-- /.modal-content -->
     </div><!-- /.modal-dialog -->
@@ -183,7 +183,7 @@ class="nav-link active"
             <div class="modal-footer justify-content-between">
                 <button type="button" class="btn btn-default" data-dismiss="modal" id="dismis2">{{ trans('lang.close') }}</button>
                 <input  type="submit" id="merge-btn" class="btn btn-primary" value="{{ trans('lang.assign') }}">
-                {!! Form::close() !!}
+                </form>
             </div><!-- /.modal-footer -->
         </div><!-- /.modal-content -->
     </div><!-- /.modal-dialog -->

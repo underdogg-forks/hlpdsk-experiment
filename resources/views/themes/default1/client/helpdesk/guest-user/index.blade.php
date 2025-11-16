@@ -23,7 +23,7 @@
 {{--    </div>--}}
 @stop
 @section('content')
-@if(!Session::has('error') && count($errors)>0)
+@if(!session()->has('error') && count($errors)>0)
     <div class="alert alert-danger alert-dismissable">
         <i class="fa fa-ban"></i>
         <b>{{ trans('lang.alert') }} !</b>

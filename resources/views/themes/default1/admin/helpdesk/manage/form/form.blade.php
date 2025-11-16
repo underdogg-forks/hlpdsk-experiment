@@ -41,20 +41,20 @@ class="nav-link active"
     </ul>
 </div>
 @endif
-@if(Session::has('success'))
+@if(session()->has('success'))
 <div class="alert alert-success alert-dismissable">
     <i class="fa fa-check-circle"></i>
     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
     {{ session('success') }}
 </div>
 @endif
-@if(Session::has('fails'))
+@if(session()->has('fails'))
 <div class="alert alert-danger alert-dismissable">
     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
     {{ session('fails') }}
 </div>
 @endif
-@if(Session::has('warn'))
+@if(session()->has('warn'))
 <div class="alert alert-warning alert-dismissable">
     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
     {{ session('warn') }}
@@ -66,7 +66,8 @@ class="nav-link active"
     </div>
     <div class="card-body">
 
-        {!! Form::open(['route'=>'forms.store']) !!}
+        <form method="POST" action="{{ route('forms.store') }}">
+    @csrf
 
         <div class="row">
             <div class="form-group col-sm-6">
@@ -131,7 +132,7 @@ class="nav-link active"
         <input type="submit" class="btn btn-primary" value="{{ trans('lang.save_form') }}">
     </div>
 </div>
-{!! Form::close() !!}
+</form>
 <script>
     function showDiv() {
         document.getElementById('welcomeDiv').style.display = "block";

@@ -38,7 +38,7 @@ class="nav-item menu-open"
 
 {!! Form::model($article,['url' => 'article/'.$article->id , 'method' => 'PATCH'] )!!}
 
-@if(Session::has('success'))
+@if(session()->has('success'))
 <div class="alert alert-success alert-dismissable">
     <i class="fa  fa-check-circle"></i>
     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
@@ -46,7 +46,7 @@ class="nav-item menu-open"
 </div>
 @endif
 <!-- failure message -->
-@if(Session::has('fails'))
+@if(session()->has('fails'))
 <div class="alert alert-danger alert-dismissable">
     <i class="fa fa-ban"></i>
     <b>{{ trans('lang.alert') }}!</b>
@@ -54,7 +54,7 @@ class="nav-item menu-open"
     {{ session('fails') }}
 </div>
 @endif
-@if(Session::has('errors'))
+@if(session()->has('errors'))
 <?php //dd($errors); ?>
 <div class="alert alert-danger alert-dismissable">
     <i class="fa fa-ban"></i>
@@ -194,7 +194,7 @@ class="nav-item menu-open"
                     </div>
                 </div>
             </div>
-            {!! Form::close() !!}
+            </form>
             <div class="card-footer">
 
                 {!! Form::submit(trans('lang.publish'),['class'=>'btn btn-primary'])!!}
@@ -257,7 +257,7 @@ class="nav-item menu-open"
                                     {!! Form::submit(trans('lang.add'),['class'=>'btn btn-primary'])!!}
                                 </div>      
                             </div>
-                            {!! Form::close() !!}
+                            </form>
                         </div>
                     </div>
                 </div>

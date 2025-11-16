@@ -257,7 +257,7 @@ class="nav-link active"
         {!! Form::button('<i id="spin" class="fas fa-spinner" style="display:none;"></i> ' . trans("lang.update").'' ,['class'=>'btn btn-primary', 'type' => 'submit'])!!}
     </div>
 </div>
-{!!Form::close()!!}
+</form>
 <div class="modal fade" id="loadingpopup">
     <div class="modal-dialog">
         <div class="modal-content">

@@ -33,7 +33,7 @@ class="active"
 
 <!-- Main content -->
 {!! Form::open(['route'=>'post.newticket','method'=>'post','id'=>'form']) !!}
-@if(Session::has('success'))       
+@if(session()->has('success'))       
 <div class="alert alert-success alert-dismissable">
     <i class="fas fa-check-circle"></i>
     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
@@ -41,7 +41,7 @@ class="active"
 </div>
 @endif
 <!-- failure message -->
-@if(Session::has('fails'))
+@if(session()->has('fails'))
 <div class="alert alert-danger alert-dismissable">
     <i class="fas fa-ban"></i>
     <b>{{ trans('lang.alert') }}!</b>
@@ -49,7 +49,7 @@ class="active"
     {{ session('fails') }}
 </div>
 @endif
-@if(Session::has('errors'))
+@if(session()->has('errors'))
 <div class="alert alert-danger alert-dismissable">
     <i class="fas fa-ban"></i>
     <b>{{ trans('lang.alert') }}!</b>
@@ -127,7 +127,7 @@ class="active"
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-md-1 form-group {{ Session::has('country_code_error') ? 'has-error' : '' }}">
+                        <div class="col-md-1 form-group {{ session()->has('country_code_error') ? 'has-error' : '' }}">
                             <div class="form-group {{ $errors->has('code') ? 'has-error' : '' }}">
                             {!! Form::label('code',trans('lang.country-code')) !!}
                             @if ($email_mandatory->status == 0 || $settings->status == 1)
@@ -280,7 +280,7 @@ class="active"
         </div>
     </div>
 </div><!-- /. box -->
-{!! Form::close() !!}
+</form>
 <script type="text/javascript">
     $(document).ready(function () {
         var helpTopic = $("#selectid").val();

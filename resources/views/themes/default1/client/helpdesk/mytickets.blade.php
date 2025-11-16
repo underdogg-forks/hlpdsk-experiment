@@ -150,7 +150,7 @@ class="nav-item active"
                         <?php echo $open->setPath(url('mytickets'))->render(); ?>&nbsp;
                     </div>
                 </div><!-- /.mail-box-messages -->
-                {!! Form::close() !!}
+                </form>
             </div><!-- /.box-body -->
             {{-- /.tab_1 --}}
             <div class="tab-pane" id="tab_2">
@@ -236,7 +236,7 @@ class="nav-item active"
                         <?php echo $close->setPath(url('mytickets'))->render(); ?>&nbsp;
                     </div>
                 </div><!-- /.mail-box-messages -->
-                {!! Form::close() !!}
+                </form>
             </div>
         </div><!-- /. box -->
     </div>

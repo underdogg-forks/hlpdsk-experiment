@@ -26,14 +26,14 @@
     		{!! Form::text('ticket_number',null,['class' => 'form-control']) !!}
             <br/><input type="submit" value="Check Ticket Status" class="btn btn-info">
 
-        {!! Form::close() !!}
+        </form>
 		</div>
 	</div>
 @stop
 <!-- content -->
 @section('content')
 <div id="content" class="site-content col-md-9">
-    @if(Session::has('message'))
+    @if(session()->has('message'))
     <div class="alert alert-success alert-dismissable">
         <i class="fa  fa-check-circle"></i>
         <b>Success!</b>
@@ -94,7 +94,7 @@
     </div>
 </div>
 </div>
-{!! Form::close() !!}
+</form>
 </div>
 <!--
 |====================================================

@@ -269,12 +269,13 @@
                             <div id="login-form" class="{{$loginFormClass}}">
                                  <div class="row">
                                     <div class="col-md-12">
-                                        {!!  Form::open(['route' => 'post.login']) !!}
-                                        @if(Session::has('errors'))
-                                        @if(Session::has('check'))
+                                        <form method="POST" action="{{ route('post.login') }}">
+    @csrf
+                                        @if(session()->has('errors'))
+                                        @if(session()->has('check'))
                                         <?php goto b; ?>
                                         @endif
-                                        @if(Session::has('error'))
+                                        @if(session()->has('error'))
                                         <div class="alert alert-danger alert-dismissable">
 
                                             {{ session('error') }}
@@ -297,7 +298,7 @@
                                     </div>
                                     <div class="col-md-12 text-center">
                                             <button type="submit" class="btn btn-custom" style="background-color: #009aba; hov: #00c0ef; color: #fff ">{{ trans('lang.login') }}</button>
-                                        {!! Form::close() !!}
+                                        </form>
                                     </div>
 
                                 <div class="col-md-12 text-center">
@@ -332,7 +333,7 @@
                                 </style>
                             </div>
                         </div>
-                        {!! Form::close() !!}
+                        </form>
                     </div>
                 </div>
             </header>
@@ -349,7 +350,7 @@
                     <div class="content-area">
                         <div>
                             <!-- Success message -->
-                            @if(Session::has('success'))
+                            @if(session()->has('success'))
                                 <div class="alert alert-success alert-dismissable" style="padding-right:20px">
                                     <i class="fa fa-check-circle"></i>
                                     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
@@ -358,7 +359,7 @@
                             @endif
 
                             <!-- Warning message -->
-                            @if(Session::has('warning'))
+                            @if(session()->has('warning'))
                                 <div class="alert alert-warning alert-dismissable" style="padding-right:20px">
                                     <i class="fa fa-check-circle"></i>
                                     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
@@ -367,8 +368,8 @@
                             @endif
 
                             <!-- Failure message -->
-                            @if(Session::has('fails'))
-                                @if(Session::has('check'))
+                            @if(session()->has('fails'))
+                                @if(session()->has('check'))
                                         <?php goto a; ?>
                                 @endif
                                 <div class="alert alert-danger alert-dismissable" style="padding-right:20px">

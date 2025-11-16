@@ -11,10 +11,11 @@
             bkLib.onDomLoaded(function() { nicEditors.allTextAreas() });
         </script>
 @section('content')
-{!! Form::open(array('action' => 'Admin\kb\ArticleController@store' , 'method' => 'post') )!!}
+<form method="POST" action="{{ action('Admin\kb\ArticleController@store') }}">
+    @csrf
 
 <div class="row">
-	@if(Session::has('success'))
+	@if(session()->has('success'))
     <div class="alert alert-success alert-dismissable">
         <i class="fa  fa-check-circle"></i>
         <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
@@ -22,7 +23,7 @@
     </div>
     @endif
     <!-- failure message -->
-    @if(Session::has('fails'))
+    @if(session()->has('fails'))
     <div class="alert alert-danger alert-dismissable">
         <i class="fa fa-ban"></i>
         <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
@@ -149,7 +150,7 @@
 
 				</div>
 		</div>
-		{!! Form::close() !!}
+		</form>
 		<div class="box-footer" style="background-color:#f5f5f5;">
 
 				<span class="btn btn-info btn-sm" data-toggle="modal" data-target="#j">{{ trans('lang.addcategory') }}</span>
@@ -170,7 +171,7 @@
                                 </div>
                             	<button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
                             </div>
-                        {!! Form::close() !!}
+                        </form>
                       	</div>
                      </div>
                     </div>
@@ -179,7 +180,7 @@
 </div>
 </li>
 </ul>
-{{-- {!! Form::close() !!} --}}
+{{-- </form> --}}
 @stop
 @section('FooterInclude')
 

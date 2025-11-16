@@ -33,7 +33,7 @@ class="nav-link active"
 @section('content')
 <!-- open a form -->
 {!! Form::open(['route' => 'sla.store', 'method' => 'post']) !!}
-@if(Session::has('errors'))
+@if(session()->has('errors'))
 <?php //dd($errors); ?>
 <div class="alert alert-danger alert-dismissable">
     <i class="fa fa-ban"></i>
@@ -95,5 +95,5 @@ class="nav-link active"
     </div>
 </div>
 <!-- close form -->
-{!! Form::close() !!}
+</form>
 @stop

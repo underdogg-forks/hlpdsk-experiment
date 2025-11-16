@@ -11,7 +11,8 @@
     bkLib.onDomLoaded(function() { nicEditors.allTextAreas() });
 </script>
 @section('content')
-{!! Form::open(array('action' => 'Admin\kb\PageController@store' , 'method' => 'post') )!!}
+<form method="POST" action="{{ action('Admin\kb\PageController@store') }}">
+    @csrf
 
 
     <div class="box-body">

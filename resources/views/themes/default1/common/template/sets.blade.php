@@ -22,7 +22,7 @@ class="nav-link active"
 
 @section('content')
 
-@if(Session::has('success'))
+@if(session()->has('success'))
 <div class="alert alert-success alert-dismissable">
     <i class="fa fa-check-circle"></i>
     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
@@ -30,7 +30,7 @@ class="nav-link active"
 </div>
 @endif
 
-@if(Session::has('failed'))
+@if(session()->has('failed'))
 <div class="alert alert-danger alert-dismissable">
     <i class="fa fa-ban"></i>
     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
@@ -113,7 +113,7 @@ class="nav-link active"
                                         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                                         {!! Form::submit('Update Details',['class'=>'btn btn-primary'])!!}
                                     </div>
-                                    {!! Form::close() !!}
+                                    </form>
                                 </div> 
                             </div>
                         </div>
@@ -154,7 +154,8 @@ class="nav-link active"
 <div class="modal fade" id="create" class="modal fade in {{ $errors->has('name') ? 'has-error' : '' }}">
     <div class="modal-dialog">
         <div class="modal-content">
-            {!! Form::open(['route'=>'template-sets.store']) !!}
+            <form method="POST" action="{{ route('template-sets.store') }}">
+    @csrf
             <div class="modal-header">
                 <h4 class="modal-title">{{ trans('lang.create') }}</h4>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
@@ -183,7 +184,7 @@ class="nav-link active"
                 <button type="button" class="btn btn-default" data-dismiss="modal">{{ trans('lang.close') }}</button>
                 {!! Form::submit(trans('lang.create_set'),['class'=>'btn btn-primary'])!!}
             </div>
-            {!! Form::close() !!}
+            </form>
         </div> 
     </div>
 </div>  

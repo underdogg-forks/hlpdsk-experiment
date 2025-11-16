@@ -33,9 +33,10 @@ class="nav-link active"
 <!-- content -->
 @section('content')
 <!-- open a form -->
-{!! Form::open(array('route' => 'agents.store') )!!}
+<form method="POST" action="{{ route('agents.store') }}">
+    @csrf
 
-@if(Session::has('errors'))
+@if(session()->has('errors'))
 <?php //dd($errors); ?>
 <div class="alert alert-danger alert-dismissable">
     <i class="fas fa-ban"></i>
@@ -86,7 +87,7 @@ class="nav-link active"
     @endif
 </div>
 @endif
-@if(Session::has('fails2'))
+@if(session()->has('fails2'))
     <div class="alert alert-danger alert-dismissable">
     <i class="fas fa-ban"></i>
     <b>Alert!</b>
@@ -224,7 +225,7 @@ class="nav-link active"
         {!! Form::submit(trans('lang.submit'),['class'=>'btn btn-primary'])!!}
     </div>
 </div>
-{!!Form::close()!!}
+</form>
 
 <script type="text/javascript">
     $(function() {

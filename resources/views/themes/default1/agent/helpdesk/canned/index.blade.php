@@ -24,7 +24,7 @@ class="nav-link active"
 @section('content')
 <!-- check whether success or not -->
         {{-- Success message --}}
-        @if(Session::has('success'))
+        @if(session()->has('success'))
         <div class="alert alert-success alert-dismissable">
             <i class="fas  fa-check-circle"></i>
             <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
@@ -32,7 +32,7 @@ class="nav-link active"
         </div>
         @endif
         {{-- failure message --}}
-        @if(Session::has('fails'))
+        @if(session()->has('fails'))
         <div class="alert alert-danger alert-dismissable">
             <i class="fas fa-ban"></i>
             <b>{{ trans('lang.alert') }}!</b>
@@ -66,7 +66,9 @@ class="nav-link active"
             <tr>
                 <td>{{$Canned->title }}</td>
                 <td>
-                    {!! Form::open(['route'=>['canned.destroy', $Canned->id],'method'=>'DELETE']) !!}
+                    <form method="POST" action="{{ route('canned.destroy', $Canned->id) }}">
+    @csrf
+    @method('DELETE')
                     <a data-toggle="modal" data-target="#view{!! $Canned->id !!}" href="#" class="btn btn-info btn-xs" onClick="updateModelTitle('{{$Canned->title}}')">{{ trans('lang.view') }}</a>
                     <a href="{!! URL::route('canned.edit',$Canned->id) !!}" class="btn btn-primary btn-xs">{{ trans('lang.edit') }}</a>
                     {!! Form::button(' '.trans('lang.delete'),
@@ -74,7 +76,7 @@ class="nav-link active"
                     'class'=> 'btn btn-warning btn-xs',
                     'onclick'=>'return confirm("Are you sure?")'])
                     !!}
-                    {!! Form::close() !!}
+                    </form>
                 </td>
             </tr>
             <!-- Surrender Modal -->

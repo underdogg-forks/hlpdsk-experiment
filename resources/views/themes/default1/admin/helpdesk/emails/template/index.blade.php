@@ -38,7 +38,7 @@ class="active"
 
 <!-- check whether success or not -->
 
-@if(Session::has('success'))
+@if(session()->has('success'))
     <div class="alert alert-success alert-dismissable">
         <i class="fa  fa-check-circle"></i>
         <b>Success!</b>
@@ -47,7 +47,7 @@ class="active"
     </div>
     @endif
     <!-- failure message -->
-    @if(Session::has('fails'))
+    @if(session()->has('fails'))
     <div class="alert alert-danger alert-dismissable">
         <i class="fa fa-ban"></i>
         <b>Fail!</b>
@@ -87,7 +87,9 @@ class="active"
 		<td> {!! UTC::usertimezone($template->updated_at) !!} </td>
 		<!-- Deleting Fields -->
 		<td>
-			{!! Form::open(['route'=>['template.destroy', $template->id],'method'=>'DELETE']) !!}
+			<form method="POST" action="{{ route('template.destroy', $template->id) }}">
+    @csrf
+    @method('DELETE')
 			<a href="{{route('template.edit',$template->id)}}" class="btn btn-info btn-xs btn-flat"><i class="fa fa-edit" style="color:black;"> </i> Edit</a>
 			<!-- To pop up a confirm Message -->
 				{!! Form::button('<i class="fa fa-trash" style="color:black;"> </i> Delete',
@@ -95,7 +97,7 @@ class="active"
             		'class'=> 'btn btn-warning btn-xs btn-flat',
             		'onclick'=>'return confirm("Are you sure?")'])
             	!!}
-			{!! Form::close() !!}
+			</form>
 		</td>
 		@endforeach
 	</tr>

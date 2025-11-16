@@ -33,7 +33,7 @@ class="nav-link active"
 @section('content')
 
 <!-- check whether success or not -->
-@if(Session::has('success'))
+@if(session()->has('success'))
 <div class="alert alert-success alert-dismissable">
     <i class="fa  fa-check-circle"></i>
     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
@@ -41,7 +41,7 @@ class="nav-link active"
 </div>
 @endif
 <!-- failure message -->
-@if(Session::has('fails'))
+@if(session()->has('fails'))
 <div class="alert alert-danger alert-dismissable">
     <i class="fa fa-ban"></i>
     <b>Fail!</b>
@@ -80,7 +80,9 @@ class="nav-link active"
                     <span style="color:red">{{'Inactive'}}</span>
                     @endif
                 <td>
-                    {!! Form::open(['route'=>['groups.destroy', $group->id],'method'=>'DELETE']) !!}
+                    <form method="POST" action="{{ route('groups.destroy', $group->id) }}">
+    @csrf
+    @method('DELETE')
                     <a href="{{route('groups.edit', $group->id)}}" class="btn btn-primary btn-xs"><i class="fas fa-edit"> </i> {{trans('lang.edit')}}</a>
                     <!-- To pop up a confirm Message -->
                     {!! Form::button('<i class="fas fa-trash"> </i>'.trans('lang.delete'),
@@ -88,7 +90,7 @@ class="nav-link active"
                     'class'=> 'btn btn-danger btn-xs',
                     'onclick'=>'return confirm("Are you sure?")'])
                     !!}
-                    {!! Form::close() !!}
+                    </form>
                 </td>
             </tr>
             @endforeach

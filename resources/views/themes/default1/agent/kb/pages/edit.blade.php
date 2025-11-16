@@ -37,7 +37,7 @@ class="nav-item menu-open"
 
 {!! Form::model($page,['url' => 'page/'.$page->id, 'method' => 'PATCH','files'=>true]) !!}
 
-@if(Session::has('errors'))
+@if(session()->has('errors'))
 <?php //dd($errors); ?>
 <div class="alert alert-danger alert-dismissable">
     <i class="fa fa-ban"></i>

@@ -50,7 +50,7 @@ active
         @endif
 
         <!-- checking if the system fails -->
-        @if(Session::has('fails'))
+        @if(session()->has('fails'))
             <div class="woocommerce-message woocommerce-tracker">
                 <div class="fail">
                     <span id="fail">{{ session('fails') }} </span><br/><br/>

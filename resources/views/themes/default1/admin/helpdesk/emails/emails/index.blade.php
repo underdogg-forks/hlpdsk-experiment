@@ -33,7 +33,7 @@ class="nav-link active"
 <!-- content -->
 @section('content')
 <!-- check whether success or not -->
-@if(Session::has('success'))
+@if(session()->has('success'))
 <div class="alert alert-success alert-dismissable">
   <i class="fa  fa-check-circle"></i>
   <b>Success!</b>
@@ -42,7 +42,7 @@ class="nav-link active"
 </div>
 @endif
 <!-- failure message -->
-@if(Session::has('fails'))
+@if(session()->has('fails'))
 <div class="alert alert-danger alert-dismissable">
   <i class="fa fa-ban"></i>
   <b>Fail!</b>
@@ -113,7 +113,9 @@ class="nav-link active"
 				<td>{!! UTC::usertimezone($email->created_at) !!}</td>
 				<td>{!! UTC::usertimezone($email->updated_at) !!}</td>
 				<td>
-				{!! Form::open(['route'=>['emails.destroy', $email->id],'method'=>'DELETE']) !!}
+				<form method="POST" action="{{ route('emails.destroy', $email->id) }}">
+    @csrf
+    @method('DELETE')
 				<a href="{{route('emails.edit', $email->id)}}" class="btn btn-primary btn-xs"><i class="fas fa-edit"> </i>{{ trans('lang.edit') }}</a>
 				<!-- To pop up a confirm Message -->
 
@@ -130,7 +132,7 @@ class="nav-link active"
 				@endif
 
 					
-				{!! Form::close() !!}
+				</form>
 				</td>
 			</tr>
 			@endforeach

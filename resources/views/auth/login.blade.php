@@ -14,7 +14,7 @@
 
 @section('content')
 
-    @if(Session::has('status'))
+    @if(session()->has('status'))
     <div class="alert alert-success alert-dismissable">
         <i class="fa  fa-check-circle"> </i> <b> {{ trans('lang.success') }} </b>
         <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
@@ -23,7 +23,7 @@
 
     @endif
 
-    @if(Session::has('error'))
+    @if(session()->has('error'))
     <div class="alert alert-danger alert-dismissable">
         <i class="fa  fa-check-circle"> </i> <b> {{ trans('lang.alert') }} </b>
         <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
@@ -105,7 +105,8 @@
                     </div>
 
                     <!-- form open -->
-                    {!!  Form::open(['route' => 'auth.post.login']) !!}
+                    <form method="POST" action="{{ route('auth.post.login') }}">
+    @csrf
 
                         <div class="form-group has-feedback {{ $errors->has('email') ? 'has-error' : '' }}" style="display: -webkit-box;">
                             {!! Form::text('email',null,['placeholder'=> trans("lang.email") ,'class' => 'form-control']) !!}
@@ -149,7 +150,7 @@
                             @include('themes.default1.client.layout.social-login')
                         </div>
 
-                    {!! Form::close()!!}
+                    </form>
                 </div>
             </div>
         </div>

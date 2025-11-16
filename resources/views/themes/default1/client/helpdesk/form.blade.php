@@ -38,7 +38,7 @@ class = "nav-item active"
                     <i class="line"></i>{{ trans('lang.have_a_ticket') }}?
                 </h2>
 
-                @if(Session::has('check'))
+                @if(session()->has('check'))
                 @if (count($errors) > 0)
                 <div class="alert alert-danger alert-dismissable">
                     <i class="fa fa-ban"></i>
@@ -60,7 +60,7 @@ class = "nav-item active"
                     <button type="submit" class="btn btn-info" style=" border-color: rgb(0, 192, 239); background-color: rgb(0, 154, 186) !important; color: white">
                         <i class="fas fa-save"></i> {{ trans('lang.check_ticket_status') }}
                     </button>
-                    {!! Form::close() !!}
+                    </form>
                 </div>
             </section>
         </div>
@@ -71,7 +71,7 @@ class = "nav-item active"
 
     <div id="content" class="site-content col-md-9">
 
-        @if(Session::has('message'))
+        @if(session()->has('message'))
         <div class="alert alert-success alert-dismissable">
             <i class="fas  fa-check-circle"></i>
             <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
@@ -79,10 +79,10 @@ class = "nav-item active"
         </div>
         @endif
         @if (count($errors) > 0)
-        @if(Session::has('check'))
+        @if(session()->has('check'))
         <?php goto a; ?>
         @endif
-        @if(!Session::has('error'))
+        @if(!session()->has('error'))
         <div class="alert alert-danger alert-dismissable">
             <i class="fas fa-ban"></i>
             <b>{{ trans('lang.alert') }} !</b>
@@ -145,7 +145,7 @@ class = "nav-item active"
 
                         @if(!Auth::user())
 
-                        <div class="col-md-2 form-group {{ Session::has('country_code_error') ? 'has-error' : '' }}">
+                        <div class="col-md-2 form-group {{ session()->has('country_code_error') ? 'has-error' : '' }}">
                             {!! Form::label('Code',trans('lang.country-code')) !!}
                              @if($email_mandatory->status == 0 || $email_mandatory->status == '0')
                                     <span class="text-red"> *</span>
@@ -231,7 +231,7 @@ class = "nav-item active"
                             <div class="col-md-12" id="response"> </div>
                         <div id="ss" class="xs-md-6 form-group {{ $errors->has('') ? 'has-error' : '' }}"> </div>
 
-                    {!! Form::close() !!}
+                    </form>
                     </div>
                 </section>    
             </div>

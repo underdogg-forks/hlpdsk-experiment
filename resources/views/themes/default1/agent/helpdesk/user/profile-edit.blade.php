@@ -18,7 +18,7 @@ class="nav-link active"
 
 @section('content')
 
-@if(Session::has('success1'))
+@if(session()->has('success1'))
 <div class="alert alert-success alert-dismissable">
     <i class="fas fa-check-circle"></i>
     <b>Success</b>
@@ -27,7 +27,7 @@ class="nav-link active"
 </div>
 @endif
 <!-- fail message -->
-@if(Session::has('fails1'))
+@if(session()->has('fails1'))
 <div class="alert alert-danger alert-dismissable">
     <i class="fas fa-ban"></i>
     <b>Fail!</b>
@@ -35,7 +35,7 @@ class="nav-link active"
     {{ session('fails1') }}
 </div>
 @endif
-@if(Session::has('success'))
+@if(session()->has('success'))
 <div class="alert alert-success alert-dismissable">
     <i class="fas fa-check-circle"></i>
     <b>Success</b>
@@ -44,7 +44,7 @@ class="nav-link active"
 </div>
 @endif
 <!-- fail message -->
-@if(Session::has('fails'))
+@if(session()->has('fails'))
 <div class="alert alert-danger alert-dismissable">
     <i class="fas fa-ban"></i>
     <b>Fail!</b>
@@ -52,7 +52,7 @@ class="nav-link active"
     {{ session('fails') }}
 </div>
 @endif
-@if(Session::has('errors'))
+@if(session()->has('errors'))
 <?php //dd($errors); ?>
 
 <div class="alert alert-danger alert-dismissable">
@@ -114,7 +114,7 @@ class="nav-link active"
                 </div>
                 <div class="row">
                     <!-- phone extension -->
-                    <div class="col-sm-2 form-group {{ Session::has('country_code_error') ? 'has-error' : '' }}">
+                    <div class="col-sm-2 form-group {{ session()->has('country_code_error') ? 'has-error' : '' }}">
                         {!! Form::label('country_code',trans('lang.country-code')) !!}
                         {!! Form::text('country_code',null,['class' => 'form-control', 'placeholder' => $phonecode, 'title' => trans('lang.enter-country-phone-code'), 'id' => 'code']) !!}
                     </div>
@@ -146,7 +146,7 @@ class="nav-link active"
                     </div>
                 </div>
                 {!! Form::token() !!}
-                {!! Form::close() !!}
+                </form>
             </div>
             <div class="card-footer">
                 {!! Form::submit(trans('lang.update'),['class'=>'btn btn-primary'])!!}
@@ -188,7 +188,7 @@ class="nav-link active"
         </div>
     </div>
 </div>
-{!! Form::close() !!}
+</form>
 <!-- Modal for last step of setting -->
 <div class="modal fade" id="last-modal">
     <div class="modal-dialog" role="document">
@@ -233,7 +233,7 @@ class="nav-link active"
                     <button type="button" id="close-last" class="btn btn-default closemodal">{{ trans('lang.close') }}</button>
                     <div id="last-submit"><input  type="submit" id="merge-btn" class="btn btn-primary" value="{{ trans('lang.verify') }}"></input></div>
                 </div>
-                {!! Form::close() !!}
+                </form>
             </div>
         </div>
     </div>

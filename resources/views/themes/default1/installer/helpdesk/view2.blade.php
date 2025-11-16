@@ -16,7 +16,7 @@ active
     
 <div id="form-content">
 <center><h1>Environment Test</h1></center>
-         @if (Session::has('fail_to_change'))
+         @if(session()->has('fail_to_change'))
            <div class="woocommerce-message woocommerce-tracker" >
                 <p id="fail">{{ session('fail_to_change') }}</p>
             </div>
