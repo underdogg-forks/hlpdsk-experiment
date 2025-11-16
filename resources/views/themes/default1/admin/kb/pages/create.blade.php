@@ -11,7 +11,8 @@
     bkLib.onDomLoaded(function() { nicEditors.allTextAreas() });
 </script>
 @section('content')
-{!! Form::open(array('action' => 'Admin\kb\PageController@store' , 'method' => 'post') )!!}
+<form method="POST" action="{{ action('Admin\kb\PageController@store') }}">
+    @csrf
 
 
     <div class="box-body">
@@ -26,28 +27,28 @@
     <div class="row">
         <div class="col-md-6 form-group {{ $errors->has('name') ? 'has-error' : '' }}">
 
-            {!! Form::label('name',Lang::get('lang.name')) !!}
+            <label for="name">{{ trans('lang.name') }}</label>
             {!! $errors->first('name', '<spam class="help-block">:message</spam>') !!}
-            {!! Form::text('name',null,['class' => 'form-control']) !!}
+            <input type="text" name="name" id="name" value="{{ old('name') }}" class="form-control">
 
         </div>
 
         <div class="col-md-6 form-group {{ $errors->has('slug') ? 'has-error' : '' }}">
 
-            {!! Form::label('slug',Lang::get('lang.slug')) !!}
+            <label for="slug">{{ trans('lang.slug') }}</label>
             {!! $errors->first('slug', '<spam class="help-block">:message</spam>') !!}
-            {!! Form::text('slug',null,['class' => 'form-control']) !!}
+            <input type="text" name="slug" id="slug" value="{{ old('slug') }}" class="form-control">
 
         </div>
     </div>
 
 
                 <div class="form-group {{ $errors->has('description') ? 'has-error' : '' }}">
-                    {!! Form::label('description',Lang::get('lang.description')) !!}
+                    <label for="description">{{ trans('lang.description') }}</label>
                     {!! $errors->first('description', '<spam class="help-block">:message</spam>') !!}
 
                     <div class="form-group" style="background-color:white">
-                    {!! Form::textarea('description',null,['class' => 'form-control color','size' => '110x15','id'=>'myNicEditor','placeholder'=>'Enter the description']) !!}
+                    <textarea name="description" id="myNicEditor" class="form-control color" rows="15">{{ old('description') }}</textarea>
                 </div>
                 </div>
 
@@ -58,19 +59,19 @@
             <div class="col-md-3">
     <div class="box box-default">
     <div class="box-header with-border">
-                  <h3 class="box-title">{{Lang::get('lang.publish')}}</h3>
+                  <h3 class="box-title">{{ trans('lang.publish') }}</h3>
     </div>
                 <div class="box-body">
                     <div class="form-group {{ $errors->has('status') ? 'has-error' : '' }}">
 
-                        {!! Form::label('status',Lang::get('lang.status')) !!}
+                        <label for="status">{{ trans('lang.status') }}</label>
                         {!! $errors->first('status', '<spam class="help-block">:message</spam>') !!}
                         <div class="row">
                             <div class="col-xs-4">
-                                {!! Form::radio('status','1',true) !!}{{Lang::get('lang.published')}}
+                                <input type="radio" name="status" value="'1'">{{ trans('lang.published') }}
                             </div>
                             <div class="col-xs-3">
-                                {!! Form::radio('status','0',null) !!}{{Lang::get('lang.draft')}}
+                                <input type="radio" name="status" value="'0'">{{ trans('lang.draft') }}
                             </div>
                         </div>
                     </div>
@@ -78,15 +79,15 @@
 
                     <div class="form-group {{ $errors->has('visibility') ? 'has-error' : '' }}">
 
-                        {!! Form::label('visibility',Lang::get('lang.visibility')) !!}
+                        <label for="visibility">{{ trans('lang.visibility') }}</label>
                         {!! $errors->first('visibility', '<spam class="help-block">:message</spam>') !!}
                         <div class="row">
                             <div class="col-xs-3">
-                                {!! Form::radio('visibility','1',true) !!}{{Lang::get('lang.public')}}
+                                <input type="radio" name="visibility" value="'1'">{{ trans('lang.public') }}
                                 </div>
                                 <div class="row">
                             <div class="col-xs-3">
-                                {!! Form::radio('visibility','0',null) !!}{{Lang::get('lang.private')}}
+                                <input type="radio" name="visibility" value="'0'">{{ trans('lang.private') }}
                                 </div>
                     </div>
 
@@ -98,7 +99,7 @@
         <div class="box-footer" style="background-color:#f5f5f5;">
         <div style="margin-left:140px;">
 
-                {!! Form::submit(Lang::get('lang.publish'),['class'=>'btn btn-primary'])!!}
+                <button type="submit" class="btn btn-primary">{{ trans('lang.publish') }}</button>
         </div>
 
         </div>

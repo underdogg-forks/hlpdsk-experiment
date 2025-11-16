@@ -118,7 +118,7 @@ class TemplateController extends Controller
         try {
             $this->template->fill($request->input())->save();
 
-            return redirect('templates')->with('success', Lang::get('lang.template_saved_successfully'));
+            return redirect('templates')->with('success', trans('lang.template_saved_successfully'));
         } catch (\Exception $ex) {
             return redirect()->back()->with('fails', $ex->getMessage());
         }
@@ -159,7 +159,7 @@ class TemplateController extends Controller
             $template = $this->template->where('id', $id)->first();
             $template->fill($request->input())->save();
 
-            return redirect()->back()->with('success', Lang::get('lang.template_updated_successfully'));
+            return redirect()->back()->with('success', trans('lang.template_updated_successfully'));
         } catch (\Exception $ex) {
             return redirect()->back()->with('fails', $ex->getMessage());
         }
@@ -184,9 +184,9 @@ class TemplateController extends Controller
                     } else {
                         echo "<div class='alert alert-danger alert-dismissable'>
                     <i class='fa fa-ban'></i>
-                    <b>".\Lang::get('message.alert').'!</b>
+                    <b>".\trans('message.alert').'!</b>
                     <button type=button class=close data-dismiss=alert aria-hidden=true>&times;</button>
-                        '.\Lang::get('message.no-record').'
+                        '.\trans('message.no-record').'
                 </div>';
                     }
                 }
@@ -194,20 +194,20 @@ class TemplateController extends Controller
                     <i class='fa fa-ban'></i>
                     <b>
                     <button type=button class=close data-dismiss=alert aria-hidden=true>&times;</button>
-                        ".\Lang::get('message.deleted-successfully').'
+                        ".\trans('message.deleted-successfully').'
                 </div>';
             } else {
                 echo "<div class='alert alert-danger alert-dismissable'>
                     <i class='fa fa-ban'></i>
-                    <b>".\Lang::get('message.alert').'!</b> 
+                    <b>".\trans('message.alert').'!</b> 
                     <button type=button class=close data-dismiss=alert aria-hidden=true>&times;</button>
-                        '.\Lang::get('message.select-a-row').'
+                        '.\trans('message.select-a-row').'
                 </div>';
             }
         } catch (\Exception $e) {
             echo "<div class='alert alert-danger alert-dismissable'>
                     <i class='fa fa-ban'></i>
-                    <b>".\Lang::get('message.alert').'!</b>
+                    <b>".\trans('message.alert').'!</b>
                     <button type=button class=close data-dismiss=alert aria-hidden=true>&times;</button>
                         '.$e->getMessage().'
                 </div>';
@@ -253,7 +253,7 @@ class TemplateController extends Controller
 
                             $subscription = $this->plan->where('id', $product_currency->subscription)->first()->name;
                         } else {
-                            return redirect('/')->with('fails', \Lang::get('message.no-such-currency-in-system'));
+                            return redirect('/')->with('fails', \trans('message.no-such-currency-in-system'));
                         }
 
                         $array1 = ['{{title}}', '{{currency}}', '{{price}}', '{{subscription}}', '<li>{{feature}}</li>', '{{url}}'];

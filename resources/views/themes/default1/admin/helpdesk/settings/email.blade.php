@@ -20,7 +20,7 @@ class="nav-link active"
 @stop
 <!-- header -->
 @section('PageHeader')
-<h1>{{Lang::get('lang.emails')}}</h1>
+<h1>{{ trans('lang.emails') }}</h1>
 @stop
 <!-- /header -->
 <!-- breadcrumbs -->
@@ -32,29 +32,31 @@ class="nav-link active"
 <!-- content -->
 @section('content')
 <!-- open a form -->
-{!! Form::model($emails,['url' => 'postemail/'.$emails->id, 'method' => 'PATCH']) !!}
+<form method="POST">
+    @csrf
+    @method('PATCH')
 <!-- check whether success or not -->
-@if(Session::has('success'))
+@if(session()->has('success'))
 <div class="alert alert-success alert-dismissable">
     <i class="fas  fa-check-circle"></i>
     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-    {!!Session::get('success')!!}
+    {{ session('success') }}
 </div>
 @endif
 <!-- failure message -->
-@if(Session::has('fails'))
+@if(session()->has('fails'))
 <div class="alert alert-danger alert-dismissable">
     <i class="fas fa-ban"></i>
     <b>{!! lang::get('lang.success') !!} !</b>
     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-    {!!Session::get('fails')!!}
+    {{ session('fails') }}
 </div>
 @endif
-@if(Session::has('errors'))
+@if(session()->has('errors'))
 <?php //dd($errors); ?>
 <div class="alert alert-danger alert-dismissable">
     <i class="fa fa-ban"></i>
-    <b>{!! Lang::get('lang.alert') !!}!</b>
+    <b>{{ trans('lang.alert') }}!</b>
     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
     <br/>
     @if($errors->first('sys_email'))
@@ -64,14 +66,14 @@ class="nav-link active"
 @endif
 <div class="card card-light">
     <div class="card-header">
-        <h3 class="card-title">{{Lang::get('lang.email-settings')}}</h3>             
+        <h3 class="card-title">{{ trans('lang.email-settings') }}</h3>             
     </div>
     <div class="card-body">
         <!-- Accept All Emails:	CHECKBOX: Accept email from unknown Users  -->
         <div class="row">
             <div class="col-md-6">
                 <div class="form-group">
-                    {!! Form::checkbox('all_emails',1,true) !!}&nbsp;{{Lang::get('lang.accept_all_email')}}
+                    <input type="checkbox" name="all_emails" value="1">&nbsp;{{ trans('lang.accept_all_email') }}
                 </div>
             </div>
         </div>
@@ -82,7 +84,7 @@ class="nav-link active"
         <div class="row">
             <div class="col-md-4">
                 <div class="form-group">
-                    {!! Form::checkbox('email_collaborator',1) !!}&nbsp;{{Lang::get('lang.accept_email_collab')}}
+                    <input type="checkbox" name="email_collaborator" value="1) !!}&nbsp;{{ trans('lang.accept_email_collab') }}
                 </div>
             </div>
         </div>
@@ -90,13 +92,13 @@ class="nav-link active"
         <div class="row">
             <div class="col-md-4">
                 <div class="form-group">
-                    {!! Form::checkbox('attachment',1) !!}&nbsp;{{Lang::get('lang.attachments')}}
+                    <input type="checkbox" name="attachment'">&nbsp;{{ trans('lang.attachments') }}
                 </div>
             </div>
         </div>
     </div>
     <div class="card-footer">
-        {!! Form::submit(Lang::get('lang.submit'),['class'=>'btn btn-primary'])!!}
+        {!! Form::submit(trans('lang.submit')" value="['class'=>'btn btn-primary']">
     </div>
 </div>
 @stop

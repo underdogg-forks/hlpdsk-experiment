@@ -20,7 +20,7 @@ class="nav-link active"
 @stop
 <!-- header -->
 @section('PageHeader')
-<h1>{!! Lang::get('lang.organization') !!}</h1>
+<h1>{{ trans('lang.organization') }}</h1>
 @stop
 <!-- /header -->
 <!-- breadcrumbs -->
@@ -32,13 +32,14 @@ class="nav-link active"
 <!-- content -->
 @section('content')
 <!-- open a form -->
-{!! Form::open(['route' => 'organizations.store','method'=>'post']) !!}
+<form method="POST" action="{{ route('organizations.store') }}">
+    @csrf
 
-@if(Session::has('errors'))
+@if(session()->has('errors'))
 <?php //dd($errors); ?>
 <div class="alert alert-danger alert-dismissable">
     <i class="fa fa-ban"></i>
-    <b>{!! Lang::get('lang.alert') !!}!</b>
+    <b>{{ trans('lang.alert') }}!</b>
     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
     <br/>
     @if($errors->first('name'))
@@ -54,40 +55,40 @@ class="nav-link active"
 @endif
 <div class="card card-light">
     <div class="card-header">
-        <h3 class="card-title">{{Lang::get('lang.create')}}</h3>
+        <h3 class="card-title">{{ trans('lang.create') }}</h3>
     </div>
     <div class="card-body">  
         <!-- name : text : Required -->
         <div class="row">
             <div class="col-sm-4 form-group {{ $errors->has('name') ? 'has-error' : '' }}">
-                {!! Form::label('name',Lang::get('lang.name')) !!} <span class="text-red"> *</span>
-                {!! Form::text('name',null,['class' => 'form-control']) !!}
+                <label for="name">{{ trans('lang.name') }}</label> <span class="text-red"> *</span>
+                <input type="text" name="name" id="name" value="{{ old('name') }}" class="form-control">
             </div>
             <!-- phone : Text : -->
             <div class="col-sm-4 form-group {{ $errors->has('phone') ? 'has-error' : '' }}">
-                {!! Form::label('phone',Lang::get('lang.phone')) !!}
-                {!! Form::text('phone',null,['class' => 'form-control']) !!}
+                <label for="phone">{{ trans('lang.phone') }}</label>
+                <input type="text" name="phone" id="phone" value="{{ old('phone') }}" class="form-control">
             </div>
             <!-- website : Text :  -->
             <div class="col-sm-4 form-group {{ $errors->has('website') ? 'has-error' : '' }}">
-                {!! Form::label('website',Lang::get('lang.website')) !!}
-                {!! Form::text('website',null,['class' => 'form-control']) !!}
+                <label for="website">{{ trans('lang.website') }}</label>
+                <input type="text" name="website" id="website" value="{{ old('website') }}" class="form-control">
             </div>
         </div>
         <!-- Internal Notes : Textarea -->
         <div class="row">
             <div class="col-sm-6 form-group">
-                {!! Form::label('address',Lang::get('lang.address')) !!}
-                {!! Form::textarea('address',null,['class' => 'form-control']) !!}
+                <label for="address">{{ trans('lang.address') }}</label>
+                <textarea name="address" id="address" class="form-control">{{ old('address') }}</textarea>
             </div>
             <div class="col-sm-6 form-group">
-                {!! Form::label('internal_notes',Lang::get('lang.internal_notes')) !!}
-                {!! Form::textarea('internal_notes',null,['class' => 'form-control']) !!}
+                <label for="internal_notes">{{ trans('lang.internal_notes') }}</label>
+                <textarea name="internal_notes" id="internal_notes" class="form-control">{{ old('internal_notes') }}</textarea>
             </div>
         </div>
     </div>
     <div class="card-footer">
-        {!! Form::submit(Lang::get('lang.submit'),['class'=>'btn btn-primary'])!!}
+        <button type="submit" class="btn btn-primary">{{ trans('lang.submit') }}</button>
     </div>
 </div>
 <script type="text/javascript">

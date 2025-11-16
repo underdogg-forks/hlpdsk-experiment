@@ -85,6 +85,6 @@ class ClientTicketController extends Controller
 
         $this->TicketWorkflowController->workflow($fromaddress, $fromname, $subject, $body, $phone, $phonecode, $mobile_number, $helptopic, $sla, $priority, $source, $collaborator, $dept, $assign, $team_assign, $ticket_status, $form_data, $auto_response);
 
-        return \Redirect::back()->with('success1', Lang::get('lang.successfully_replied'));
+        return \Redirect::back()->with('success1', trans('lang.successfully_replied'));
     }
 }

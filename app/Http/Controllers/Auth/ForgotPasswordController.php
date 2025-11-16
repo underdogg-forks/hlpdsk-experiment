@@ -78,9 +78,9 @@ class ForgotPasswordController extends Controller
                     event('reset.password2', [$value]);
                 }
 
-                return redirect()->back()->with('status', Lang::get('lang.we_have_e-mailed_your_password_reset_link'));
+                return redirect()->back()->with('status', trans('lang.we_have_e-mailed_your_password_reset_link'));
             } else {
-                return redirect()->back()->with('fails', Lang::get("lang.we_can't_find_a_user_with_that_e-mail_address"));
+                return redirect()->back()->with('fails', trans("lang.we_can't_find_a_user_with_that_e-mail_address"));
             }
         } catch (\Exception $e) {
             return redirect()->back()->with('fails', $e->getMessage());

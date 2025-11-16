@@ -6,8 +6,8 @@ Knowledge Base -
 @section('breadcrumb')
     {{--<div class="site-hero clearfix">--}}
     <ol class="breadcrumb float-sm-right ">
-        <li class="breadcrumb-item"> <i class="fas fa-home"> </i> {!! Lang::get('lang.you_are_here') !!} : &nbsp;</li>
-        <li><a href="{!! URL::route('home') !!}">{!! Lang::get('lang.knowledge_base') !!}</a></li>
+        <li class="breadcrumb-item"> <i class="fas fa-home"> </i> {{ trans('lang.you_are_here') }} : &nbsp;</li>
+        <li><a href="{!! URL::route('home') !!}">{{ trans('lang.knowledge_base') }}</a></li>
     </ol>
 
 @stop
@@ -16,20 +16,20 @@ class = "nav-item active"
 @stop
 @section('content')
 
-@if(Session::has('success'))
+@if(session()->has('success'))
 <div class="alert alert-success alert-dismissable">
     <i class="fas  fa-check-circle"></i>
     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-    {{Session::get('success')}}
+    {{ session('success') }}
 </div>
 @endif
 <!-- failure message -->
-@if(Session::has('fails'))
+@if(session()->has('fails'))
 <div class="alert alert-danger alert-dismissable">
     <i class="fas fa-ban"></i>
-    <b>{!! Lang::get('lang.alert') !!}!</b>
+    <b>{{ trans('lang.alert') }}!</b>
     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-    {{Session::get('fails')}}
+    {{ session('fails') }}
 </div>
 @endif
 
@@ -98,11 +98,11 @@ class = "nav-item active"
                             </h3>
                         </li>
                         @empty
-{{--                        <p>{!! Lang::get('lang.no_article') !!}</p>--}}
+{{--                        <p>{{ trans('lang.no_article') }}</p>--}}
                         @endforelse
                     <?php } ?>
                 </ul>
-                <p class="more-link text-center"><a href="{{url('category-list/'.$category->slug)}}" class="btn btn-custom btn-sm" style="background-color: #009aba; hov: #00c0ef; color: #fff ">{!! Lang::get('lang.view_all') !!}</a></p>
+                <p class="more-link text-center"><a href="{{url('category-list/'.$category->slug)}}" class="btn btn-custom btn-sm" style="background-color: #009aba; hov: #00c0ef; color: #fff ">{{ trans('lang.view_all') }}</a></p>
             </section>
         </div>
         @endforeach
@@ -112,14 +112,14 @@ class = "nav-item active"
 
         <div class="banner-wrapper banner-horizontal clearfix" style="background: none;">
 
-            <h4 style="font-size: 15px;" class="banner-title h3">{!! Lang::get('lang.need_more_support') !!}?</h4>
+            <h4 style="font-size: 15px;" class="banner-title h3">{{ trans('lang.need_more_support') }}?</h4>
 
             <div class="banner-content">
 
-                <p>{!! Lang::get('lang.if_you_did_not_find_an_answer_please_raise_a_ticket_describing_the_issue') !!}.</p>
+                <p>{{ trans('lang.if_you_did_not_find_an_answer_please_raise_a_ticket_describing_the_issue') }}.</p>
             </div>
 
-            <p><a  style="background-color: #009aba; hov: #00c0ef; color: #fff " href="{!! URL::route('form') !!}" class="btn btn-custom">{!! Lang::get('lang.submit_a_ticket') !!}</a></p>
+            <p><a  style="background-color: #009aba; hov: #00c0ef; color: #fff " href="{!! URL::route('form') !!}" class="btn btn-custom">{{ trans('lang.submit_a_ticket') }}</a></p>
         </div>
     </section>
 </div>
@@ -137,7 +137,7 @@ class = "nav-item active"
 
                 <h2 class="section-title h4 clearfix">
 
-                    <b>   <i class="line"></i>{!! Lang::get('lang.categories') !!}</b>
+                    <b>   <i class="line"></i>{{ trans('lang.categories') }}</b>
 
                     <small class="float-right"><i class="far fa-hdd fa-fw"></i></small>
                 </h2>

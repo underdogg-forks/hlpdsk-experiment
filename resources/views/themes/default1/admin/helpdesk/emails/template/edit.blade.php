@@ -29,16 +29,18 @@ class="active"
 <!-- content -->
 @section('content')
 
-{!! Form::model($templates,['url' => 'template/'.$templates->id,'method' => 'PATCH']) !!}
+<form method="POST">
+    @csrf
+    @method('PATCH')
 
 	<div class="row">
 <div class="col-md-12">
 <div class="box box-primary">
 <div class="box-body">
 <div class="box-header">
-<h2 class="box-title">{{Lang::get('lang.create')}}</h2>
+<h2 class="box-title">{{ trans('lang.create') }}</h2>
 <div class="pull-right">
-   {!! Form::submit(Lang::get('lang.save'),['class'=>'btn btn-primary'])!!}</div>
+   <button type="submit" class="btn btn-primary">{{ trans('lang.save') }}</button></div>
    </div>
 
 	 <div class="box-body table-responsive no-padding"style="overflow:hidden">
@@ -48,14 +50,14 @@ class="active"
       <div class="col-md-6">
 		<div class="form-group {{ $errors->has('status') ? 'has-error' : '' }}">
 			<div class="row col-xs-3">
-			{!! Form::label('status',Lang::get('lang.status')) !!}
+			<label for="status">{{ trans('lang.status') }}</label>
 			</div>
 			<div class="row">
 				<div class="col-xs-3">
-					{!! Form::radio('ban_status','active',true) !!}{{Lang::get('lang.active')}}
+					<input type="radio" name="ban_status" value="'active'">{{ trans('lang.active') }}
 				</div>
 				<div class="col-xs-3">
-					{!! Form::radio('ban_status','disabled') !!}{{Lang::get('lang.disabled')}}
+					<input type="radio" name="ban_status" value="'disabled'">{{ trans('lang.disabled') }}
 				</div>
 			</div>
 			</div>
@@ -65,27 +67,51 @@ class="active"
 		<div class="row">
            <div class="col-md-4">
 		        <div class="form-group {{ $errors->has('name') ? 'has-error' : '' }}">
-			      {!! Form::label('name',Lang::get('lang.name')) !!}
+			      <label for="name">{{ trans('lang.name') }}</label>
 			      {!! $errors->first('name', '<spam class="help-block">:message</spam>') !!}
-			       {!! Form::text('name',null,['disabled'=>'disabled','class' => 'form-control']) !!}
+			       <input type="text" name="name" id="name" value="{{ old('name') }}" class="form-control">
 			</div>
 		</div>
 
 		<!-- Form for template set to clone From template table : Drop down : required -->
              <div class="col-md-4">
 		<div class="form-group {{ $errors->has('template_set_to_clone') ? 'has-error' : '' }}">
-			{!! Form::label('template_set_to_clone',Lang::get('lang.template_set_to_clone')) !!}
+			<label for="template_set_to_clone">{{ trans('lang.template_set_to_clone') }}</label>
 			{!! $errors->first('template_set_to_clone', '<spam class="help-block">:message</spam>') !!}
-			{!!Form::select('template_set_to_clone', [''=>'Select a Template','Templates'=>$templates->pluck('name','name')],1,['class' => 'form-control']) !!}
+			<select name="template_set_to_clone" id="template_set_to_clone" class="form-control">
+    @foreach([''=>'Select a Template','Templates'=>$templates->pluck('name','name')] as $key => $value)
+        @if(is_array($value))
+            <optgroup label="{{ $key }}">
+                @foreach($value as $subKey => $subValue)
+                    <option value="{{ $subKey }}">{{ $subValue }}</option>
+                @endforeach
+            </optgroup>
+        @else
+            <option value="{{ $key }}">{{ $value }}</option>
+        @endif
+    @endforeach
+</select>
 			</div>
 		</div>
 
 		<!-- Language field to Set the language in the template -->
            <div class="col-md-4">
 		<div class="form-group {{ $errors->has('language') ? 'has-error' : '' }}">
-			{!! Form::label('language',Lang::get('lang.language')) !!}
+			<label for="language">{{ trans('lang.language') }}</label>
 			{!! $errors->first('language', '<spam class="help-block">:message</spam>') !!}
-			{!!Form::select('language', [''=>'Select a Language','Languages'=>$languages->pluck('name','name')],null,['class' => 'form-control']) !!}
+			<select name="language" id="language" class="form-control">
+    @foreach([''=>'Select a Language','Languages'=>$languages->pluck('name','name')] as $key => $value)
+        @if(is_array($value))
+            <optgroup label="{{ $key }}">
+                @foreach($value as $subKey => $subValue)
+                    <option value="{{ $subKey }}">{{ $subValue }}</option>
+                @endforeach
+            </optgroup>
+        @else
+            <option value="{{ $key }}">{{ $value }}</option>
+        @endif
+    @endforeach
+</select>
 			</div>
 		</div>
 
@@ -93,8 +119,8 @@ class="active"
 
              <div class="col-md-12">
 		      <div class="form-group">
-			     {!! Form::label('internal_note',Lang::get('lang.internal_notes')) !!}
-			     {!! Form::textarea('internal_note',null,['class' => 'form-control']) !!}
+			     <label for="internal_note">{{ trans('lang.internal_notes') }}</label>
+			     <textarea name="internal_note" id="internal_note" class="form-control">{{ old('internal_note') }}</textarea>
 		     </div>
            </div>
 

@@ -203,6 +203,6 @@ class CategoryControllerTest extends TestCase
         $response->assertRedirect();
 
         // Assert that the response has a success message
-        $response->assertSessionHas('success', Lang::get('lang.category_deleted_successfully'));
+        $response->assertSessionHas('success', trans('lang.category_deleted_successfully'));
     }
 }

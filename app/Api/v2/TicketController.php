@@ -73,13 +73,13 @@ class TicketController extends Controller
                         // $result = json_encode($result);
                         return successResponse('', $result);
                     } else {
-                        $error = Lang::get('lang.invalid_value_for_api_in_parameters');
+                        $error = trans('lang.invalid_value_for_api_in_parameters');
                     }
                 } else {
-                    $error = Lang::get('lang.required_parameters_can_not_be_empty');
+                    $error = trans('lang.required_parameters_can_not_be_empty');
                 }
             } else {
-                $error = Lang::get('lang.missing_requre_parameters');
+                $error = trans('lang.missing_requre_parameters');
             }
 
             return errorResponse($error, $responseCode = 400);

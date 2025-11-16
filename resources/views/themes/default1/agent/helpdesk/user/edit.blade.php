@@ -19,25 +19,25 @@ class="nav-link active"
 
 <!-- header -->
 @section('PageHeader')
-<h1>{!! Lang::get('lang.edit_user') !!}</h1>
+<h1>{{ trans('lang.edit_user') }}</h1>
 @stop
 <!-- /header -->
 
 <!-- content -->
 @section('content')
-@if(Session::has('fails'))
+@if(session()->has('fails'))
 <div class="alert alert-danger alert-dismissable">
     <i class="fas fa-ban"></i>
-    <b>{!! Lang::get('lang.alert') !!}!</b>
+    <b>{{ trans('lang.alert') }}!</b>
     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-    {{Session::get('fails')}}
+    {{ session('fails') }}
 </div>
 @endif
 
-@if(Session::has('errors'))
+@if(session()->has('errors'))
     <div class="alert alert-danger alert-dismissable">
         <i class="fas fa-ban"></i>
-        <b>{!! Lang::get('lang.alert') !!}!</b>
+        <b>{{ trans('lang.alert') }}!</b>
         <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
         <br/>
         @if($errors->first('first_name'))
@@ -67,39 +67,41 @@ class="nav-link active"
     </div>
     @endif
 <!-- open a form -->
-{!! Form::model($users,['url'=>'user/'.$users->id,'method'=>'PATCH']) !!}
+<form method="POST">
+    @csrf
+    @method('PATCH')
 <div class="card card-light">
     <div class="card-header">
         <h3 class="card-title">
-            {!! Lang::get('lang.user_credentials') !!}
+            {{ trans('lang.user_credentials') }}
         </h3>
     </div>
     <div class="card-body">
         <div class="row">
             <!-- First name : first name : Required -->
             <div class="col-sm-4 form-group {{ $errors->has('first_name') ? 'has-error' : '' }}">
-                {!! Form::label('first_name',Lang::get('lang.first_name')) !!}<span class="text-red"> *</span>
-                {!! Form::text('first_name',null,['class' => 'form-control']) !!}
+                <label for="first_name">{{ trans('lang.first_name') }}</label><span class="text-red"> *</span>
+                <input type="text" name="first_name" id="first_name" value="{{ old('first_name') }}" class="form-control">
             </div>
             <!-- Last name : last name : Required -->
             <div class="col-sm-4 form-group {{ $errors->has('last_name') ? 'has-error' : '' }}">
-                {!! Form::label('last_name',Lang::get('lang.last_name')) !!}
-                {!! Form::text('last_name',null,['class' => 'form-control']) !!}
+                <label for="last_name">{{ trans('lang.last_name') }}</label>
+                <input type="text" name="last_name" id="last_name" value="{{ old('last_name') }}" class="form-control">
             </div>
             <!-- User Name : Text : Required-->
             <div class="col-sm-4 form-group {{ $errors->has('user_name') ? 'has-error' : '' }}">
-                {!! Form::label('user_name',Lang::get('lang.user_name')) !!}<span class="text-red"> *</span>
-                {!! Form::text('user_name',null,['class' => 'form-control']) !!}
+                <label for="user_name">{{ trans('lang.user_name') }}</label><span class="text-red"> *</span>
+                <input type="text" name="user_name" id="user_name" value="{{ old('user_name') }}" class="form-control">
             </div>
         </div>
         <div class="row">
             <!-- Email Address : Email : Required -->
             <div class="col-sm-6 form-group {{ $errors->has('email') ? 'has-error' : '' }}">
-                {!! Form::label('email',Lang::get('lang.email')) !!}<span class="text-red"> *</span>
-                {!! Form::email('email',null,['class' => 'form-control']) !!}
+                <label for="email">{{ trans('lang.email') }}</label><span class="text-red"> *</span>
+                <input type="email" name="email" id="email" value="{{ old('email') }}" class="form-control">
             </div>
             <div class="col-sm-6 form-group {{ $errors->has('organization') ? 'has-error' : '' }}">
-                {!! Form::label('organization',Lang::get('lang.organization')) !!}
+                <label for="organization">{{ trans('lang.organization') }}</label>
                
 
                   <select class="form-control" name="org_id">
@@ -115,55 +117,55 @@ class="nav-link active"
             </div>
         </div>
         <div class="row">     
-            <div class="col-sm-1 form-group {{ Session::has('country_code_error') ? 'has-error' : '' }}">
-                {!! Form::label('country_code',Lang::get('lang.country-code')) !!}
+            <div class="col-sm-1 form-group {{ session()->has('country_code_error') ? 'has-error' : '' }}">
+                <label for="country_code">{{ trans('lang.country-code') }}</label>
                 {!! $errors->first('country_code', '<spam class="help-block">:message</spam>') !!}
-                {!! Form::text('country_code',null,['class' => 'form-control', 'placeholder' => $phonecode, 'title' => Lang::get('lang.enter-country-phone-code')]) !!}
+                <input type="text" name="country_code" id="country_code" value="{{ old('country_code') }}" class="form-control">
             </div>
             <!-- mobile Number : Text :  -->
             <div class="col-md-3 form-group {{ $errors->has('mobile') ? 'has-error' : '' }}">
-                {!! Form::label('mobile',Lang::get('lang.mobile')) !!}
-                {!! Form::input('number', 'mobile',null,['class' => 'form-control']) !!}
+                <label for="mobile">{{ trans('lang.mobile') }}</label>
+                <input type="number" name="mobile" id="mobile" value="{{ old('mobile') }}" class="form-control">
             </div>           
             <div class="col-sm-1 form-group {{ $errors->has('ext') ? 'has-error' : '' }}">
-                <label for="ext">{!! Lang::get('lang.ext') !!}</label>  
-                {!! Form::text('ext',null,['class' => 'form-control']) !!}
+                <label for="ext">{{ trans('lang.ext') }}</label>  
+                <input type="text" name="ext" id="ext" value="{{ old('ext') }}" class="form-control">
             </div>
             <div class="col-sm-3 form-group {{ $errors->has('phone_number') ? 'has-error' : '' }}">
-                <label for="phone_number">{!! Lang::get('lang.phone') !!}</label>
-                {!! Form::text('phone_number',null,['class' => 'form-control']) !!}
+                <label for="phone_number">{{ trans('lang.phone') }}</label>
+                <input type="text" name="phone_number" id="phone_number" value="{{ old('phone_number') }}" class="form-control">
             </div>
             <div class="col-sm-2 form-group {{ $errors->has('active') ? 'has-error' : '' }}">
-                {!! Form::label('active',Lang::get('lang.status')) !!}
+                <label for="active">{{ trans('lang.status') }}</label>
                 <div class="row">
                     <div class="col-sm-12">
-                        {!! Form::radio('active','1',true) !!} {{Lang::get('lang.active')}}
+                        <input type="radio" name="active" value="'1'"> {{ trans('lang.active') }}
                     </div>
                     <div class="col-sm-12">
-                        {!! Form::radio('active','0') !!} {{Lang::get('lang.inactive')}}
+                        <input type="radio" name="active" value="'0'"> {{ trans('lang.inactive') }}
                     </div>
                 </div>
             </div>
             <div class="col-sm-2 form-group {{ $errors->has('ban') ? 'has-error' : '' }}">
-                {!! Form::label('ban',Lang::get('lang.ban')) !!}
+                <label for="ban">{{ trans('lang.ban') }}</label>
                 <div class="row">
                     <div class="col-sm-12">
-                        {!! Form::radio('ban','1',true) !!} {{Lang::get('lang.enable')}}
+                        <input type="radio" name="ban" value="'1'"> {{ trans('lang.enable') }}
                     </div>
                     <div class="col-sm-12">
-                        {!! Form::radio('ban','0') !!} {{Lang::get('lang.disable')}}
+                        <input type="radio" name="ban" value="'0'"> {{ trans('lang.disable') }}
                     </div>
                 </div>
             </div>
         </div>
         <!-- Internal Notes : Textarea -->
         <div class="form-group">
-            {!! Form::label('internal_note',Lang::get('lang.internal_notes')) !!}
-            {!! Form::textarea('internal_note',null,['class' => 'form-control', 'size' => '30x5']) !!}
+            <label for="internal_note">{{ trans('lang.internal_notes') }}</label>
+            <textarea name="internal_note" id="internal_note" class="form-control" rows="5">{{ old('internal_note') }}</textarea>
         </div>
     </div>
     <div class="card-footer">
-        {!! Form::submit(Lang::get('lang.update'),['class'=>'btn btn-primary'])!!}
+        <button type="submit" class="btn btn-primary">{{ trans('lang.update') }}</button>
     </div>        
 </div>
 <script>

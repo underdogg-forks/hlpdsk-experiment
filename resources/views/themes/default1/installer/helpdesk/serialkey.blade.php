@@ -8,26 +8,27 @@ active
     <div class="wc-setup-content" ng-app="myApp">
         <h1 style="text-align: center;">Faveo HELPDESK Serial Key</h1>
         <p><strong>Please enter your serial key for Faveo HELPDESK PRO</strong></p>
-                @if(Session::has('success'))
+                @if(session()->has('success'))
                     <div class="wc-setup-content">
                         <div class="woocommerce-message woocommerce-tracker">
                             <div class="ok">
-                                <span id="fail">{{Session::get('success')}}</span><br/><br/>
+                                <span id="fail">{{ session('success') }}</span><br/><br/>
                             </div>
                         </div>
                     </div>
                 @endif
                 <!-- fail message -->
-                @if(Session::has('fails'))
+                @if(session()->has('fails'))
                     <div class="wc-setup-content">
                         <div class="woocommerce-message woocommerce-tracker">
                             <div class="fail">
-                                <span id="fail">{{Session::get('fails')}}</span><br/><br/>
+                                <span id="fail">{{ session('fails') }}</span><br/><br/>
                             </div>
                         </div>
                     </div>
                 @endif
-        {!! Form::open(['url'=> '/post-serial']) !!}
+        <form method="POST" action="/post-serial">
+    @csrf
             <input type="hidden" name="domain" value="http://{{ $_SERVER['HTTP_HOST'] }}">
             <input type="hidden" name="url" value="http://{{$_SERVER['HTTP_HOST']}}{{$_SERVER['REQUEST_URI']}}">
             <table ng-controller="AutotabController">

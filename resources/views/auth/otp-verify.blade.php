@@ -3,11 +3,11 @@
 @section('body')
 <h4  id="otp-screen" class="login-box-msg">
 <p>Hello
-@if (Session::has('name'))
-    {{ Session::get('name')}}
+@if(session()->has('name'))
+    {{ session('name') }}
 @endif!</p><br/>
 <span style='font-size: .8em'>
-{!!Lang::get('lang.verify-screen-msg')!!}
+{{ trans('lang.verify-screen-msg') }}
     <?php
         $value = Session::get('values');
         if (array_key_exists('referer', $value)) {
@@ -34,60 +34,61 @@
     <span id = "success_message"></span>
 </div>
 <div id="ere_msg" style="display:none" class="alert alert-danger alert-dismissable">
-    <i class="fa fa-ban"> </i> <b> {!! Lang::get('lang.alert') !!}! </b>
+    <i class="fa fa-ban"> </i> <b> {{ trans('lang.alert') }}! </b>
     <span id = "error_message"></span>
 </div>
 
 <!-- failure message -->
-@if(Session::has('errors'))
+@if(session()->has('errors'))
 <div class="alert alert-danger alert-dismissable">
-    <i class="fa fa-ban"> </i> <b> {!! Lang::get('lang.alert') !!}! </b>
+    <i class="fa fa-ban"> </i> <b> {{ trans('lang.alert') }}! </b>
     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-    @if(Session::has('error'))    
-    <li>{!! Session::get('error') !!}</li>
+    @if(session()->has('error'))    
+    <li>{{ session('error') }}</li>
     @else
-    <li>{!! Lang::get('lang.please_fill_all_required_feilds') !!}</li>
+    <li>{{ trans('lang.please_fill_all_required_feilds') }}</li>
     @endif
 </div>
 @endif
 <!-- failure message -->
-@if(Session::has('fails'))
+@if(session()->has('fails'))
 <div class="alert alert-danger alert-dismissable">
-    <i class="fa fa-ban"> </i> <b> {!! Lang::get('lang.alert') !!}! </b>
+    <i class="fa fa-ban"> </i> <b> {{ trans('lang.alert') }}! </b>
     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-    <li>{!! Session::get('fails') !!}</li>
+    <li>{{ session('fails') }}</li>
 </div>
 @endif
 
 <!-- form open -->
-{!!  Form::open(['route'=> 'otp-verification', 'method'=>'post']) !!}
+<form method="POST" action="{{ route('otp-verification') }}">
+    @csrf
 <!-- Email -->
 <div class="form-group has-feedback {{ $errors->has('email') ? 'has-error' : '' }}">
-    {!! Form::hidden('email',null,['placeholder'=> Lang::get("lang.email") ,'class' => 'form-control']) !!}
+    <input type="hidden" name="email" value="null">
     <!-- {!! $errors->first('email', '<spam class="help-block">:message</spam>') !!} -->
 </div>
 
 <!-- Password -->
 <div class="form-group has-feedback {{ $errors->has('password') ? 'has-error' : '' }}">
-    {!! Form::hidden('password',['placeholder'=>Lang::get("lang.password"),'class' => 'form-control']) !!}
+    {!! Form::hidden('password',['placeholder'=>trans("lang.password"),'class' => 'form-control']) !!}
     <!-- {!! $errors->first('password', '<spam class="help-block">:message</spam>') !!} -->
 </div>
 <div class="form-group has-feedback {{ $errors->has('otp') ? 'has-error' : '' }}">
-    {!! Form::input('text','otp',null,['placeholder'=> Lang::get("lang.enter-otp") ,'class' => 'form-control' , 'required' => true, 'pattern' => "[0-9]{6}", "title" => Lang::get('lang.otp-input-title')]) !!}
+    {!! Form::input('text','otp',null,['placeholder'=> trans("lang.enter-otp") ,'class' => 'form-control' , 'required' => true, 'pattern' => "[0-9]{6}", "title" => trans('lang.otp-input-title')]) !!}
     <!-- {!! $errors->first('email', '<spam class="help-block">:message</spam>') !!} -->
 </div>
-@if (Session::has('referer'))
-    <input type='hidden' name="referer" value="{!! Session::get('referer') !!}">
-@elseif(Session::has('errors'))
+@if(session()->has('referer'))
+    <input type='hidden' name="referer" value="{{ session('referer') }}">
+@elseif(session()->has('errors'))
     <input type='hidden' name="referer" value="form">
 @endif
 <div class="row">
     <div class="col-xs-8">
-        {!! Lang::get('lang.did-not-recive-code') !!}<br/>
-        <a id="resend" onclick="resendOTP();" href="#" title="{!!Lang::get('lang.resend-otp-title') !!}">{!! Lang::get("lang.resend_otp") !!}</a><br>
+        {{ trans('lang.did-not-recive-code') }}<br/>
+        <a id="resend" onclick="resendOTP();" href="#" title="{{ trans('lang.resend-otp-title') }}">{{ trans("lang.resend_otp") }}</a><br>
     </div><!-- /.col -->
     <div class="col-xs-4">
-        <button type="submit" class="btn btn-primary btn-block btn-flat">{!! Lang::get("lang.verify") !!}</button>
+        <button type="submit" class="btn btn-primary btn-block btn-flat">{{ trans("lang.verify") }}</button>
     </div><!-- /.col -->
 </div>
 </form>
@@ -122,7 +123,7 @@ input[type=number]::-webkit-outer-spin-button {
                 $('#loading-screen').css('display','block');
             },
             success: function(response) {
-                var message = "{{Lang::get('lang.otp-sent')}}";
+                var message = "{{ trans('lang.otp-sent') }}";
                 $("#success_message").html(message);
                 $('#otp-screen').css('display','block');
                 $('#success').css('display','block');
@@ -130,7 +131,7 @@ input[type=number]::-webkit-outer-spin-button {
             },
             complete: function( jqXHR, textStatus) {
                 if (textStatus === "parsererror" || textStatus === "timeout" || textStatus === "abort" || textStatus === "error") {
-                    var message = "{{Lang::get('lang.otp-not-sent')}}";
+                    var message = "{{ trans('lang.otp-not-sent') }}";
                     $("#error_message").html(message);
                     $('#otp-screen').css('display','block');
                     $('#ere_msg').css('display','block');

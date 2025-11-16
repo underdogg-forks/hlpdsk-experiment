@@ -21,7 +21,7 @@ class="nav-link active"
 
 <!-- header -->
 @section('PageHeader')
-<h1>{!! Lang::get('lang.organization_profile') !!}</h1>
+<h1>{{ trans('lang.organization_profile') }}</h1>
 @stop
 <!-- /header -->
 
@@ -44,19 +44,19 @@ class="nav-link active"
             <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
         </div>
 
-        @if(Session::has('success'))
+        @if(session()->has('success'))
         <div id="success-alert" class="alert alert-success alert-dismissable" style="margin-top: 15px;">
             <i class="fas fa-check-circle"> </i>
             <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-            {{Session::get('success')}}
+            {{ session('success') }}
         </div>
         @endif
         <!-- failure message -->
-        @if(Session::has('fails'))
+        @if(session()->has('fails'))
         <div class="alert alert-danger alert-dismissable" style="margin-top: 15px;">
-            <i class="fas fa-ban"> </i> <b> {!! Lang::get('lang.alert') !!} ! </b>
+            <i class="fas fa-ban"> </i> <b> {{ trans('lang.alert') }} ! </b>
             <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-            {{Session::get('fails')}}
+            {{ session('fails') }}
         </div>
         @endif
     </div> 
@@ -72,21 +72,21 @@ class="nav-link active"
 
                 <a href="{{route('organizations.edit', $orgs->id)}}" class="btn btn-primary btn-block has-tooltip">
 
-                    <i class="fas fa-edit"></i> {!! Lang::get('lang.edit') !!}
+                    <i class="fas fa-edit"></i> {{ trans('lang.edit') }}
                 </a> 
 
                 <ul class="list-group list-group-unbordered mb-3">
 
                     <li class="list-group-item">
 
-                        <label>{!! Lang::get('lang.website') !!}</label> 
+                        <label>{{ trans('lang.website') }}</label> 
                         <a class="float-right" title="{{$orgs->website}}">{!! Str::limit($orgs->website,15) !!}</a>
                     </li>
 
                     @if($orgs->phone)
                     <li class="list-group-item">
 
-                        <label>{!! Lang::get('lang.phone') !!}</label> 
+                        <label>{{ trans('lang.phone') }}</label> 
                         <a class="float-right" title="{{$orgs->phone}}">{!! Str::limit($orgs->phone,15) !!}</a>
                     </li>
                     @endif
@@ -94,7 +94,7 @@ class="nav-link active"
                     @if($orgs->address)
                     <li class="list-group-item">
 
-                        <label>{!! Lang::get('lang.address') !!}</label> 
+                        <label>{{ trans('lang.address') }}</label> 
                         <br>
                         {!! $orgs->address !!}
                     </li>
@@ -103,7 +103,7 @@ class="nav-link active"
                     @if($orgs->internal_notes)
                     <li class="list-group-item">
 
-                        <label>{!! Lang::get('lang.internal_notes') !!}</label> 
+                        <label>{{ trans('lang.internal_notes') }}</label> 
                         <br>
                         {!! $orgs->internal_notes !!}
                     </li>
@@ -111,7 +111,7 @@ class="nav-link active"
                 </ul>
 
                 <button data-toggle="modal" data-target="#assign_head" id="button_select" class="btn btn-primary btn-block">
-                    <i class="fas fa-plus"> </i> {!! Lang::get('lang.select_organization_manager') !!}
+                    <i class="fas fa-plus"> </i> {{ trans('lang.select_organization_manager') }}
                 </button>
             </div>
         </div>
@@ -140,7 +140,7 @@ class="nav-link active"
 
                         <li class="nav-item">
 
-                            <a href="javascript:;" class="nav-link text-dark"> {!! Lang::get('lang.e-mail') !!}  
+                            <a href="javascript:;" class="nav-link text-dark"> {{ trans('lang.e-mail') }}  
 
                                 <span class="float-right" title="{{$users->email}}">{!! Str::limit($users->email,15) !!}</span>
                             </a>
@@ -148,7 +148,7 @@ class="nav-link active"
 
                         <li class="nav-item">
 
-                            <a href="javascript:;" class="nav-link text-dark"> {!! Lang::get('lang.phone') !!}  
+                            <a href="javascript:;" class="nav-link text-dark"> {{ trans('lang.phone') }}  
 
                                 <span class="float-right" title="{{$users->phone_number}}">{!! Str::limit($users->phone_number,15) !!}</span>
                             </a>
@@ -166,7 +166,7 @@ class="nav-link active"
             $user_orgs = App\Model\helpdesk\Agent_panel\User_org::where('org_id', '=', $orgs->id)->paginate(20);
             ?>
             <div class="card-header">
-                <h3 class="card-title">{!! Lang::get('lang.users_of') !!} {{$orgs->name}}</h3>
+                <h3 class="card-title">{{ trans('lang.users_of') }} {{$orgs->name}}</h3>
                 <div class="card-tools">
                     <?php echo $user_orgs->setPath(route('organizations.show', $orgs->id))->render(); ?>
                 </div>
@@ -174,11 +174,11 @@ class="nav-link active"
             <div class="card-body">
                 <table class="table table-hover table-bordered">
                     <tbody><tr>
-                            <th>{!! Lang::get('lang.name') !!}</th>
-                            <th>{!! Lang::get('lang.email') !!}</th>
-                            <th>{!! Lang::get('lang.phone') !!}</th>
-                            <th>{!! Lang::get('lang.status') !!}</th>
-                            <th>{!! Lang::get('lang.ban') !!}</th>
+                            <th>{{ trans('lang.name') }}</th>
+                            <th>{{ trans('lang.email') }}</th>
+                            <th>{{ trans('lang.phone') }}</th>
+                            <th>{{ trans('lang.status') }}</th>
+                            <th>{{ trans('lang.ban') }}</th>
                         </tr>
                         @foreach($user_orgs as $user_org)
                         <?php
@@ -189,9 +189,9 @@ class="nav-link active"
                             <td><a href="{!! route('user.show',$user_detail->id) !!}">{!! $user_detail->email !!}</a></td>
                             <td>{!! $user_detail->phone_number !!}</td>
                             @if($user_detail->active == 1)
-                            <td><span class="badge badge-success">{!! Lang::get('lang.active') !!}</span></td>
+                            <td><span class="badge badge-success">{{ trans('lang.active') }}</span></td>
                             @elseif($user_detail->active == 0)
-                            <td><span class="badge badge-warning">{!! Lang::get('lang.inactive') !!}</span></td>
+                            <td><span class="badge badge-warning">{{ trans('lang.inactive') }}</span></td>
                             @endif
                             <td>{!! $user_detail->ban !!}</td>
                         </tr>
@@ -223,13 +223,13 @@ class="nav-link active"
                 <div class="nav-tabs-custom">
                     <ul class="nav nav-tabs">
                         <li class="nav-item">
-                            <a href="#tab_1" data-toggle="tab"  class="nav-link active">{!! Lang::get('lang.open_tickets') !!} ({{$open}})</a>
+                            <a href="#tab_1" data-toggle="tab"  class="nav-link active">{{ trans('lang.open_tickets') }} ({{$open}})</a>
                         </li>
                         <li class="nav-item">
-                            <a href="#tab_2" data-toggle="tab"  class="nav-link">{!! Lang::get('lang.closed_tickets') !!} ({{$counted}})</a>
+                            <a href="#tab_2" data-toggle="tab"  class="nav-link">{{ trans('lang.closed_tickets') }} ({{$counted}})</a>
                         </li>
                         <li class="nav-item">
-                            <a href="#tab_3" data-toggle="tab"  class="nav-link">{!! Lang::get('lang.deleted_tickets') !!} ({{$deleted}})</a>
+                            <a href="#tab_3" data-toggle="tab"  class="nav-link">{{ trans('lang.deleted_tickets') }} ({{$deleted}})</a>
                         </li>
                     </ul>
 
@@ -239,12 +239,13 @@ class="nav-link active"
                             <?php $open = count(App\Model\helpdesk\Ticket\Tickets::whereIn('user_id', $user_orga_relation_id)->where('status', '=', '1')->get()); ?>
                             
                             <div>
-                                {!! Form::open(['route'=>'select_all','method'=>'post']) !!}
+                                <form method="POST" action="{{ route('select_all') }}">
+    @csrf
                                 <div class="mailbox-controls p-0 mt-2 mb-2">
                                     <!-- Check all button -->
                                     <a class="btn btn-default btn-sm checkbox-toggle"><i class="far fa-square"></i></a>
-                                    <input type="submit" class="btn btn-default text-orange btn-sm" name="submit" value="{!! Lang::get('lang.delete') !!}">
-                                    <input type="submit" class="btn btn-default text-yellow btn-sm" name="submit" value="{!! Lang::get('lang.close') !!}">
+                                    <input type="submit" class="btn btn-default text-orange btn-sm" name="submit" value="{{ trans('lang.delete') }}">
+                                    <input type="submit" class="btn btn-default text-yellow btn-sm" name="submit" value="{{ trans('lang.close') }}">
                                     <div class="float-right">
                                         <?php
                                         $counted = count(App\Model\helpdesk\Ticket\Tickets::whereIn('user_id', $user_orga_relation_id)->where('status', '=', '1')->get());
@@ -263,12 +264,12 @@ class="nav-link active"
                                         <thead>
                                         <th>
                                         </th>
-                                        <th>{!! Lang::get('lang.subject') !!}</th>
-                                        <th>{!! Lang::get('lang.ticket_id') !!}</th>
-                                        <th>{!! Lang::get('lang.priority') !!}</th>
-                                        <th>{!! Lang::get('lang.last_replier') !!}</th>
-                                        <th>{!! Lang::get('lang.assigned_to') !!}</th>
-                                        <th>{!! Lang::get('lang.last_activity') !!}</th>
+                                        <th>{{ trans('lang.subject') }}</th>
+                                        <th>{{ trans('lang.ticket_id') }}</th>
+                                        <th>{{ trans('lang.priority') }}</th>
+                                        <th>{{ trans('lang.last_replier') }}</th>
+                                        <th>{{ trans('lang.assigned_to') }}</th>
+                                        <th>{{ trans('lang.last_activity') }}</th>
                                         </thead>
                                         <tbody id="hello">
                                             <?php $tickets = App\Model\helpdesk\Ticket\Tickets::whereIn('user_id', $user_orga_relation_id)->where('status', '=', '1')->orderBy('id', 'DESC')->paginate(20); ?>
@@ -334,7 +335,7 @@ class="nav-link active"
                                         <?php echo $tickets->setPath(url('/organizations/' . $orgs->id))->render(); ?>&nbsp;
                                     </div>
                                 </div><!-- /.mail-box-messages -->
-                                {!! Form::close() !!}
+                                </form>
 
                                 {{-- end deleted tickets --}}
                             </div>
@@ -344,12 +345,13 @@ class="nav-link active"
                             <?php $closed = count(App\Model\helpdesk\Ticket\Tickets::whereIn('user_id', $user_orga_relation_id)->where('status', 2)->get()); ?>
                             
                             <div>
-                                {!! Form::open(['route'=>'select_all','method'=>'post']) !!}
+                                <form method="POST" action="{{ route('select_all') }}">
+    @csrf
                                 <div class="mailbox-controls p-0 mt-2 mb-2">
                                     <!-- Check all button -->
                                     <a class="btn btn-default btn-sm checkbox-toggle"><i class="far fa-square"></i></a>
-                                    <input type="submit" class="btn btn-default text-orange btn-sm" name="submit" value="{!! Lang::get('lang.delete') !!}">
-                                    <input type="submit" class="btn btn-default text-yellow btn-sm" name="submit" value="{!! Lang::get('lang.close') !!}">
+                                    <input type="submit" class="btn btn-default text-orange btn-sm" name="submit" value="{{ trans('lang.delete') }}">
+                                    <input type="submit" class="btn btn-default text-yellow btn-sm" name="submit" value="{{ trans('lang.close') }}">
                                     <div class="float-right">
                                         <?php
                                         $counted = count(App\Model\helpdesk\Ticket\Tickets::whereIn('user_id', $user_orga_relation_id)->where('status', '=', '2')->get());
@@ -368,12 +370,12 @@ class="nav-link active"
                                         <thead>
                                         <th>
                                         </th>
-                                        <th>{!! Lang::get('lang.subject') !!}</th>
-                                        <th>{!! Lang::get('lang.ticket_id') !!}</th>
-                                        <th>{!! Lang::get('lang.priority') !!}</th>
-                                        <th>{!! Lang::get('lang.last_replier') !!}</th>
-                                        <th>{!! Lang::get('lang.assigned_to') !!}</th>
-                                        <th>{!! Lang::get('lang.last_activity') !!}</th>
+                                        <th>{{ trans('lang.subject') }}</th>
+                                        <th>{{ trans('lang.ticket_id') }}</th>
+                                        <th>{{ trans('lang.priority') }}</th>
+                                        <th>{{ trans('lang.last_replier') }}</th>
+                                        <th>{{ trans('lang.assigned_to') }}</th>
+                                        <th>{{ trans('lang.last_activity') }}</th>
                                         </thead>
                                         <tbody id="hello">
                                             <?php $tickets = App\Model\helpdesk\Ticket\Tickets::whereIn('user_id', $user_orga_relation_id)->where('status', '=', '2')->orderBy('id', 'DESC')->paginate(20); ?>
@@ -440,7 +442,7 @@ class="nav-link active"
                                         <?php echo $tickets->setPath(url('/organizations/' . $orgs->id))->render(); ?>&nbsp;
                                     </div>
                                 </div><!-- /.mail-box-messages -->
-                                {!! Form::close() !!}
+                                </form>
 
                                 {{-- end deleted tickets --}}
                             </div>
@@ -450,12 +452,13 @@ class="nav-link active"
                             <?php $deleted = count(App\Model\helpdesk\Ticket\Tickets::whereIn('user_id', $user_orga_relation_id)->where('status', '=', '5')->get()); ?>
                             <div>
 
-                                {!! Form::open(['route'=>'select_all','method'=>'post']) !!}
+                                <form method="POST" action="{{ route('select_all') }}">
+    @csrf
                                 <div class="mailbox-controls p-0 mt-2 mb-2">
                                     <!-- Check all button -->
                                     <a class="btn btn-default btn-sm checkbox-toggle"><i class="far fa-square"></i></a>
-                                    <input type="submit" class="btn btn-default text-orange btn-sm" name="submit" value="{!! Lang::get('lang.delete') !!}">
-                                    <input type="submit" class="btn btn-default text-yellow btn-sm" name="submit" value="{!! Lang::get('lang.close') !!}">
+                                    <input type="submit" class="btn btn-default text-orange btn-sm" name="submit" value="{{ trans('lang.delete') }}">
+                                    <input type="submit" class="btn btn-default text-yellow btn-sm" name="submit" value="{{ trans('lang.close') }}">
                                     <div class="float-right">
                                         <?php
                                         $counted = count(App\Model\helpdesk\Ticket\Tickets::whereIn('user_id', $user_orga_relation_id)->where('status', '=', '5')->get());
@@ -474,12 +477,12 @@ class="nav-link active"
                                         <thead>
                                         <th>
                                         </th>
-                                        <th>{!! Lang::get('lang.subject') !!}</th>
-                                        <th>{!! Lang::get('lang.ticket_id') !!}</th>
-                                        <th>{!! Lang::get('lang.priority') !!}</th>
-                                        <th>{!! Lang::get('lang.last_replier') !!}</th>
-                                        <th>{!! Lang::get('lang.assigned_to') !!}</th>
-                                        <th>{!! Lang::get('lang.last_activity') !!}</th>
+                                        <th>{{ trans('lang.subject') }}</th>
+                                        <th>{{ trans('lang.ticket_id') }}</th>
+                                        <th>{{ trans('lang.priority') }}</th>
+                                        <th>{{ trans('lang.last_replier') }}</th>
+                                        <th>{{ trans('lang.assigned_to') }}</th>
+                                        <th>{{ trans('lang.last_activity') }}</th>
                                         </thead>
                                         <tbody id="hello">
                                             <?php $tickets = App\Model\helpdesk\Ticket\Tickets::whereIn('user_id', $user_orga_relation_id)->where('status', '=', '5')->orderBy('id', 'DESC')->paginate(20); ?>
@@ -546,7 +549,7 @@ class="nav-link active"
                                         <?php echo $tickets->setPath(url('/organizations/' . $orgs->id))->render(); ?>&nbsp;
                                     </div>
                                 </div><!-- /.mail-box-messages -->
-                                {!! Form::close() !!}
+                                </form>
                             </div><!-- /.tab-pane -->
                         </div><!-- /.tab-content -->
                     </div><!-- nav-tabs-custom -->
@@ -558,7 +561,7 @@ class="nav-link active"
         <div class="card card-light">
             <div class="card-header">
                 <h3 class="card-title">
-                    {!! Lang::get('lang.report_of') !!} {!! $orgs->name !!}
+                    {{ trans('lang.report_of') }} {!! $orgs->name !!}
                 </h3>
             </div>
             <div class="card-body">
@@ -566,8 +569,8 @@ class="nav-link active"
                     <div  class="form-group">
                         <div class="row">
                             <div class='col-sm-3'>
-                                {!! Form::label('date', Lang::get("lang.start_date").':') !!}
-                                {!! Form::text('start_date',null,['class'=>'form-control','id'=>'datepicker4'])!!}
+                                {!! Form::label('date', trans("lang.start_date").':') !!}
+                                <input type="text" name="start_date" id="datepicker4" value="{{ old('start_date') }}" class="form-control">
                             </div>
                             <?php
                             $start_date = App\Model\helpdesk\Ticket\Tickets::where('id', '=', '1')->first();
@@ -593,8 +596,8 @@ class="nav-link active"
                                 });
                             </script>
                             <div class='col-sm-3'>
-                                {!! Form::label('start_time', Lang::get("lang.end_date").':') !!}
-                                {!! Form::text('end_date',null,['class'=>'form-control','id'=>'datetimepicker3'])!!}
+                                {!! Form::label('start_time', trans("lang.end_date").':') !!}
+                                <input type="text" name="end_date" id="datetimepicker3" value="{{ old('end_date') }}" class="form-control">
                             </div>
                             <script type="text/javascript">
                                 $(function() {
@@ -608,8 +611,8 @@ class="nav-link active"
                                 });
                             </script>
                             <div class='col-sm-2'>
-                                {!! Form::label('filter', 'Filter:',['style' => 'visibility:hidden;']) !!}<br>
-                                <input type="submit" value="{!! Lang::get('lang.submit') !!}" class="btn btn-primary">
+                                <label for="filter">'Filter:'</label><br>
+                                <input type="submit" value="{{ trans('lang.submit') }}" class="btn btn-primary">
                             </div>
                             
                         </div>
@@ -618,9 +621,9 @@ class="nav-link active"
                                     <style>
                                         #legend-holder { border: 1px solid #ccc; float: left; width: 25px; height: 25px; margin: 2px; }
                                     </style>
-                                    <div class="col-md-4"><span id="legend-holder" style="background-color: #6C96DF;"></span>&nbsp; <span class="lead"> <span id="total-created-tickets" ></span> {!! Lang::get('lang.tickets') !!} {!! Lang::get('lang.created') !!} </span></div> 
-                            <div class="col-md-4"><span id="legend-holder" style="background-color: #6DC5B2;"></span>&nbsp; <span class="lead"> <span id="total-reopen-tickets" class="lead"></span> {!! Lang::get('lang.tickets') !!} {!! Lang::get('lang.reopen') !!}  </span></div> 
-                            <div class="col-md-4"><span id="legend-holder" style="background-color: #E3B870;"></span>&nbsp; <span class="lead"> <span id="total-closed-tickets" class="lead"></span> {!! Lang::get('lang.tickets') !!} {!! Lang::get('lang.closed') !!}  </span></div> 
+                                    <div class="col-md-4"><span id="legend-holder" style="background-color: #6C96DF;"></span>&nbsp; <span class="lead"> <span id="total-created-tickets" ></span> {{ trans('lang.tickets') }} {{ trans('lang.created') }} </span></div> 
+                            <div class="col-md-4"><span id="legend-holder" style="background-color: #6DC5B2;"></span>&nbsp; <span class="lead"> <span id="total-reopen-tickets" class="lead"></span> {{ trans('lang.tickets') }} {{ trans('lang.reopen') }}  </span></div> 
+                            <div class="col-md-4"><span id="legend-holder" style="background-color: #E3B870;"></span>&nbsp; <span class="lead"> <span id="total-closed-tickets" class="lead"></span> {{ trans('lang.tickets') }} {{ trans('lang.closed') }}  </span></div> 
                                
                         </div>
                     </div>
@@ -908,9 +911,11 @@ class="nav-link active"
 <div class="modal fade" id="assign_head">
     <div class="modal-dialog">
         <div class="modal-content">
-            {!! Form::model($orgs->id, ['id'=>'org_head','method' => 'PATCH'] )!!}
+            <form method="POST">
+    @csrf
+    @method('PATCH')
             <div class="modal-header">
-                <h4 class="modal-title">{!! Lang::get('lang.assign') !!}</h4>
+                <h4 class="modal-title">{{ trans('lang.assign') }}</h4>
                 <button type="button" class="close" data-dismiss="modal" id="dismiss" aria-label="Close"><span aria-hidden="true">&times;</span></button>
             </div>
             <div class="modal-body">
@@ -922,7 +927,7 @@ class="nav-link active"
                     </div>
                 </div>
                 <div id="assign_body">
-                    <p>{!! Lang::get('lang.please_select_an_user') !!}</p>
+                    <p>{{ trans('lang.please_select_an_user') }}</p>
                     <select id="user" class="form-control" name="user">
                         <?php
                         $org_heads = App\Model\helpdesk\Agent_panel\User_org::where('org_id', '=', $orgs->id)->get();
@@ -937,10 +942,10 @@ class="nav-link active"
                 </div>
             </div>
             <div class="modal-footer justify-content-between">
-                <button type="button" class="btn btn-default" data-dismiss="modal" id="dismis4">{!! Lang::get('lang.close') !!}</button>
-                <button type="submit" class="btn btn-success" id="submt2">{!! Lang::get('lang.assign') !!}</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal" id="dismis4">{{ trans('lang.close') }}</button>
+                <button type="submit" class="btn btn-success" id="submt2">{{ trans('lang.assign') }}</button>
             </div>
-            {!! Form::close()!!}
+            </form>
         </div><!-- /.modal-content -->
     </div><!-- /.modal-dialog -->
 </div><!-- /.modal -->

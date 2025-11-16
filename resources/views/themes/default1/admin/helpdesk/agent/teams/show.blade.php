@@ -32,21 +32,21 @@ class="nav-link active"
 <!-- content -->
 @section('content')
 
-@if(Session::has('success'))
+@if(session()->has('success'))
 <div class="alert alert-success alert-dismissable">
     <i class="fas fa-check-circle"></i>
     <b>Success!</b>
     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-    {!! Session::get('success') !!}
+    {{ session('success') }}
 </div>
 @endif
 <!-- failure message -->
-@if(Session::has('fails'))
+@if(session()->has('fails'))
 <div class="alert alert-danger alert-dismissable">
     <i class="fa fa-ban"></i>
     <b>Fail!</b>
     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-    {!! Session::get('fails') !!}
+    {{ session('fails') }}
 </div>
 @endif
 
@@ -63,13 +63,13 @@ class="nav-link active"
 
     <div class="card-header">
     @if($team_lead_name)
-        <h3 class="lead card-title">{!! Lang::get('lang.team_lead') !!} : {!! $team_lead !!} </h3>
+        <h3 class="lead card-title">{{ trans('lang.team_lead') }} : {!! $team_lead !!} </h3>
      @endif
-        <h3 class="lead card-title"> &nbsp;| {!! Lang::get('lang.status') !!} : <?php if($teams->status == 1) { $stat = Lang::get('lang.active'); } elseif($teams->status == 0) { $stat = Lang::get('lang.inactive'); } ?>{!! $stat !!} </h3>
+        <h3 class="lead card-title"> &nbsp;| {{ trans('lang.status') }} : <?php if($teams->status == 1) { $stat = trans('lang.active'); } elseif($teams->status == 0) { $stat = trans('lang.inactive'); } ?>{!! $stat !!} </h3>
         
         <div class="card-tools">
             <a href="{{URL::route('teams.index')}}" class="btn btn-default btn-tool">
-                <i class="fas fa-arrow-left" aria-hidden="true"></i> {{Lang::get('lang.go_back')}}
+                <i class="fas fa-arrow-left" aria-hidden="true"></i> {{ trans('lang.go_back') }}
             </a>
         </div>
     </div>
@@ -78,12 +78,12 @@ class="nav-link active"
     <div class="card-body">             
         {!! Datatable::table()
                 ->addColumn(
-                    Lang::get('lang.user_name'),
-                    Lang::get('lang.name'),
-                    Lang::get('lang.status'),
-                    Lang::get('lang.group'),
-                    Lang::get('lang.depertment'),
-                    Lang::get('lang.role')
+                    trans('lang.user_name'),
+                    trans('lang.name'),
+                    trans('lang.status'),
+                    trans('lang.group'),
+                    trans('lang.depertment'),
+                    trans('lang.role')
                 )
                 ->setUrl(route('teams.getshow.list', $id))  // this is the route where data will be retrieved
                 ->render() 

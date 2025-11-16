@@ -15,10 +15,10 @@
                 margin-right: 10px; /* Adjust the value to increase or decrease the gap between list items */
             }
         </style>
-        <li class="breadcrumb-item"> <i class="fas fa-home"> </i> {!! Lang::get('lang.you_are_here') !!} : &nbsp;</li>
-        <li><a class="words" href="{!! URL::route('home') !!}">{!! Lang::get('lang.knowledge_base') !!}</a></li>
+        <li class="breadcrumb-item"> <i class="fas fa-home"> </i> {{ trans('lang.you_are_here') }} : &nbsp;</li>
+        <li><a class="words" href="{!! URL::route('home') !!}">{{ trans('lang.knowledge_base') }}</a></li>
         <li class="words">></li>
-        <li><a href="{!! URL::route('article-list') !!}">{!! Lang::get('lang.article_list') !!}</a></li>
+        <li><a href="{!! URL::route('article-list') !!}">{{ trans('lang.article_list') }}</a></li>
     </ol>
 
 @stop
@@ -49,7 +49,7 @@
                 <?php $content = trim(preg_replace("/<img[^>]+\>/i", "", $excerpt), " \t.") ?>
                 {!! strip_tags($content) !!}
 
-                <p><a href="{{url('show/'.$arti->slug)}}">{!! Lang::get('lang.read_more') !!}</a></p>
+                <p><a href="{{url('show/'.$arti->slug)}}">{{ trans('lang.read_more') }}</a></p>
             </blockquote>
 
             <footer class="entry-footer">
@@ -84,7 +84,7 @@
 
                     <h2 class="section-title h4 clearfix">
 
-                        <b>   <i class="line" style="border-color: rgb(0, 154, 186);"></i>{!! Lang::get('lang.categories') !!}</b>
+                        <b>   <i class="line" style="border-color: rgb(0, 154, 186);"></i>{{ trans('lang.categories') }}</b>
 
                         <small class="float-right"><i class="far fa-hdd fa-fw"></i></small>
                     </h2>

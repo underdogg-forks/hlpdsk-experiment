@@ -12,21 +12,21 @@
 
 	<div class="box-body">
 
-					@if(Session::has('success'))
+					@if(session()->has('success'))
                     <div class="alert alert-success alert-dismissable">
                         <i class="fa fa-ban"></i>
                         <b>Alert!</b> Success.
                         <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-                        {{Session::get('success')}}
+                        {{ session('success') }}
                     </div>
                     @endif
                     <!-- fail message -->
-                    @if(Session::has('fails'))
+                    @if(session()->has('fails'))
                     <div class="alert alert-danger alert-dismissable">
                         <i class="fa fa-ban"></i>
                         <b>Alert!</b> Failed.
                         <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-                        {{Session::get('fails')}}
+                        {{ session('fails') }}
                     </div>
                     @endif
 

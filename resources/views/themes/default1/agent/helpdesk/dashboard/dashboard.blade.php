@@ -9,7 +9,7 @@ class="nav-link active"
 @stop
 
 @section('PageHeader')
-<h1>{!! Lang::get('lang.dashboard_reports') !!}</h1>
+<h1>{{ trans('lang.dashboard_reports') }}</h1>
 @stop
 
 @section('dashboard')
@@ -19,20 +19,20 @@ class="nav-item d-none d-sm-inline-block active"
 @section('content')
 <!-- check whether success or not -->
 {{-- Success message --}}
-@if(Session::has('success'))
+@if(session()->has('success'))
 <div class="alert alert-success alert-dismissable">
 	<i class="fas  fa-check-circle"></i>
 	<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-	{{Session::get('success')}}
+	{{ session('success') }}
 </div>
 @endif
 {{-- failure message --}}
-@if(Session::has('fails'))
+@if(session()->has('fails'))
 <div class="alert alert-danger alert-dismissable">
 	<i class="fas fa-ban"></i>
-	<b>{!! Lang::get('lang.alert') !!}!</b>
+	<b>{{ trans('lang.alert') }}!</b>
 	<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-	{{Session::get('fails')}}
+	{{ session('fails') }}
 </div>
 @endif
 
@@ -48,7 +48,7 @@ class="nav-item d-none d-sm-inline-block active"
 
 			  	<div class="info-box-content">
 				
-					<span class="info-box-text">{!! Lang::get('lang.inbox') !!}</span>
+					<span class="info-box-text">{{ trans('lang.inbox') }}</span>
 					
 					<span class="info-box-number"><?php echo $tickets->count() ?></span>
 			  	</div>
@@ -66,7 +66,7 @@ class="nav-item d-none d-sm-inline-block active"
 
 			  	<div class="info-box-content">
 				
-					<span class="info-box-text">{!! Lang::get('lang.unassigned') !!}</span>
+					<span class="info-box-text">{{ trans('lang.unassigned') }}</span>
 					
 					<span class="info-box-number">{{$unassigned->count() }} </span>
 			  	</div>
@@ -84,7 +84,7 @@ class="nav-item d-none d-sm-inline-block active"
 
 			  	<div class="info-box-content">
 				
-					<span class="info-box-text">{!! Lang::get('lang.overdue') !!}</span>
+					<span class="info-box-text">{{ trans('lang.overdue') }}</span>
 					
 					<span class="info-box-number">{{ $overdues->count() }}</span>
 			  	</div>
@@ -102,7 +102,7 @@ class="nav-item d-none d-sm-inline-block active"
 
 			  	<div class="info-box-content">
 				
-					<span class="info-box-text">{!! Lang::get('lang.my_tickets') !!}</span>
+					<span class="info-box-text">{{ trans('lang.my_tickets') }}</span>
 					
 					<span class="info-box-number">{{ $myticket->count() }}</span>
 			  	</div>
@@ -128,7 +128,7 @@ class="nav-item d-none d-sm-inline-block active"
 
 			  	<div class="info-box-content">
 				
-					<span class="info-box-text">{!! Lang::get('lang.duetoday') !!}</span>
+					<span class="info-box-text">{{ trans('lang.duetoday') }}</span>
 					
 					<span class="info-box-number">{{ $todaytickets }}</span>
 			  	</div>
@@ -141,7 +141,7 @@ class="nav-item d-none d-sm-inline-block active"
 
 	<div class="card-header">
 		
-		<h3 class="card-title">{!! Lang::get('lang.report') !!}</h3>
+		<h3 class="card-title">{{ trans('lang.report') }}</h3>
 	</div>
 
 	<div class="card-body">
@@ -153,8 +153,8 @@ class="nav-item d-none d-sm-inline-block active"
 				<div class="row">
 					
 					<div class='col-sm-2'>
-						{!! Form::label('date', trans('lang.start_date')) !!}
-						{!! Form::text('start_date',null,['class'=>'form-control','id'=>'datepicker4'])!!}
+						<label for="date">{{ trans('lang.start_date') }}</label>
+						<input type="text" name="start_date" id="datepicker4" value="{{ old('start_date') }}" class="form-control">
 					</div>
 					
 					<?php
@@ -184,8 +184,8 @@ class="nav-item d-none d-sm-inline-block active"
 
 					<div class='col-sm-2'>
 
-						{!! Form::label('start_time', trans('lang.end_date')) !!}
-						{!! Form::text('end_date',null,['class'=>'form-control','id'=>'datetimepicker3'])!!}
+						<label for="start_time">{{ trans('lang.end_date') }}</label>
+						<input type="text" name="end_date" id="datetimepicker3" value="{{ old('end_date') }}" class="form-control">
 					</div>
 
 					<script type="text/javascript">
@@ -201,7 +201,7 @@ class="nav-item d-none d-sm-inline-block active"
 					</script>
 
 					<div class='col-sm-1'>
-						{!! Form::label('filter', 'Filter:',['style' => 'visibility:hidden;']) !!}<br>
+						<label for="filter">'Filter:'</label><br>
 						<button type="submit" class="btn btn-primary">{{trans('lang.submit')}}</button>
 					</div>
 				</div>
@@ -214,17 +214,17 @@ class="nav-item d-none d-sm-inline-block active"
 
 					<div class="col-md-4">
 						<span id="legend-holder" style="background-color: #6C96DF;"></span>&nbsp; 
-						<span class="lead"> <span id="total-created-tickets" ></span> {!! Lang::get('lang.tickets') !!} {!! Lang::get('lang.created') !!}</span>
+						<span class="lead"> <span id="total-created-tickets" ></span> {{ trans('lang.tickets') }} {{ trans('lang.created') }}</span>
 					</div> 
 					
 					<div class="col-md-4">
 						<span id="legend-holder" style="background-color: #6DC5B2;"></span>&nbsp; 
-						<span class="lead"> <span id="total-reopen-tickets" class="lead"></span> {!! Lang::get('lang.tickets') !!} {!! Lang::get('lang.reopen') !!}</span>
+						<span class="lead"> <span id="total-reopen-tickets" class="lead"></span> {{ trans('lang.tickets') }} {{ trans('lang.reopen') }}</span>
 					</div> 
 
 					<div class="col-md-4">
 						<span id="legend-holder" style="background-color: #E3B870;"></span>&nbsp; 
-						<span class="lead"> <span id="total-closed-tickets" class="lead"></span> {!! Lang::get('lang.tickets') !!} {!! Lang::get('lang.closed') !!}</span>
+						<span class="lead"> <span id="total-closed-tickets" class="lead"></span> {{ trans('lang.tickets') }} {{ trans('lang.closed') }}</span>
 					</div> 
 				</div>
 			</div>
@@ -240,7 +240,7 @@ class="nav-item d-none d-sm-inline-block active"
 
 	<div class="card-header">
 
-		<h3 class="card-title">{!! Lang::get('lang.statistics') !!}</h3>
+		<h3 class="card-title">{{ trans('lang.statistics') }}</h3>
 	</div>
 
 	<div class="card-body">

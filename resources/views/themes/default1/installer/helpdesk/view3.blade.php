@@ -21,7 +21,7 @@ active
     <div class="wc-setup-content">
         <div class="woocommerce-message woocommerce-tracker">
             <div class="fail">
-                <span id="fail">{!! Lang::get('lang.fails') !!}! {{Cache::get('fails')}}</span><br/><br/>
+                <span id="fail">{{ trans('lang.fails') }}! {{Cache::get('fails')}}</span><br/><br/>
             </div>
         </div>        
     </div>  
@@ -44,7 +44,8 @@ active
     </div>
     @endif
 
-    {!! Form::open(['url'=> '/step4post', 'id' => 'databaseform']) !!}
+    <form method="POST" action="/step4post">
+    @csrf
     <table ng-controller="MainController">
         <tr>
             <td>
@@ -69,7 +70,7 @@ active
                 <label for="box1">Host<span style="color: red;font-size:12px;">*</span></label>
             </td>
             <td>
-                {!! Form::text('host', null, ['required' => true]) !!}
+                <input type="text" name="host" id="host" value="{{ old('host') }}" required>
             </td>
             <td>
                 <button type="button" data-toggle="popover" data-placement="right" data-arrowcolor="#eeeeee" data-bordercolor="#bbbbbb" data-title-backcolor="#cccccc" data-title-bordercolor="#bbbbbb" data-title-textcolor="#444444" data-content-backcolor="#eeeeee" data-content-textcolor="#888888" title="@{{Hosttitle}}" data-content="@{{Hostcontent}}" style="padding: 0px;border: 0px; border-radius: 5px;"><i class="fa fa-question-circle" style="padding: 0px;"></i>
@@ -81,7 +82,7 @@ active
                 <label for="box2">Port</label>
             </td>
             <td>
-                {!! Form::text('port', null, ['onkeydown' => 'return CheckPortForInput(event)']) !!}
+                <input type="text" name="port" id="port" value="{{ old('port') }}">
             </td>
             <td>
                 <button type="button" data-toggle="popover" data-placement="right" data-arrowcolor="#eeeeee" data-bordercolor="#bbbbbb" data-title-backcolor="#cccccc" data-title-bordercolor="#bbbbbb" data-title-textcolor="#444444" data-content-backcolor="#eeeeee" data-content-textcolor="#888888" title="@{{Porttitle}}" data-content="@{{Portcontent}}" style="padding: 0px;border: 0px; border-radius: 5px;"><i class="fa fa-question-circle" style="padding: 0px;"></i>
@@ -93,7 +94,7 @@ active
                 <label for="box3">Database Name<span style="color: red;font-size:12px;">*</span></label>
             </td>
             <td>
-                {!! Form::text('databasename', null, ['required' => true]) !!}
+                <input type="text" name="databasename" id="databasename" value="{{ old('databasename') }}" required>
             </td>
             <td>
                 <button type="button" data-toggle="popover" data-placement="right" data-arrowcolor="#eeeeee" data-bordercolor="#bbbbbb" data-title-backcolor="#cccccc" data-title-bordercolor="#bbbbbb" data-title-textcolor="#444444" data-content-backcolor="#eeeeee" data-content-textcolor="#888888" title="@{{Databasenametitle}}" data-content="@{{Databasenamecontent}}" style="padding: 0px;border: 0px; border-radius: 5px;"><i class="fa fa-question-circle" style="padding: 0px;"></i>
@@ -105,7 +106,7 @@ active
                 <label for="box4">User Name<span style="color: red; font-size: 12px;">*</span></label>
             </td>
             <td>
-                {!! Form::text('username', null, ['required' => true]) !!}
+                <input type="text" name="username" id="username" value="{{ old('username') }}" required>
             </td>
             <td>
                 <button type="button" data-toggle="popover" data-placement="right" data-arrowcolor="#eeeeee" data-bordercolor="#bbbbbb" data-title-backcolor="#cccccc" data-title-bordercolor="#bbbbbb" data-title-textcolor="#444444" data-content-backcolor="#eeeeee" data-content-textcolor="#888888" title="@{{Usertitle}}" data-content="@{{Usercontent}}" style="padding: 0px;border: 0px; border-radius: 5px;"><i class="fa fa-question-circle" style="padding: 0px;"></i>

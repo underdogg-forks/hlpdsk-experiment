@@ -7,33 +7,33 @@
 @section('breadcrumb')
 {{--    <div class="site-hero clearfix">--}}
         <ol class="breadcrumb float-sm-right ">
-            <li class="breadcrumb-item"> <i class="fas fa-home"> </i> {!! Lang::get('lang.you_are_here') !!} : &nbsp;</li>
+            <li class="breadcrumb-item"> <i class="fas fa-home"> </i> {{ trans('lang.you_are_here') }} : &nbsp;</li>
 
-            <li><a href="{!! URL::route('post.register') !!}">{!! Lang::get('lang.register') !!}</a></li>
+            <li><a href="{!! URL::route('post.register') !!}">{{ trans('lang.register') }}</a></li>
         </ol>
 {{--    </div>--}}
 @stop
 {{--    <div class="site-hero clearfix">--}}
 {{--        <ol class="breadcrumb breadcrumb-custom">--}}
-{{--            <li class="text">{!! Lang::get('lang.you_are_here') !!}: </li>--}}
-{{--            <li><a href="{!! URL::route('/') !!}">{!! Lang::get('lang.home') !!}</a></li>--}}
+{{--            <li class="text">{{ trans('lang.you_are_here') }}: </li>--}}
+{{--            <li><a href="{!! URL::route('/') !!}">{{ trans('lang.home') }}</a></li>--}}
 {{--        </ol>--}}
 {{--    </div>--}}
 
 @section('content')
 
-    @if(Session::has('status'))
+    @if(session()->has('status'))
     <div class="alert alert-success alert-dismissable">
-        <i class="fas fa-check-circle"> </i> <b> {!! Lang::get('lang.success') !!} </b>
+        <i class="fas fa-check-circle"> </i> <b> {{ trans('lang.success') }} </b>
         <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-        {{Session::get('status')}}
+        {{ session('status') }}
     </div>
     @endif
 
     @if (count($errors) > 0)
     <div class="alert alert-danger alert-dismissable">
         <i class="fa fa-ban"></i>
-        <b>{!! Lang::get('lang.alert') !!} !</b>
+        <b>{{ trans('lang.alert') }} !</b>
         <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
         @foreach ($errors->all() as $error)
         <li>{{ $error }}</li>
@@ -51,7 +51,7 @@
         @else
             <span onclick="javascript: window.location.href='{{url('auth/login')}}';">
                 <a href="{{url('auth/login')}}" class="widgetrowitem defaultwidget"  style="background-image:url({{ URL::asset('lb-faveo/media/images/register.png') }})">
-                    <span class="widgetitemtitle" style="color: rgb(0, 154, 186)">{!! Lang::get('lang.login') !!}</span>
+                    <span class="widgetitemtitle" style="color: rgb(0, 154, 186)">{{ trans('lang.login') }}</span>
                 </a>
             </span>
         @endif
@@ -62,7 +62,7 @@
                 @if($system->status == 1)
                     <span onclick="javascript: window.location.href='{!! URL::route('form') !!}';">
                         <a href="{!! URL::route('form') !!}" class="widgetrowitem defaultwidget" style="background-image:url({{ URL::asset('lb-faveo/media/images/submitticket.png') }})">
-                            <span class="widgetitemtitle" style="color: rgb(0, 154, 186)">{!! Lang::get('lang.submit_a_ticket') !!}</span>
+                            <span class="widgetitemtitle" style="color: rgb(0, 154, 186)">{{ trans('lang.submit_a_ticket') }}</span>
                         </a>
                     </span>
                 @endif
@@ -70,12 +70,12 @@
         @endif
             <span onclick="javascript: window.location.href='{{url('mytickets')}}';">
                 <a href="{{url('mytickets')}}" class="widgetrowitem defaultwidget" style="background-image:url({{ URL::asset('lb-faveo/media/images/news.png') }})">
-                    <span class="widgetitemtitle" style="color: rgb(0, 154, 186)">{!! Lang::get('lang.my_tickets') !!}</span>
+                    <span class="widgetitemtitle" style="color: rgb(0, 154, 186)">{{ trans('lang.my_tickets') }}</span>
                 </a>
             </span>
             <span onclick="javascript: window.location.href='{{url('/knowledgebase')}}';">
                 <a href="{{url('/knowledgebase')}}" class="widgetrowitem defaultwidget" style="background-image:url({{ URL::asset('lb-faveo/media/images/knowledgebase.png') }})">
-                    <span class="widgetitemtitle" style="color: rgb(0, 154, 186)">{!! Lang::get('lang.knowledge_base') !!}</span>
+                    <span class="widgetitemtitle" style="color: rgb(0, 154, 186)">{{ trans('lang.knowledge_base') }}</span>
                 </a>
             </span>
         </div>
@@ -95,7 +95,7 @@
                
                 <div>
                     <div class="text-center">
-                        <h3 class="box-title" >{{Lang::get('lang.registration')}}</h3>
+                        <h3 class="box-title" >{{ trans('lang.registration') }}</h3>
                     </div>   </div>
 
                 <div>
@@ -104,74 +104,75 @@
                 </div>      
 
                 <!-- form open -->
-                {!!  Form::open(['url'=>'auth/register', 'method'=>'post']) !!}
+                <form method="POST" action="auth/register">
+    @csrf
 
                 <!-- fullname -->
                 <div class="form-group has-feedback {{ $errors->has('full_name') ? 'has-error' : '' }}" style="display: -webkit-box;">
             
-                    {!! Form::text('full_name',null,['placeholder'=>Lang::get('lang.full_name'),'class' => 'form-control']) !!}
+                    <input type="text" name="full_name" id="full_name" value="{{ old('full_name') }}" class="form-control">
                     <span class="fas fa-user   form-control-feedback" style="top: 9px;left: -25px;color: #6c757d;"></span>
                 </div>
 
                 <!-- Email -->
                 @if (($email_mandatory->status == 1 || $email_mandatory->status == '1'))
                 <div class="form-group has-feedback {{ $errors->has('email') ? 'has-error' : '' }}" style="display: -webkit-box;">
-                    {!! Form::text('email',null,['placeholder'=>Lang::get('lang.email'),'class' => 'form-control']) !!}
+                    <input type="text" name="email" id="email" value="{{ old('email') }}" class="form-control">
                     <span class="far fa-envelope text-muted form-control-feedback" style="top: 9px;left: -25px;color: #6c757d;"></span>
                 </div>
                 @elseif (($settings->status == 0 || $settings->status == '0') && ($email_mandatory->status == 0 || $email_mandatory->status == '0'))
                 <div class="form-group has-feedback {{ $errors->has('email') ? 'has-error' : '' }}" style="display: -webkit-box;">
-                    {!! Form::text('email',null,['placeholder'=>Lang::get('lang.email'),'class' => 'form-control']) !!}
+                    <input type="text" name="email" id="email" value="{{ old('email') }}" class="form-control">
                     <span class="far fa-envelope text-muted form-control-feedback" style="top: 9px;left: -25px;color: #6c757d;"></span>
                 </div>
                 @else
-                    {!! Form::hidden('email', null) !!}
+                    <input type="hidden" name="email" value="null">
                 @endif
 
                 @if($settings->status == '1' || $settings->status == 1)
                 <div class='row'>
                     <div class="col-md-3">
                         <div class="form-group {{ $errors->has('code') ? 'has-error' : '' }}">
-                        {!! Form::text('code',null,['placeholder'=>91,'class' => 'form-control']) !!}
+                        <input type="text" name="code" id="code" value="{{ old('code') }}" class="form-control">
                         </div>    
                     </div>
                     <div class="col-md-9">
                         <div class="form-group has-feedback {{ $errors->has('mobile') ? 'has-error' : '' }}" style="display: -webkit-box;">
-                        {!! Form::text('mobile',null,['placeholder'=>Lang::get('lang.mobile'),'class' => 'form-control']) !!}
+                        <input type="text" name="mobile" id="mobile" value="{{ old('mobile') }}" class="form-control">
                         <span class="fas fa-phone  form-control-feedback" style="top: 9px;left: -25px;color: #6c757d;"></span>
                         </div>
                     </div>
                 </div>
                 @else
-                    {!! Form::hidden('mobile', null) !!}
-                    {!! Form::hidden('code', null) !!}
+                    <input type="hidden" name="mobile" value="null">
+                    <input type="hidden" name="code" value="null">
 
                 @endif
                 <!-- Password -->
                 <div class="form-group has-feedback {{ $errors->has('password') ? 'has-error' : '' }}" style="display: -webkit-box;">
                            
-                    {!! Form::password('password',['placeholder'=>Lang::get('lang.password'),'class' => 'form-control']) !!}
+                    <input type="password" name="password" id="password" class="form-control">
                     <span class="fa fa-lock  form-control-feedback" style="top: 9px;left: -25px;color: #6c757d;"></span>
 
                 </div>
                 <!-- Confirm password -->
                 <div class="form-group has-feedback {{ $errors->has('password_confirmation') ? 'has-error' : '' }}" style="display: -webkit-box;">
                            
-                    {!! Form::password('password_confirmation',['placeholder'=>Lang::get('lang.retype_password'),'class' => 'form-control']) !!}
+                    <input type="password" name="password_confirmation" id="password_confirmation" class="form-control">
                     <span class="fas fa-sign-in-alt form-control-feedback" style="top: 9px;left: -25px;color: #6c757d;"></span>
 
                 </div>
                 
                 <div >
                     
-                    <button type="submit" class="btn btn-primary btn-block btn-flat" style="width: 100%; hov: #00c0ef; color: #fff">{!! Lang::get('lang.register') !!}</button>
+                    <button type="submit" class="btn btn-primary btn-block btn-flat" style="width: 100%; hov: #00c0ef; color: #fff">{{ trans('lang.register') }}</button>
                 </div>
 
                 <div>
                   
                     <div class="checkbox icheck" align="center">
                         <label class="mb-0">
-                           {{trans('lang.already_got_an_account?')}} <a href="{{url('auth/login')}}" class="text-center">{!! Lang::get('lang.login') !!}</a>
+                           {{trans('lang.already_got_an_account?')}} <a href="{{url('auth/login')}}" class="text-center">{{ trans('lang.login') }}</a>
                         </label>
                     </div>
                     <div class="row">
@@ -184,6 +185,6 @@
         </div>
     </div>
 </div>
-{!! Form::close()!!}  
+</form>  
 
 @stop

@@ -20,7 +20,7 @@ class="nav-link active"
 @stop
 <!-- header -->
 @section('PageHeader')
-<h1>{!! Lang::get('lang.language') !!}</h1>
+<h1>{{ trans('lang.language') }}</h1>
 @stop
 <!-- /header -->
 <!-- breadcrumbs -->
@@ -32,33 +32,34 @@ class="nav-link active"
 <!-- content -->
 @section('content')
 <!-- open a form -->
-{!! Form::open(array('url'=>'language/add' , 'method' => 'post', 'files'=>true) )!!}
-@if(Session::has('success'))
+<form method="POST" action="language/add" enctype="multipart/form-data">
+    @csrf
+@if(session()->has('success'))
 <div class="alert alert-success alert-dismissable">
     <i class="fas fa-check-circle"></i>
     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-    <span>{{Session::get('success')}}</span>
+    <span>{{ session('success') }}</span>
 </div>
 @endif
 <!-- failure message -->
-@if(Session::has('fails'))
+@if(session()->has('fails'))
 <div class="alert alert-danger alert-dismissable">
     <i class="fas fa-ban"></i>
     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-    {{Session::get('fails')}}
-    @if(Session::has('link'))
-    <a href="{{url(Session::get('link'))}}">{{Lang::get('lang.enable_lang')}}</a>
+    {{ session('fails') }}
+    @if(session()->has('link'))
+    <a href="{{url(Session::get('link'))}}">{{ trans('lang.enable_lang') }}</a>
     @endif
-    @if(Session::has('link2'))
-    <a href="{{url(Session::get('link2'))}}" target="blank">{{Lang::get('lang.read-more')}}</a>
+    @if(session()->has('link2'))
+    <a href="{{url(Session::get('link2'))}}" target="blank">{{ trans('lang.read-more') }}</a>
     @endif
 </div>
 @endif
-@if(Session::has('errors'))
+@if(session()->has('errors'))
 <?php //dd($errors); ?>
 <div class="alert alert-danger alert-dismissable">
     <i class="fas fa-ban"></i>
-    <b>{!! Lang::get('lang.alert') !!}!</b>
+    <b>{{ trans('lang.alert') }}!</b>
     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
     <br/>
     @if($errors->first('language-name'))
@@ -74,31 +75,37 @@ class="nav-link active"
 @endif
 <div class="card card-light">
     <div class="card-header">
-        <h3 class="card-title">{{Lang::get('lang.add-lang-package')}}</h3>
+        <h3 class="card-title">{{ trans('lang.add-lang-package') }}</h3>
     </div>
     <div class="card-body">
         <div class="row">
             <!-- username -->
             <div class="col-sm-4 form-group {{ $errors->has('language-name') ? 'has-error' : '' }}">
-                {!! Form::label('language-name',Lang::get('lang.language-name')) !!} <span class="text-red"> *</span>
-                {!! Form::text('language-name',null,['placeholder'=>'English','class' => 'form-control']) !!}
+                <label for="language-name">{{ trans('lang.language-name') }}</label> <span class="text-red"> *</span>
+                <input type="text" name="language-name" id="language-name" value="{{ old('language-name') }}" class="form-control">
             </div>
             <div class="col-sm-4 form-group {{ $errors->has('iso-code') ? 'has-error' : '' }}">
-                {!! Form::label('iso-code',Lang::get('lang.iso-code')) !!} <span class="text-red"> *</span>
-                {!! Form::text('iso-code',null,['placeholder'=>'en','class' => 'form-control']) !!}
+                <label for="iso-code">{{ trans('lang.iso-code') }}</label> <span class="text-red"> *</span>
+                <input type="text" name="iso-code" id="iso-code" value="{{ old('iso-code') }}" class="form-control">
             </div>
         </div>
         <div class="row">
             <div class="col-sm-4 form-group {{ $errors->has('File') ? 'has-error' : '' }}">
-                {!! Form::label('File',Lang::get('lang.file')) !!} <span class="text-red"> *</span>&nbsp
-                <div class="btn bg-olive btn-file" style="color:blue"> {!! Lang::get('lang.upload_file') !!}
-                    {!! Form::file('File') !!}
+                <label for="File">{{ trans('lang.file') }}</label> <span class="text-red"> *</span>&nbsp
+                <div class="btn bg-olive btn-file" style="color:blue"> {{ trans('lang.upload_file') }}
+                    <input type="file" name="File') !!}
                 </div>
             </div>
         </div>
     </div>
     <div class="card-footer">
-        {!! Form::submit(Lang::get('lang.submit'),['class'=>'btn btn-primary'])!!}
+        {!! Form::submit(trans('lang.submit')" id="File') !!}
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="card-footer">
+        {!! Form::submit(trans('lang.submit')" class="btn btn-primary">
     </div>
 </div>
 @stop

@@ -32,38 +32,38 @@ class="active"
 <div class="col-md-12">
 <div class="box box-primary">
 <div class="box-header">
-	<h2 class="box-title">{{Lang::get('lang.templates')}}</h2><a href="{{route('template.create')}}" class="btn btn-primary pull-right">{{Lang::get('lang.create_template')}}</a></div>
+	<h2 class="box-title">{{ trans('lang.templates') }}</h2><a href="{{route('template.create')}}" class="btn btn-primary pull-right">{{ trans('lang.create_template') }}</a></div>
 
 <div class="box-body table-responsive no-padding">
 
 <!-- check whether success or not -->
 
-@if(Session::has('success'))
+@if(session()->has('success'))
     <div class="alert alert-success alert-dismissable">
         <i class="fa  fa-check-circle"></i>
         <b>Success!</b>
         <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-        {{Session::get('success')}}
+        {{ session('success') }}
     </div>
     @endif
     <!-- failure message -->
-    @if(Session::has('fails'))
+    @if(session()->has('fails'))
     <div class="alert alert-danger alert-dismissable">
         <i class="fa fa-ban"></i>
         <b>Fail!</b>
         <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-        {{Session::get('fails')}}
+        {{ session('fails') }}
     </div>
     @endif
 
 				<table class="table table-bordered dataTable" style="overflow:hidden;">
 	<tr>
-		<th width="100px">{{Lang::get('lang.name')}}</th>
-		<th width="100px">{{Lang::get('lang.status')}}</th>
-		<th width="100px">{{Lang::get('lang.in_use')}}</th>
-		<th width="100px">{{Lang::get('lang.created')}}</th>
-		<th width="100px">{{Lang::get('lang.last_updated')}}</th>
-		<th width="100px">{{Lang::get('lang.action')}}</th>
+		<th width="100px">{{ trans('lang.name') }}</th>
+		<th width="100px">{{ trans('lang.status') }}</th>
+		<th width="100px">{{ trans('lang.in_use') }}</th>
+		<th width="100px">{{ trans('lang.created') }}</th>
+		<th width="100px">{{ trans('lang.last_updated') }}</th>
+		<th width="100px">{{ trans('lang.action') }}</th>
 	</tr>
 	<!-- Foreach @var templates as @var template -->
 		@foreach($templates as $template)
@@ -87,15 +87,13 @@ class="active"
 		<td> {!! UTC::usertimezone($template->updated_at) !!} </td>
 		<!-- Deleting Fields -->
 		<td>
-			{!! Form::open(['route'=>['template.destroy', $template->id],'method'=>'DELETE']) !!}
+			<form method="POST" action="{{ route('template.destroy', $template->id) }}">
+    @csrf
+    @method('DELETE')
 			<a href="{{route('template.edit',$template->id)}}" class="btn btn-info btn-xs btn-flat"><i class="fa fa-edit" style="color:black;"> </i> Edit</a>
 			<!-- To pop up a confirm Message -->
-				{!! Form::button('<i class="fa fa-trash" style="color:black;"> </i> Delete',
-            		['type' => 'submit',
-            		'class'=> 'btn btn-warning btn-xs btn-flat',
-            		'onclick'=>'return confirm("Are you sure?")'])
-            	!!}
-			{!! Form::close() !!}
+				<button type="submit" class="btn btn-warning btn-xs btn-flat">'<i class="fa fa-trash" style="color:black;"> </i> Delete'</button>
+			</form>
 		</td>
 		@endforeach
 	</tr>

@@ -30,32 +30,32 @@ class="nav-item menu-open"
 @stop
 
 @section('PageHeader')
-<h1>{{Lang::get('lang.category')}}</h1>
+<h1>{{ trans('lang.category') }}</h1>
 @stop
 
 @section('content')
 {!! Form::open(array('route' => 'category.store' , 'method' => 'post') )!!}
-@if(Session::has('success'))
+@if(session()->has('success'))
 <div class="alert alert-success alert-dismissable">
     <i class="fas fa-check-circle"></i>
     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-    {{Session::get('success')}}
+    {{ session('success') }}
 </div>
 @endif
 <!-- failure message -->
-@if(Session::has('fails'))
+@if(session()->has('fails'))
 <div class="alert alert-danger alert-dismissable">
     <i class="fas fa-ban"></i>
-    <b>{!! Lang::get('lang.alert') !!}!</b>
+    <b>{{ trans('lang.alert') }}!</b>
     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-    {{Session::get('fails')}}
+    {{ session('fails') }}
 </div>
 @endif
-@if(Session::has('errors'))
+@if(session()->has('errors'))
 <?php //dd($errors); ?>
 <div class="alert alert-danger alert-dismissable">
     <i class="fa fa-ban"></i>
-    <b>{!! Lang::get('lang.alert') !!}!</b>
+    <b>{{ trans('lang.alert') }}!</b>
     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
     <br/>
     @if($errors->first('name'))
@@ -77,38 +77,50 @@ class="nav-item menu-open"
 @endif
 <div class="card card-light">
     <div class="card-header">
-        <h3 class="card-title">{!! Lang::get('lang.addcategory') !!}</h3> 
+        <h3 class="card-title">{{ trans('lang.addcategory') }}</h3> 
     </div>
     <div class="card-body">
         
         <div class="row">
             <div class="col-sm-3 {{ $errors->has('name') ? 'has-error' : '' }}">
-                {!! Form::label('name',Lang::get('lang.name')) !!}<span class="text-red"> *</span>
-                {!! Form::text('name',null,['class' => 'form-control']) !!}
+                <label for="name">{{ trans('lang.name') }}</label><span class="text-red"> *</span>
+                <input type="text" name="name" id="name" value="{{ old('name') }}" class="form-control">
             </div>
             <div class="col-sm-3 {{ $errors->has('parent') ? 'has-error' : '' }}">
-                {!! Form::label('parent',Lang::get('lang.parent')) !!}
-                {!!Form::select('parent',[''=>'Select a Category','Categories'=>$category],null,['class' => 'form-control select']) !!}
+                <label for="parent">{{ trans('lang.parent') }}</label>
+                <select name="parent" id="parent" class="form-control select">
+    @foreach([''=>'Select a Category','Categories'=>$category] as $key => $value)
+        @if(is_array($value))
+            <optgroup label="{{ $key }}">
+                @foreach($value as $subKey => $subValue)
+                    <option value="{{ $subKey }}">{{ $subValue }}</option>
+                @endforeach
+            </optgroup>
+        @else
+            <option value="{{ $key }}">{{ $value }}</option>
+        @endif
+    @endforeach
+</select>
             </div>
             <div class="col-sm-3 {{ $errors->has('status') ? 'has-error' : '' }}">
-                {!! Form::label('status',Lang::get('lang.status')) !!}
+                <label for="status">{{ trans('lang.status') }}</label>
                 <div class="row">
                     <div class="col-md-4">
-                        {!! Form::radio('status','1',true) !!} {{ Lang::get('lang.active')}}
+                        <input type="radio" name="status" value="'1'"> {{ trans('lang.active') }}
                     </div>
                     <div class="col-md-6">
-                        {!! Form::radio('status','0',null) !!} {{ Lang::get('lang.inactive')}}
+                        <input type="radio" name="status" value="'0'"> {{ trans('lang.inactive') }}
                     </div>
                 </div>
             </div>
             <div class="col-md-12 {{ $errors->has('description') ? 'has-error' : '' }}">
-                {!! Form::label('description',Lang::get('lang.description')) !!}<span class="text-red"> *</span>
-                {!! Form::textarea('description',null,['class' => 'form-control','id'=>'description','placeholder'=>Lang::get('lang.enter_the_description') ]) !!}
+                <label for="description">{{ trans('lang.description') }}</label><span class="text-red"> *</span>
+                <textarea name="description" id="description" class="form-control">{{ old('description') }}</textarea>
             </div>
         </div>
     </div>
     <div class="card-footer">
-        {!! Form::submit(Lang::get('lang.submit'),['class'=>'btn btn-primary'])!!}
+        <button type="submit" class="btn btn-primary">{{ trans('lang.submit') }}</button>
     </div>
 </div>
 <script type="text/javascript">

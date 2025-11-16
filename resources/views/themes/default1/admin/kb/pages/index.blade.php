@@ -11,25 +11,25 @@
     
 <div class="box box-primary">
 <div class="box-header">
-    <h2 class="box-title">{{Lang::get('lang.pages')}}</h2></div>
+    <h2 class="box-title">{{ trans('lang.pages') }}</h2></div>
 
 <div class="box-body table-responsive no-padding">
 
 <!-- check whether success or not -->
 
-@if(Session::has('success'))
+@if(session()->has('success'))
     <div class="alert alert-success alert-dismissable">
         <i class="fa  fa-check-circle"></i>
         <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-        {{Session::get('success')}}
+        {{ session('success') }}
     </div>
     @endif
     <!-- failure message -->
-    @if(Session::has('fails'))
+    @if(session()->has('fails'))
     <div class="alert alert-danger alert-dismissable">
         <i class="fa fa-ban"></i>
         <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-        {{Session::get('fails')}}
+        {{ session('fails') }}
     </div>
     @endif
 
@@ -45,9 +45,9 @@
     <table id="allBlogs"  class="table table-bordered table-striped dataTable" role="grid" aria-describedby="example1_info">
         <thead>
         <tr>
-            <th>{{Lang::get('lang.name')}}</th>
-            <th>{{Lang::get('lang.created')}}</th>
-            <th>{{Lang::get('lang.action')}}</th>
+            <th>{{ trans('lang.name') }}</th>
+            <th>{{ trans('lang.created') }}</th>
+            <th>{{ trans('lang.action') }}</th>
         </tr>
         </thead>
         <tbody>

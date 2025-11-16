@@ -20,7 +20,7 @@ class="nav-link active"
 @stop
 <!-- header -->
 @section('PageHeader')
-<h1>{{Lang::get('lang.email_diagnostic')}}</h1>
+<h1>{{ trans('lang.email_diagnostic') }}</h1>
 @stop
 <!-- /header -->
 <!-- content -->
@@ -28,27 +28,27 @@ class="nav-link active"
 <!-- check whether success or not -->
 <form method="POST" action="{!! route('postdiagno') !!}">
     <input type="hidden" name="_token" value="{{ csrf_token() }}">
-    @if(Session::has('success') && !Session::has('fails'))
+    @if(session()->has('success') && !session()->has('fails'))
     <div class="alert alert-success alert-dismissable">
         <i class="fas fa-check-circle"></i>
         <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-        {{Session::get('success')}}
+        {{ session('success') }}
     </div>
     @endif
     <!-- failure message -->
-    @if(Session::has('fails'))
+    @if(session()->has('fails'))
     <div class="alert alert-warning alert-dismissable">
         <i class="fas fa-ban"></i>
         <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-        <b>{!! Lang::get('lang.alert') !!} !</b><br/>
-        <li class="error-message-padding">{{Session::get('fails')}}</li>
+        <b>{{ trans('lang.alert') }} !</b><br/>
+        <li class="error-message-padding">{{ session('fails') }}</li>
     </div>
     @endif
-    @if(Session::has('errors'))
+    @if(session()->has('errors'))
     <?php //dd($errors); ?>
     <div class="alert alert-danger alert-dismissable">
         <i class="fas fa-ban"></i>
-        <b>{!! Lang::get('lang.alert') !!} !</b>
+        <b>{{ trans('lang.alert') }} !</b>
         <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
         <br/>
         @if($errors->first('from'))
@@ -67,19 +67,19 @@ class="nav-link active"
     @endif
     <div class="card card-light">
         <div class="card-header">
-            <h3 class="card-title">{{Lang::get('lang.send-mail-to-diagnos')}}</h3>	
+            <h3 class="card-title">{{ trans('lang.send-mail-to-diagnos') }}</h3>	
         </div>
         <div class="card-body">
 
             <div class="row form-group no-padding {!! $errors->has('from') ? 'has-error' : '' !!}">
                 <div class="col-md-2">
-                    <label>{!! Lang::get('lang.from') !!} <span class="text-red">*</span> :</label>
+                    <label>{{ trans('lang.from') }} <span class="text-red">*</span> :</label>
                 </div>
                 <div class="col-md-4">
                     {!! $errors->first('fetching_encryption', '<spam class="help-block">:message</spam>') !!}
                     <select name="from" class="form-control" id="from">
-                        <option value="">{!! Lang::get('lang.choose_an_email') !!}</option>
-                        <optgroup label="{!! Lang::get('lang.email') !!}">
+                        <option value="">{{ trans('lang.choose_an_email') }}</option>
+                        <optgroup label="{{ trans('lang.email') }}">
                             @foreach($emails as $email)
                             <?php
                             if ($email->email_address == $email->email_name) {
@@ -96,23 +96,23 @@ class="nav-link active"
             </div>
             <div class="row form-group no-padding {!! $errors->has('to') ? 'has-error' : '' !!}">
                 <div class="col-md-2">
-                    <label>{!! Lang::get('lang.to') !!} <span class="text-red">*</span> :</label>
+                    <label>{{ trans('lang.to') }} <span class="text-red">*</span> :</label>
                 </div>
                 <div class="col-md-4">
-                    {!! Form::text('to',null,['class' => 'form-control']) !!}
+                    <input type="text" name="to" id="to" value="{{ old('to') }}" class="form-control">
                 </div>
             </div>
             <div class="row form-group no-padding {!! $errors->has('subject') ? 'has-error' : '' !!}">
                 <div class="col-md-2">
-                    <label>{!! Lang::get('lang.subject') !!} <span class="text-red">*</span> :</label>
+                    <label>{{ trans('lang.subject') }} <span class="text-red">*</span> :</label>
                 </div>
                 <div class="col-md-8">
-                    {!! Form::text('subject',null,['class' => 'form-control']) !!}
+                    <input type="text" name="subject" id="subject" value="{{ old('subject') }}" class="form-control">
                 </div>
             </div>
             <div class="row form-group no-padding {!! $errors->has('message') ? 'has-error' : '' !!}">
                 <div class="col-md-2">
-                    <label>{!! Lang::get('lang.message') !!} <span class="text-red">*</span> :</label>
+                    <label>{{ trans('lang.message') }} <span class="text-red">*</span> :</label>
                 </div>
                 <div class="col-md-10">
                     <textarea name="message" id="message" class="form-control" style="height:200px;"></textarea>
@@ -120,7 +120,7 @@ class="nav-link active"
             </div>
         </div>
         <div class="card-footer">
-            {!! Form::submit(Lang::get('lang.send'),['class'=>'btn btn-primary'])!!}
+            <button type="submit" class="btn btn-primary">{{ trans('lang.send') }}</button>
         </div>
     </div>
 </form>

@@ -21,17 +21,17 @@
     <div class="app flex-row align-items-center">
         <div class="container">
             <!-- Flash Messages -->
-            @if(Session::has('success'))
+            @if(session()->has('success'))
                 <div class="alert alert-success alert-dismissible fade show">
                     <button type="button" class="close" data-dismiss="alert">&times;</button>
-                    <strong>Success!</strong> {{ Session::get('success') }}
+                    <strong>Success!</strong> {{ session('success') }}
                 </div>
             @endif
             
-            @if(Session::has('fails'))
+            @if(session()->has('fails'))
                 <div class="alert alert-danger alert-dismissible fade show">
                     <button type="button" class="close" data-dismiss="alert">&times;</button>
-                    <strong>Error!</strong> {{ Session::get('fails') }}
+                    <strong>Error!</strong> {{ session('fails') }}
                 </div>
             @endif
             

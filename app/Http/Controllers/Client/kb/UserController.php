@@ -124,7 +124,7 @@ class UserController extends Controller
         if ($arti) {
             return view('themes.default1.client.kb.article-list.show', compact('arti'));
         } else {
-            return Redirect::back()->with('fails', Lang::get('lang.sorry_not_processed'));
+            return Redirect::back()->with('fails', trans('lang.sorry_not_processed'));
         }
     }
 
@@ -133,7 +133,7 @@ class UserController extends Controller
         /* get the article_id where category_id == current category */
         $catid = $category->where('slug', $slug)->first();
         if (!$catid) {
-            return redirect()->back()->with('fails', Lang::get('lang.we_are_sorry_but_the_page_you_are_looking_for_can_not_be_found'));
+            return redirect()->back()->with('fails', trans('lang.we_are_sorry_but_the_page_you_are_looking_for_can_not_be_found'));
         }
         $id = $catid->id;
         $all = $relation->where('category_id', $id)->get();
@@ -210,9 +210,9 @@ class UserController extends Controller
             $message->to($contact->email, $contact->name)->subject('Contact');
         });
         if ($mail) {
-            return redirect('contact')->with('success', Lang::get('lang.your_details_send_to_system'));
+            return redirect('contact')->with('success', trans('lang.your_details_send_to_system'));
         } else {
-            return redirect('contact')->with('fails', Lang::get('lang.your_details_can_not_send_to_system'));
+            return redirect('contact')->with('fails', trans('lang.your_details_can_not_send_to_system'));
         }
     }
 
@@ -239,7 +239,7 @@ class UserController extends Controller
 
         $article = $article->where('slug', $slug)->first();
         if (!$article) {
-            return response()->json(['success' => false, 'message' => Lang::get('lang.sorry_not_processed')]);
+            return response()->json(['success' => false, 'message' => trans('lang.sorry_not_processed')]);
         }
 
         $comment->article_id = $article->id;
@@ -256,9 +256,9 @@ class UserController extends Controller
         }
 
         if ($comment->fill($request->input())->save()) {
-            return Redirect::back()->with('success', Lang::get('lang.your_comment_posted'));
+            return Redirect::back()->with('success', trans('lang.your_comment_posted'));
         } else {
-            return Redirect::back()->with('fails', Lang::get('lang.sorry_not_processed'));
+            return Redirect::back()->with('fails', trans('lang.sorry_not_processed'));
         }
     }
 
@@ -277,7 +277,7 @@ class UserController extends Controller
         if ($page) {
             return view('themes.default1.client.kb.article-list.pages', compact('page'));
         } else {
-            return Redirect::back()->with('fails', Lang::get('lang.sorry_not_processed'));
+            return Redirect::back()->with('fails', trans('lang.sorry_not_processed'));
         }
     }
 

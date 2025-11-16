@@ -10,31 +10,33 @@
 
 @section('content')
 
-	{!! Form::model($side,['url' => 'side2/'.$side->id, 'method' => 'PATCH','files'=>true]) !!}
+	<form method="POST">
+    @csrf
+    @method('PATCH')
 
 <!-- <div class="form-group {{ $errors->has('company_name') ? 'has-error' : '' }}"> -->
 	<!-- table  -->
 
 <div class="box box-primary">
-@if(Session::has('success'))
+@if(session()->has('success'))
     <div class="alert alert-success alert-dismissable">
         <i class="fa  fa-check-circle"></i>
         <b>Success</b>
         <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-        {{Session::get('success')}}
+        {{ session('success') }}
     </div>
     @endif
     <!-- failure message -->
-    @if(Session::has('fails'))
+    @if(session()->has('fails'))
     <div class="alert alert-danger alert-dismissable">
         <i class="fa fa-ban"></i>
         <b>Fail!</b>
         <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-        {{Session::get('fails')}}
+        {{ session('fails') }}
     </div>
     @endif
     <div class="box-header">
-        <h3 class="box-title">{{Lang::get('lang.sidewidget2')}}</h3>  {!! Form::submit(Lang::get('lang.save'),['class'=>'form-group btn btn-primary pull-right'])!!}
+        <h3 class="box-title">{{ trans('lang.sidewidget2') }}</h3>  <button type="submit" class="form-group btn btn-primary pull-right">{{ trans('lang.save') }}</button>
     </div>
     <div class="box-body">
 
@@ -45,16 +47,16 @@
 
         <div class="form-group {{ $errors->has('title') ? 'has-error' : '' }}">
 
-            {!! Form::label('title',Lang::get('lang.title')) !!}
+            <label for="title">{{ trans('lang.title') }}</label>
             {!! $errors->first('title', '<spam class="help-block">:message</spam>') !!}
-            {!! Form::text('title',null,['class' => 'form-control']) !!}
+            <input type="text" name="title" id="title" value="{{ old('title') }}" class="form-control">
 
         </div>
 
         <div class="form-group {{ $errors->has('content') ? 'has-error' : '' }}">
-            {!! Form::label('content',Lang::get('lang.content')) !!}
+            <label for="content">{{ trans('lang.content') }}</label>
             {!! $errors->first('content', '<spam class="help-block">:message</spam>') !!}
-            {!! Form::textarea('content',null,['class' => 'form-control','size' => '128x10','id'=>'footer','placeholder'=>Lang::get('lang.enter_the_description')]) !!}
+            <textarea name="content" id="footer" class="form-control" rows="10">{{ old('content') }}</textarea>
         </div>
 
     </div>

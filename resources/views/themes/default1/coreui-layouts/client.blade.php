@@ -142,11 +142,12 @@
                 <div id="login-form" class="login-form collapse">
                     <div class="card mt-3 mx-auto" style="max-width: 400px;">
                         <div class="card-body">
-                            {!! Form::open(['route' => 'post.login']) !!}
+                            <form method="POST" action="{{ route('post.login') }}">
+    @csrf
                             
                             <div class="form-group {{ $errors->has('email') ? 'has-error' : '' }}">
                                 <div class="input-group">
-                                    {!! Form::text('email', null, ['placeholder'=>'Email', 'class' => 'form-control']) !!}
+                                    <input type="text" name="email" id="email" value="{{ old('email') }}" class="form-control">
                                     <div class="input-group-append">
                                         <span class="input-group-text"><i class="fa fa-envelope"></i></span>
                                     </div>
@@ -156,7 +157,7 @@
                             
                             <div class="form-group {{ $errors->has('password') ? 'has-error' : '' }}">
                                 <div class="input-group">
-                                    {!! Form::password('password', ['placeholder'=>'Password', 'class' => 'form-control']) !!}
+                                    <input type="password" name="password" id="password" class="form-control">
                                     <div class="input-group-append">
                                         <span class="input-group-text"><i class="fa fa-lock"></i></span>
                                     </div>
@@ -172,7 +173,7 @@
                                 <button type="submit" class="btn btn-primary">Login</button>
                             </div>
                             
-                            {!! Form::close() !!}
+                            </form>
                         </div>
                     </div>
                 </div>
@@ -180,17 +181,17 @@
                 
                 <!-- Alert Messages -->
                 <div id="header-search" class="site-search clearfix mt-3">
-                    @if(Session::has('success'))
+                    @if(session()->has('success'))
                         <div class="alert alert-success alert-dismissible fade show">
                             <button type="button" class="close" data-dismiss="alert">&times;</button>
-                            <i class="fa fa-check-circle"></i> <strong>Success!</strong> {{ Session::get('success') }}
+                            <i class="fa fa-check-circle"></i> <strong>Success!</strong> {{ session('success') }}
                         </div>
                     @endif
                     
-                    @if(Session::has('fails'))
+                    @if(session()->has('fails'))
                         <div class="alert alert-danger alert-dismissible fade show">
                             <button type="button" class="close" data-dismiss="alert">&times;</button>
-                            <i class="fa fa-ban"></i> <strong>Alert!</strong> {{ Session::get('fails') }}
+                            <i class="fa fa-ban"></i> <strong>Alert!</strong> {{ session('fails') }}
                         </div>
                     @endif
                     

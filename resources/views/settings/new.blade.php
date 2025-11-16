@@ -1,13 +1,13 @@
    {!! Form::open( array('route' => 'settings.create','method' => 'post', 'id' => 'form-add-setting' ) ) !!}
      
-    {!! Form::label( 'setting_name', 'Setting Name:' ) !!}
+    <label for="setting_name">'Setting Name:' </label>
     {!! Form::text( 'setting_name', '', array(
         'id' => 'setting_name',
         'placeholder' => 'Enter Setting Name',
         'maxlength' => 20,
         'required' => true,
     ) ) !!}
-    {!! Form::label( 'setting_value', 'Setting Value:' ) !!}
+    <label for="setting_value">'Setting Value:' </label>
     {!! Form::text( 'setting_value', '', array(
         'id' => 'setting_value',
         'placeholder' => 'Enter Setting Value',
@@ -19,5 +19,5 @@
         'id' => 'btn-add-setting',
     ) ) !!}
      
-    {!! Form::close() !!}
+    </form>
 

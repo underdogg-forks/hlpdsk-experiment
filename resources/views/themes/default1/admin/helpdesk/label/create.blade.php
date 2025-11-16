@@ -28,24 +28,24 @@ class="active"
 <!-- content -->
 @section('content')
 
-@if(Session::has('success'))
+@if(session()->has('success'))
 <div class="alert alert-success alert-dismissable">
     <i class="fa fa-check-circle"></i>
     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-    {{Session::get('success')}}
+    {{ session('success') }}
 </div>
 @endif
-@if(Session::has('fails'))
+@if(session()->has('fails'))
 <div class="alert alert-danger alert-dismissable">
     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-    {{Session::get('fails')}}
+    {{ session('fails') }}
 </div>
 @endif
- @if(Session::has('errors'))
+ @if(session()->has('errors'))
         <br><br>
         <div class="alert alert-danger alert-dismissable">
             <i class="fa fa-ban"></i>
-            <b>{!! Lang::get('lang.alert') !!}!</b>
+            <b>{{ trans('lang.alert') }}!</b>
             <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
             <br/>
             @if($errors->first('title'))
@@ -59,10 +59,10 @@ class="active"
             @endif
         </div>
         @endif
-@if(Session::has('warn'))
+@if(session()->has('warn'))
 <div class="alert alert-warning alert-dismissable">
     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-    {{Session::get('warn')}}
+    {{ session('warn') }}
 </div>
 @endif
 <div class="box">
@@ -71,32 +71,33 @@ class="active"
         <div class="box-title">
             New Label
         </div>
-        {!! Form::open(['url'=>'labels','method'=>'post', 'id' => 'label-form']) !!}
+        <form method="POST" action="labels">
+    @csrf
     </div>
     <div class="box-body">
         <table class="table table-borderless">
             
             <tr>
                 <div class="form-group {{ $errors->has('title') ? 'has-error' : '' }}">
-                <td>{!! Form::label('title','Title') !!}<span class="text-red"> *</span></td>
+                <td><label for="title">'Title'</label><span class="text-red"> *</span></td>
                 <td>
                     <div class="form-group {{ $errors->has('title') ? 'has-error' : '' }}">
-                        {!! Form::text('title',null,['class'=>'form-control']) !!}
+                        <input type="text" name="title" id="title" value="{{ old('title') }}" class="form-control">
                     </div>
                 </td>
                 </div>
             </tr>
              <tr>
-                <td>{!! Form::label('color','Color') !!}<span class="text-red"> *</span></td>
+                <td><label for="color">'Color'</label><span class="text-red"> *</span></td>
                 <td>
                     <div class="form-group {{ $errors->has('color') ? 'has-error' : '' }}">
-                    {!! Form::text('color', null,['class'=>'form-control my-colorpicker1 colorpicker-element']) !!}
+                    <input type="text" name="color" id="color" value="{{ old('color') }}" class="form-control my-colorpicker1 colorpicker-element">
                     </div>
                 </td>
             </tr>
             
              <tr>
-                <td>{!! Form::label('order','Order') !!}<span class="text-red"> *</span></td>
+                <td><label for="order">'Order'</label><span class="text-red"> *</span></td>
                 <td>
                     <div class="form-group {{ $errors->has('order') ? 'has-error' : '' }}">
                     {!! Form::input('number', 'order', null, array('class' => 'form-control')) !!}
@@ -105,15 +106,15 @@ class="active"
             </tr>
             
              <tr>
-                <td>{!! Form::label('status','Status') !!}</td>
-                <td><input type="checkbox" name="status" id="status" checked="true">&nbsp;&nbsp;{{Lang::get('lang.enable')}}</td>
+                <td><label for="status">'Status'</label></td>
+                <td><input type="checkbox" name="status" id="status" checked="true">&nbsp;&nbsp;{{ trans('lang.enable') }}</td>
             </tr>
             
         </table>
     </div>
     <div class="box-footer">
-        {!! Form::submit('Save',['class'=>'btn btn-success']) !!}
-        {!! Form::close() !!}
+        <button type="submit" class="btn btn-success">'Save'</button>
+        </form>
     </div>
 </div>
 @stop

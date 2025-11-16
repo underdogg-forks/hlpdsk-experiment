@@ -500,10 +500,10 @@ class SettingsController2 extends Controller
             $emails->save();
 
             /* redirect to Index page with Success Message */
-            return redirect('job-scheduler')->with('success', Lang::get('lang.job-scheduler-success'));
+            return redirect('job-scheduler')->with('success', trans('lang.job-scheduler-success'));
         } catch (Exception $e) {
             /* redirect to Index page with Fails Message */
-            return redirect('job-scheduler')->with('fails', Lang::get('lang.job-scheduler-error').'<li>'.$e->getMessage().'</li>');
+            return redirect('job-scheduler')->with('fails', trans('lang.job-scheduler-error').'<li>'.$e->getMessage().'</li>');
         }
     }
 

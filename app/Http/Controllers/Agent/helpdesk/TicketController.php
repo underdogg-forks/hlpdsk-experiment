@@ -137,7 +137,7 @@ class TicketController extends Controller
                 $geoipcode = $code->where('iso', '=', $location->iso_code)->first();
                 if ($phonecode == null) {
                     $data = [
-                        'fails'              => Lang::get('lang.country-code-required-error'),
+                        'fails'              => trans('lang.country-code-required-error'),
                         'phonecode'          => $geoipcode->phonecode,
                         'country_code_error' => 1,
                     ];
@@ -150,7 +150,7 @@ class TicketController extends Controller
                     $code = CountryCode::select('phonecode')->where('phonecode', '=', $phonecode)->get();
                     if (!count($code)) {
                         $data = [
-                            'fails'              => Lang::get('lang.incorrect-country-code-error'),
+                            'fails'              => trans('lang.incorrect-country-code-error'),
                             'phonecode'          => $geoipcode->phonecode,
                             'country_code_error' => 1,
                         ];
@@ -170,23 +170,23 @@ class TicketController extends Controller
                     if ($api != false) {
                         $ticket = Tickets::where('ticket_number', '=', $result[0])->select('id')->first();
 
-                        return ['ticket_id' => $ticket->id, 'message' => Lang::get('lang.Ticket-created-successfully')];
+                        return ['ticket_id' => $ticket->id, 'message' => trans('lang.Ticket-created-successfully')];
                     }
 
-                    return Redirect('newticket')->with('success', Lang::get('lang.Ticket-created-successfully'));
+                    return Redirect('newticket')->with('success', trans('lang.Ticket-created-successfully'));
                 } else {
                     if ($api != false) {
-                        return response()->json(['success' => Lang::get('lang.Ticket-created-successfully')]);
+                        return response()->json(['success' => trans('lang.Ticket-created-successfully')]);
                     }
 
-                    return Redirect('newticket')->with('success', Lang::get('lang.Ticket-created-successfully2'));
+                    return Redirect('newticket')->with('success', trans('lang.Ticket-created-successfully2'));
                 }
             } else {
                 if ($api != false) {
-                    return response()->json(['error' => Lang::get('lang.failed-to-create-user-tcket-as-mobile-has-been-taken')], 500);
+                    return response()->json(['error' => trans('lang.failed-to-create-user-tcket-as-mobile-has-been-taken')], 500);
                 }
 
-                return Redirect('newticket')->with('fails', Lang::get('lang.failed-to-create-user-tcket-as-mobile-has-been-taken'))->withInput($request->except('password'));
+                return Redirect('newticket')->with('fails', trans('lang.failed-to-create-user-tcket-as-mobile-has-been-taken'))->withInput($request->except('password'));
             }
         } catch (Exception $e) {
             if ($api != false) {
@@ -227,7 +227,7 @@ class TicketController extends Controller
             return redirect()->route('check_ticket', compact('ticket_id'));
         }
         if ($tickets == null) {
-            return redirect()->route('inbox.ticket')->with('fails', \Lang::get('lang.invalid_attempt'));
+            return redirect()->route('inbox.ticket')->with('fails', \trans('lang.invalid_attempt'));
         }
         $avg = DB::table('ticket_thread')->where('ticket_id', '=', $id)->where('reply_rating', '!=', 0)->avg('reply_rating');
         $avg_rate = explode('.', $avg);
@@ -437,7 +437,7 @@ class TicketController extends Controller
 
             return response()->json(compact('result'));
         }
-        $result = ['success' => Lang::get('lang.you_have_successfully_replied_to_your_ticket')];
+        $result = ['success' => trans('lang.you_have_successfully_replied_to_your_ticket')];
 
         return response()->json(compact('result'));
     }
@@ -1664,7 +1664,7 @@ class TicketController extends Controller
             return '<div id="alert11" class="alert alert-warning alert-dismissable">'
                     .'<button id="dismiss11" type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>'
                     .'<i class="icon fa fa-ban"></i>'
-                    .Lang::get('lang.email_not_exist_system')
+                    .trans('lang.email_not_exist_system')
                     .'</div>'
                     .'</div>';
         }
@@ -1704,7 +1704,7 @@ class TicketController extends Controller
         $ticket_id = Input::get('ticket_id');
         $user_search = User::where('email', '=', $email)->first();
         if (isset($user_search)) {
-            return '<div id="alert11" class="alert alert-warning alert-dismissable" ><button id="dismiss11" type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button><h4><i class="icon fa fa-alert"></i>'.Lang::get('lang.alert').'!</h4><div id="message-success1">'.Lang::get('lang.user_already_exist').'</div></div>';
+            return '<div id="alert11" class="alert alert-warning alert-dismissable" ><button id="dismiss11" type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button><h4><i class="icon fa fa-alert"></i>'.trans('lang.alert').'!</h4><div id="message-success1">'.trans('lang.user_already_exist').'</div></div>';
         } else {
             $company = $this->company();
             $user = new User();
@@ -1809,11 +1809,11 @@ class TicketController extends Controller
             if ($value == 'Delete') {
                 return redirect()->back()->with('success', lang::get('lang.moved_to_trash'));
             } elseif ($value == 'Close') {
-                return redirect()->back()->with('success', Lang::get('lang.tickets_have_been_closed'));
+                return redirect()->back()->with('success', trans('lang.tickets_have_been_closed'));
             } elseif ($value == 'Open') {
-                return redirect()->back()->with('success', Lang::get('lang.tickets_have_been_opened'));
+                return redirect()->back()->with('success', trans('lang.tickets_have_been_opened'));
             } else {
-                return redirect()->back()->with('success', Lang::get('lang.hard-delete-success-message'));
+                return redirect()->back()->with('success', trans('lang.hard-delete-success-message'));
             }
         }
 
@@ -2039,7 +2039,7 @@ class TicketController extends Controller
                 $name = $user_data->username;
             }
 
-            return Lang::get('lang.locked-ticket')." <a href='".route('user.show', $ticket->lock_by)."'>".$name.'</a>&nbsp;'.$diff.'&nbsp'.Lang::get('lang.minutes-ago');  //ticket is locked
+            return trans('lang.locked-ticket')." <a href='".route('user.show', $ticket->lock_by)."'>".$name.'</a>&nbsp;'.$diff.'&nbsp'.trans('lang.minutes-ago');  //ticket is locked
         } elseif ($diff < $cad && Auth::user()->id == $ticket->lock_by) {
             $ticket = Tickets::where('id', '=', $id)->first();
             $ticket->lock_at = date('Y-m-d H:i:s');
@@ -2269,7 +2269,7 @@ class TicketController extends Controller
             if (!empty(Input::get('reason'))) {
                 $reason = Input::get('reason');
             } else {
-                $reason = Lang::get('lang.no-reason');
+                $reason = trans('lang.no-reason');
             }
             if (!empty(Input::get('title'))) {
                 Ticket_Thread::where('ticket_id', '=', $p_id)->first()
@@ -2281,9 +2281,9 @@ class TicketController extends Controller
             $new_thread->user_id = Auth::user()->id;
             $new_thread->is_internal = 0;
             $new_thread->title = $thread->title;
-            $new_thread->body = Lang::get('lang.get_merge_message').
+            $new_thread->body = trans('lang.get_merge_message').
                     "&nbsp;&nbsp;<a href='".route('ticket.thread', [$p_id]).
-                    "'>#".$parent_ticket->ticket_number.'</a><br><br><b>'.Lang::get('lang.merge-reason').':</b>&nbsp;&nbsp;'.$reason;
+                    "'>#".$parent_ticket->ticket_number.'</a><br><br><b>'.trans('lang.merge-reason').':</b>&nbsp;&nbsp;'.$reason;
             $new_thread->format = $thread->format;
             $new_thread->ip_address = $thread->ip_address;
 
@@ -2292,7 +2292,7 @@ class TicketController extends Controller
             $new_parent_thread->user_id = Auth::user()->id;
             $new_parent_thread->is_internal = 1;
             $new_parent_thread->title = $thread->title;
-            $new_parent_thread->body = Lang::get('lang.ticket')."&nbsp;<a href='".route('ticket.thread', [$value])."'>#".$ticket->ticket_number.'</a>&nbsp'.Lang::get('lang.ticket_merged').'<br><br><b>'.Lang::get('lang.merge-reason').':</b>&nbsp;&nbsp;'.$reason;
+            $new_parent_thread->body = trans('lang.ticket')."&nbsp;<a href='".route('ticket.thread', [$value])."'>#".$ticket->ticket_number.'</a>&nbsp'.trans('lang.ticket_merged').'<br><br><b>'.trans('lang.merge-reason').':</b>&nbsp;&nbsp;'.$reason;
             $new_parent_thread->format = $parent_thread->format;
             $new_parent_thread->ip_address = $parent_thread->ip_address;
             if ($new_thread->save() && $new_parent_thread->save()) {
@@ -2711,11 +2711,11 @@ class TicketController extends Controller
         return DatatableFacade::table()
             ->addColumn(
                 '<a class="checkbox-toggle"><i class="far fa-square fa-2x"></i></a>',
-                Lang::get('lang.subject'),
-                Lang::get('lang.ticket_id'),
-                Lang::get('lang.from'),
-                Lang::get('lang.assigned_to'),
-                Lang::get('lang.last_activity')
+                trans('lang.subject'),
+                trans('lang.ticket_id'),
+                trans('lang.from'),
+                trans('lang.assigned_to'),
+                trans('lang.last_activity')
             )->noScript();
     }
 
@@ -2754,19 +2754,19 @@ class TicketController extends Controller
                                     $string = Str::limit($string, 30).'...';
                                 }
                             } else {
-                                $string = Lang::get('lang.no-subject');
+                                $string = trans('lang.no-subject');
                             }
 
                             $collab = $tickets->countcollaborator;
                             if ($collab > 0) {
-                                $collabString = '&nbsp;<i class="fa fa-users" title="'.Lang::get('lang.ticket_has_collaborator').'"></i>';
+                                $collabString = '&nbsp;<i class="fa fa-users" title="'.trans('lang.ticket_has_collaborator').'"></i>';
                             } else {
                                 $collabString = null;
                             }
 
                             $attachCount = $tickets->countattachment;
                             if ($attachCount > 0) {
-                                $attachString = '&nbsp;<i class="fa fa-paperclip" title="'.Lang::get('lang.ticket_has_attachments').'"></i>';
+                                $attachString = '&nbsp;<i class="fa fa-paperclip" title="'.trans('lang.ticket_has_attachments').'"></i>';
                             } else {
                                 $attachString = '';
                             }
@@ -2784,10 +2784,10 @@ class TicketController extends Controller
                                 $duedate = strtotime($tickets->duedate);
 
                                 if ($duedate - $now < 0) {
-                                    $due = '&nbsp;<span style="background-color: rgba(221, 75, 57, 0.67) !important" title="'.Lang::get('lang.is_overdue').'" class="label label-danger">'.Lang::get('lang.overdue').'</span>';
+                                    $due = '&nbsp;<span style="background-color: rgba(221, 75, 57, 0.67) !important" title="'.trans('lang.is_overdue').'" class="label label-danger">'.trans('lang.overdue').'</span>';
                                 } else {
                                     if (date('Ymd', $duedate) == date('Ymd', $now)) {
-                                        $due = '&nbsp;<span style="background-color: rgba(240, 173, 78, 0.67) !important" title="'.Lang::get('lang.going-overdue-today').'" class="label label-warning">'.Lang::get('lang.duetoday').'</span>';
+                                        $due = '&nbsp;<span style="background-color: rgba(240, 173, 78, 0.67) !important" title="'.trans('lang.going-overdue-today').'" class="label label-warning">'.trans('lang.duetoday').'</span>';
                                     }
                                 }
                             }
@@ -2801,11 +2801,11 @@ class TicketController extends Controller
 
                             return "<div class='tooltip1' id='tool".$tickets->id."'>
                             <a href='".route('ticket.thread', [$tickets->id])."'>".$string."&nbsp;<span style='color:green'>".$thread_count."</span>
-                            </a> <span><i style='color:green' title='".Lang::get('lang.ticket_created_source', ['source' => $source])."' class='".$css."'></i></span>".$collabString.$attachString.$due.$tooltip_script.
-                                    "<span class='tooltiptext' id='tooltip".$tickets->id."' style='height:auto;width:300px;height:200px;overflow:scroll;background-color:#fff;color:black;border-radius:3px;border:2px solid gainsboro;position:absolute;z-index:1;top:150%;left:50%;margin-left:-23px;word-wrap:break-word;padding:10px;'>".Lang::get('lang.loading').'</span></div>';
+                            </a> <span><i style='color:green' title='".trans('lang.ticket_created_source', ['source' => $source])."' class='".$css."'></i></span>".$collabString.$attachString.$due.$tooltip_script.
+                                    "<span class='tooltiptext' id='tooltip".$tickets->id."' style='height:auto;width:300px;height:200px;overflow:scroll;background-color:#fff;color:black;border-radius:3px;border:2px solid gainsboro;position:absolute;z-index:1;top:150%;left:50%;margin-left:-23px;word-wrap:break-word;padding:10px;'>".trans('lang.loading').'</span></div>';
                         })
                         ->editColumn('ticket_number', function ($tickets) {
-                            return "<a href='".route('ticket.thread', [$tickets->id])."' class='$".ucfirst($tickets->priority)."*' title='".Lang::get('lang.click-here-to-see-more-details')."'>#".$tickets->ticket_number.'</a>';
+                            return "<a href='".route('ticket.thread', [$tickets->id])."' class='$".ucfirst($tickets->priority)."*' title='".trans('lang.click-here-to-see-more-details')."'>#".$tickets->ticket_number.'</a>';
                         })
                         ->editColumn('c_uname', function ($tickets) {
                             $from = $tickets->c_fname;
@@ -2817,25 +2817,25 @@ class TicketController extends Controller
 
                             $color = '';
                             if ($tickets->verified == 0 || $tickets->verified == '0') {
-                                $color = "<i class='fa fa-exclamation-triangle'  title='".Lang::get('lang.accoutn-not-verified')."'></i>";
+                                $color = "<i class='fa fa-exclamation-triangle'  title='".trans('lang.accoutn-not-verified')."'></i>";
                             }
 
-                            return "<a href='".$url."' title='".Lang::get('lang.see-profile1').' '.strip_tags($name).'&apos;'.Lang::get('lang.see-profile2')."'><span style='color:#508983'>".Str::limit(strip_tags($name), 30).' <span style="color:#f75959">'.$color.'</span></span></a>';
+                            return "<a href='".$url."' title='".trans('lang.see-profile1').' '.strip_tags($name).'&apos;'.trans('lang.see-profile2')."'><span style='color:#508983'>".Str::limit(strip_tags($name), 30).' <span style="color:#f75959">'.$color.'</span></span></a>';
                         })
                         ->editColumn('a_uname', function ($tickets) {
                             if ($tickets->assigned_to == null && $tickets->name == null) {
-                                return "<span style='color:red'>".Lang::get('lang.Unassigned').'</span>';
+                                return "<span style='color:red'>".trans('lang.Unassigned').'</span>';
                             } else {
                                 $assign = $tickets->assign_user_name;
                                 if ($tickets->assigned_to != null) {
                                     $assign = utfEncoding($tickets->a_fname).' '.utfEncoding($tickets->a_lname);
                                     $url = route('user.show', $tickets->assigned_to);
 
-                                    return "<a href='".$url."' title='".Lang::get('lang.see-profile1').' '.strip_tags($assign).'&apos;'.Lang::get('lang.see-profile2')."'><span style='color:green'>".mb_substr(strip_tags($assign), 0, 30, 'UTF-8').'</span></a>';
+                                    return "<a href='".$url."' title='".trans('lang.see-profile1').' '.strip_tags($assign).'&apos;'.trans('lang.see-profile2')."'><span style='color:green'>".mb_substr(strip_tags($assign), 0, 30, 'UTF-8').'</span></a>';
                                 } else {
                                     $url1 = '#';
 
-                                    return "<a href='".$url1."' title='".Lang::get('lang.see-profile1').' '.ucfirst(strip_tags($tickets->name)).'&apos;'.Lang::get('lang.see-profile2')."'><span style='color:green'>".mb_substr(ucfirst(strip_tags($tickets->name)), 0, 30, 'UTF-8').'</span></a>';
+                                    return "<a href='".$url1."' title='".trans('lang.see-profile1').' '.ucfirst(strip_tags($tickets->name)).'&apos;'.trans('lang.see-profile2')."'><span style='color:green'>".mb_substr(ucfirst(strip_tags($tickets->name)), 0, 30, 'UTF-8').'</span></a>';
                                 }
                             }
                         })
@@ -2872,13 +2872,13 @@ class TicketController extends Controller
         $table = \Datatable::table()
                 ->addColumn(
                     '',
-                    Lang::get('lang.subject'),
-                    Lang::get('lang.ticket_id'),
-                    Lang::get('lang.priority'),
-                    Lang::get('lang.from'),
-                    Lang::get('lang.assigned_to'),
-                    Lang::get('lang.last_activity'),
-                    Lang::get('lang.created-at')
+                    trans('lang.subject'),
+                    trans('lang.ticket_id'),
+                    trans('lang.priority'),
+                    trans('lang.from'),
+                    trans('lang.assigned_to'),
+                    trans('lang.last_activity'),
+                    trans('lang.created-at')
                 )
                 ->noScript();
 
@@ -2895,13 +2895,13 @@ class TicketController extends Controller
         $table = \Datatable::table()
                 ->addColumn(
                     '',
-                    Lang::get('lang.subject'),
-                    Lang::get('lang.ticket_id'),
-                    Lang::get('lang.priority'),
-                    Lang::get('lang.from'),
-                    Lang::get('lang.assigned_to'),
-                    Lang::get('lang.last_activity'),
-                    Lang::get('lang.created-at')
+                    trans('lang.subject'),
+                    trans('lang.ticket_id'),
+                    trans('lang.priority'),
+                    trans('lang.from'),
+                    trans('lang.assigned_to'),
+                    trans('lang.last_activity'),
+                    trans('lang.created-at')
                 )
                 ->noScript();
 
@@ -2918,13 +2918,13 @@ class TicketController extends Controller
         $table = \Datatable::table()
                 ->addColumn(
                     '',
-                    Lang::get('lang.subject'),
-                    Lang::get('lang.ticket_id'),
-                    Lang::get('lang.priority'),
-                    Lang::get('lang.from'),
-                    Lang::get('lang.assigned_to'),
-                    Lang::get('lang.last_activity'),
-                    Lang::get('lang.created-at')
+                    trans('lang.subject'),
+                    trans('lang.ticket_id'),
+                    trans('lang.priority'),
+                    trans('lang.from'),
+                    trans('lang.assigned_to'),
+                    trans('lang.last_activity'),
+                    trans('lang.created-at')
                 )
                 ->noScript();
 
@@ -2941,13 +2941,13 @@ class TicketController extends Controller
         $table = \Datatable::table()
                 ->addColumn(
                     '',
-                    Lang::get('lang.subject'),
-                    Lang::get('lang.ticket_id'),
-                    Lang::get('lang.priority'),
-                    Lang::get('lang.from'),
-                    Lang::get('lang.assigned_to'),
-                    Lang::get('lang.last_activity'),
-                    Lang::get('lang.created-at')
+                    trans('lang.subject'),
+                    trans('lang.ticket_id'),
+                    trans('lang.priority'),
+                    trans('lang.from'),
+                    trans('lang.assigned_to'),
+                    trans('lang.last_activity'),
+                    trans('lang.created-at')
                 )
                 ->noScript();
 
@@ -2964,13 +2964,13 @@ class TicketController extends Controller
         $table = \Datatable::table()
                 ->addColumn(
                     '',
-                    Lang::get('lang.subject'),
-                    Lang::get('lang.ticket_id'),
-                    Lang::get('lang.priority'),
-                    Lang::get('lang.from'),
-                    Lang::get('lang.assigned_to'),
-                    Lang::get('lang.last_activity'),
-                    Lang::get('lang.created-at')
+                    trans('lang.subject'),
+                    trans('lang.ticket_id'),
+                    trans('lang.priority'),
+                    trans('lang.from'),
+                    trans('lang.assigned_to'),
+                    trans('lang.last_activity'),
+                    trans('lang.created-at')
                 )
                 ->noScript();
 
@@ -2987,13 +2987,13 @@ class TicketController extends Controller
         $table = \Datatable::table()
                 ->addColumn(
                     '',
-                    Lang::get('lang.subject'),
-                    Lang::get('lang.ticket_id'),
-                    Lang::get('lang.priority'),
-                    Lang::get('lang.from'),
-                    Lang::get('lang.assigned_to'),
-                    Lang::get('lang.last_activity'),
-                    Lang::get('lang.created-at')
+                    trans('lang.subject'),
+                    trans('lang.ticket_id'),
+                    trans('lang.priority'),
+                    trans('lang.from'),
+                    trans('lang.assigned_to'),
+                    trans('lang.last_activity'),
+                    trans('lang.created-at')
                 )
                 ->noScript();
 
@@ -3010,13 +3010,13 @@ class TicketController extends Controller
         $table = \Datatable::table()
                 ->addColumn(
                     '',
-                    Lang::get('lang.subject'),
-                    Lang::get('lang.ticket_id'),
-                    Lang::get('lang.priority'),
-                    Lang::get('lang.from'),
-                    Lang::get('lang.assigned_to'),
-                    Lang::get('lang.last_activity'),
-                    Lang::get('lang.created-at')
+                    trans('lang.subject'),
+                    trans('lang.ticket_id'),
+                    trans('lang.priority'),
+                    trans('lang.from'),
+                    trans('lang.assigned_to'),
+                    trans('lang.last_activity'),
+                    trans('lang.created-at')
                 )
                 ->noScript();
 
@@ -3033,13 +3033,13 @@ class TicketController extends Controller
         $table = \Datatable::table()
                 ->addColumn(
                     '',
-                    Lang::get('lang.subject'),
-                    Lang::get('lang.ticket_id'),
-                    Lang::get('lang.priority'),
-                    Lang::get('lang.from'),
-                    Lang::get('lang.assigned_to'),
-                    Lang::get('lang.last_activity'),
-                    Lang::get('lang.created-at')
+                    trans('lang.subject'),
+                    trans('lang.ticket_id'),
+                    trans('lang.priority'),
+                    trans('lang.from'),
+                    trans('lang.assigned_to'),
+                    trans('lang.last_activity'),
+                    trans('lang.created-at')
                 )
                 ->noScript();
 
@@ -3070,19 +3070,19 @@ class TicketController extends Controller
         if (\Auth::user()->role === 'agent') {
             $dept2 = Department::where('id', '=', \Auth::user()->primary_dpt)->first();
             if ($dept !== $dept2->name) {
-                return redirect()->back()->with('fails', Lang::get('lang.unauthorized_access'));
+                return redirect()->back()->with('fails', trans('lang.unauthorized_access'));
             }
         }
         $table = \Datatable::table()
                 ->addColumn(
                     '',
-                    Lang::get('lang.subject'),
-                    Lang::get('lang.ticket_id'),
-                    Lang::get('lang.priority'),
-                    Lang::get('lang.from'),
-                    Lang::get('lang.assigned_to'),
-                    Lang::get('lang.last_activity'),
-                    Lang::get('lang.created-at')
+                    trans('lang.subject'),
+                    trans('lang.ticket_id'),
+                    trans('lang.priority'),
+                    trans('lang.from'),
+                    trans('lang.assigned_to'),
+                    trans('lang.last_activity'),
+                    trans('lang.created-at')
                 )
                 ->noScript();
 
@@ -3099,13 +3099,13 @@ class TicketController extends Controller
         $table = \Datatable::table()
                 ->addColumn(
                     '',
-                    Lang::get('lang.subject'),
-                    Lang::get('lang.ticket_id'),
-                    Lang::get('lang.priority'),
-                    Lang::get('lang.from'),
-                    Lang::get('lang.assigned_to'),
-                    Lang::get('lang.last_activity'),
-                    Lang::get('lang.created-at')
+                    trans('lang.subject'),
+                    trans('lang.ticket_id'),
+                    trans('lang.priority'),
+                    trans('lang.from'),
+                    trans('lang.assigned_to'),
+                    trans('lang.last_activity'),
+                    trans('lang.created-at')
                 )
                 ->noScript();
 
@@ -3122,13 +3122,13 @@ class TicketController extends Controller
         $table = \Datatable::table()
                 ->addColumn(
                     '',
-                    Lang::get('lang.subject'),
-                    Lang::get('lang.ticket_id'),
-                    Lang::get('lang.priority'),
-                    Lang::get('lang.from'),
-                    Lang::get('lang.assigned_to'),
-                    Lang::get('lang.last_activity'),
-                    Lang::get('lang.created-at')
+                    trans('lang.subject'),
+                    trans('lang.ticket_id'),
+                    trans('lang.priority'),
+                    trans('lang.from'),
+                    trans('lang.assigned_to'),
+                    trans('lang.last_activity'),
+                    trans('lang.created-at')
                 )
                 ->noScript();
 
@@ -3145,13 +3145,13 @@ class TicketController extends Controller
         $table = \Datatable::table()
                 ->addColumn(
                     '',
-                    Lang::get('lang.subject'),
-                    Lang::get('lang.ticket_id'),
-                    Lang::get('lang.priority'),
-                    Lang::get('lang.from'),
-                    Lang::get('lang.assigned_to'),
-                    Lang::get('lang.last_activity'),
-                    Lang::get('lang.created-at')
+                    trans('lang.subject'),
+                    trans('lang.ticket_id'),
+                    trans('lang.priority'),
+                    trans('lang.from'),
+                    trans('lang.assigned_to'),
+                    trans('lang.last_activity'),
+                    trans('lang.created-at')
                 )
                 ->noScript();
 
@@ -3167,13 +3167,13 @@ class TicketController extends Controller
             $table = \Datatable::table()
                     ->addColumn(
                         '',
-                        Lang::get('lang.subject'),
-                        Lang::get('lang.ticket_id'),
-                        Lang::get('lang.priority'),
-                        Lang::get('lang.from'),
-                        Lang::get('lang.assigned_to'),
-                        Lang::get('lang.last_activity'),
-                        Lang::get('lang.created-at')
+                        trans('lang.subject'),
+                        trans('lang.ticket_id'),
+                        trans('lang.priority'),
+                        trans('lang.from'),
+                        trans('lang.assigned_to'),
+                        trans('lang.last_activity'),
+                        trans('lang.created-at')
                     )
                     ->noScript();
 
@@ -3251,19 +3251,19 @@ class TicketController extends Controller
                 }
                 $color = '';
                 if ($tickets->verified == 0 || $tickets->verified == '0') {
-                    $color = "<i class='fa fa-exclamation-triangle'  title='".Lang::get('lang.accoutn-not-verified')."'></i>";
+                    $color = "<i class='fa fa-exclamation-triangle'  title='".trans('lang.accoutn-not-verified')."'></i>";
                 }
 
-                return "<a href='".$url."' title='".Lang::get('lang.see-profile1').' '.ucfirst($tickets->user_name).'&apos;'.Lang::get('lang.see-profile2')."'><span style='color:#508983'>".ucfirst(Str::limit($name, 30)).' <span style="color:#f75959">'.$color.'</span></span></a>';
+                return "<a href='".$url."' title='".trans('lang.see-profile1').' '.ucfirst($tickets->user_name).'&apos;'.trans('lang.see-profile2')."'><span style='color:#508983'>".ucfirst(Str::limit($name, 30)).' <span style="color:#f75959">'.$color.'</span></span></a>';
             })
             ->addColumn('assign_user_name', function ($tickets) {
                 if ($tickets->assigned_to == null) {
-                    return "<span style='color:red'>".Lang::get('lang.Unassigned').'</span>';
+                    return "<span style='color:red'>".trans('lang.Unassigned').'</span>';
                 } else {
                     $assign = $tickets->assign_user_name;
                     $url = route('user.show', $tickets->assigned_to);
 
-                    return "<a href='".$url."' title='".Lang::get('lang.see-profile1').' '.ucfirst($tickets->assign_first_name).'&apos;'.Lang::get('lang.see-profile2')."'><span style='color:green'>".ucfirst($tickets->assign_first_name).' '.ucfirst($tickets->assign_last_name).'</span></a>';
+                    return "<a href='".$url."' title='".trans('lang.see-profile1').' '.ucfirst($tickets->assign_first_name).'&apos;'.trans('lang.see-profile2')."'><span style='color:green'>".ucfirst($tickets->assign_first_name).' '.ucfirst($tickets->assign_last_name).'</span></a>';
                 }
             })
                 ->addColumn('updated_at', function ($tickets) {

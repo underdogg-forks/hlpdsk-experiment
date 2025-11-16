@@ -20,7 +20,8 @@ active
  <div id="form-content">
 <div ng-app="myApp">
         <h1 style="text-align: center;">Locale Information</h1>
-        {!! Form::open(['url'=>route('postaccount'), 'id' => 'postaccount']) !!}
+        <form method="POST">
+    @csrf
         
 
         <!-- checking if the form submit fails -->
@@ -50,10 +51,10 @@ active
         @endif
 
         <!-- checking if the system fails -->
-        @if(Session::has('fails'))
+        @if(session()->has('fails'))
             <div class="woocommerce-message woocommerce-tracker">
                 <div class="fail">
-                    <span id="fail">{{Session::get('fails')}} </span><br/><br/>
+                    <span id="fail">{{ session('fails') }} </span><br/><br/>
                 </div>
             </div>
         @endif
@@ -66,11 +67,11 @@ active
                 <div>
                     <tr>
                         <td>
-                            <label for="box1">{!! Lang::get('lang.name') !!}<span style="color
+                            <label for="box1">{{ trans('lang.name') }}<span style="color
                                 : red;font-size:12px;">*</span></label>
                         </td>
                         <td>
-                            {!! Form::text('firstname',null,['style' =>'margin-left:250px', 'required' => true]) !!}
+                            <input type="text" name="firstname" id="firstname" value="{{ old('firstname') }}" required>
                         </td>
                         <td>
                             <button type="button" data-toggle="popover" data-placement="right" data-arrowcolor="#eeeeee" data-bordercolor="#bbbbbb" data-title-backcolor="#cccccc" data-title-bordercolor="#bbbbbb" data-title-textcolor="#444444" data-content-backcolor="#eeeeee" data-content-textcolor="#888888" title="@{{Nametitle}}" data-content="@{{Namecontent}}" style="padding: 0px;border: 0px; border-radius: 5px;"><i class="fa fa-question-circle" style="padding: 0px;"></i>
@@ -83,7 +84,7 @@ active
                                 : red;font-size:12px;">*</span></label>
                         </td>
                         <td>
-                            {!! Form::text('Lastname',null,['style' =>'margin-left:250px', 'required' => true]) !!}
+                            <input type="text" name="Lastname" id="Lastname" value="{{ old('Lastname') }}" required>
                         </td>
                         <td>
                             <button type="button" data-toggle="popover" data-placement="right" data-arrowcolor="#eeeeee" data-bordercolor="#bbbbbb" data-title-backcolor="#cccccc" data-title-bordercolor="#bbbbbb" data-title-textcolor="#444444" data-content-backcolor="#eeeeee" data-content-textcolor="#888888" title="@{{Lasttitle}}" data-content="@{{Lastcontent}}" style="padding: 0px;border: 0px; border-radius: 5px;"><i class="fa fa-question-circle" style="padding: 0px;"></i>
@@ -96,7 +97,7 @@ active
                                 : red;font-size:12px;">*</span></label>
                         </td>
                         <td>
-                            {!! Form::email('email',null,['style' =>'margin-left:250px', 'required' => true]) !!}
+                            <input type="email" name="email" id="email" value="{{ old('email') }}">
                         </td>
                         <td>
                             <button type="button" data-toggle="popover" data-placement="right" data-arrowcolor="#eeeeee" data-bordercolor="#bbbbbb" data-title-backcolor="#cccccc" data-title-bordercolor="#bbbbbb" data-title-textcolor="#444444" data-content-backcolor="#eeeeee" data-content-textcolor="#888888" title="@{{Emailtitle}}" data-content="@{{Emailcontent}}" style="padding: 0px;border: 0px; border-radius: 5px;"><i class="fa fa-question-circle" style="padding: 0px;"></i>
@@ -117,7 +118,7 @@ active
                             </label>
                         </td>
                         <td>
-                            {!! Form::text('username',null,['style' =>'margin-left:195px', 'required' => true]) !!}
+                            <input type="text" name="username" id="username" value="{{ old('username') }}" required>
                         </td>
                         <td>
                             <button type="button" data-toggle="popover" data-placement="right" data-arrowcolor="#eeeeee" data-bordercolor="#bbbbbb" data-title-backcolor="#cccccc" data-title-bordercolor="#bbbbbb" data-title-textcolor="#444444" data-content-backcolor="#eeeeee" data-content-textcolor="#888888" title="@{{UserNametitle}}" data-content="@{{UserNamecontent}}" style="padding: 0px;border: 0px; border-radius: 5px;"><i class="fa fa-question-circle" style="padding: 0px;"></i>
@@ -159,7 +160,7 @@ active
                 <div>
                     <tr>
                         <td>
-                            {!! Form::label('date',Lang::get('lang.date_time')) !!}
+                            <label for="date">{{ trans('lang.date_time') }}</label>
                         </td>
                         <td>
                             <div class="side-by-side clearfix moveleft">
@@ -179,7 +180,7 @@ active
                     </tr>
                     <tr>
                         <td>
-                            {!! Form::label('time_zone',Lang::get('lang.time_zone')) !!}
+                            <label for="time_zone">{{ trans('lang.time_zone') }}</label>
                         </td>
                         <?php  
 
@@ -201,7 +202,19 @@ active
                             <div class="side-by-side clearfix moveleft">
                                 <div>
 
-                     {!! Form::select('timezone', [Lang::get('lang.choose')=>$timezones],null,['class' => 'selectpicker chosen-select','required','data-live-search'=>'true','data-live-search-placeholder'=>'Search','style'=>'width:295px;']) !!}
+                     <select name="timezone" id="timezone" class="selectpicker chosen-select">
+    @foreach([trans('lang.choose')=>$timezones] as $key => $value)
+        @if(is_array($value))
+            <optgroup label="{{ $key }}">
+                @foreach($value as $subKey => $subValue)
+                    <option value="{{ $subKey }}">{{ $subValue }}</option>
+                @endforeach
+            </optgroup>
+        @else
+            <option value="{{ $key }}">{{ $value }}</option>
+        @endif
+    @endforeach
+</select>
                                </div>
                             </div>                
                         </td>
@@ -212,7 +225,7 @@ active
                     </tr>
                     <tr>
                         <td>
-                            {!! Form::label('language',Lang::get('lang.language')) !!}
+                            <label for="language">{{ trans('lang.language') }}</label>
                         </td>
                         <td>
                             <div class="side-by-side clearfix moveleft">

@@ -15,44 +15,46 @@ class="active"
 @section('content')
 <!-- open a form -->
 
-	{!! Form::model($footer2,['url' => 'post-create-footer2/'.$footer2->id, 'method' => 'PATCH','files'=>true]) !!}
+	<form method="POST">
+    @csrf
+    @method('PATCH')
 
 <!-- <div class="form-group {{ $errors->has('company_name') ? 'has-error' : '' }}"> -->
 	<!-- table  -->
 
 <div class="box box-primary">
 	<div class="box-header">
-        	<h4 class="box-title">{!! Lang::get('lang.footer2') !!}</h4> {!! Form::submit(Lang::get('lang.save'),['class'=>'form-group btn btn-primary pull-right'])!!}
+        	<h4 class="box-title">{{ trans('lang.footer2') }}</h4> <button type="submit" class="form-group btn btn-primary pull-right">{{ trans('lang.save') }}</button>
     </div>
     <!-- check whether success or not -->
-    @if(Session::has('success'))
+    @if(session()->has('success'))
     <div class="alert alert-success alert-dismissable">
         <i class="fa  fa-check-circle"></i>
         <b>Success!</b>
         <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-        {{Session::get('success')}}
+        {{ session('success') }}
     </div>
     @endif
     <!-- failure message -->
-    @if(Session::has('fails'))
+    @if(session()->has('fails'))
     <div class="alert alert-danger alert-dismissable">
         <i class="fa fa-ban"></i>
         <b>Fail!</b>
         <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-        {{Session::get('fails')}}
+        {{ session('fails') }}
     </div>
     @endif
 		<!-- Name text form Required -->
  		<div class="box-body table-responsive"style="overflow:hidden;">
             <div class="form-group {{ $errors->has('title') ? 'has-error' : '' }}">
-                {!! Form::label('title',Lang::get('lang.title') ) !!}
+                <label for="title">{{ trans('lang.title') }}</label>
                 {!! $errors->first('title', '<spam class="help-block">:message</spam>') !!}
-                {!! Form::text('title',null,['class' => 'form-control']) !!}
+                <input type="text" name="title" id="title" value="{{ old('title') }}" class="form-control">
             </div>
             <div class="form-group {{ $errors->has('footer') ? 'has-error' : '' }}">
-                {!! Form::label('footer', Lang::get('lang.footer') ) !!}
+                <label for="footer">{{ trans('lang.footer') }}</label>
                 {!! $errors->first('footer', '<spam class="help-block">:message</spam>') !!}
-                {!! Form::textarea('footer',null,['class' => 'form-control','size' => '30x5','id'=>'footer']) !!}
+                <textarea name="footer" id="footer" class="form-control" rows="5">{{ old('footer') }}</textarea>
             </div>
         </div>
         <div class="box-footer">

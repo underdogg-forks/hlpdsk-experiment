@@ -17,7 +17,7 @@ class="nav-link active"
 @stop
 
 @section('PageHeader')
-<h1>{!! Lang::get('lang.settings') !!}</h1>
+<h1>{{ trans('lang.settings') }}</h1>
 @stop
 
 @section('breadcrumbs')
@@ -26,32 +26,32 @@ class="nav-link active"
 @stop
 
 @section('content')
-@if(Session::has('success'))
+@if(session()->has('success'))
 <div class="alert alert-success alert-dismissable">
     <i class="fas fa-check-circle"></i>
     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-    {{Session::get('success')}}
+    {{ session('success') }}
 </div>
 @endif
-@if(Session::has('failed'))
+@if(session()->has('failed'))
 <div class="alert alert-danger alert-dismissable">
     <i class="fas fa-ban"></i>
-    <b>{!! Lang::get('lang.alert') !!} !</b>
+    <b>{{ trans('lang.alert') }} !</b>
     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-    <p>{{Session::get('failed')}}</p>                
+    <p>{{ session('failed') }}</p>                
 </div>
 @endif
 <div class="card card-light">
     <div class="card-header">
-        <h3 class="card-title">{!! Lang::get('lang.list_of_status') !!}</h3>
+        <h3 class="card-title">{{ trans('lang.list_of_status') }}</h3>
     </div><!-- /.box-header -->
     <div class="card-body">
         <table id="example1" class="table table-bordered table-striped">
             <thead>
                 <tr>
-                    <th>{!! Lang::get('lang.name') !!}</th>
-                    <th>{!! Lang::get('lang.display_order') !!}</th>
-                    <th>{!! Lang::get('lang.action') !!}</th>
+                    <th>{{ trans('lang.name') }}</th>
+                    <th>{{ trans('lang.display_order') }}</th>
+                    <th>{{ trans('lang.action') }}</th>
                 </tr>
             </thead>
             <tbody>
@@ -61,7 +61,7 @@ class="nav-link active"
                     <td>{!! $status->name !!}</td>
                     <td>{!! $status->sort !!}</td>
                     <td>
-                        <a href="{!! route('status.edit',$status->id) !!}"><button class="btn btn-primary btn-sm">{!! Lang::get('lang.edit_details') !!}</button></a>
+                        <a href="{!! route('status.edit',$status->id) !!}"><button class="btn btn-primary btn-sm">{{ trans('lang.edit_details') }}</button></a>
                     </td>
                 </tr>
                 @endforeach

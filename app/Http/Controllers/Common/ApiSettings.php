@@ -69,7 +69,7 @@ class ApiSettings extends Controller
                 $settings->create(['key' => $key, 'value' => $value]);
             }
 
-            return redirect()->back()->with('success', Lang::get('lang.updated_successfully'));
+            return redirect()->back()->with('success', trans('lang.updated_successfully'));
         } catch (Exception $ex) {
             return redirect()->back()->with('fails', $ex->getMessage());
         }

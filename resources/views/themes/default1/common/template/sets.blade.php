@@ -17,34 +17,34 @@ class="nav-link active"
 @stop
 
 @section('PageHeader')
-<h1>{!! Lang::get('lang.template_set') !!}</h1>
+<h1>{{ trans('lang.template_set') }}</h1>
 @stop
 
 @section('content')
 
-@if(Session::has('success'))
+@if(session()->has('success'))
 <div class="alert alert-success alert-dismissable">
     <i class="fa fa-check-circle"></i>
     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-    {{Session::get('success')}}
+    {{ session('success') }}
 </div>
 @endif
 
-@if(Session::has('failed'))
+@if(session()->has('failed'))
 <div class="alert alert-danger alert-dismissable">
     <i class="fa fa-ban"></i>
     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-    <b>{!! Lang::get('lang.alert') !!} !</b> <br>
-    <li>{{Session::get('failed')}}</li>
+    <b>{{ trans('lang.alert') }} !</b> <br>
+    <li>{{ session('failed') }}</li>
 </div>
 @endif
 
 <div class="card card-light">
     <div class="card-header">
-        <h3 class="card-title">{!! Lang::get('lang.list_of_templates_sets') !!}</h3>
+        <h3 class="card-title">{{ trans('lang.list_of_templates_sets') }}</h3>
         <div class="card-tools">
             <button class="btn btn-default btn-tool" data-toggle="modal" data-target="#create" title="Create" id="2create">
-                <i class="fas fa-plus"> </i> {{Lang::get('lang.create')}}
+                <i class="fas fa-plus"> </i> {{ trans('lang.create') }}
             </button>
         </div>
     </div><!-- /.box-header -->
@@ -52,9 +52,9 @@ class="nav-link active"
         <table id="example1" class="table table-bordered table-striped">
             <thead>
                 <tr>
-                    <th>{!! Lang::get('lang.name') !!}</th>
-                    <th>{!! Lang::get('lang.status') !!}</th>
-                    <th>{!! Lang::get('lang.action') !!}</th>
+                    <th>{{ trans('lang.name') }}</th>
+                    <th>{{ trans('lang.status') }}</th>
+                    <th>{{ trans('lang.action') }}</th>
                 </tr>
             </thead>
             <tbody>
@@ -87,33 +87,34 @@ class="nav-link active"
                         }
                         ?>
                         @if($set->name == $settings->template)
-                       <button class="btn btn-success btn-sm {!! $dis !!}" data-toggle="modal" data-target="">{!! Lang::get('lang.activate_this_set') !!}</button>
+                       <button class="btn btn-success btn-sm {!! $dis !!}" data-toggle="modal" data-target="">{{ trans('lang.activate_this_set') }}</button>
                         @else()
-                        {!! link_to_route('active.template-set',Lang::get('lang.activate_this_set'),[$set->name],['class'=>'btn btn-success btn-sm $dis']) !!}
+                        {!! link_to_route('active.template-set',trans('lang.activate_this_set'),[$set->name],['class'=>'btn btn-success btn-sm $dis']) !!}
                          @endif
 
-                        {!! link_to_route('show.templates',Lang::get('lang.show'),[$set->id],['class'=>'btn btn-success btn-sm']) !!}
+                        {!! link_to_route('show.templates',trans('lang.show'),[$set->id],['class'=>'btn btn-success btn-sm']) !!}
                         <div class="modal fade" id="{{$set->id}}">
                             <div class="modal-dialog">
                                 <div class="modal-content">
-                                    {!! Form::model($set,['route'=>['template-sets.update', $set->id],'method'=>'PATCH','files' => true]) !!}
+                                    <form method="POST">
+    @csrf
                                     <div class="modal-header">
-                                        <h4 class="modal-title">{!! Lang::get('lang.edit_details') !!}</h4>
+                                        <h4 class="modal-title">{{ trans('lang.edit_details') }}</h4>
                                         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                                     </div>
                                     <div class="modal-body">
                                         <div class="form-group">
                                             <div class="form-control">
                                                 <label for="title">Name:</label><br>
-                                                {!! Form::text('name',null,['class'=>'form-control'])!!}
+                                                <input type="text" name="name" id="name" value="{{ old('name') }}" class="form-control">
                                             </div>
                                         </div>
                                     </div>
                                     <div class="modal-footer justify-content-between">
                                         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                                        {!! Form::submit('Update Details',['class'=>'btn btn-primary'])!!}
+                                        <button type="submit" class="btn btn-primary">'Update Details'</button>
                                     </div>
-                                    {!! Form::close() !!}
+                                    </form>
                                 </div> 
                             </div>
                         </div>
@@ -125,20 +126,20 @@ class="nav-link active"
                             $dis = "";
                         }
                         ?>
-                        <button class="btn btn-danger btn-sm {!! $dis !!}" data-toggle="modal" data-target="#delete{{$set->id}}">{!! Lang::get('lang.delete') !!}</button>
+                        <button class="btn btn-danger btn-sm {!! $dis !!}" data-toggle="modal" data-target="#delete{{$set->id}}">{{ trans('lang.delete') }}</button>
                         <div class="modal fade" id="delete{{$set->id}}">
                             <div class="modal-dialog">
                                 <div class="modal-content">
                                     <div class="modal-header">
-                                        <h4 class="modal-title">{!! Lang::get('lang.delete') !!}</h4>
+                                        <h4 class="modal-title">{{ trans('lang.delete') }}</h4>
                                         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                                     </div>
                                     <div class="modal-body">
-                                        <span>{{Lang::get('lang.are_you_sure_you_want_to_delete')}}</span>&nbsp;
+                                        <span>{{ trans('lang.are_you_sure_you_want_to_delete') }}</span>&nbsp;
                                     </div>
                                     <div class="modal-footer justify-content-between">
                                         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                                        {!! link_to_route('sets.delete',Lang::get('lang.delete'),[$set->id],['id'=>'delete','class'=>'btn btn-danger btn-sm']) !!}
+                                        {!! link_to_route('sets.delete',trans('lang.delete'),[$set->id],['id'=>'delete','class'=>'btn btn-danger btn-sm']) !!}
                                     </div>
                                 </div> 
                             </div>
@@ -154,16 +155,17 @@ class="nav-link active"
 <div class="modal fade" id="create" class="modal fade in {{ $errors->has('name') ? 'has-error' : '' }}">
     <div class="modal-dialog">
         <div class="modal-content">
-            {!! Form::open(['route'=>'template-sets.store']) !!}
+            <form method="POST" action="{{ route('template-sets.store') }}">
+    @csrf
             <div class="modal-header">
-                <h4 class="modal-title">{!! Lang::get('lang.create') !!}</h4>
+                <h4 class="modal-title">{{ trans('lang.create') }}</h4>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
             </div>
             <div class="modal-body">
                 @foreach ($errors->all() as $error)
                 <div class="alert alert-danger alert-dismissable">
                     <i class="fas fa-ban"></i><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-                    <b>{!! Lang::get('lang.alert') !!} !</b><br>
+                    <b>{{ trans('lang.alert') }} !</b><br>
                     <li style="list-style: none">{{ $error }}</li>
                 </div>
                 @if($error == "The name field is required.")
@@ -175,15 +177,15 @@ class="nav-link active"
                 @endif
                 @endforeach 
                 <div class="form-group {{ $errors->has('name') ? 'has-error' : '' }}">
-                    <label for="title">{!! Lang::get('lang.name') !!}:<span style="color:red;">*</span></label><br>
-                    {!! Form::text('name',null,['class'=>'form-control'])!!}
+                    <label for="title">{{ trans('lang.name') }}:<span style="color:red;">*</span></label><br>
+                    <input type="text" name="name" id="name" value="{{ old('name') }}" class="form-control">
                 </div>
             </div>
             <div class="modal-footer justify-content-between">
-                <button type="button" class="btn btn-default" data-dismiss="modal">{!! Lang::get('lang.close') !!}</button>
-                {!! Form::submit(Lang::get('lang.create_set'),['class'=>'btn btn-primary'])!!}
+                <button type="button" class="btn btn-default" data-dismiss="modal">{{ trans('lang.close') }}</button>
+                <button type="submit" class="btn btn-primary">{{ trans('lang.create_set') }}</button>
             </div>
-            {!! Form::close() !!}
+            </form>
         </div> 
     </div>
 </div>  

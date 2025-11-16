@@ -1,10 +1,10 @@
 @extends('themes.default1.agent.layout.agent')
 
 @section('sidebar')
-<li class="nav-header">{!! Lang::get('lang.Report') !!}</li>
+<li class="nav-header">{{ trans('lang.Report') }}</li>
 <li class="nav-item">
     <a href="" class="nav-link active">
-        <i class="fas fa-chart-area"></i> <p>{!! Lang::get('lang.help_topic') !!}</p>
+        <i class="fas fa-chart-area"></i> <p>{{ trans('lang.help_topic') }}</p>
     </a>
 </li>
 @stop 
@@ -18,7 +18,7 @@ active
 @stop
 
 @section('PageHeader')
-<h1>{!! Lang::get('lang.report') !!}</h1>
+<h1>{{ trans('lang.report') }}</h1>
 @stop
 
 @section('dashboard')
@@ -28,27 +28,27 @@ class="active"
 @section('content')
 <!-- check whether success or not -->
 {{-- Success message --}}
-@if(Session::has('success'))
+@if(session()->has('success'))
 <div class="alert alert-success alert-dismissable">
     <i class="fas  fa-check-circle"></i>
     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-    {{Session::get('success')}}
+    {{ session('success') }}
 </div>
 @endif
 {{-- failure message --}}
-@if(Session::has('fails'))
+@if(session()->has('fails'))
 <div class="alert alert-danger alert-dismissable">
     <i class="fas fa-ban"></i>
-    <b>{!! Lang::get('lang.alert') !!}!</b>
+    <b>{{ trans('lang.alert') }}!</b>
     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-    {{Session::get('fails')}}
+    {{ session('fails') }}
 </div>
 @endif
 
 <div class="card card-light">
     
     <div class="card-header">
-        <h3 class="card-title">{!! Lang::get('lang.help_topic') !!}</h3>
+        <h3 class="card-title">{{ trans('lang.help_topic') }}</h3>
     </div>
     
     <div class="card-body">
@@ -62,7 +62,7 @@ class="active"
                 <div class="row">
          
                     <div class='col-sm-2'>
-                        {!! Form::label('helptopic', Lang::get('lang.help_topic')) !!}
+                        <label for="helptopic">{{ trans('lang.help_topic') }}</label>
                         <select name="help_topic" id="help_topic" class="form-control">
                             <?php $helptopics = App\Model\helpdesk\Manage\Help_topic::where('status', '=', '1')->get([ 'id', 'topic']); ?>
                             @foreach($helptopics as $helptopic)
@@ -72,8 +72,8 @@ class="active"
                     </div>
 
                     <div class='col-sm-2 form-group' id="start_date">
-                        {!! Form::label('date', Lang::get('lang.start_date').':') !!}
-                        {!! Form::text('start_date',null,['class'=>'form-control','id'=>'datepicker4'])!!}
+                        {!! Form::label('date', trans('lang.start_date').':') !!}
+                        <input type="text" name="start_date" id="datepicker4" value="{{ old('start_date') }}" class="form-control">
                     </div>
                     <?php
                     $start_date = App\Model\helpdesk\Ticket\Tickets::where('id', '=', '1')->first();
@@ -99,8 +99,8 @@ class="active"
                     </script>
 
                     <div class='col-sm-2 form-group' id="end_date">
-                        {!! Form::label('start_time', Lang::get('lang.end_date').':') !!}
-                        {!! Form::text('end_date',null,['class'=>'form-control','id'=>'datetimepicker3'])!!}
+                        {!! Form::label('start_time', trans('lang.end_date').':') !!}
+                        <input type="text" name="end_date" id="datetimepicker3" value="{{ old('end_date') }}" class="form-control">
                     </div>
                     <script type="text/javascript">
                         $(function() {
@@ -115,10 +115,10 @@ class="active"
                     </script>
 
                     <div class='col-sm-1'>
-                        <label>{!! Lang::get('lang.status') !!}</label>
+                        <label>{{ trans('lang.status') }}</label>
                         <div class="btn-group">
                             <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                                {!! Lang::get('lang.select') !!}
+                                {{ trans('lang.select') }}
                             </button>
                             <div class="dropdown-menu" role="menu">
                                 <a href="#" id="stop" class="dropdown-item">
@@ -137,15 +137,15 @@ class="active"
                     </div>
 
                     <div class='col-sm-1'>
-                        {!! Form::label('filter', 'Filter:',['style' => 'visibility:hidden;']) !!}<br>
+                        <label for="filter">'Filter:'</label><br>
                         <input type="submit" class="btn btn-primary" value="{{trans('lang.submit')}}" id="submit">
                     </div>
                     <br/>
                     <div class="col-md-4">
 
-                        {!! Form::label('filter', 'Filter:',['style' => 'visibility:hidden;']) !!}<br>
+                        <label for="filter">'Filter:'</label><br>
 
-                        <a class="btn btn-primary" href="#" id="pdf">{!! Lang::get('lang.generate_pdf') !!}</a>
+                        <a class="btn btn-primary" href="#" id="pdf">{{ trans('lang.generate_pdf') }}</a>
 
                         <div class="float-right">
                             <div class="btn-group">
@@ -161,9 +161,9 @@ class="active"
                     <style>
                         #legend-holder { float: left; width: 32px; height: 16px;}
                     </style>
-                    <div class="col-md-2"><span id="legend-holder" style="background-color: #6C96DF;"></span>&nbsp; <span> <span id="total-created-tickets1" ></span> {!! Lang::get('lang.tickets') !!} {!! Lang::get('lang.created') !!}</span></div> 
-                    <div class="col-md-2"><span id="legend-holder" style="background-color: #6DC5B2;"></span>&nbsp; <span> <span id="total-reopen-tickets1"></span> {!! Lang::get('lang.tickets') !!} {!! Lang::get('lang.reopen') !!}</span></div> 
-                    <div class="col-md-2"><span id="legend-holder" style="background-color: #E3B870;"></span>&nbsp; <span> <span id="total-closed-tickets1"></span> {!! Lang::get('lang.tickets') !!} {!! Lang::get('lang.closed') !!}</span></div> 
+                    <div class="col-md-2"><span id="legend-holder" style="background-color: #6C96DF;"></span>&nbsp; <span> <span id="total-created-tickets1" ></span> {{ trans('lang.tickets') }} {{ trans('lang.created') }}</span></div> 
+                    <div class="col-md-2"><span id="legend-holder" style="background-color: #6DC5B2;"></span>&nbsp; <span> <span id="total-reopen-tickets1"></span> {{ trans('lang.tickets') }} {{ trans('lang.reopen') }}</span></div> 
+                    <div class="col-md-2"><span id="legend-holder" style="background-color: #E3B870;"></span>&nbsp; <span> <span id="total-closed-tickets1"></span> {{ trans('lang.tickets') }} {{ trans('lang.closed') }}</span></div> 
                 </div>
             </div>
         </form>
@@ -183,7 +183,7 @@ class="active"
                             <span id="total-inprogress-tickets"> </span> 
                         </span>
                     </h3>
-                    <span class="">{!! Lang::get('lang.Currnet_In_Progress') !!}</span>
+                    <span class="">{{ trans('lang.Currnet_In_Progress') }}</span>
                 </div>
                 <!-- /.description-block -->
             </div>
@@ -194,7 +194,7 @@ class="active"
                         <span class="description-percentage text-blue" ><i class="fas fa-file-alt"> </i> <small class="text-blue"><i class="fas fa-plus"> </i>
                         </small><span id="total-created-tickets"> </span> </span>
                     </h3>
-                    <span class="">{!! Lang::get('lang.Total_Created') !!}</span>
+                    <span class="">{{ trans('lang.Total_Created') }}</span>
                 </div>
                 <!-- /.description-block -->
             </div>
@@ -205,7 +205,7 @@ class="active"
                         <span class="description-percentage text-yellow" ><i class="fas fa-file-alt"></i> <small class="text-yellow"><i class="fas fa-sync"> </i>
                         </small> <span id="total-reopen-tickets"> </span> </span>
                     </h3>
-                    <span class="">{!! Lang::get('lang.Total_Reopened') !!}</span>
+                    <span class="">{{ trans('lang.Total_Reopened') }}</span>
                 </div>
                 <!-- /.description-block -->
             </div>
@@ -215,7 +215,7 @@ class="active"
                     <h3>
                         <span class="description-percentage text-green" ><i class="fas fa-file-alt"> </i> <small class="text-green"><i class="fas fa-times"> </i></small> <span id="total-closed-tickets"> </span> </span>
                     </h3>
-                    <span class="">{!! Lang::get('lang.Total_Closed') !!}</span>
+                    <span class="">{{ trans('lang.Total_Closed') }}</span>
                 </div>
                 <!-- /.description-block -->
             </div>
@@ -226,7 +226,7 @@ class="active"
 
 <div class="card card-light">
     <div class="card-header">
-        <h3 class="card-title">{!! Lang::get('lang.tabular') !!}</h3>
+        <h3 class="card-title">{{ trans('lang.tabular') }}</h3>
     </div>
     <div class="card-body">
         <table class="table table-bordered" id="tabular">
@@ -272,13 +272,13 @@ class="active"
                                     open.push(result[i].open);
                                     if (i == 1) {
                                         var cell = row.insertCell(0);
-                                        cell.innerHTML = "<b>{!! Lang::get('lang.reopened') !!}</b>";
+                                        cell.innerHTML = "<b>{{ trans('lang.reopened') }}</b>";
                                         var cell = row.insertCell(0);
-                                        cell.innerHTML = "<b>{!! Lang::get('lang.closed') !!}</b>";
+                                        cell.innerHTML = "<b>{{ trans('lang.closed') }}</b>";
                                         var cell = row.insertCell(0);
-                                        cell.innerHTML = "<b>{!! Lang::get('lang.created') !!}</b>";
+                                        cell.innerHTML = "<b>{{ trans('lang.created') }}</b>";
                                         var cell = row.insertCell(0);
-                                        cell.innerHTML = "<b>{!! Lang::get('lang.date') !!}</b>";
+                                        cell.innerHTML = "<b>{{ trans('lang.date') }}</b>";
                                     }
                                     var cell1 = row1.insertCell(0);
                                     cell1.innerHTML = "<b>" + result[i].reopened + "</b>";
@@ -486,7 +486,7 @@ class="active"
                                                 reopened_total += parseInt(result2[i].reopened);
                                                 if (i == 1) {
                                                     var cell = row.insertCell(0);
-                                                    cell.innerHTML = "<b>{!! Lang::get('lang.reopened') !!}</b>";
+                                                    cell.innerHTML = "<b>{{ trans('lang.reopened') }}</b>";
                                                 }
                                                 var cell1 = row1.insertCell(0);
                                                 cell1.innerHTML = "<b>" + result2[i].reopened + "</b>";
@@ -500,7 +500,7 @@ class="active"
                                                 closed_total += parseInt(result2[i].closed);
                                                 if (i == 1) {
                                                     var cell = row.insertCell(0);
-                                                    cell.innerHTML = "<b>{!! Lang::get('lang.closed') !!}</b>";
+                                                    cell.innerHTML = "<b>{{ trans('lang.closed') }}</b>";
                                                 }
                                                 var cell1 = row1.insertCell(0);
                                                 cell1.innerHTML = "<b>" + result2[i].closed + "</b>";
@@ -514,7 +514,7 @@ class="active"
                                                 open_total += parseInt(result2[i].open);
                                                 if (i == 1) {
                                                     var cell = row.insertCell(0);
-                                                    cell.innerHTML = "<b>{!! Lang::get('lang.created') !!}</b>";
+                                                    cell.innerHTML = "<b>{{ trans('lang.created') }}</b>";
                                                 }
                                                 var cell1 = row1.insertCell(0);
                                                 cell1.innerHTML = "<b>" + result2[i].open + "</b>";
@@ -525,7 +525,7 @@ class="active"
 
                                             if (i == 1) {
                                                 var cell = row.insertCell(0);
-                                                cell.innerHTML = "<b>{!! Lang::get('lang.date') !!}</b>";
+                                                cell.innerHTML = "<b>{{ trans('lang.date') }}</b>";
                                             }
 
                                             var cell1 = row1.insertCell(0);

@@ -17,7 +17,7 @@ class="nav-link active"
 @stop
 
 @section('PageHeader')
-<h1>{!! Lang::get('lang.status_settings') !!}</h1>
+<h1>{{ trans('lang.status_settings') }}</h1>
 @stop
 
 @section('breadcrumbs')
@@ -37,11 +37,12 @@ class="nav-link active"
 </style>
 
 @section('content')
-{!! Form::model($status,['route'=>['statuss.update', $status->id],'method'=>'PATCH','files' => true]) !!}
- @if(Session::has('errors'))
+<form method="POST">
+    @csrf
+ @if(session()->has('errors'))
 <div class="alert alert-danger alert-dismissable">
     <i class="fas fa-ban"></i>
-    <b>{!! Lang::get('lang.alert') !!}!</b>
+    <b>{{ trans('lang.alert') }}!</b>
     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
     <br/>
     @foreach ($errors->all() as $error)
@@ -49,44 +50,44 @@ class="nav-link active"
     @endforeach 
 </div>
 @endif
-@if(Session::has('success'))
+@if(session()->has('success'))
 <div class="alert alert-success alert-dismissable">
     <i class="fas fa-check-circle"></i>
     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-    {{Session::get('success')}}
+    {{ session('success') }}
 </div>
 @endif
-@if(Session::has('failed'))
+@if(session()->has('failed'))
 <div class="alert alert-danger alert-dismissable">
     <i class="fas fa-ban"></i>
-    <b>{!! Lang::get('lang.alert') !!} !</b>
+    <b>{{ trans('lang.alert') }} !</b>
     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-    <p>{{Session::get('failed')}}</p>                
+    <p>{{ session('failed') }}</p>                
 </div>
 @endif
 
 <div class="card card-light">
     <div class="card-header">
-        <h3 class="card-title">{!! Lang::get('lang.edit_details') !!}</h3>
+        <h3 class="card-title">{{ trans('lang.edit_details') }}</h3>
     </div><!-- /.box-header -->
     <div class="card-body">
         <div class="row">
             <div class="col-md-4">
                 <div class="form-group {{ $errors->has('name') ? 'has-error' : '' }}">
-                    <label>{!! Lang::get('lang.name') !!}: <span class="text-red"> *</span></label><br>
-                    {!! Form::text('name',null,['class'=>'form-control'])!!}
+                    <label>{{ trans('lang.name') }}: <span class="text-red"> *</span></label><br>
+                    <input type="text" name="name" id="name" value="{{ old('name') }}" class="form-control">
                 </div>
             </div>
             <div class="col-md-4">
                 <div class="form-group {{ $errors->has('sort') ? 'has-error' : '' }}">
-                    <label>{!! Lang::get('lang.display_order') !!}: <span class="text-red"> *</span></label><br>
+                    <label>{{ trans('lang.display_order') }}: <span class="text-red"> *</span></label><br>
                     <input type="number" name="sort" min="1" class="form-control" value="{!! $status->sort !!}">
                 </div>  
             </div>
             <div class="col-md-2" id="ticket-status-icon-container">
                 <div class="form-group {{ $errors->has('icon_class') ? 'has-error' : '' }}">
                     <i class=></i>
-                    <label>{!! Lang::get('lang.icon_class') !!}: <span class="text-red"> *</span></label><br>
+                    <label>{{ trans('lang.icon_class') }}: <span class="text-red"> *</span></label><br>
                     <select class="form-control icons"  name="icon_class" style="font-family: 'FontAwesome', sans-serif;" required>
                          <option <?php if ($status->icon_class == "fas fa-edit") echo 'selected="selected"' ?> value="fas fa-edit">&#xf044</option>
                         <option <?php if ($status->icon_class == "fas fa-folder-open") echo 'selected="selected"' ?> value="fas fa-folder-open">&#xf07c</option>
@@ -156,48 +157,48 @@ class="nav-link active"
         </div>
         <div class="form-group">
             <!-- gender -->
-            {!! Form::label('gender',Lang::get('lang.resolved_status')) !!}
-            <div class="callout callout-default" style="font-style: oblique;">{!! Lang::get('lang.status_msg3') !!}</div>
+            <label for="gender">{{ trans('lang.resolved_status') }}</label>
+            <div class="callout callout-default" style="font-style: oblique;">{{ trans('lang.status_msg3') }}</div>
             <div class="row">
                 <div class="col-sm-3">
-                    {!! Form::radio('state','closed',true) !!} {{Lang::get('lang.yes')}}
+                    <input type="radio" name="state" value="'closed'"> {{ trans('lang.yes') }}
                 </div>
                 <div class="col-sm-3">
-                    {!! Form::radio('state','open') !!} {{Lang::get('lang.no')}}
+                    <input type="radio" name="state" value="'open'"> {{ trans('lang.no') }}
                 </div>
             </div>
         </div>
         <div class="form-group">
             <!-- Email user -->
-            {!! Form::label('gender',Lang::get('lang.deleted_status')) !!}
-            <div class="callout callout-default" style="font-style: oblique;">{!! Lang::get('lang.status_msg2') !!}</div>
+            <label for="gender">{{ trans('lang.deleted_status') }}</label>
+            <div class="callout callout-default" style="font-style: oblique;">{{ trans('lang.status_msg2') }}</div>
             <div class="row">
                 <div class="col-sm-3">
-                    {!! Form::radio('delete','yes') !!} {{Lang::get('lang.yes')}}
+                    <input type="radio" name="delete" value="'yes') !!} {{ trans('lang.yes') }}
                 </div>
                 <div class="col-sm-3">
-                    {!! Form::radio('delete','no') !!} {{Lang::get('lang.no')}}
+                    {!! Form::radio('delete'"> {{ trans('lang.no') }}
                 </div>
             </div>        
         </div>
         <div class="form-group">
             <!-- gender -->
-            {!! Form::label('gender',Lang::get('lang.notify_user')) !!}
-            <div class="callout callout-default" style="font-style: oblique;">{!! Lang::get('lang.status_msg1') !!}</div>
+            <label for="gender">{{ trans('lang.notify_user') }}</label>
+            <div class="callout callout-default" style="font-style: oblique;">{{ trans('lang.status_msg1') }}</div>
             <div class="row">
                 <div class="col-sm-3">
-                    {!! Form::radio('email_user','yes') !!} {{Lang::get('lang.yes')}}
+                    <input type="radio" name="email_user" value="'yes') !!} {{ trans('lang.yes') }}
                 </div>
                 <div class="col-sm-3">
-                    {!! Form::radio('email_user','no') !!} {{Lang::get('lang.no')}}
+                    <input type="radio" name="email_user'"> {{ trans('lang.no') }}
                 </div>
             </div>        
         </div>
     </div>
     <div class="card-footer">
-        {!! Form::submit(Lang::get('lang.update'),['class'=>'btn btn-primary'])!!}
+        {!! Form::submit(trans('lang.update')" value="['class'=>'btn btn-primary']">
     </div>
-    {!! Form::close() !!}
+    </form>
 </div> 
 <script src="{{asset("lb-faveo/plugins/select2/select2.full.min.js")}}" type="text/javascript"></script>
 <script type="text/javascript">

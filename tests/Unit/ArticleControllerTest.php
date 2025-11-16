@@ -203,7 +203,7 @@ class ArticleControllerTest extends TestCase
         $response = $this->get("/article/delete/{$article->slug}");
 
         // Assert that success message is flashed
-        $response->assertSessionHas('success', Lang::get('lang.article_deleted_successfully'));
+        $response->assertSessionHas('success', trans('lang.article_deleted_successfully'));
 
         // Create a category
         $category = Category::latest()->first();
@@ -233,6 +233,6 @@ class ArticleControllerTest extends TestCase
         $response->assertRedirect();
 
         // Assert that the response has a failure message
-        $response->assertSessionHas('fails', Lang::get('lang.article_not_deleted'));
+        $response->assertSessionHas('fails', trans('lang.article_not_deleted'));
     }
 }

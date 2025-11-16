@@ -67,7 +67,7 @@ class="active"
                                     </ul>
                                 </div>
                                 
-                                {!! Form::close() !!}
+                                </form>
                             </div>
                         </div>
 
@@ -146,7 +146,8 @@ class="active"
 
                                     <div class="tab-pane active" id="General">
                                         <div id="t1">
-                                            {!! Form::open(['route'=>'ticket.reply']) !!}
+                                            <form method="POST" action="{{ route('ticket.reply') }}">
+    @csrf
                                         <div class="form-group">
 
                                         </div>
@@ -155,10 +156,10 @@ class="active"
                                                 <input type="hidden" name="ticket_ID" value="{{$tickets->id}}">
                                                     <div class="form-group {{ $errors->has('title') ? 'has-error' : '' }}">
                                                         <div class="col-md-2">
-                                                            {!! Form::label('To', 'To:') !!}
+                                                            <label for="To">'To:'</label>
                                                         </div>
                                                         <div class="col-md-10">
-                                                            {!! Form::text('To',$user->email,['class'=>'form-control','style'=>'width:55%'])!!}
+                                                            <input type="text" name="To" id="To" value="$user->email" class="form-control">
                                                             {!! $errors->first('To', '<spam class="help-block text-red">:message</spam>') !!}
                                                         </div>
                                                     </div>
@@ -169,7 +170,7 @@ class="active"
                                                 <div class="row">
                                                     <div class="form-group {{ $errors->has('title') ? 'has-error' : '' }}">
                                                         <div class="col-md-2">
-                                                            {!! Form::label('Reply Content', 'reply_content:') !!}
+                                                            <label for="Reply Content">'reply_content:'</label>
                                                         </div>
                                                         <div class="col-md-10">
                                                             <textarea name="reply_content"></textarea> 
@@ -189,11 +190,12 @@ class="active"
                                                         </div>
                                                     </div>
                                                 </div>
-                                        {!!Form::close()!!}
+                                        </form>
                                         </div>
 
                                         <div id="t2" style="display:none">
-                                            {!! Form::open(['route'=>'ticket.reply']) !!}
+                                            <form method="POST" action="{{ route('ticket.reply') }}">
+    @csrf
                                             <div class="form-group">
                                                 <button type="submit" id="tt1" class="btn btn-default"><i class="fa fa-check-square-o" style="color:green;"> </i> Update</button>
                                                 <button style="display:none;" type="submit" id="tt2" class="btn btn-default"><i class="fa fa-check-square-o" style="color:blue;"> </i> Update</button>
@@ -209,7 +211,7 @@ class="active"
                                                             <label>Subject</label>
                                                         </div>
                                                         <div class="col-md-10">
-                                                            {!! Form::text('To',$user->email,['class'=>'form-control','style'=>'width:55%'])!!}
+                                                            <input type="text" name="To" id="To" value="$user->email" class="form-control">
                                                             {!! $errors->first('To', '<spam class="help-block text-red">:message</spam>') !!}
                                                         </div>
                                                     </div>
@@ -228,7 +230,7 @@ class="active"
                                                     </div>
                                                 </div>
                                             </div>
-                                            {!!Form::close()!!}
+                                            </form>
                                         </div>
 
                                     </div>
@@ -327,11 +329,11 @@ class="active"
                                             </li>
                                             <li>
                                             <?php if($conversation->staff_id > 0) { ?>
-                                                <i class="fa fa-group bg-yellow" title="<?= Lang::get('lang.posted_by_support_team') ?>"></i>
+                                                <i class="fa fa-group bg-yellow" title="<?= trans('lang.posted_by_support_team') ?>"></i>
                                             <?php } elseif($conversation->user_id > 0) { ?>   
-                                                <i class="fa fa-user bg-aqua" title="<?= Lang::get('lang.posted_by_customer') ?>"></i>
+                                                <i class="fa fa-user bg-aqua" title="<?= trans('lang.posted_by_customer') ?>"></i>
                                             <?php } else { ?>   
-                                                <i class="fa fa-mail-reply-all bg-purple" title="<?= Lang::get('lang.posted_by_system') ?>"></i>
+                                                <i class="fa fa-mail-reply-all bg-purple" title="<?= trans('lang.posted_by_system') ?>"></i>
                                             <?php } ?>
                                                 <div class="timeline-item">
                                                     <span id="date" class="time"><i class="fa fa-clock-o"> </i> {{date_format($conversation->created_at, 'd/m/Y H:i:s')}}</span>

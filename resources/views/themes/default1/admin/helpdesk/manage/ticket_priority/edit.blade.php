@@ -20,7 +20,7 @@ class="nav-link active"
 @stop
 <!-- header -->
 @section('PageHeader')
-<h1>{!! Lang::get('lang.priority') !!}</h1>
+<h1>{{ trans('lang.priority') }}</h1>
 @stop
 <!-- /header -->
 <!-- breadcrumbs -->
@@ -35,7 +35,7 @@ class="nav-link active"
 <form action="{!!URL::route('priority.edit1')!!}" method="post" role="form">
 {{ csrf_field() }}
     <input type="hidden" name="priority_id" value="{{$tk_priority->priority_id}}">
-    @if(Session::has('errors'))
+    @if(session()->has('errors'))
     <?php //dd($errors); ?>
     <div class="alert alert-danger alert-dismissable">
         <i class="fas fa-ban"></i>
@@ -61,19 +61,19 @@ class="nav-link active"
     @endif
     <div class="card card-light">
         <div class="card-header">
-            <h3 class="card-title">{{Lang::get('lang.edit')}}</h3>
+            <h3 class="card-title">{{ trans('lang.edit') }}</h3>
         </div>
         <div class="card-body">
             
             <div class="row">
 
                  <div class="form-group col-md-6 {{ $errors->has('priority') ? 'has-error' : '' }}">
-                    {!! Form::label('priority',Lang::get('lang.priority')) !!}<span class="text-red"> *</span>
+                    <label for="priority">{{ trans('lang.priority') }}</label><span class="text-red"> *</span>
                     <input type="text" class="form-control" name="priority" value="{{ ($tk_priority->priority) }}" >
                 </div>
 
                 <div class="form-group col-md-6 {{ $errors->has('priority_desc') ? 'has-error' : '' }}">
-                    {!! Form::label('priority_desc',Lang::get('lang.priority_desc')) !!} <span class="text-red"> *</span>
+                    <label for="priority_desc">{{ trans('lang.priority_desc') }}</label> <span class="text-red"> *</span>
                     <input type="text" class="form-control" name="priority_desc" value="{{ ($tk_priority->priority_desc) }}">
                 </div>
             </div>
@@ -81,38 +81,38 @@ class="nav-link active"
             <div class="row">
 
                 <div class="form-group col-sm-6 {{ $errors->has('priority_color') ? 'has-error' : '' }}">
-                    {!! Form::label('priority_color',Lang::get('lang.priority_color')) !!}<span class="text-red"> *</span>
+                    <label for="priority_color">{{ trans('lang.priority_color') }}</label><span class="text-red"> *</span>
                     <input class="form-control my-colorpicker1 colorpicker-element" id="colorpicker" value="{{ ($tk_priority->priority_color) }}" type="text" name="priority_color">
                 </div>
 
                 <div class="form-group col-sm-3 {{ $errors->has('status') ? 'has-error' : '' }}">
-                    {!! Form::label('status',Lang::get('lang.status')) !!}<span class="text-red"> *</span><br/>
-                    <input type="radio"  name="status" value="1" {{$tk_priority->status == '1' ? 'checked' : ''}}>&nbsp;&nbsp;{{Lang::get('lang.active')}}&nbsp;&nbsp;
-                    <input type="radio"  name="status"  value="0" {{$tk_priority->status == '0' ? 'checked' : ''}}>&nbsp;&nbsp;{{Lang::get('lang.inactive')}}
+                    <label for="status">{{ trans('lang.status') }}</label><span class="text-red"> *</span><br/>
+                    <input type="radio"  name="status" value="1" {{$tk_priority->status == '1' ? 'checked' : ''}}>&nbsp;&nbsp;{{ trans('lang.active') }}&nbsp;&nbsp;
+                    <input type="radio"  name="status"  value="0" {{$tk_priority->status == '0' ? 'checked' : ''}}>&nbsp;&nbsp;{{ trans('lang.inactive') }}
                 </div>
 
                 <div class="form-group col-sm-3 {{ $errors->has('ispublic') ? 'has-error' : '' }}">
-                    {!! Form::label('visibility',Lang::get('lang.visibility')) !!}&nbsp;<span class="text-red"> *</span><br/>
-                    <input type="radio"  name="ispublic" value="1" {{$tk_priority->ispublic == '1' ? 'checked' : ''}} >&nbsp;&nbsp;{{Lang::get('lang.public')}}&nbsp;&nbsp;
-                    <input type="radio"  name="ispublic"  value="0" {{$tk_priority->ispublic == '0' ? 'checked' : ''}}>&nbsp;&nbsp;{{Lang::get('lang.private')}}
+                    <label for="visibility">{{ trans('lang.visibility') }}</label>&nbsp;<span class="text-red"> *</span><br/>
+                    <input type="radio"  name="ispublic" value="1" {{$tk_priority->ispublic == '1' ? 'checked' : ''}} >&nbsp;&nbsp;{{ trans('lang.public') }}&nbsp;&nbsp;
+                    <input type="radio"  name="ispublic"  value="0" {{$tk_priority->ispublic == '0' ? 'checked' : ''}}>&nbsp;&nbsp;{{ trans('lang.private') }}
                 </div>
             </div>  
             <!-- Admin Note : Textarea : -->
             <div>
-                {!! Form::label('admin_note',Lang::get('lang.admin_notes')) !!}
-                {!! Form::textarea('admin_note',null,['class' => 'form-control','size' => '30x5']) !!}
+                <label for="admin_note">{{ trans('lang.admin_notes') }}</label>
+                <textarea name="admin_note" id="admin_note" class="form-control" rows="5">{{ old('admin_note') }}</textarea>
             </div>
 
             <div>
-                <input type="checkbox" name="default_priority" @if($tk_priority->is_default == $tk_priority->priority_id) checked disabled @endif> {{ Lang::get('lang.make-default-priority')}}
+                <input type="checkbox" name="default_priority" @if($tk_priority->is_default == $tk_priority->priority_id) checked disabled @endif> {{ trans('lang.make-default-priority') }}
             </div>
         </div>
         <div class="card-footer">
-            {!! Form::submit(Lang::get('lang.update'),['class'=>'btn btn-primary'])!!}
+            <button type="submit" class="btn btn-primary">{{ trans('lang.update') }}</button>
         </div>
     </div>
     <!-- close form -->
-    {!! Form::close() !!}
+    </form>
     <script>
         $(function () {
 

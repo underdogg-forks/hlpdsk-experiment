@@ -48,7 +48,7 @@ class LanguageController extends Controller
     {
         $changed = UnAuth::changeLanguage($lang);
         if (!$changed) {
-            return \Redirect::back()->with('fails', Lang::get('lang.language-error'));
+            return \Redirect::back()->with('fails', trans('lang.language-error'));
         } else {
             return \Redirect::back();
         }
@@ -90,7 +90,7 @@ class LanguageController extends Controller
                         ->addColumn('language', function ($model) {
                             $img_src = 'lb-faveo/flags/'.$model.'.png';
                             if ($model == Config::get('app.fallback_locale')) {
-                                return '<img src="'.asset($img_src).'"/>&nbsp;'.Config::get('languages.'.$model)[0].' ('.Lang::get('lang.default-fallback').')';
+                                return '<img src="'.asset($img_src).'"/>&nbsp;'.Config::get('languages.'.$model)[0].' ('.trans('lang.default-fallback').')';
                             } else {
                                 return '<img src="'.asset($img_src).'"/>&nbsp;'.Config::get('languages.'.$model)[0];
                             }
@@ -107,18 +107,18 @@ class LanguageController extends Controller
                         })
                         ->addColumn('status', function ($model) use ($sysLanguage) {
                             if ($sysLanguage === $model) {
-                                return "<span style='color:green'>".Lang::get('lang.yes').'</span>';
+                                return "<span style='color:green'>".trans('lang.yes').'</span>';
                             } else {
-                                return "<span style='color:red'>".Lang::get('lang.no').'</span>';
+                                return "<span style='color:red'>".trans('lang.no').'</span>';
                             }
                         })
                         ->addColumn('Action', function ($model) use ($sysLanguage) {
                             if ($model === $sysLanguage) {
-                                return "<a href='change-language/".$model."' disabled><input type='button' class='btn btn-primary btn-xs' disabled value='".Lang::get('lang.set_as_sys_lang')."'/></a>  
-                <button disabled class='btn btn-danger btn-xs'><i class='fas fa-trash'> </i> ".Lang::get('lang.delete').'</button>';
+                                return "<a href='change-language/".$model."' disabled><input type='button' class='btn btn-primary btn-xs' disabled value='".trans('lang.set_as_sys_lang')."'/></a>  
+                <button disabled class='btn btn-danger btn-xs'><i class='fas fa-trash'> </i> ".trans('lang.delete').'</button>';
                             } else {
-                                return "<a href='change-language/".$model."'><input type='button' class='btn btn-primary btn-xs' value='".Lang::get('lang.set_as_sys_lang')."'/></a>  
-                <a href='delete-language/".$model."' class='btn btn-danger btn-xs'><i class='fas fa-trash'> </i> ".Lang::get('lang.delete').'</a>';
+                                return "<a href='change-language/".$model."'><input type='button' class='btn btn-primary btn-xs' value='".trans('lang.set_as_sys_lang')."'/></a>  
+                <a href='delete-language/".$model."' class='btn btn-danger btn-xs'><i class='fas fa-trash'> </i> ".trans('lang.delete').'</a>';
                             }
                         })
                         ->searchColumns('language', 'id')
@@ -156,13 +156,13 @@ class LanguageController extends Controller
                 $path = base_path('lang');
                 if (in_array(strtolower(Request::get('iso-code')), scandir($path))) {
                     //sending back with error message
-                    Session::flash('fails', Lang::get('lang.package_exist'));
+                    Session::flash('fails', trans('lang.package_exist'));
                     Session::flash('link', 'change-language/'.strtolower(Request::get('iso-code')));
 
                     return Redirect::back()->withInput();
                 } elseif (!array_key_exists(strtolower(Request::get('iso-code')), Config::get('languages'))) {//Checking Valid ISO code form Languages.php
                     //sending back with error message
-                    Session::flash('fails', Lang::get('lang.iso-code-error'));
+                    Session::flash('fails', trans('lang.iso-code-error'));
 
                     return Redirect::back()->withInput();
                 } else {
@@ -183,21 +183,21 @@ class LanguageController extends Controller
                             //$success2 = File::delete($destinationPath.'/'.$name);
                             if ($success) {
                                 //sending back with error message
-                                Session::flash('fails', Lang::get('lang.zipp-error'));
+                                Session::flash('fails', trans('lang.zipp-error'));
                                 Session::flash('link2', 'http://www.ladybirdweb.com/support/show/how-to-translate-faveo-into-multiple-languages');
 
                                 return Redirect::back()->withInput();
                             }
                         } else {
                             // sending back with success message
-                            Session::flash('success', Lang::get('lang.upload-success'));
+                            Session::flash('success', trans('lang.upload-success'));
                             Session::flash('link', 'change-language/'.strtolower(Request::get('iso-code')));
 
                             return Redirect::route('LanguageController');
                         }
                     } else {
                         // sending back with error message.
-                        Session::flash('fails', Lang::get('lang.file-error'));
+                        Session::flash('fails', trans('lang.file-error'));
 
                         return Redirect::route('form');
                     }
@@ -237,22 +237,22 @@ class LanguageController extends Controller
                 $success = File::deleteDirectory($deletePath); //remove extracted folder and it's subfolder from lang
                 if ($success) {
                     //sending back with success message
-                    Session::flash('success', Lang::get('lang.delete-success'));
+                    Session::flash('success', trans('lang.delete-success'));
 
                     return Redirect::back();
                 } else {
                     //sending back with error message
-                    Session::flash('fails', Lang::get('lang.lang-doesnot-exist'));
+                    Session::flash('fails', trans('lang.lang-doesnot-exist'));
 
                     return Redirect::back();
                 }
             } else {
-                Session::flash('fails', Lang::get('lang.lang-fallback-lang'));
+                Session::flash('fails', trans('lang.lang-fallback-lang'));
 
                 return redirect('languages');
             }
         } else {
-            Session::flash('fails', Lang::get('lang.active-lang-error'));
+            Session::flash('fails', trans('lang.active-lang-error'));
 
             return redirect('languages');
         }

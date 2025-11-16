@@ -7,18 +7,19 @@
       <div class="login-box-body">
         <p class="login-box-msg">Sign in to start your session</p>
         <!-- form open -->
-        {!!  Form::open(['route' => 'post.login']) !!}
+        <form method="POST" action="{{ route('post.login') }}">
+    @csrf
           <!-- Email -->
           <div class="form-group has-feedback {{ $errors->has('email') ? 'has-error' : '' }}">
 			
-			{!! Form::text('email',null,['placeholder'=>'Email','class' => 'form-control']) !!}
+			<input type="text" name="email" id="email" value="{{ old('email') }}" class="form-control">
 			{!! $errors->first('email', '<spam class="help-block">:message</spam>') !!}
 			<span class="far fa-envelope text-muted form-control-feedback"></span>
           
           </div>
 
           <div class="form-group has-feedback {{ $errors->has('password') ? 'has-error' : '' }}">
-            {!! Form::password('password',['placeholder'=>'Password','class' => 'form-control']) !!}
+            <input type="password" name="password" id="password" class="form-control">
 			{!! $errors->first('password', '<spam class="help-block">:message</spam>') !!}
             <span class="fa fa-lock text-muted form-control-feedback"></span>
           </div>

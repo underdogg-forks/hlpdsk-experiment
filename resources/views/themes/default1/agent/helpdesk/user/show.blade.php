@@ -49,10 +49,10 @@ class="nav-link active"
 @section('PageHeader')
 
 @if($users->role == 'user')
-<h1>{!! Lang::get('lang.user_profile') !!} </h1>
+<h1>{{ trans('lang.user_profile') }} </h1>
 
 @elseif($users->role == 'agent')
-<h1>{!! Lang::get('lang.agent_profile') !!} </h1>
+<h1>{{ trans('lang.agent_profile') }} </h1>
 @endif
 @stop
 <!-- /header -->
@@ -73,24 +73,24 @@ class="nav-link active"
     <i class="fas fa-ban"> </i> <b>  <span id="get-danger"></span></b>
     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
 </div>
-@if(Session::has('success1'))
+@if(session()->has('success1'))
 <div id="success-alert" class="alert alert-success alert-dismissable">
     <i class="fas  fa-check-circle"> </i>
     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-    {{Session::get('success1')}}
+    {{ session('success1') }}
 </div>
 @endif
 <!-- failure message -->
-@if(Session::has('fails1'))
+@if(session()->has('fails1'))
 <div class="alert alert-danger alert-dismissable">
-    <i class="fas fa-ban"> </i> <b> {!! Lang::get('lang.alert') !!} ! </b>
+    <i class="fas fa-ban"> </i> <b> {{ trans('lang.alert') }} ! </b>
     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-    {{Session::get('fails1')}}
+    {{ session('fails1') }}
 </div>
 @endif
 <?php $table = \Datatable::table()
                 ->addColumn(
-                        "", Lang::get('lang.subject'), Lang::get('lang.ticket_id'), Lang::get('lang.priority'), Lang::get('lang.from'), Lang::get('lang.assigned_to'), Lang::get('lang.last_activity'), Lang::get('lang.created-at'))
+                        "", trans('lang.subject'), trans('lang.ticket_id'), trans('lang.priority'), trans('lang.from'), trans('lang.assigned_to'), trans('lang.last_activity'), trans('lang.created-at'))
                 ->noScript();?>
 
 <div class="row">
@@ -113,11 +113,11 @@ class="nav-link active"
                 <ul class="list-group list-group-unbordered mb-3 mt-3">
                      @if($users->user_name)
                     <li class="list-group-item mb-0">
-                        <b>{{Lang::get('lang.user_name')}}</b> <a class="float-right" title="{{$users->user_name}}">{{Str::limit($users->user_name,10) }}</a>
+                        <b>{{ trans('lang.user_name') }}</b> <a class="float-right" title="{{$users->user_name}}">{{Str::limit($users->user_name,10) }}</a>
                     </li>
                      @endif
                      <li class="list-group-item mb-0">
-                        <b>{{Lang::get('lang.email')}}</b> <a class="float-right" title="{{$users->email}}"> {{Str::limit($users->email,10) }}</a>
+                        <b>{{ trans('lang.email') }}</b> <a class="float-right" title="{{$users->email}}"> {{Str::limit($users->email,10) }}</a>
                     </li>
 
                     @if($users->is_delete != '1')
@@ -130,9 +130,9 @@ class="nav-link active"
                         ?>
                        
                        @if($user_org == null)
-                        <b>{!! Lang::get('lang.organization') !!}</b>
-                        <a href="" class="float-right"  data-toggle="modal" data-target="#assign"><i class="fas fa-hand-point-right"> </i> {!! Lang::get('lang.assign') !!} </a>
-                        <a href="" data-toggle="modal" data-target="#create_org" class="float-right"> {{Lang::get('lang.create')}} |&nbsp;</a>
+                        <b>{{ trans('lang.organization') }}</b>
+                        <a href="" class="float-right"  data-toggle="modal" data-target="#assign"><i class="fas fa-hand-point-right"> </i> {{ trans('lang.assign') }} </a>
+                        <a href="" data-toggle="modal" data-target="#create_org" class="float-right"> {{ trans('lang.create') }} |&nbsp;</a>
                         @endif
 
                         @if($user_org != null)
@@ -140,14 +140,14 @@ class="nav-link active"
                         $org_id = $user_org->org_id;
                         $organization = App\Model\helpdesk\Agent_panel\Organization::where('id', '=', $org_id)->first();
                         ?>
-                        <b>{!! Lang::get('lang.organization') !!}</b>
+                        <b>{{ trans('lang.organization') }}</b>
 
                         &nbsp;&nbsp;&nbsp;
 
                         <a href=""  data-toggle="modal" data-target="#editassign" title="{{$organization->name}}"> <span style="color:green;">{{Str::limit($organization->name,10)}}</span> </a>
 
 
-                        <a class="float-right" href="#" data-toggle="modal" data-target="#delete-{{$org_id}}" title="{!! Lang::get('lang.remove') !!}"><i class="fas fa-times" style="color:red;"> </i></a> 
+                        <a class="float-right" href="#" data-toggle="modal" data-target="#delete-{{$org_id}}" title="{{ trans('lang.remove') }}"><i class="fas fa-times" style="color:red;"> </i></a> 
 
                         <div class="modal fade" id="delete-{{$org_id}}">
                             <div class="modal-dialog">
@@ -173,11 +173,11 @@ class="nav-link active"
                     @endif
 
                     <li class="list-group-item mb-0">
-                        <b>{{Lang::get('lang.role')}}</b> <a class="float-right" style="color:green;"> {!! $users->role !!}</a>
+                        <b>{{ trans('lang.role') }}</b> <a class="float-right" style="color:green;"> {!! $users->role !!}</a>
                     </li>
 
                     <li class="list-group-item mb-0">
-                        <b>{{Lang::get('lang.status')}}</b> 
+                        <b>{{ trans('lang.status') }}</b> 
                         <a class="float-right">
                             @if($users->active == '1')
                             <span style="color:green;"> 
@@ -195,32 +195,32 @@ class="nav-link active"
 
                     @if($users->country_code)
                     <li class="list-group-item mb-0">
-                        <b>{{Lang::get('lang.country_code')}}</b> <a class="float-right" title="{{$users->country_code}}"> 
+                        <b>{{ trans('lang.country_code') }}</b> <a class="float-right" title="{{$users->country_code}}"> 
                             {{Str::limit($users->country_code,10) }}</a>
                     </li>
                     @endif
 
                     @if($users->ext)
                     <li class="list-group-item mb-0">
-                        <b>{{Lang::get('lang.ext')}}</b> <a class="float-right" title="{{$users->ext}}"> {{Str::limit($users->ext,10)}}</a>
+                        <b>{{ trans('lang.ext') }}</b> <a class="float-right" title="{{$users->ext}}"> {{Str::limit($users->ext,10)}}</a>
                     </li>
                     @endif
 
                     @if($users->mobile)
                     <li class="list-group-item mb-0">
-                        <b>{{Lang::get('lang.mobile')}}</b> <a class="float-right" title="{{$users->mobile}}"> {{Str::limit($users->mobile,10)}}</a>
+                        <b>{{ trans('lang.mobile') }}</b> <a class="float-right" title="{{$users->mobile}}"> {{Str::limit($users->mobile,10)}}</a>
                     </li>
                     @endif
 
                     @if($users->phone_number)
                     <li class="list-group-item mb-0">
-                        <b>{{Lang::get('lang.phone')}}</b><a class="float-right" title="{{$users->phone_number}}">{{Str::limit($users->phone_number,10)}}</a>
+                        <b>{{ trans('lang.phone') }}</b><a class="float-right" title="{{$users->phone_number}}">{{Str::limit($users->phone_number,10)}}</a>
                     </li>
                     @endif
 
                     @if($users->internal_note)
                     <li class="list-group-item mb-0">
-                        <b>{{Lang::get('lang.internal_notes')}}</b> 
+                        <b>{{ trans('lang.internal_notes') }}</b> 
                         <br/>
                         {!! $users->internal_note !!}
                     </li>
@@ -273,57 +273,57 @@ class="nav-link active"
                     @if($users->role == 'user')
                     <div class="btn-group">
                         <button type="button" href="#myPopup" data-rel="popup" class="btn btn-default btn-sm" data-toggle="modal" 
-                            data-target="#addNewCategoryModal1">{{Lang::get('lang.change_role_to_agent')}}</button>
+                            data-target="#addNewCategoryModal1">{{ trans('lang.change_role_to_agent') }}</button>
                     </div>
 
                     <div class="btn-group">
                         <button type="button" href="#myPopup" data-rel="popup" class="btn btn-default btn-sm" data-toggle="modal" 
-                            data-target="#addNewCategoryModal4">{{Lang::get('lang.change_role_to_admin')}}</button>
+                            data-target="#addNewCategoryModal4">{{ trans('lang.change_role_to_admin') }}</button>
                     </div>
                     @elseif($users->role == 'agent')
                     <div class="btn-group">
                         <button type="button" href="#myPopup" data-rel="popup" class="btn btn-default btn-sm" data-toggle="modal" 
-                            data-target="#addNewCategoryModal2">{{Lang::get('lang.change_role_to_user')}}</button>
+                            data-target="#addNewCategoryModal2">{{ trans('lang.change_role_to_user') }}</button>
                     </div>
                     <div class="btn-group">
                         <button type="button" href="#myPopup" data-rel="popup" class="btn btn-default btn-sm" data-toggle="modal" 
-                            data-target="#addNewCategoryModal4">{{Lang::get('lang.change_role_to_admin')}}</button>
+                            data-target="#addNewCategoryModal4">{{ trans('lang.change_role_to_admin') }}</button>
                     </div>
                     @else
                     <div class="btn-group">
                         <button type="button" href="#myPopup" data-rel="popup" class="btn btn-default btn-sm" data-toggle="modal" 
-                            data-target="#addNewCategoryModal2">{{Lang::get('lang.change_role_to_user')}}</button>
+                            data-target="#addNewCategoryModal2">{{ trans('lang.change_role_to_user') }}</button>
                     </div>
                     <div class="btn-group">
                         <button type="button" href="#myPopup" data-rel="popup" class="btn btn-default btn-sm" data-toggle="modal" 
-                            data-target="#addNewCategoryModal1">{{Lang::get('lang.change_role_to_agent')}}</button>
+                            data-target="#addNewCategoryModal1">{{ trans('lang.change_role_to_agent') }}</button>
                     </div>
                     @endif
                     @endif
 
                     @if(Auth::user()->role == 'admin')
                     <a href="{{route('user.edit', $users->id)}}">
-                        <button type="button"  href="{{route('user.edit', $users->id)}}" class="btn btn-default btn-sm">{{Lang::get('lang.edit')}}</button>
+                        <button type="button"  href="{{route('user.edit', $users->id)}}" class="btn btn-default btn-sm">{{ trans('lang.edit') }}</button>
                     </a>
 
                     <button type="button" href="#myPopup" data-rel="popup" class="btn btn-default btn-sm" data-toggle="modal" 
-                        data-target="#addNewCategoryModal">{{Lang::get('lang.change_password')}}</button>
+                        data-target="#addNewCategoryModal">{{ trans('lang.change_password') }}</button>
                     
                     <button type="button" href="#myPopup" data-rel="popup" class="btn btn-default btn-sm" data-toggle="modal" 
-                        data-target="#addNewCategoryModal3">{{Lang::get('lang.delete')}}</button>
+                        data-target="#addNewCategoryModal3">{{ trans('lang.delete') }}</button>
                     @endif
 
                     @if(Auth::user()->role == 'agent')
                     @if($users->role == 'user')
                     <a href="{{route('user.edit', $users->id)}}">
-                        <button type="button"  href="{{route('user.edit', $users->id)}}" class="btn btn-default btn-sm">{{Lang::get('lang.edit')}}</button>
+                        <button type="button"  href="{{route('user.edit', $users->id)}}" class="btn btn-default btn-sm">{{ trans('lang.edit') }}</button>
                     </a>
 
                     <button type="button" href="#myPopup" data-rel="popup" class="btn btn-default btn-sm" data-toggle="modal" 
-                        data-target="#addNewCategoryModal">{{Lang::get('lang.change_password')}}</button>
+                        data-target="#addNewCategoryModal">{{ trans('lang.change_password') }}</button>
 
                     <button type="button" href="#myPopup" data-rel="popup" class="btn btn-default btn-sm" data-toggle="modal" 
-                        data-target="#addNewCategoryModal3">{{Lang::get('lang.delete')}}</button>
+                        data-target="#addNewCategoryModal3">{{ trans('lang.delete') }}</button>
                     @endif
                     @endif
 
@@ -338,13 +338,13 @@ class="nav-link active"
                         
                             </h1>
 
-                            <h2 class="entry-title text-muted">{!! Lang::get('lang.user-account-is-deleted') !!}</h2>
+                            <h2 class="entry-title text-muted">{{ trans('lang.user-account-is-deleted') }}</h2>
                         
                             <div class="entry-content clearfix">
-                                <p class="lead">{!! Lang::get('lang.delete-account-caution-info') !!}</p>
+                                <p class="lead">{{ trans('lang.delete-account-caution-info') }}</p>
                                 <p>
                                     <button type="button" href="#myPopup" data-rel="popup" class="btn btn-primary btn-sm" data-toggle="modal" 
-                                        data-target="#addNewCategoryModal8">{{Lang::get('lang.restore-user')}}
+                                        data-target="#addNewCategoryModal8">{{ trans('lang.restore-user') }}
                                     </button>
                                 </p>
                             </div><!-- .entry-content -->
@@ -355,7 +355,7 @@ class="nav-link active"
                     @if(Auth::user()->role == 'agent')
                     @if($users->role == 'user')
                     This is a deleted contact 
-                    <button type="button" href="#myPopup" data-rel="popup" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#addNewCategoryModal8">{{Lang::get('lang.restore')}}</button>
+                    <button type="button" href="#myPopup" data-rel="popup" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#addNewCategoryModal8">{{ trans('lang.restore') }}</button>
                     @elseif($users->role == 'agent')
                     This is a deleted contact 
                     @endif
@@ -369,56 +369,57 @@ class="nav-link active"
                     <ul class="nav nav-tabs" >
 
                         <li class="nav-item">
-                            <a class="nav-link active" href="#tab_1" id="open_tab" data-toggle="tab">{!! Lang::get('lang.open_tickets') !!} ({{$open}})</a>
+                            <a class="nav-link active" href="#tab_1" id="open_tab" data-toggle="tab">{{ trans('lang.open_tickets') }} ({{$open}})</a>
                         </li>
                         
                         <li class="nav-item">
-                            <a class="nav-link" href="#tab_2" id="closed_tab" data-toggle="tab">{!! Lang::get('lang.closed_tickets') !!} ({{$counted}})</a>
+                            <a class="nav-link" href="#tab_2" id="closed_tab" data-toggle="tab">{{ trans('lang.closed_tickets') }} ({{$counted}})</a>
                         </li>
                         
                         <li class="nav-item">
-                            <a class="nav-link" href="#tab_3" id="deleted_tab" data-toggle="tab">{!! Lang::get('lang.deleted_tickets') !!} ({{$deleted}})</a>
+                            <a class="nav-link" href="#tab_3" id="deleted_tab" data-toggle="tab">{{ trans('lang.deleted_tickets') }} ({{$deleted}})</a>
                         </li>
                     </ul>
                 
                     <div class="tab-content mt-2">
                     
-                        @if(Session::has('success'))
+                        @if(session()->has('success'))
                         <div id="success-alert" class="alert alert-success alert-dismissable">
                             <i class="fas  fa-check-circle"> </i>
                             <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-                            {{Session::get('success')}}
+                            {{ session('success') }}
                         </div>
                         @endif
                         <!-- failure message -->
-                        @if(Session::has('fails'))
+                        @if(session()->has('fails'))
                         <div class="alert alert-danger alert-dismissable">
-                            <i class="fas fa-ban"> </i> <b> {!! Lang::get('lang.alert') !!} ! </b>
+                            <i class="fas fa-ban"> </i> <b> {{ trans('lang.alert') }} ! </b>
                             <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-                            {{Session::get('fails')}}
+                            {{ session('fails') }}
                         </div>
                         @endif
 
-                        {!! Form::open(['route'=>'select_all','method'=>'post']) !!}
+                        <form method="POST" action="{{ route('select_all') }}">
+    @csrf
                         
                         <div class="mailbox-controls">
 
                             <a class="btn btn-default btn-sm checkbox-toggle"><i class="far fa-square"></i></a>
                        
-                            <input type="submit" class="btn btn-default text-orange btn-sm" name="submit" value="{!! Lang::get('lang.delete') !!}">
+                            <input type="submit" class="btn btn-default text-orange btn-sm" name="submit" value="{{ trans('lang.delete') }}">
                        
-                            <input type="submit" class="btn btn-default text-yellow btn-sm" name="submit" value="{!! Lang::get('lang.close') !!}">
+                            <input type="submit" class="btn btn-default text-yellow btn-sm" name="submit" value="{{ trans('lang.close') }}">
                        
                             <div id="more-option" class="btn-group">
                        
                                 <button type="button" class="btn btn-sm btn-default dropdown-toggle" data-toggle="dropdown" id="d2">
                                     <i class="fas fa-sort" style="color:teal;"> </i>
-                                        {!! Lang::get('lang.sort-by') !!} <span class="caret"></span>
+                                        {{ trans('lang.sort-by') }} <span class="caret"></span>
                                 </button>
 
                                 <div  class="dropdown-menu">
                                     <a data-toggle="modal" data-target="#ChangeOwner" class="dropdown-item toggle-vis" href="#">
-                                        <i class="fas fa-plus" style="color:green;"> </i> {!!Lang::get('lang.created-at')!!}
+                                        <i class="fas fa-plus" style="color:green;"> </i> {{ trans('lang.created-at') }}
                                     </a>
                                 </div>
                             </div>
@@ -433,7 +434,7 @@ class="nav-link active"
                         <div class="mt-2 mailbox-messages"  id="refresh">
                         
                             <p style="display:none;text-align:center; position:fixed; margin-left:40%;margin-top:-70px;" id="show" class="text-red">
-                                <b>{!! Lang::get('lang.loading') !!}...</b>
+                                <b>{{ trans('lang.loading') }}...</b>
                             </p>
                             
                             {!!$table->render('vendor.Chumper.template')!!}
@@ -443,7 +444,7 @@ class="nav-link active"
                 </div>
             </div>
         </div>
-        {!!Form::close()!!}
+        </form>
            
          @endif
 
@@ -453,10 +454,10 @@ class="nav-link active"
            
             <div class="card-header">
                 @if($users->role=='user')
-                <h3 class="card-title">{!! Lang::get('lang.user_report') !!}</h3>
+                <h3 class="card-title">{{ trans('lang.user_report') }}</h3>
                 @endif 
                 @if($users->role=='agent')
-                <h3 class="card-title">{!! Lang::get('lang.agent_report') !!}</h3>
+                <h3 class="card-title">{{ trans('lang.agent_report') }}</h3>
                 @endif
             </div>
 
@@ -466,8 +467,8 @@ class="nav-link active"
                     <div  class="form-group">
                         <div class="row">
                             <div class='col-sm-3'>
-                                {!! Form::label('date', Lang::get("lang.start_date").':') !!}
-                                {!! Form::text('start_date',null,['class'=>'form-control','id'=>'datepicker4'])!!}
+                                {!! Form::label('date', trans("lang.start_date").':') !!}
+                                <input type="text" name="start_date" id="datepicker4" value="{{ old('start_date') }}" class="form-control">
                             </div>
                             <?php
                             $start_date = App\Model\helpdesk\Ticket\Tickets::where('id', '=', '1')->first();
@@ -493,8 +494,8 @@ class="nav-link active"
                                 });
                             </script>
                             <div class='col-sm-3'>
-                                {!! Form::label('start_time', Lang::get("lang.end_date").':') !!}
-                                {!! Form::text('end_date',null,['class'=>'form-control','id'=>'datetimepicker3'])!!}
+                                {!! Form::label('start_time', trans("lang.end_date").':') !!}
+                                <input type="text" name="end_date" id="datetimepicker3" value="{{ old('end_date') }}" class="form-control">
                             </div>
                             <script type="text/javascript">
                                 $(function() {
@@ -508,8 +509,8 @@ class="nav-link active"
                                 });
                             </script>
                             <div class='col-sm-3'>
-                                {!! Form::label('filter', 'Filter:',['style' => 'visibility:hidden;']) !!}<br>
-                                <input type="submit" value="{!! Lang::get('lang.submit') !!}" class="btn btn-primary">
+                                <label for="filter">'Filter:'</label><br>
+                                <input type="submit" value="{{ trans('lang.submit') }}" class="btn btn-primary">
                             </div>
                             <div class="col-sm-10">
                                 <div class="row mt-2">
@@ -519,16 +520,16 @@ class="nav-link active"
 
                                     @if($users->role=='user')
 
-                                    <div class="col-md-4"><span id="legend-holder" style="background-color: #6C96DF;"></span>&nbsp; <span class="lead"> <span id="total-created-tickets" ></span> {!! Lang::get('lang.tickets') !!} {!! Lang::get('lang.created') !!} </span></div>
+                                    <div class="col-md-4"><span id="legend-holder" style="background-color: #6C96DF;"></span>&nbsp; <span class="lead"> <span id="total-created-tickets" ></span> {{ trans('lang.tickets') }} {{ trans('lang.created') }} </span></div>
                                     @endif 
                                     @if($users->role=='agent')
-                                    <div class="col-md-4"><span id="legend-holder" style="background-color: #6C96DF;"></span>&nbsp; <span class="lead"> <span id="total-created-tickets" ></span> {!! Lang::get('lang.assign_tickets') !!}  </span></div>
+                                    <div class="col-md-4"><span id="legend-holder" style="background-color: #6C96DF;"></span>&nbsp; <span class="lead"> <span id="total-created-tickets" ></span> {{ trans('lang.assign_tickets') }}  </span></div>
 
                                     @endif
 
 
-                                    <div class="col-md-4"><span id="legend-holder" style="background-color: #6DC5B2;"></span>&nbsp; <span class="lead"> <span id="total-reopen-tickets" class="lead"></span> {!! Lang::get('lang.tickets') !!} {!! Lang::get('lang.reopen') !!}  </span></div> 
-                                    <div class="col-md-4"><span id="legend-holder" style="background-color: #E3B870;"></span>&nbsp; <span class="lead"> <span id="total-closed-tickets" class="lead"></span> {!! Lang::get('lang.tickets') !!} {!! Lang::get('lang.closed') !!}  </span></div> 
+                                    <div class="col-md-4"><span id="legend-holder" style="background-color: #6DC5B2;"></span>&nbsp; <span class="lead"> <span id="total-reopen-tickets" class="lead"></span> {{ trans('lang.tickets') }} {{ trans('lang.reopen') }}  </span></div> 
+                                    <div class="col-md-4"><span id="legend-holder" style="background-color: #E3B870;"></span>&nbsp; <span class="lead"> <span id="total-closed-tickets" class="lead"></span> {{ trans('lang.tickets') }} {{ trans('lang.closed') }}  </span></div> 
                                 </div>
                             </div>
                         </div>
@@ -547,23 +548,25 @@ class="nav-link active"
     <div class="modal fade" id="create_org">
         <div class="modal-dialog" style="width:84%;height:70%;">
             <div class="modal-content">
-                {!! Form::model($users->id, ['id'=>'form','method' => 'PATCH'] )!!}
+                <form method="POST">
+    @csrf
+    @method('PATCH')
                 <div class="modal-header">
                     
-                    <h4 class="modal-title">{!! Lang::get('lang.create_organization') !!}</h4>
+                    <h4 class="modal-title">{{ trans('lang.create_organization') }}</h4>
 
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidd en="true">&times;</span></button>
                 </div>
                 <div class="modal-body">
                     <!-- failure message -->                                
                     <div class="alert alert-danger alert-dismissable" id="alert-danger-create-org" style="display:none;"> 
-                        <i class="fas fa-ban"> </i> <b> {!! Lang::get('lang.alert') !!} ! <span id="get-danger-create-org"></span> </b>
+                        <i class="fas fa-ban"> </i> <b> {{ trans('lang.alert') }} ! <span id="get-danger-create-org"></span> </b>
                         <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
                     </div>                              
                     <div class="row" id="hide">
                         <div class="col-md-4">
                             <div class="form-group">
-                                <label>{!! Lang::get('lang.name') !!}</label>
+                                <label>{{ trans('lang.name') }}</label>
                                 <input type="text" name="name" class="form-control">
                                 <spam id="error-name" style="display:none;position:fixed" class="call-out text-red">This is a required field</spam>
                                 <spam id="error-name1" style="display:none;position:fixed" class="call-out text-red">! Allready Taken</spam>
@@ -572,14 +575,14 @@ class="nav-link active"
                         </div>
                         <div class="col-md-4">
                             <div class="form-group">
-                                <label>{!! Lang::get('lang.phone') !!}</label>
+                                <label>{{ trans('lang.phone') }}</label>
                                 <input type="number" name="phone" class="form-control">
                                 <br/>
                             </div>
                         </div>
                         <div class="col-md-4">
                             <div class="form-group">
-                                <label>{!! Lang::get('lang.website') !!}</label>
+                                <label>{{ trans('lang.website') }}</label>
                                 <input type="url" name="website" placeholder="https://www.example.com" class="form-control">
                                 <spam id="error-website" style="display:none" class="help-block text-red">! Allready Taken</spam>
                                 <br/>
@@ -587,13 +590,13 @@ class="nav-link active"
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label>{!! Lang::get('lang.address') !!}</label>
+                                <label>{{ trans('lang.address') }}</label>
                                 <textarea name="address" id="address" class="form-control"></textarea>
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label>{!! Lang::get('lang.internal_notes') !!}</label>
+                                <label>{{ trans('lang.internal_notes') }}</label>
                                 <textarea name="internal" id="internal" class="form-control"></textarea>
                             </div>
                         </div>
@@ -611,10 +614,10 @@ class="nav-link active"
                     </div>
                 </div>
                 <div class="modal-footer justify-content-between">
-                    <button type="button" class="btn btn-default" data-dismiss="modal" id="dismis">{!! Lang::get('lang.close') !!}</button>
-                    <input type="submit" class="btn btn-primary" value="{!! Lang::get('lang.update') !!}">
+                    <button type="button" class="btn btn-default" data-dismiss="modal" id="dismis">{{ trans('lang.close') }}</button>
+                    <input type="submit" class="btn btn-primary" value="{{ trans('lang.update') }}">
                 </div>
-                {!! Form::close() !!}
+                </form>
             </div><!-- /.modal-content -->
         </div><!-- /.modal-dialog -->
         <script>
@@ -671,10 +674,12 @@ class="nav-link active"
     <div class="modal fade" id="assign">
         <div class="modal-dialog">
             <div class="modal-content">
-                {!! Form::model($users->id, ['id'=>'org_assign','method' => 'PATCH'] )!!}
+                <form method="POST">
+    @csrf
+    @method('PATCH')
                 <div class="modal-header">
 
-                    <h4 class="modal-title">{!! Lang::get('lang.assign') !!}</h4>
+                    <h4 class="modal-title">{{ trans('lang.assign') }}</h4>
 
                     <button type="button" class="close" data-dismiss="modal" id="dismiss" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                     
@@ -683,7 +688,7 @@ class="nav-link active"
                 <div class="modal-body">
 
                     <div class="alert alert-danger alert-dismissable" id="alert-danger-assign-org" style="display:none;"> 
-                        <i class="fas fa-ban"> </i> <b> {!! Lang::get('lang.alert') !!} ! <span id="get-danger-assign-org"></span> </b>
+                        <i class="fas fa-ban"> </i> <b> {{ trans('lang.alert') }} ! <span id="get-danger-assign-org"></span> </b>
                         <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
                     </div>
 
@@ -695,15 +700,15 @@ class="nav-link active"
                         </div>
                     </div>
                     <div id="assign_body">
-                        <p>{!! Lang::get('lang.please_select_an_organization') !!}</p>
+                        <p>{{ trans('lang.please_select_an_organization') }}</p>
 
                         <input type="text" id="org" class="form-control" name="org">
 
                     </div>
                 </div>
                 <div class="modal-footer justify-content-between">
-                    <button type="button" class="btn btn-default" data-dismiss="modal" id="dismis4">{!! Lang::get('lang.close') !!}</button>
-                    <button type="submit" class="btn btn-success" id="submt2">{!! Lang::get('lang.assign') !!}</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal" id="dismis4">{{ trans('lang.close') }}</button>
+                    <button type="submit" class="btn btn-success" id="submt2">{{ trans('lang.assign') }}</button>
                 </div>
                 <script>
                     $('#assign').on('hidden.bs.modal', function (e) {
@@ -712,7 +717,7 @@ class="nav-link active"
                     });
                 </script>
 
-                {!! Form::close()!!}
+                </form>
             </div><!-- /.modal-content -->
         </div><!-- /.modal-dialog -->
     </div><!-- /.modal -->
@@ -733,10 +738,12 @@ class="nav-link active"
         <div class="modal-dialog">
 
             <div class="modal-content">
-                {!! Form::model($users->id, ['id'=>'org_edit_assign','method' => 'PATCH'] )!!}
+                <form method="POST">
+    @csrf
+    @method('PATCH')
                 <div class="modal-header">
                     
-                    <h4 class="modal-title">{!! Lang::get('lang.assign') !!}</h4>
+                    <h4 class="modal-title">{{ trans('lang.assign') }}</h4>
 
                     <button type="button" class="close" data-dismiss="modal" id="dismiss" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                 </div>
@@ -747,7 +754,7 @@ class="nav-link active"
                   </div> -->
                 <div class="modal-body">
                     <div class="alert alert-danger alert-dismissable" id="alert-danger-edit-org" style="display:none;"> 
-                        <i class="fas fa-ban"> </i> <b> {!! Lang::get('lang.alert') !!} ! <span id="get-danger-edit-org"></span> </b>
+                        <i class="fas fa-ban"> </i> <b> {{ trans('lang.alert') }} ! <span id="get-danger-edit-org"></span> </b>
                         <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
                     </div>
                     <div class="row">
@@ -758,7 +765,7 @@ class="nav-link active"
                         </div>
                     </div>
                     <div id="assign_body">
-                        <p>{!! Lang::get('lang.please_select_an_organization') !!}</p>
+                        <p>{{ trans('lang.please_select_an_organization') }}</p>
 
 
 
@@ -767,10 +774,10 @@ class="nav-link active"
                     </div>
                 </div>
                 <div class="modal-footer justify-content-between">
-                    <button type="button" class="btn btn-default" data-dismiss="modal" id="dismis4">{!! Lang::get('lang.close') !!}</button>
-                    <button type="submit" class="btn btn-success" id="submt3">{!! Lang::get('lang.assign') !!}</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal" id="dismis4">{{ trans('lang.close') }}</button>
+                    <button type="submit" class="btn btn-success" id="submt3">{{ trans('lang.assign') }}</button>
                 </div>
-                {!! Form::close()!!}
+                </form>
             </div><!-- /.modal-content -->
         </div><!-- /.modal-dialog -->
     </div><!-- /.modal -->
@@ -1283,10 +1290,10 @@ class="nav-link active"
                         <div class="modal-header">
                            
                             @if($users->role=='user')
-                            <h4 class="modal-title" id="titleLabel">{{Lang::get('lang.delete_user')}}</h4>
+                            <h4 class="modal-title" id="titleLabel">{{ trans('lang.delete_user') }}</h4>
                             @endif 
                             @if($users->role=='agent')
-                            <h4 class="modal-title" id="titleLabel">{{Lang::get('lang.delete_agent')}}</h4>
+                            <h4 class="modal-title" id="titleLabel">{{ trans('lang.delete_agent') }}</h4>
                             @endif
 
                              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
@@ -1297,11 +1304,11 @@ class="nav-link active"
 
                         <div class="modal-body">
 
-                            <p>{!! Lang::get('lang.what_should_be_done_with_content_owned_by_this_user') !!}?</p>
+                            <p>{{ trans('lang.what_should_be_done_with_content_owned_by_this_user') }}?</p>
 <br>
                             <?php $user = App\User::where('id', $users->id)->first(); ?>
                             @if($user->role == 'agent')
-                            {!! Form::label('delete_all_content',Lang::get('lang.delete_all_content')) !!} <span class="text-red"> *</span>
+                            <label for="delete_all_content">{{ trans('lang.delete_all_content') }}</label> <span class="text-red"> *</span>
                             <?php
                             $open = App\Model\helpdesk\Ticket\Tickets::where('assigned_to', '=', $users->id)->where('status', '=', '1')->get();
                             ?>
@@ -1333,7 +1340,7 @@ class="nav-link active"
                             ?>
                             @if($open>0 && $user->role == 'agent')  
                             <div id="delete_assign_body">
-                                <p>{!! Lang::get('lang.whome_do_you_want_to_assign_ticket') !!}?</p>
+                                <p>{{ trans('lang.whome_do_you_want_to_assign_ticket') }}?</p>
                                 <select id="asssign" class="form-control" name="assign_to">
                                     <?php
                                     $assign = App\User::where('role', '!=', 'user')->get();
@@ -1358,7 +1365,7 @@ class="nav-link active"
                         </div>
 
                         <div class="modal-footer">
-                            {!! Form::submit(Lang::get('lang.confirm_deletion'),['class'=>'btn btn-primary float-right'])!!}
+                            <button type="submit" class="btn btn-primary float-right">{{ trans('lang.confirm_deletion') }}</button>
                         </div>
                     </div>
                 </div>
@@ -1374,7 +1381,7 @@ class="nav-link active"
                 <div class="modal-content">
                     <div class="modal-header">
 
-                        <h4 class="modal-title" id="titleLabel">{{Lang::get('lang.role_change')}}:</h4>
+                        <h4 class="modal-title" id="titleLabel">{{ trans('lang.role_change') }}:</h4>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
                                 aria-hidden="true">&times;</span>
                         </button>
@@ -1389,19 +1396,43 @@ class="nav-link active"
                         ?>
 
                         <!-- <div class="col-sm-4 form-group {{ $errors->has('group') ? 'has-error' : '' }}"> -->
-                        {!! Form::label('assign_group',Lang::get('lang.assigned_group')) !!} <span class="text-red"> *</span>
-                        {!!Form::select('group',[Lang::get('lang.groups')=>$groups->pluck('name','id')->toArray()],null,['class' => 'form-control select']) !!}
+                        <label for="assign_group">{{ trans('lang.assigned_group') }}</label> <span class="text-red"> *</span>
+                        <select name="group" id="group" class="form-control select">
+    @foreach([trans('lang.groups')=>$groups->pluck('name','id')->toArray()] as $key => $value)
+        @if(is_array($value))
+            <optgroup label="{{ $key }}">
+                @foreach($value as $subKey => $subValue)
+                    <option value="{{ $subKey }}">{{ $subValue }}</option>
+                @endforeach
+            </optgroup>
+        @else
+            <option value="{{ $key }}">{{ $value }}</option>
+        @endif
+    @endforeach
+</select>
                         <!-- </div> -->
                         <!-- primary dept -->
                         <!-- <div class="col-sm-4 form-group {{ $errors->has('primary_department') ? 'has-error' : '' }}"> -->
-                        {!! Form::label('primary_dpt',Lang::get('lang.primary_department')) !!} <span class="text-red"> *</span>
-                        {!! Form::select('primary_department', [Lang::get('lang.departments')=>$departments->pluck('name','id')->toArray()],null,['class' => 'form-control select']) !!}
+                        <label for="primary_dpt">{{ trans('lang.primary_department') }}</label> <span class="text-red"> *</span>
+                        <select name="primary_department" id="primary_department" class="form-control select">
+    @foreach([trans('lang.departments')=>$departments->pluck('name','id')->toArray()] as $key => $value)
+        @if(is_array($value))
+            <optgroup label="{{ $key }}">
+                @foreach($value as $subKey => $subValue)
+                    <option value="{{ $subKey }}">{{ $subValue }}</option>
+                @endforeach
+            </optgroup>
+        @else
+            <option value="{{ $key }}">{{ $value }}</option>
+        @endif
+    @endforeach
+</select>
                         <!-- </div> -->
 
                     </div>
 
                     <div class="modal-footer">
-                        {!! Form::submit(Lang::get('lang.submit'),['class'=>'btn btn-primary float-right'])!!}
+                        <button type="submit" class="btn btn-primary float-right">{{ trans('lang.submit') }}</button>
                     </div>
                 </div>
             </div>
@@ -1415,7 +1446,7 @@ class="nav-link active"
                 <div class="modal-content">
                     <div class="modal-header">
 
-                         <h4 class="modal-title" id="titleLabel">{{Lang::get('lang.role_change')}}:</h4>
+                         <h4 class="modal-title" id="titleLabel">{{ trans('lang.role_change') }}:</h4>
 
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
                                 aria-hidden="true">&times;</span>
@@ -1432,7 +1463,7 @@ class="nav-link active"
                     </div>
 
                     <div class="modal-footer">
-                        {!! Form::submit(Lang::get('lang.submit'),['class'=>'btn btn-primary float-right'])!!}
+                        <button type="submit" class="btn btn-primary float-right">{{ trans('lang.submit') }}</button>
                     </div>
                 </div>
             </div>
@@ -1446,7 +1477,7 @@ class="nav-link active"
                 <div class="modal-content">
                     <div class="modal-header">
 
-                        <h4 class="modal-title" id="titleLabel">{{Lang::get('lang.role_change')}}:</h4>
+                        <h4 class="modal-title" id="titleLabel">{{ trans('lang.role_change') }}:</h4>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
                                 aria-hidden="true">&times;</span>
                         </button>
@@ -1461,19 +1492,43 @@ class="nav-link active"
                         ?>
 
                         <!-- <div class="col-sm-4 form-group {{ $errors->has('group') ? 'has-error' : '' }}"> -->
-                        {!! Form::label('assign_group',Lang::get('lang.assigned_group')) !!} <span class="text-red"> *</span>
-                        {!!Form::select('group',[Lang::get('lang.groups')=>$groups->pluck('name','id')->toArray()],null,['class' => 'form-control select']) !!}
+                        <label for="assign_group">{{ trans('lang.assigned_group') }}</label> <span class="text-red"> *</span>
+                        <select name="group" id="group" class="form-control select">
+    @foreach([trans('lang.groups')=>$groups->pluck('name','id')->toArray()] as $key => $value)
+        @if(is_array($value))
+            <optgroup label="{{ $key }}">
+                @foreach($value as $subKey => $subValue)
+                    <option value="{{ $subKey }}">{{ $subValue }}</option>
+                @endforeach
+            </optgroup>
+        @else
+            <option value="{{ $key }}">{{ $value }}</option>
+        @endif
+    @endforeach
+</select>
                         <!-- </div> -->
                         <!-- primary dept -->
                         <!-- <div class="col-sm-4 form-group {{ $errors->has('primary_department') ? 'has-error' : '' }}"> -->
-                        {!! Form::label('primary_dpt',Lang::get('lang.primary_department')) !!} <span class="text-red"> *</span>
-                        {!! Form::select('primary_department', [Lang::get('lang.departments')=>$departments->pluck('name','id')->toArray()],null,['class' => 'form-control select']) !!}
+                        <label for="primary_dpt">{{ trans('lang.primary_department') }}</label> <span class="text-red"> *</span>
+                        <select name="primary_department" id="primary_department" class="form-control select">
+    @foreach([trans('lang.departments')=>$departments->pluck('name','id')->toArray()] as $key => $value)
+        @if(is_array($value))
+            <optgroup label="{{ $key }}">
+                @foreach($value as $subKey => $subValue)
+                    <option value="{{ $subKey }}">{{ $subValue }}</option>
+                @endforeach
+            </optgroup>
+        @else
+            <option value="{{ $key }}">{{ $value }}</option>
+        @endif
+    @endforeach
+</select>
                         <!-- </div> -->
 
                     </div>
 
                     <div class="modal-footer">
-                        {!! Form::submit(Lang::get('lang.submit'),['class'=>'btn btn-primary float-right'])!!}
+                        <button type="submit" class="btn btn-primary float-right">{{ trans('lang.submit') }}</button>
                     </div>
                 </div>
             </div>
@@ -1486,7 +1541,7 @@ class="nav-link active"
             <div class="modal-content">
                 <div class="modal-header">
 
-                    <h4 class="modal-title" id="titleLabel">{{Lang::get('lang.change_password')}}:</h4>
+                    <h4 class="modal-title" id="titleLabel">{{ trans('lang.change_password') }}:</h4>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
                             aria-hidden="true">&times;</span>
                     </button>
@@ -1495,14 +1550,14 @@ class="nav-link active"
 
                 <div class="modal-body">
 
-                    <button class="btn btn-warning float-right btn-sm mb-1" id="changepassword">{{Lang::get('lang.password_generator')}}</button>
+                    <button class="btn btn-warning float-right btn-sm mb-1" id="changepassword">{{ trans('lang.password_generator') }}</button>
 
                     <form name="myForm" action="{!!URL::route('user.post.changepassword', $users->id)!!}" method="post" role="form" onsubmit="return validateForm()">
                     {{ csrf_field() }}
                         <div class="form-group">
 
                             <!-- <div class="form-group {{ $errors->has('change_password') ? 'has-error' : '' }}"> -->
-                            {!! Form::label('New password',Lang::get('lang.new_password')) !!} <span class="text-red"> *</span>
+                            <label for="New password">{{ trans('lang.new_password') }}</label> <span class="text-red"> *</span>
                             <input type="text" class="form-control" name="change_password" id="changepassword1" >
 
                             <p id="demo" style="color:red"></p>
@@ -1514,7 +1569,7 @@ class="nav-link active"
                 </div>
 
                 <div class="modal-footer">
-                    {!! Form::submit(Lang::get('lang.submit'),['class'=>'btn btn-primary float-right','id'=>'savepassword'])!!}
+                    {!! Form::submit(trans('lang.submit'),['class'=>'btn btn-primary float-right','id'=>'savepassword'])!!}
                 </div>
             </div>
             </form>
@@ -1530,7 +1585,7 @@ class="nav-link active"
                 <div class="modal-content">
                     <div class="modal-header">
 
-                          <h4 class="modal-title" id="titleLabel">{{Lang::get('lang.restore')}}:</h4>
+                          <h4 class="modal-title" id="titleLabel">{{ trans('lang.restore') }}:</h4>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
                                 aria-hidden="true">&times;</span>
                         </button>
@@ -1544,7 +1599,7 @@ class="nav-link active"
                     </div>
 
                     <div class="modal-footer">
-                        {!! Form::submit(Lang::get('lang.submit'),['class'=>'btn btn-primary float-right'])!!}
+                        <button type="submit" class="btn btn-primary float-right">{{ trans('lang.submit') }}</button>
                     </div>
                 </div>
             </div>
@@ -1580,7 +1635,7 @@ $(document).ready(function(){
                 url: '{{route("user.changepassword")}}',
                 // data: {settings_approval: settings_approval},
                 success: function(result) {
-                    // with('success', Lang::get('lang.approval_settings-created-successfully'));
+                    // with('success', trans('lang.approval_settings-created-successfully'));
                     // alert("Hi, testing");
                     // var x =result;
                     var sum = result;

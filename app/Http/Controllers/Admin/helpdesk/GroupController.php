@@ -89,7 +89,7 @@ class GroupController extends Controller
         try {
             $this->groupService->create($request->all());
 
-            return redirect('groups')->with('success', Lang::get('lang.group_created_successfully'));
+            return redirect('groups')->with('success', trans('lang.group_created_successfully'));
         } catch (Exception $e) {
             return $this->redirectWithError('lang.group_can_not_create', $e->getMessage());
         }
@@ -130,7 +130,7 @@ class GroupController extends Controller
         try {
             $this->groupService->update($id, $request->all());
 
-            return redirect('groups')->with('success', Lang::get('lang.group_updated_successfully'));
+            return redirect('groups')->with('success', trans('lang.group_updated_successfully'));
         } catch (Exception $e) {
             return $this->redirectWithError('lang.group_can_not_update', $e->getMessage());
         }
@@ -148,7 +148,7 @@ class GroupController extends Controller
         try {
             $this->groupService->delete($id);
 
-            return redirect('groups')->with('success', Lang::get('lang.group_deleted_successfully'));
+            return redirect('groups')->with('success', trans('lang.group_deleted_successfully'));
         } catch (Exception $e) {
             return $this->redirectWithError('lang.group_cannot_delete', $e->getMessage());
         }
@@ -163,7 +163,7 @@ class GroupController extends Controller
      */
     private function redirectWithError($langKey, $details = '')
     {
-        $message = Lang::get($langKey);
+        $message = trans($langKey);
         if ($details) {
             $message .= '<li>'.$details.'</li>';
         }

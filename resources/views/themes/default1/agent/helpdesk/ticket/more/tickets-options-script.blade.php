@@ -99,7 +99,7 @@ var filterClick = 0;
                                 $("#show2").hide();
                                 $("#hidespin").show();
                                 $("#spin").hide();
-                                var message = "{!! Lang::get('lang.status-changed-successfully') !!} {!! Lang::get('lang.reload-be-patient-message') !!}";
+                                var message = "{{ trans('lang.status-changed-successfully') }} {{ trans('lang.reload-be-patient-message') }}";
                                 $(".success-message, .success-msg, .get-success, #get-success").html(message);
                                 $(".alert-success").show();
                                 setTimeout(function(){
@@ -131,13 +131,13 @@ var filterClick = 0;
             });
             
             function changeStatus(id, name) {
-                $('#myModalLabel').html('{{Lang::get("lang.change-ticket-status-to")}}' + name);
-                var msg = "{{Lang::get('lang.confirm-to-proceed')}}";
+                $('#myModalLabel').html('{{ trans("lang.change-ticket-status-to") }}' + name);
+                var msg = "{{ trans('lang.confirm-to-proceed') }}";
                 var values = getValues();
                 if (values == "") {
-                    msg = "{{Lang::get('lang.select-ticket')}}";
-                    $('.yes').html("{{Lang::get('lang.ok')}}");
-                    $('#myModalLabel').html("{{Lang::get('lang.alert')}}");
+                    msg = "{{ trans('lang.select-ticket') }}";
+                    $('.yes').html("{{ trans('lang.ok') }}");
+                    $('#myModalLabel').html("{{ trans('lang.alert') }}");
                 } else {
                     c_status = "Open";
                     if(id == 2){
@@ -160,7 +160,7 @@ var filterClick = 0;
             $('#modalpopup').on('submit', function(e){
                 if (submit_form == 0) {
                     e.preventDefault();
-                    changeStatus('hard-delete', '{{Lang::get("lang.clean-forever")}}');
+                    changeStatus('hard-delete', '{{ trans("lang.clean-forever") }}');
                 }
                 $('#hard-delete').val('Delete forever')
             });
@@ -218,7 +218,7 @@ var filterClick = 0;
                             $("#merge-body-form").hide();
                             $("#merge_loader").hide();
                             $("#merge-btn").attr('disabled', true);
-                            var message = "{{Lang::get('lang.select-tickets-to merge')}}";
+                            var message = "{{ trans('lang.select-tickets-to merge') }}";
                             $("#merge-err-alert").show();
                             $('#message-merge-err').html(message);
                         } else if (response == 2) {
@@ -228,7 +228,7 @@ var filterClick = 0;
                             $("#merge-body-form").hide();
                             $("#merge_loader").hide();
                             $("#merge-btn").attr('disabled', true);
-                            var message = "{{Lang::get('lang.different-users')}}";
+                            var message = "{{ trans('lang.different-users') }}";
                             $("#merge-err-alert").show();
                             $('#message-merge-err').html(message);
                         } else {
@@ -281,7 +281,7 @@ var filterClick = 0;
                             $("#merge-body-form").hide();
                             $("#merge_loader").hide();
                             $("#merge-btn").attr('disabled', true);
-                            var message = "{{Lang::get('lang.merge-error')}}";
+                            var message = "{{ trans('lang.merge-error') }}";
                             $("#merge-err-alert").show();
                             $('#message-merge-err').html(message);
                         } else {
@@ -291,7 +291,7 @@ var filterClick = 0;
                             $("#merge-body-form").hide();
                             $("#merge_loader").hide();
                             $("#merge-btn").attr('disabled', true);
-                            var message = "{{Lang::get('lang.merge-success')}}";
+                            var message = "{{ trans('lang.merge-success') }}";
                             $("#merge-succ-alert").show();
                             $('#message-merge-succ').html(message);
                             setTimeout(function () {
@@ -339,7 +339,7 @@ var filterClick = 0;
                         $('.loader1').css('display','none');
                         $('.loader').css('display','none');
                         if (response == 1) {
-                            var message = "{!!Lang::get('lang.ticket-assigned-successfully')!!} {!!Lang::get('lang.reload-be-patient-message')!!}"
+                            var message = "{{ trans('lang.ticket-assigned-successfully') }} {{ trans('lang.reload-be-patient-message') }}"
                             $(".success-message, .success-msg, .get-success, #get-success").html(message);
                             $(".alert-success").show();
                             $("#assign-close").trigger("click");

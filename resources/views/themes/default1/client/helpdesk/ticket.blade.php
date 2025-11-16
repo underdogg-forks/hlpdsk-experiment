@@ -194,7 +194,9 @@ echo UTC::usertimezone(date_format($time, 'd/m/Y H:i:s'));
                         </br>
                     </div>
 
-                    {!! Form::model($ticket->id, ['id'=>'form3','method' => 'PATCH', 'enctype'=>'multipart/form-data'] )!!}
+                    <form method="POST">
+    @csrf
+    @method('PATCH')
                     <div id="t1">
 
                         <div class="form-group">
@@ -203,7 +205,7 @@ echo UTC::usertimezone(date_format($time, 'd/m/Y H:i:s'));
                                 <input type="hidden" name="ticket_ID" value="{{$ticket->id}}">
                                 <div class="form-group {{ $errors->has('title') ? 'has-error' : '' }}">
                                     <div class="col-md-2">
-                                        {!! Form::label('To', 'To:') !!}
+                                        <label for="To">'To:'</label>
                                     </div>
                                     <div class="col-md-10">
                                         {!! Form::text('To','support@faveohelpdesk.com',array('disabled'),['id'=>'email','class'=>'form-control','style'=>'width:55%'])!!}
@@ -220,7 +222,7 @@ echo UTC::usertimezone(date_format($time, 'd/m/Y H:i:s'));
                             <!-- reply content -->
                                 <div class="form-group {{ $errors->has('title') ? 'has-error' : '' }}">
                                     <div class="col-md-2">
-                                        {!! Form::label('Reply Content', 'reply_content:') !!}
+                                        <label for="Reply Content">'reply_content:'</label>
                                     </div>
                                     <div class="col-md-10">
                                         <textarea style="width:98%;height:200px;" name="reply_content" id="reply_content"></textarea>
@@ -244,11 +246,13 @@ echo UTC::usertimezone(date_format($time, 'd/m/Y H:i:s'));
                             </div>
                         </div>
                     </div>
-                    {!!Form::close()!!}
+                    </form>
 
                     <!-- Internal Content -->
                     <div id="t2" style="display:none">
-                        {!! Form::model($ticket->id, ['id'=>'form2','method' => 'PATCH'] )!!}
+                        <form method="POST">
+    @csrf
+    @method('PATCH')
                         <div id="t4">
                             <div class="form-group">
                                 <div class="row">
@@ -275,7 +279,7 @@ echo UTC::usertimezone(date_format($time, 'd/m/Y H:i:s'));
                                 </div>
                             </div>
                         </div>
-                        {!!Form::close()!!}
+                        </form>
                     </div>
                 </div>
                 <!-- ticket foreward -->
@@ -379,11 +383,11 @@ $data = $ConvDate[0];
                                 <?php if($conversation->is_internal) { ?>
                                 <i class="fa fa-tag bg-purple" title="Posted by System"></i>
                                     <?php }else{ if ($role->role == 'agent' || $role->role == 'admin') { ?>
-                                    <i class="fa fa-mail-reply-all bg-yellow" title="<?= Lang::get('lang.posted_by_support_team') ?>"></i>
+                                    <i class="fa fa-mail-reply-all bg-yellow" title="<?= trans('lang.posted_by_support_team') ?>"></i>
                                 <?php } elseif ($role->role == 'user') {  ?>
-                                    <i class="fa fa-user bg-aqua" title="<?= Lang::get('lang.posted_by_customer') ?>"></i>
+                                    <i class="fa fa-user bg-aqua" title="<?= trans('lang.posted_by_customer') ?>"></i>
                                 <?php } else { ?>
-                                    <i class="fa fa-mail-reply-all bg-purple" title="<?= Lang::get('lang.posted_by_system') ?>"></i>
+                                    <i class="fa fa-mail-reply-all bg-purple" title="<?= trans('lang.posted_by_system') ?>"></i>
     <?php } }
     $attachment = App\Model\Ticket\Ticket_attachments::where('thread_id','=',$conversation->id)->first();
     if($attachment == null ) {
@@ -576,7 +580,9 @@ $data = $ConvDate[0];
     <div class="modal fade" id="Edit" >
         <div class="modal-dialog" style="width:60%;height:70%;">
             <div class="modal-content">
-                {!! Form::model($ticket->id, ['id'=>'form','method' => 'PATCH'] )!!}
+                <form method="POST">
+    @csrf
+    @method('PATCH')
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                     <h4 class="modal-title">Edit <b>[#{!! $ticket->ticket_number !!}]</b>[{!! $user->user_name !!}]</h4>
@@ -606,7 +612,7 @@ $data = $ConvDate[0];
                     <button type="button" class="btn btn-default pull-left" data-dismiss="modal" id="dismis">Close</button>
                     <input type="submit" class="btn btn-primary pull-right" value="Update">
                 </div>
-                {!! Form::close() !!}
+                </form>
             </div><!-- /.modal-content -->
         </div><!-- /.modal-dialog -->
     </div><!-- /.modal -->
@@ -634,7 +640,9 @@ $data = $ConvDate[0];
     <div class="modal fade" id="ChangeOwner">
         <div class="modal-dialog">
             <div class="modal-content">
-                {!! Form::model($ticket->id, ['id'=>'form4','method' => 'PATCH'] )!!}
+                <form method="POST">
+    @csrf
+    @method('PATCH')
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                     <h4 class="modal-title">Change Owner for ticket <b>#{!! $ticket->ticket_number !!}</b></h4>
@@ -672,7 +680,7 @@ $data = $ConvDate[0];
                     <button type="button" class="btn btn-default pull-left" data-dismiss="modal" id="dismis2">Close</button>
                     <button id="ban" type="button" class="btn btn-warning pull-right" >Submit</button>
                 </div>
-                {!! Form::close() !!}
+                </form>
             </div><!-- /.modal-content -->
         </div><!-- /.modal-dialog -->
     </div><!-- /.modal -->
@@ -680,7 +688,9 @@ $data = $ConvDate[0];
     <div class="modal fade" id="{{$ticket->id}}assign">
         <div class="modal-dialog">
             <div class="modal-content">
-                {!! Form::open(['id'=>'form1','method' => 'PATCH'] )!!}
+                <form method="POST">
+    @csrf
+    @method('PATCH')
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                     <h4 class="modal-title">Assign</h4>
@@ -699,7 +709,7 @@ $data = $ConvDate[0];
                     <button type="button" class="btn btn-default pull-left" data-dismiss="modal" id="dismis4">Close</button>
                     <button type="submit" class="btn btn-success pull-right" id="submt2">Assign</button>
                 </div>
-                {!! Form::close()!!}
+                </form>
             </div><!-- /.modal-content -->
         </div><!-- /.modal-dialog -->
     </div><!-- /.modal -->

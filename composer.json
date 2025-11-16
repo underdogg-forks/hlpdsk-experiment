@@ -44,7 +44,6 @@
     "require": {
         "php": "^8.0",
         "laravel/framework": "^9.46",
-        "laravelcollective/html": "^6.3",
         "vsmoraes/laravel-pdf": "dev-dev-laravel6",
         "propaganistas/laravel-phone": "^4.3",
         "bugsnag/bugsnag-laravel": "^2.23",

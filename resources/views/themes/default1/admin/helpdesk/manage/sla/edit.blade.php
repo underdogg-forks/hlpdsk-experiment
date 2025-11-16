@@ -20,7 +20,7 @@ class="nav-link active"
 @stop
 <!-- header -->
 @section('PageHeader')
-<h1>{!! Lang::get('lang.sla_plan') !!}</h1>
+<h1>{{ trans('lang.sla_plan') }}</h1>
 @stop
 <!-- /header -->
 <!-- breadcrumbs -->
@@ -32,8 +32,10 @@ class="nav-link active"
 <!-- content -->
 @section('content')
 <!-- open a form -->
-{!! Form::model($slas,['url' => 'sla/'.$slas->id, 'method' => 'PATCH']) !!}
-@if(Session::has('errors'))
+<form method="POST">
+    @csrf
+    @method('PATCH')
+@if(session()->has('errors'))
 <?php //dd($errors); ?>
 <div class="alert alert-danger alert-dismissable">
     <i class="fa fa-ban"></i>
@@ -53,30 +55,42 @@ class="nav-link active"
 @endif
 <div class="card card-light">
     <div class="card-header">
-        <h3 class="card-title">{{Lang::get('lang.edit')}}</h3>
+        <h3 class="card-title">{{ trans('lang.edit') }}</h3>
     </div>
     <div class="card-body"> 
         <!-- Name text form Required -->
         <div class="row">
             <div class="col-md-4">
                 <div class="form-group {{ $errors->has('name') ? 'has-error' : '' }}">
-                    {!! Form::label('name',Lang::get('lang.name')) !!} <span class="text-red"> *</span>
-                    {!! Form::text('name',null,['class' => 'form-control']) !!}
+                    <label for="name">{{ trans('lang.name') }}</label> <span class="text-red"> *</span>
+                    <input type="text" name="name" id="name" value="{{ old('name') }}" class="form-control">
                 </div>
             </div>
             <!-- Grace Period text form Required -->
             <div class="col-md-4">
                 <div class="form-group {{ $errors->has('grace_period') ? 'has-error' : '' }}">
-                    {!! Form::label('grace_period',Lang::get('lang.grace_period')) !!}
-                    {!! Form::select('grace_period',['6 Hours'=>'6 Hours', '12 Hours'=>'12 Hours', '18 Hours'=>'18 Hours', '24 Hours'=>'24 Hours', '36 Hours'=>'36 Hours', '48 Hours'=>'48 Hours'],null,['class' => 'form-control']) !!}
+                    <label for="grace_period">{{ trans('lang.grace_period') }}</label>
+                    <select name="grace_period" id="grace_period" class="form-control">
+    @foreach(['6 Hours'=>'6 Hours', '12 Hours'=>'12 Hours', '18 Hours'=>'18 Hours', '24 Hours'=>'24 Hours', '36 Hours'=>'36 Hours', '48 Hours'=>'48 Hours'] as $key => $value)
+        @if(is_array($value))
+            <optgroup label="{{ $key }}">
+                @foreach($value as $subKey => $subValue)
+                    <option value="{{ $subKey }}">{{ $subValue }}</option>
+                @endforeach
+            </optgroup>
+        @else
+            <option value="{{ $key }}">{{ $value }}</option>
+        @endif
+    @endforeach
+</select>
                 </div>
             </div>
             <!-- status radio: required: Active|Dissable -->
             <div class="col-md-4">
                 <div class="form-group {{ $errors->has('status') ? 'has-error' : '' }}">
-                    {!! Form::label('status',Lang::get('lang.status')) !!}&nbsp;<br/>
-                    {!! Form::radio('status','1',true) !!} &nbsp; {{Lang::get('lang.active')}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    {!! Form::radio('status','0') !!} &nbsp; {{Lang::get('lang.inactive')}}
+                    <label for="status">{{ trans('lang.status') }}</label>&nbsp;<br/>
+                    <input type="radio" name="status" value="'1'"> &nbsp; {{ trans('lang.active') }}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <input type="radio" name="status" value="'0'"> &nbsp; {{ trans('lang.inactive') }}
                 </div>
             </div>
         </div>
@@ -84,20 +98,20 @@ class="nav-link active"
         <div class="row">
             <div class="col-md-12">
                 <div class="form-group">
-                    {!! Form::label('admin_note',Lang::get('lang.admin_notes')) !!}
-                    {!! Form::textarea('admin_note',null,['class' => 'form-control','size' => '30x5']) !!}
+                    <label for="admin_note">{{ trans('lang.admin_notes') }}</label>
+                    <textarea name="admin_note" id="admin_note" class="form-control" rows="5">{{ old('admin_note') }}</textarea>
                 </div>
             </div>
         </div>
 
         <div>
-            <input type="checkbox" name="sys_sla" @if($slas->id == $sla->sla) checked disabled @endif> {{ Lang::get('lang.make-default-sla')}}
+            <input type="checkbox" name="sys_sla" @if($slas->id == $sla->sla) checked disabled @endif> {{ trans('lang.make-default-sla') }}
         </div>
     </div>
     <div class="card-footer">
-        {!! Form::submit(Lang::get('lang.update'),['class'=>'btn btn-primary'])!!}
+        <button type="submit" class="btn btn-primary">{{ trans('lang.update') }}</button>
     </div>
 </div>
 <!-- close form -->
-{!! Form::close() !!}
+</form>
 @stop

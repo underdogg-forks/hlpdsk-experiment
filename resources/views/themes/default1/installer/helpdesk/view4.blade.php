@@ -143,7 +143,8 @@ try {
 
         <span id="wait"></span>
 
-        {!! Form::open( ['id'=>'form','method' => 'POST'] )!!}
+        <form method="POST">
+    @csrf
         {{-- <input type="hidden" name="_token" value="{{ csrf_token() }}"> --}}
         <!-- <b>default</b><br> -->
         <input type="hidden" name="default" value="{!! $default !!}"/>

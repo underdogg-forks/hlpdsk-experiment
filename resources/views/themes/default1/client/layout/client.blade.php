@@ -142,21 +142,21 @@
 
                             <ul class="navbar-nav navbar-menu site-navigate ml-auto">
 
-                                <li @yield('home') class="nav-item"><a href="{{url('/')}}" class="nav-link">{!! Lang::get('lang.home') !!}</a></li>
+                                <li @yield('home') class="nav-item"><a href="{{url('/')}}" class="nav-link">{{ trans('lang.home') }}</a></li>
 
                                 @if($system->first()->status == 1)
                                 <li @yield('submit') class="nav-item">
-                                    <a href="{{URL::route('form')}}" class="nav-link">{!! Lang::get('lang.submit_a_ticket') !!}</a>
+                                    <a href="{{URL::route('form')}}" class="nav-link">{{ trans('lang.submit_a_ticket') }}</a>
                                 </li>
                                 @endif
 
                                 <li @yield('kb') class="nav-item dropdown">
                                     <a href="{!! url('knowledgebase') !!}" class="dropdown-toggle nav-link"  id="navbarDropdown" role="button" data-toggle=""
-                                        aria-haspopup="true" aria-expanded="false">{!! Lang::get('lang.knowledge_base') !!}
+                                        aria-haspopup="true" aria-expanded="false">{{ trans('lang.knowledge_base') }}
                                     </a>
                                     <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu">
-                                        <li><a href="{{route('category-list')}}" class="dropdown-item">{!! Lang::get('lang.categories') !!}</a></li>
-                                        <li><a href="{{route('article-list')}}" class="dropdown-item">{!! Lang::get('lang.articles') !!}</a></li>
+                                        <li><a href="{{route('category-list')}}" class="dropdown-item">{{ trans('lang.categories') }}</a></li>
+                                        <li><a href="{{route('article-list')}}" class="dropdown-item">{{ trans('lang.articles') }}</a></li>
                                     </ul>
                                 </li>
 
@@ -169,7 +169,7 @@
                                  @if(count($pages))
                                 <li @yield('pages') class="nav-item dropdown">
                                     <a class="dropdown-toggle nav-link"  id="navbarDropdown" role="button" data-toggle=""
-                                        aria-haspopup="true" aria-expanded="false">{!! Lang::get('lang.pages') !!}
+                                        aria-haspopup="true" aria-expanded="false">{{ trans('lang.pages') }}
                                     </a>
                                     <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu">
                                         @foreach($pages as $page)
@@ -181,12 +181,12 @@
 
                                 @if(Auth::user())
                                 <li @yield('myticket') class="nav-item">
-                                    <a href="{{url('mytickets')}}" class="nav-link">{!! Lang::get('lang.my_tickets') !!}</a>
+                                    <a href="{{url('mytickets')}}" class="nav-link">{{ trans('lang.my_tickets') }}</a>
                                 </li>
 
                                 <li @yield('profile') class="nav-item dropdown">
                                     <a href="#" class="dropdown-toggle nav-link"  id="navbarDropdown" role="button" data-toggle=""
-                                        aria-haspopup="true" aria-expanded="false">{!! Lang::get('lang.my_profile') !!}
+                                        aria-haspopup="true" aria-expanded="false">{{ trans('lang.my_profile') }}
                                     </a>
                                     <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu">
                                         <li>
@@ -201,16 +201,16 @@
 
                                                 <div class="banner-content" id="dropdown_content">
 
-                                                    <a href="{{url('auth/logout')}}" class="btn btn-custom btn-sm text-white profile_btn" style="background-color: #009aba; hov: #00c0ef; color: #fff "">{!! Lang::get('lang.log_out') !!}</a>
+                                                    <a href="{{url('auth/logout')}}" class="btn btn-custom btn-sm text-white profile_btn" style="background-color: #009aba; hov: #00c0ef; color: #fff "">{{ trans('lang.log_out') }}</a>
 
                                                     @if(Auth::user())
                                                     @if(Auth::user()->role != 'user')
-                                                        <a href="{{url('dashboard')}}" class="btn btn-custom btn-sm text-white profile_btn" style="background-color: #009aba; hov: #00c0ef; color: #fff ">{!! Lang::get('lang.dashboard') !!}</a>
+                                                        <a href="{{url('dashboard')}}" class="btn btn-custom btn-sm text-white profile_btn" style="background-color: #009aba; hov: #00c0ef; color: #fff ">{{ trans('lang.dashboard') }}</a>
                                                     @endif
                                                     @endif
                                                     @if(Auth::user())
                                                     @if(Auth::user()->role == 'user')
-                                                    <a href="{{url('client-profile')}}" class="btn btn-custom btn-sm text-white profile_btn" style="background-color: #009aba; hov: #00c0ef; color: #fff ">{!! Lang::get('lang.profile') !!}</a>
+                                                    <a href="{{url('client-profile')}}" class="btn btn-custom btn-sm text-white profile_btn" style="background-color: #009aba; hov: #00c0ef; color: #fff ">{{ trans('lang.profile') }}</a>
                                                     @endif
                                                     @endif
                                                 </div>
@@ -223,12 +223,12 @@
                                         <li class="nav-item">
                                                 <?php if (is_object($errors) && ($errors->first('email') || $errors->first('password'))) : ?>
                                             <a href="#" class="nav-link sfHover" data-bs-toggle="collapse" data-bs-target="#login-form">
-                                                {!! Lang::get('lang.login') !!}
+                                                {{ trans('lang.login') }}
 {{--                                                <i class="sub-indicator fa fa-chevron-circle-down fa-fw text-muted"></i>--}}
                                             </a>
                                             <?php else : ?>
                                             <a href="#" class="nav-link collapsed" data-bs-toggle="collapse" data-bs-target="#login-form">
-                                                {!! Lang::get('lang.login') !!}
+                                                {{ trans('lang.login') }}
 {{--                                                <i class="sub-indicator fa fa-chevron-circle-down fa-fw text-muted"></i>--}}
                                             </a>
                                             <?php endif; ?>
@@ -269,41 +269,42 @@
                             <div id="login-form" class="{{$loginFormClass}}">
                                  <div class="row">
                                     <div class="col-md-12">
-                                        {!!  Form::open(['route' => 'post.login']) !!}
-                                        @if(Session::has('errors'))
-                                        @if(Session::has('check'))
+                                        <form method="POST" action="{{ route('post.login') }}">
+    @csrf
+                                        @if(session()->has('errors'))
+                                        @if(session()->has('check'))
                                         <?php goto b; ?>
                                         @endif
-                                        @if(Session::has('error'))
+                                        @if(session()->has('error'))
                                         <div class="alert alert-danger alert-dismissable">
 
-                                            {!! Session::get('error') !!}
+                                            {{ session('error') }}
 
                                         </div>
                                          @endif
                                         <?php b: ?>
                                         @endif
                                         <div class="form-group has-feedback @if(isset($errors)) {!! $errors->has('email') ? 'has-error' : '' !!} @endif">
-                                            {!! Form::text('email',null,['placeholder'=>Lang::get('lang.e-mail'),'class' => 'form-control']) !!}
+                                            <input type="text" name="email" id="email" value="{{ old('email') }}" class="form-control">
                                         </div>
                                         <div class="form-group has-feedback @if(isset($errors)) {!! $errors->has('password') ? 'has-error' : '' !!} @endif">
-                                            {!! Form::password('password',['placeholder'=>Lang::get('lang.password'),'class' => 'form-control']) !!}
+                                            <input type="password" name="password" id="password" class="form-control">
                                             <?php \Illuminate\Support\Facades\Event::dispatch('auth.login.form'); ?>
-                                            <a href="{{url('password/email')}}" style="font-size: .8em" class="pull-left">{!! Lang::get('lang.forgot_password') !!}</a>
+                                            <a href="{{url('password/email')}}" style="font-size: .8em" class="pull-left">{{ trans('lang.forgot_password') }}</a>
                                         </div>
                                         <div class="form-group pull-left">
-                                         <input type="checkbox" name="remember"> {!! Lang::get("lang.remember") !!}
+                                         <input type="checkbox" name="remember"> {{ trans("lang.remember") }}
                                         </div>
                                     </div>
                                     <div class="col-md-12 text-center">
-                                            <button type="submit" class="btn btn-custom" style="background-color: #009aba; hov: #00c0ef; color: #fff ">{!! Lang::get('lang.login') !!}</button>
-                                        {!! Form::close() !!}
+                                            <button type="submit" class="btn btn-custom" style="background-color: #009aba; hov: #00c0ef; color: #fff ">{{ trans('lang.login') }}</button>
+                                        </form>
                                     </div>
 
                                 <div class="col-md-12 text-center">
-                                     {{Lang::get('lang.or')}}
+                                     {{ trans('lang.or') }}
                                     <ul class="list-unstyled">
-                                        <a href="{{url('auth/register')}}" style="font-size: 1.2em">{!! Lang::get('lang.create_account') !!}</a>
+                                        <a href="{{url('auth/register')}}" style="font-size: 1.2em">{{ trans('lang.create_account') }}</a>
                                     </ul>
                                 </div>
                                 </div>
@@ -315,7 +316,8 @@
                     </nav>
 
                     <div id="header-search" class="site-search clearfix" style="margin-right: 90%; width: 100%"><!-- #header-search -->
-                        {!!Form::open(['route' => 'client.search','class'=>'search-form clearfix'])!!}
+                        <form method="POST" action="{{ route('client.search') }}">
+    @csrf
                         <div class="form-border" style="z-index: 0;width: 85%;">
                             <div class="form-inline ">
                                 <div class="form-group input-group " style="width: 98% ">
@@ -332,7 +334,7 @@
                                 </style>
                             </div>
                         </div>
-                        {!! Form::close() !!}
+                        </form>
                     </div>
                 </div>
             </header>
@@ -349,33 +351,33 @@
                     <div class="content-area">
                         <div>
                             <!-- Success message -->
-                            @if(Session::has('success'))
+                            @if(session()->has('success'))
                                 <div class="alert alert-success alert-dismissable" style="padding-right:20px">
                                     <i class="fa fa-check-circle"></i>
                                     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-                                    {{ Session::get('success') }}
+                                    {{ session('success') }}
                                 </div>
                             @endif
 
                             <!-- Warning message -->
-                            @if(Session::has('warning'))
+                            @if(session()->has('warning'))
                                 <div class="alert alert-warning alert-dismissable" style="padding-right:20px">
                                     <i class="fa fa-check-circle"></i>
                                     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-                                    {!! Session::get('warning') !!}
+                                    {{ session('warning') }}
                                 </div>
                             @endif
 
                             <!-- Failure message -->
-                            @if(Session::has('fails'))
-                                @if(Session::has('check'))
+                            @if(session()->has('fails'))
+                                @if(session()->has('check'))
                                         <?php goto a; ?>
                                 @endif
                                 <div class="alert alert-danger alert-dismissable" style="padding-right:20px">
                                     <i class="fa fa-ban"></i>
-                                    <b>{!! Lang::get('lang.alert') !!} !</b>
+                                    <b>{{ trans('lang.alert') }} !</b>
                                     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-                                    {{ Session::get('fails') }}
+                                    {{ session('fails') }}
                                 </div>
                                     <?php a: ?>
                             @endif
@@ -458,7 +460,7 @@
                     <hr style="color:#E5E5E5"/>
                     <div class="row">
                         <div class="site-info col-md-6">
-                            <p class="text-muted">{!! Lang::get('lang.copyright') !!} &copy; {!! date('Y') !!}  <a href="{!! $company->website !!}" target="_blank">{!! $company->company_name !!}</a>. {!! Lang::get('lang.all_rights_reserved') !!}. {!! Lang::get('lang.powered_by') !!} <a href="https://www.faveohelpdesk.com/"  target="_blank">Faveo</a></p>
+                            <p class="text-muted">{{ trans('lang.copyright') }} &copy; {!! date('Y') !!}  <a href="{!! $company->website !!}" target="_blank">{!! $company->company_name !!}</a>. {{ trans('lang.all_rights_reserved') }}. {{ trans('lang.powered_by') }} <a href="https://www.faveohelpdesk.com/"  target="_blank">Faveo</a></p>
                         </div>
                         <div class="site-social text-right col-md-6">
                             <?php $socials = App\Model\helpdesk\Theme\Widgets::all(); ?>

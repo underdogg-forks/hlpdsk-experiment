@@ -86,7 +86,7 @@ class CannedController extends Controller
             // saving inputs
             $canned->save();
 
-            return redirect()->route('canned.list')->with('success', Lang::get('lang.added_successfully'));
+            return redirect()->route('canned.list')->with('success', trans('lang.added_successfully'));
         } catch (Exception $e) {
             return redirect()->route('canned.list')->with('fails', $e->getMessage());
         }
@@ -133,7 +133,7 @@ class CannedController extends Controller
             // saving inputs
             $canned->save();
 
-            return redirect()->route('canned.list')->with('success', Lang::get('lang.updated_successfully'));
+            return redirect()->route('canned.list')->with('success', trans('lang.updated_successfully'));
         } catch (Exception $e) {
             return redirect()->route('canned.list')->with('fails', $e->getMessage());
         }
@@ -157,7 +157,7 @@ class CannedController extends Controller
             $canned->delete();
 
             /* redirect to Index page with Success Message */
-            return redirect()->route('canned.list')->with('success', Lang::get('lang.canned_response_deleted'));
+            return redirect()->route('canned.list')->with('success', trans('lang.canned_response_deleted'));
         } catch (Exception $e) {
             /* redirect to Index page with Fails Message */
             return redirect()->route('canned.list')->with('fails', $e->getMessage());

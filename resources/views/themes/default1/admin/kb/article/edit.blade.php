@@ -19,23 +19,25 @@
 </script>
 
 @section('content')
-{!! Form::model($article,['url' => 'article/'.$article->slug , 'method' => 'PATCH'] )!!}
+<form method="POST">
+    @csrf
+    @method('PATCH')
 
 <div class="row">
 		<div class="box-body" >
-		@if(Session::has('success'))
+		@if(session()->has('success'))
     <div class="alert alert-success alert-dismissable">
         <i class="fa  fa-check-circle"></i>
         <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-        {{Session::get('success')}}
+        {{ session('success') }}
     </div>
     @endif
     <!-- failure message -->
-    @if(Session::has('fails'))
+    @if(session()->has('fails'))
     <div class="alert alert-danger alert-dismissable">
         <i class="fa fa-ban"></i>
         <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-        {{Session::get('fails')}}
+        {{ session('fails') }}
     </div>
     @endif
 			<div class="col-md-9">
@@ -44,24 +46,24 @@
 
 				<div class="col-md-6 form-group {{ $errors->has('name') ? 'has-error' : '' }}" >
 
-					{!! Form::label('name',Lang::get('lang.name')) !!}
+					<label for="name">{{ trans('lang.name') }}</label>
 					{!! $errors->first('name', '<spam class="help-block">:message</spam>') !!}
-					{!! Form::text('name',null,['class' => 'form-control']) !!}
+					<input type="text" name="name" id="name" value="{{ old('name') }}" class="form-control">
 				</div>
 
 				<div class="col-md-6 form-group {{ $errors->has('slug') ? 'has-error' : '' }}" >
 
-					{!! Form::label('slug',Lang::get('lang.slug')) !!}
+					<label for="slug">{{ trans('lang.slug') }}</label>
 					{!! $errors->first('slug', '<spam class="help-block">:message</spam>') !!}
-					{!! Form::text('slug',null,['class' => 'form-control']) !!}
+					<input type="text" name="slug" id="slug" value="{{ old('slug') }}" class="form-control">
 				</div>
 			</div>
 
 				<div class="form-group {{ $errors->has('description') ? 'has-error' : '' }}">
-				{!! Form::label('description',Lang::get('lang.description')) !!}
+				<label for="description">{{ trans('lang.description') }}</label>
 				{!! $errors->first('description', '<spam class="help-block">:message</spam>') !!}
 				<div class="form-group" style="background-color:white">
-					{!! Form::textarea('description',null,['class' => 'form-control','size' => '128x20','id'=>'myNicEditor','placeholder'=>'Enter the description']) !!}
+					<textarea name="description" id="myNicEditor" class="form-control" rows="20">{{ old('description') }}</textarea>
 				</div>
 				</div>
 			</div>
@@ -73,19 +75,19 @@
 	<div class="col-md-3">
 	<div class="box box-default">
 	<div class="box-header with-border">
-              <h3 class="box-title">{{Lang::get('lang.publish')}}</h3>
+              <h3 class="box-title">{{ trans('lang.publish') }}</h3>
 	</div>
 				<div class="box-body">
 					<div class="form-group {{ $errors->has('type') ? 'has-error' : '' }}">
 
-						{!! Form::label('type',Lang::get('lang.status')) !!}
+						<label for="type">{{ trans('lang.status') }}</label>
 						{!! $errors->first('type', '<spam class="help-block">:message</spam>') !!}
 						<div class="row">
 							<div class="col-xs-4">
-								{!! Form::radio('type','1',true) !!}{{Lang::get('lang.published')}}
+								<input type="radio" name="type" value="'1'">{{ trans('lang.published') }}
 							</div>
 							<div class="col-xs-3">
-								{!! Form::radio('type','0',null) !!}{{Lang::get('lang.draft')}}
+								<input type="radio" name="type" value="'0'">{{ trans('lang.draft') }}
 							</div>
 						</div>
 					</div>
@@ -93,15 +95,15 @@
 
 					<div class="form-group {{ $errors->has('status') ? 'has-error' : '' }}">
 
-						{!! Form::label('status',Lang::get('lang.visibility')) !!}
+						<label for="status">{{ trans('lang.visibility') }}</label>
 						{!! $errors->first('status', '<spam class="help-block">:message</spam>') !!}
 						<div class="row">
 							<div class="col-xs-3">
-								{!! Form::radio('status','1',true) !!}{{Lang::get('lang.public')}}
+								<input type="radio" name="status" value="'1'">{{ trans('lang.public') }}
 								</div>
 								<div class="row">
 							<div class="col-xs-3">
-								{!! Form::radio('status','0',null) !!}{{Lang::get('lang.private')}}
+								<input type="radio" name="status" value="'0'">{{ trans('lang.private') }}
 								</div>
 					</div>
 
@@ -109,11 +111,11 @@
 
 			</div>
 		</div>
-		{!! Form::close() !!}
+		</form>
 		<div class="box-footer" style="background-color:#f5f5f5;">
 		<div style="margin-left:140px;">
 
-				{!! Form::submit(Lang::get('lang.publish'),['class'=>'btn btn-block btn-primary btn-sm'])!!}
+				<button type="submit" class="btn btn-block btn-primary btn-sm">{{ trans('lang.publish') }}</button>
 		</div>
 
 		</div>
@@ -123,12 +125,12 @@
 <div class="col-md-3">
 	<div class="box box-default">
 				<div class="box-header with-border">
-                  <h3 class="box-title">{{Lang::get('lang.category')}}</h3>
+                  <h3 class="box-title">{{ trans('lang.category') }}</h3>
                 </div>
 			<div class="box-body" style="height:190px; overflow-y:auto;">
 
 				<div class="form-group {{ $errors->has('category_id') ? 'has-error' : '' }}">
-		{{-- {!! Form::label('category_id','Category') !!} --}}
+		{{-- <label for="category_id">'Category'</label> --}}
 				{!! $errors->first('category_id', '<spam class="help-block">:message</spam>') !!}
 			@while (list($key, $val) = each($category))
 			<div class="row">
@@ -154,21 +156,22 @@
 				<div class="modal" id="j">
                     <div class="modal-dialog">
                         <div class="modal-content">
-                        {!! Form::open(['method'=>'post','action'=>'Admin\kb\CategoryController@store']) !!}
+                        <form method="POST">
+    @csrf
                             <div class="modal-header">
                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                <h4 class="modal-title">{{Lang::get('lang.addcategory')}}</h4>
+                                <h4 class="modal-title">{{ trans('lang.addcategory') }}</h4>
                             </div>
                             <div class="modal-body">
                                	@include('themes.default1.admin.category.form')
                             </div>
                             <div class="modal-footer">
                               	<div class="form-group">
-                                    {!! Form::submit('Add')!!}
+                                    <button type="submit">'Add'</button>
                                 </div>
                             	<button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
                             </div>
-                        {!! Form::close() !!}
+                        </form>
                       	</div>
                      </div>
                     </div>
@@ -183,5 +186,5 @@
 
 
 
-{{-- {!! Form::close() !!} --}}
+{{-- </form> --}}
 @stop

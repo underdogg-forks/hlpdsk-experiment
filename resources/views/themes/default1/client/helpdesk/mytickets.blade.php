@@ -10,8 +10,8 @@ class="nav-item active"
 @section('breadcrumb')
     {{--<div class="site-hero clearfix">--}}
     <ol class="breadcrumb float-sm-right ">
-        <li class="breadcrumb-item"> <i class="fas fa-home"> </i> {!! Lang::get('lang.you_are_here') !!} : &nbsp;</li>
-        <li><a href="{!! URL::route('ticket') !!}">{!! Lang::get('lang.my_tickets') !!}</a></li>
+        <li class="breadcrumb-item"> <i class="fas fa-home"> </i> {{ trans('lang.you_are_here') }} : &nbsp;</li>
+        <li><a href="{!! URL::route('ticket') !!}">{{ trans('lang.my_tickets') }}</a></li>
     </ol>
 
 @stop
@@ -43,7 +43,7 @@ class="nav-item active"
 
                 <a style="cursor: pointer;" class="nav-link text-dark active" id="tab_1-tab" data-bs-toggle="pill" href="#tab_1">
                 
-                    <b>{!! Lang::get('lang.opened') !!}</b>
+                    <b>{{ trans('lang.opened') }}</b>
                 
                     <span class="badge badge-pill" style="background: #337ab7; color: white;">{!! $open->total() !!}</span>
                 
@@ -54,7 +54,7 @@ class="nav-item active"
 
                 <a class="nav-link" id="tab_2-tab" data-bs-toggle="pill" href="#tab_2" style="color: #343a40!important">
                 
-                    <b>{!! Lang::get('lang.closed') !!}</b>
+                    <b>{{ trans('lang.closed') }}</b>
                 
                     <span class="badge badge-pill" style="background: #337ab7; color: white;">{!! $close->total() !!}</span>
                 
@@ -64,12 +64,13 @@ class="nav-item active"
 
         <div class="tab-content">
             <div class="tab-pane active" id="tab_1">
-                {!! Form::open(['route'=>'select_all','method'=>'post']) !!}
+                <form method="POST" action="{{ route('select_all') }}">
+    @csrf
                 <div class="mailbox-controls mt-3">
                     <!-- Check all button -->
                     <a class="btn btn-light btn-sm checkbox-toggle" style="background-color: whitesmoke"><i class="far fa-square"></i></a>
                     <a class="btn btn-light btn-sm" id="click1" style="background-color: whitesmoke"><i class="fas fa-sync"></i></a>
-                    <input type="submit" class="btn btn-light text-warning btn-sm" name="submit" value="{!! Lang::get('lang.close') !!}"style="color: #F39C12;background-color: whitesmoke">
+                    <input type="submit" class="btn btn-light text-warning btn-sm" name="submit" value="{{ trans('lang.close') }}"style="color: #F39C12;background-color: whitesmoke">
                     <div class="float-right" id="refresh21">
                         {!! $open->count().'-'.$open->total(); !!}
                     </div>
@@ -81,22 +82,22 @@ class="nav-item active"
                         <thead>
                         <th></th>
                         <th>
-                            {!! Lang::get('lang.subject') !!}
+                            {{ trans('lang.subject') }}
                         </th>
                         <th>
-                            {!! Lang::get('lang.ticket_id') !!}
+                            {{ trans('lang.ticket_id') }}
                         </th>
                         <th>
-                            {!! Lang::get('lang.priority') !!}
+                            {{ trans('lang.priority') }}
                         </th>
                         <th>
-                            {!! Lang::get('lang.last_replier') !!}
+                            {{ trans('lang.last_replier') }}
                         </th>
                         <th>
-                            {!! Lang::get('lang.last_activity') !!}
+                            {{ trans('lang.last_activity') }}
                         </th>
                         <th>
-                            {!! Lang::get('lang.status') !!}
+                            {{ trans('lang.status') }}
                         </th>
                         </thead>
                         <tbody id="hello">
@@ -150,16 +151,17 @@ class="nav-item active"
                         <?php echo $open->setPath(url('mytickets'))->render(); ?>&nbsp;
                     </div>
                 </div><!-- /.mail-box-messages -->
-                {!! Form::close() !!}
+                </form>
             </div><!-- /.box-body -->
             {{-- /.tab_1 --}}
             <div class="tab-pane" id="tab_2">
-                {!! Form::open(['route'=>'select_all','method'=>'post']) !!}
+                <form method="POST" action="{{ route('select_all') }}">
+    @csrf
                 <div class="mailbox-controls mt-3">
                     <!-- Check all button -->
                     <a class="btn btn-light btn-sm checkbox-toggle" style="background-color: whitesmoke"><i class="far fa-square" ></i></a>
                     <a class="btn btn-light btn-sm" id="click2" style="background-color: whitesmoke"><i class="fas fa-sync"></i></a>
-                    <input type="submit" class="btn btn-light text-primary btn-sm" name="submit" value="{!! Lang::get('lang.open') !!}" style="background-color: whitesmoke">
+                    <input type="submit" class="btn btn-light text-primary btn-sm" name="submit" value="{{ trans('lang.open') }}" style="background-color: whitesmoke">
                     <div class="float-right" id="refresh22">
                         {!! $close->count().'-'.$close->total(); !!}
                     </div>
@@ -171,22 +173,22 @@ class="nav-item active"
                         <thead>
                         <th></th>
                         <th>
-                            {!! Lang::get('lang.subject') !!}
+                            {{ trans('lang.subject') }}
                         </th>
                         <th>
-                            {!! Lang::get('lang.ticket_id') !!}
+                            {{ trans('lang.ticket_id') }}
                         </th>
                         <th>
-                            {!! Lang::get('lang.priority') !!}
+                            {{ trans('lang.priority') }}
                         </th>
                         <th>
-                            {!! Lang::get('lang.last_replier') !!}
+                            {{ trans('lang.last_replier') }}
                         </th>
                         <th>
-                            {!! Lang::get('lang.last_activity') !!}
+                            {{ trans('lang.last_activity') }}
                         </th>
                         <th>
-                            {!! Lang::get('lang.status') !!}
+                            {{ trans('lang.status') }}
                         </th>
                         </thead>
                         <tbody id="hello">
@@ -236,7 +238,7 @@ class="nav-item active"
                         <?php echo $close->setPath(url('mytickets'))->render(); ?>&nbsp;
                     </div>
                 </div><!-- /.mail-box-messages -->
-                {!! Form::close() !!}
+                </form>
             </div>
         </div><!-- /. box -->
     </div>

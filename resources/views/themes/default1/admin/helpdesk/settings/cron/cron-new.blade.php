@@ -1,7 +1,9 @@
-{!! Form::model($emails,['url' => 'post-scheduler', 'method' => 'PATCH']) !!}
+<form method="POST">
+    @csrf
+    @method('PATCH')
 @if (count($errors) > 0)
 <div class="alert alert-danger">
-    <strong>{{Lang::get('lang.woops')}}</strong> {{Lang::get('lang.theirisproblem')}}<br><br>
+    <strong>{{ trans('lang.woops') }}</strong> {{ trans('lang.theirisproblem') }}<br><br>
     <ul>
         @foreach ($errors->all() as $error)
         <li>{{ $error }}</li>
@@ -16,20 +18,20 @@
 </div>
 @endif
 <!-- check whether success or not -->
-@if(Session::has('success'))
+@if(session()->has('success'))
 <div class="alert alert-success alert-dismissable">
     <i class="fas  fa-check-circle"></i>
     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-    {!!Session::get('success')!!}
+    {{ session('success') }}
 </div>
 @endif
 <!-- failure message -->
-@if(Session::has('fails'))
+@if(session()->has('fails'))
 <div class="alert alert-danger alert-dismissable">
     <i class="fas fa-ban"></i>
-    <b>{!! Lang::get('lang.alert') !!}!</b>
+    <b>{{ trans('lang.alert') }}!</b>
     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-    {!!Session::get('fails')!!}
+    {{ session('fails') }}
 </div>
 @endif
 <!--        <div class="alert  alert-dismissable" style="background: #F3F3F3">
@@ -39,7 +41,7 @@
 
 <div class="card card-light">
     <div class="card-header">
-        <h3 class="card-title">{{Lang::get('lang.cron_settings')}}</h3>
+        <h3 class="card-title">{{ trans('lang.cron_settings') }}</h3>
     </div>
 
     <div class="card-body">
@@ -50,8 +52,8 @@
         </div>
 
         <div class="alert  alert-dismissable" style="background: #F3F3F3">
-            <i class="fas fa-info-circle"></i>&nbsp;{!!Lang::get('lang.crone-url-message')!!}
-            <a href="https://support.faveohelpdesk.com/show/how-to-configure-cron-jobs-in-faveo" style="color:black" target="blank">{!!Lang::get('lang.click')!!}</a> {!!Lang::get('lang.check-cron-set')!!}
+            <i class="fas fa-info-circle"></i>&nbsp;{{ trans('lang.crone-url-message') }}
+            <a href="https://support.faveohelpdesk.com/show/how-to-configure-cron-jobs-in-faveo" style="color:black" target="blank">{{ trans('lang.click') }}</a> {{ trans('lang.check-cron-set') }}
         </div>
         
         <div class="row">
@@ -68,15 +70,15 @@
                             
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    {!! Form::label('email_fetching',Lang::get('lang.email_fetch')) !!}<br>
-                                    {!! Form::checkbox('email_fetching',1,$condition->checkActiveJob()['fetching'],['id'=>'email_fetching']) !!}&nbsp;{{Lang::get('lang.fetch_auto-corn')}}
+                                    <label for="email_fetching">{{ trans('lang.email_fetch') }}</label><br>
+                                    {!! Form::checkbox('email_fetching',1,$condition->checkActiveJob()['fetching'],['id'=>'email_fetching']) !!}&nbsp;{{ trans('lang.fetch_auto-corn') }}
                                 </div>
 
                             </div>
                             <div class="col-md-6" id="fetching">
                                 {!! Form::select('fetching-commands',$commands,$condition->getConditionValue('fetching')['condition'],['class'=>'form-control','id'=>'fetching-command']) !!}
                                 <div id='fetching-daily-at'>
-                                    {!! Form::text('fetching-dailyAt',$condition->getConditionValue('fetching')['at'],['class'=>'form-control']) !!}
+                                    <input type="text" name="fetching-dailyAt" id="fetching-dailyAt" value="$condition->getConditionValue('fetching')['at']" class="form-control">
 
                                 </div>
                             </div>
@@ -94,14 +96,14 @@
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
-                                {!! Form::label('notification_cron',Lang::get('lang.notification-email')) !!}<br>
-                                {!! Form::checkbox('notification_cron',1,$condition->checkActiveJob()['notification'],['id'=>'notification_cron']) !!}&nbsp;{{Lang::get('lang.cron_notification')}}
+                                <label for="notification_cron">{{ trans('lang.notification-email') }}</label><br>
+                                {!! Form::checkbox('notification_cron',1,$condition->checkActiveJob()['notification'],['id'=>'notification_cron']) !!}&nbsp;{{ trans('lang.cron_notification') }}
                             </div>
                         </div>
                         <div class="col-md-6" id="notification">
                             {!! Form::select('notification-commands',$commands,$condition->getConditionValue('notification')['condition'],['class'=>'form-control','id'=>'notification-command']) !!}
                             <div id='notification-daily-at'>
-                                {!! Form::text('notification-dailyAt',$condition->getConditionValue('notification')['at'],['class'=>'form-control']) !!}
+                                <input type="text" name="notification-dailyAt" id="notification-dailyAt" value="$condition->getConditionValue('notification')['at']" class="form-control">
                             </div>
                         </div>
                     </div>
@@ -119,15 +121,15 @@
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
-                                {!! Form::label('condition',Lang::get('lang.auto_close_workflow')) !!}<br>
+                                <label for="condition">{{ trans('lang.auto_close_workflow') }}</label><br>
                                 {!! Form::checkbox('condition',1,$condition->checkActiveJob()['work'],['id'=>'auto_close']) !!}
-                                       {{Lang::get('lang.enable_workflow')}}
+                                       {{ trans('lang.enable_workflow') }}
                             </div>
                         </div>
                         <div class="col-md-6" id="workflow">
                             {!! Form::select('work-commands',$commands,$condition->getConditionValue('work')['condition'],['class'=>'form-control','id'=>'workflow-command']) !!}
                             <div id='workflow-daily-at'>
-                                {!! Form::text('workflow-dailyAt',$condition->getConditionValue('work')['at'],['class'=>'form-control']) !!}
+                                <input type="text" name="workflow-dailyAt" id="workflow-dailyAt" value="$condition->getConditionValue('work')['at']" class="form-control">
                             </div>
                         </div>
                     </div>
@@ -138,7 +140,7 @@
 
     </div>
     <div class="card-footer">
-        {!! Form::submit(Lang::get('lang.submit'),['class'=>'btn btn-primary'])!!}
+        <button type="submit" class="btn btn-primary">{{ trans('lang.submit') }}</button>
     </div>
 </div>
 <script>

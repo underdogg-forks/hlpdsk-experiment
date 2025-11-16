@@ -6,35 +6,35 @@
 
 @section('breadcrumb')
     <ol class="breadcrumb float-sm-right ">
-        <li class="breadcrumb-item"> <i class="fas fa-home"> </i> {!! Lang::get('lang.you_are_here') !!} : &nbsp;</li>
-            <li><a href="{!! URL::route('post.login') !!}">{!! Lang::get('lang.login') !!}</a></li>
+        <li class="breadcrumb-item"> <i class="fas fa-home"> </i> {{ trans('lang.you_are_here') }} : &nbsp;</li>
+            <li><a href="{!! URL::route('post.login') !!}">{{ trans('lang.login') }}</a></li>
         </ol>
     </div>
 @stop
 
 @section('content')
 
-    @if(Session::has('status'))
+    @if(session()->has('status'))
     <div class="alert alert-success alert-dismissable">
-        <i class="fa  fa-check-circle"> </i> <b> {!! Lang::get('lang.success') !!} </b>
+        <i class="fa  fa-check-circle"> </i> <b> {{ trans('lang.success') }} </b>
         <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-        {{Session::get('status')}}
+        {{ session('status') }}
     </div>
 
     @endif
 
-    @if(Session::has('error'))
+    @if(session()->has('error'))
     <div class="alert alert-danger alert-dismissable">
-        <i class="fa  fa-check-circle"> </i> <b> {!! Lang::get('lang.alert') !!} </b>
+        <i class="fa  fa-check-circle"> </i> <b> {{ trans('lang.alert') }} </b>
         <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-        {{Session::get('error')}}
+        {{ session('error') }}
     </div>
     @else
 
     @if (count($errors) > 0)
     <div class="alert alert-danger alert-dismissable">
         <i class="fa fa-ban"></i>
-        <b>{!! Lang::get('lang.alert') !!} !</b>
+        <b>{{ trans('lang.alert') }} !</b>
         <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
         @foreach ($errors->all() as $error)
         <li>{{ $error }}</li>
@@ -53,7 +53,7 @@
                 @else
                 <span onclick="javascript: window.location.href='{{url('auth/register')}}';">
                     <a href="{{url('auth/register')}}"  class="widgetrowitem defaultwidget"  style="background-image:url({{ URL::asset('lb-faveo/media/images/register.png') }})"  >
-                        <span class="widgetitemtitle"  style="color: rgb(0, 154, 186)">{!! Lang::get('lang.register') !!}</span>
+                        <span class="widgetitemtitle"  style="color: rgb(0, 154, 186)">{{ trans('lang.register') }}</span>
                     </a>
                 </span>
                 @endif
@@ -64,7 +64,7 @@
                         @if($system->status == 1)
                             <span onclick="javascript: window.location.href='{!! URL::route('form') !!}';">
                                 <a href="{!! URL::route('form') !!}" class="widgetrowitem defaultwidget" style="background-image:url({{ URL::asset('lb-faveo/media/images/submitticket.png') }})">
-                                    <div style="font-size: 13px ; color: rgb(0, 154, 186)"" class="widgetitemtitle">{!! Lang::get('lang.submit_a_ticket') !!}</div>
+                                    <div style="font-size: 13px ; color: rgb(0, 154, 186)"" class="widgetitemtitle">{{ trans('lang.submit_a_ticket') }}</div>
                                 </a>
                             </span>
                         @endif
@@ -72,12 +72,12 @@
                 @endif
                 <span onclick="javascript: window.location.href='{{url('mytickets')}}';">
                     <a href="{{url('mytickets')}}" class="widgetrowitem defaultwidget" style="background-image:url({{ URL::asset('lb-faveo/media/images/news.png') }})">
-                        <span class="widgetitemtitle"  style="color: rgb(0, 154, 186)">{!! Lang::get('lang.my_tickets') !!}</span>
+                        <span class="widgetitemtitle"  style="color: rgb(0, 154, 186)">{{ trans('lang.my_tickets') }}</span>
                     </a>
                 </span>
                 <span onclick="javascript: window.location.href='{{url('/knowledgebase')}}';">
                     <a href="{{url('/knowledgebase')}}" class="widgetrowitem defaultwidget" style="background-image:url({{ URL::asset('lb-faveo/media/images/knowledgebase.png') }})">
-                        <span class="widgetitemtitle"  style="color: rgb(0, 154, 186)">{!! Lang::get('lang.knowledge_base') !!}</span>
+                        <span class="widgetitemtitle"  style="color: rgb(0, 154, 186)">{{ trans('lang.knowledge_base') }}</span>
                     </a>
                 </span>
             </div>
@@ -101,25 +101,26 @@
 
                     <div>
 
-                        <h4 class="box-title" align="center">{{Lang::get('lang.login_to_start_your_session')}}</h4>
+                        <h4 class="box-title" align="center">{{ trans('lang.login_to_start_your_session') }}</h4>
                     </div>
 
                     <!-- form open -->
-                    {!!  Form::open(['route' => 'auth.post.login']) !!}
+                    <form method="POST" action="{{ route('auth.post.login') }}">
+    @csrf
 
                         <div class="form-group has-feedback {{ $errors->has('email') ? 'has-error' : '' }}" style="display: -webkit-box;">
-                            {!! Form::text('email',null,['placeholder'=> Lang::get("lang.email") ,'class' => 'form-control']) !!}
+                            <input type="text" name="email" id="email" value="{{ old('email') }}" class="form-control">
                             <span class="far fa-envelope form-control-feedback" style="top: 9px;left: -25px;color: #6c757d;"></span>
                         </div>
 
                         <div class="form-group has-feedback {{ $errors->has('password') ? 'has-error' : '' }}" style="display: -webkit-box;">
 
-                            {!! Form::password('password',['placeholder'=>Lang::get("lang.password"),'class' => 'form-control']) !!}
+                            <input type="password" name="password" id="password" class="form-control">
                             <span class="  fa fa-lock form-control-feedback" style="top: 9px;left: -25px;color: #6c757d;"></span>
                         </div>
 
                         <div>
-                            <button type="submit" class="btn btn-primary btn-block btn-flat" STYLE="width: 100%; color: white">{!! Lang::get("lang.login") !!}</button>                        </div>
+                            <button type="submit" class="btn btn-primary btn-block btn-flat" STYLE="width: 100%; color: white">{{ trans("lang.login") }}</button>                        </div>
 
                         <div class="row mt-2">
 
@@ -129,19 +130,19 @@
 
                                     <label>
 
-                                        <input type="checkbox" name="remember"> {!! Lang::get("lang.remember") !!}
+                                        <input type="checkbox" name="remember"> {{ trans("lang.remember") }}
                                     </label>
                                 </div>
                             </div>
 
                             <div class="col-sm-5">
 
-                                <a href="{{url('password/email')}}">{!! Lang::get("lang.iforgot") !!}</a><br>
+                                <a href="{{url('password/email')}}">{{ trans("lang.iforgot") }}</a><br>
                             </div>
 
                             <div class="col-sm-2">
 
-                                <a href="{{url('auth/register')}}" class="text-center">{!! Lang::get("lang.register") !!}</a>
+                                <a href="{{url('auth/register')}}" class="text-center">{{ trans("lang.register") }}</a>
                             </div>
                         </div>
 
@@ -149,7 +150,7 @@
                             @include('themes.default1.client.layout.social-login')
                         </div>
 
-                    {!! Form::close()!!}
+                    </form>
                 </div>
             </div>
         </div>

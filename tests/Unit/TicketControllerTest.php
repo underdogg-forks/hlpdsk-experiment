@@ -134,7 +134,7 @@ class TicketControllerTest extends TestCase
         // Make a POST request to the route with the reply data
         $response3 = $this->post(route('ticket.reply', ['id' => $tickets->id]), $replyData);
         $response3->assertStatus(200);
-        $response3->assertSee(Lang::get('lang.you_have_successfully_replied_to_your_ticket'));
+        $response3->assertSee(trans('lang.you_have_successfully_replied_to_your_ticket'));
     }
 
     public function it_changes_ticket_status_when_user_submits_action()
@@ -202,13 +202,13 @@ class TicketControllerTest extends TestCase
 
         // Assert that the ticket's status has been updated to open
 
-        $response->assertSessionHas('success', Lang::get('lang.tickets_have_been_opened'));
+        $response->assertSessionHas('success', trans('lang.tickets_have_been_opened'));
         $response = $this->post(route('select_all'), [
             'select_all' => [$ticket->id],
             'submit'     => 'Close',
         ]);
         $response->assertStatus(302); // Adjust this as needed
         $this->assertEquals(3, $ticket->fresh()->status); // Adjust this as needed
-        $response->assertSessionHas('success', Lang::get('lang.tickets_have_been_closed'));
+        $response->assertSessionHas('success', trans('lang.tickets_have_been_closed'));
     }
 }

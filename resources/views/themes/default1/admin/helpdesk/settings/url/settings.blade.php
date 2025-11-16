@@ -20,7 +20,7 @@ class="nav-link active"
 @stop
 <!-- header -->
 @section('PageHeader')
-<h1>{!! Lang::get('lang.url') !!}</h1>
+<h1>{{ trans('lang.url') }}</h1>
 @stop
 <!-- /header -->
 <!-- breadcrumbs -->
@@ -30,11 +30,13 @@ class="nav-link active"
 @stop
 
 @section('content')
-{!! Form::open(['url' => 'url/settings', 'method' => 'PATCH']) !!}
+<form method="POST" action="url/settings">
+    @csrf
+    @method('PATCH')
 
 @if (count($errors) > 0)
 <div class="alert alert-danger">
-    <strong>{{Lang::get('lang.woops')}}</strong> {{Lang::get('lang.theirisproblem')}} <br><br>
+    <strong>{{ trans('lang.woops') }}</strong> {{ trans('lang.theirisproblem') }} <br><br>
     <ul>
         @foreach ($errors->all() as $error)
         <li>{{ $error }}</li>
@@ -43,20 +45,20 @@ class="nav-link active"
 </div>
 @endif
 <!-- check whether success or not -->
-@if(Session::has('success'))
+@if(session()->has('success'))
 <div class="alert alert-success alert-dismissable">
     <i class="fa  fa-check-circle"></i>
     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-    {!!Session::get('success')!!}
+    {{ session('success') }}
 </div>
 @endif
 <!-- failure message -->
-@if(Session::has('fails'))
+@if(session()->has('fails'))
 <div class="alert alert-danger alert-dismissable">
     <i class="fa fa-ban"></i>
-    <b>{!! Lang::get('lang.alert') !!}!</b>
+    <b>{{ trans('lang.alert') }}!</b>
     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-    {!!Session::get('fails')!!}
+    {{ session('fails') }}
 </div>
 @endif
 <div class="card card-light">
@@ -70,23 +72,23 @@ class="nav-link active"
         <div class="row">
 
             <div class="col-md-3">
-                {!! Form::label('www','WWW/non-WWW') !!}<br/>
-                {!! Form::radio('www','yes',$www['www'],['class'=>'option']) !!} WWW&nbsp;&nbsp;
-                {!! Form::radio('www','no',$www['nonwww'],['class'=>'option']) !!} Non WWW
+                <label for="www">'WWW/non-WWW'</label><br/>
+                <input type="radio" name="www" value="'yes'" class="option"> WWW&nbsp;&nbsp;
+                <input type="radio" name="www" value="'no'" class="option"> Non WWW
             </div>
  
             <div class="col-md-3">
                 
-                {!! Form::label('option','SSl') !!}<br/>
-                {!! Form::radio('ssl','yes',$https['https'],['class'=>'option']) !!} HTTPS&nbsp;&nbsp;
-                {!! Form::radio('ssl','no',$https['http'],['class'=>'option']) !!} HTTP
+                <label for="option">'SSl'</label><br/>
+                <input type="radio" name="ssl" value="'yes'" class="option"> HTTPS&nbsp;&nbsp;
+                <input type="radio" name="ssl" value="'no'" class="option"> HTTP
             </div>
         </div>
     </div>
     
     <div class="card-footer">
-        {!! Form::submit(Lang::get('lang.submit'),['class'=>'btn btn-primary'])!!}
+        <button type="submit" class="btn btn-primary">{{ trans('lang.submit') }}</button>
     </div>
 </div>
-{!! Form::close() !!}
+</form>
 @stop

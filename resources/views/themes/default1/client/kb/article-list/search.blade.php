@@ -7,14 +7,14 @@
             }
         </style>
         <li class="breadcrumb-item">
-            <i class="fas fa-home"></i> {!! Lang::get('lang.you_are_here') !!} : &nbsp;
+            <i class="fas fa-home"></i> {{ trans('lang.you_are_here') }} : &nbsp;
         </li>
         <li>
-            <a class="words" href="{!! URL::route('/') !!}">{!! Lang::get('lang.home') !!}</a>
+            <a class="words" href="{!! URL::route('/') !!}">{{ trans('lang.home') }}</a>
         </li>
         <li class="words">></li>
         <li>
-            <a href="{!! URL::route('client.search') !!}">{!! Lang::get('lang.search_result') !!}</a>
+            <a href="{!! URL::route('client.search') !!}">{{ trans('lang.search_result') }}</a>
         </li>
     </ol>
 @stop
@@ -57,7 +57,7 @@
     @stop
 </div>
     {{--@section('category')--}}
-    {{--<h2 class="section-title h4 clearfix">{!! Lang::get('lang.categories') !!}<small class="pull-right"><i class="fa fa-hdd-o fa-fw"></i></small></h2>--}}
+    {{--<h2 class="section-title h4 clearfix">{{ trans('lang.categories') }}<small class="pull-right"><i class="fa fa-hdd-o fa-fw"></i></small></h2>--}}
     {{--<ul class="nav nav-pills nav-stacked nav-categories">--}}
 
     {{--    @foreach($categorys as $category)--}}
@@ -74,7 +74,7 @@
 
 
 {{--@section('category')--}}
-{{--<h2 class="section-title h4 clearfix">{!! Lang::get('lang.categories') !!}<small class="pull-right"><i class="fa fa-hdd-o fa-fw"></i></small></h2>--}}
+{{--<h2 class="section-title h4 clearfix">{{ trans('lang.categories') }}<small class="pull-right"><i class="fa fa-hdd-o fa-fw"></i></small></h2>--}}
 {{--<ul class="nav nav-pills nav-stacked nav-categories">--}}
 
 {{--    @foreach($categorys as $category)--}}

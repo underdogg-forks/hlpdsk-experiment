@@ -9,18 +9,33 @@ This is a helpdesk/ticketing system built with Laravel. The application manages 
 ## Key Architectural Patterns
 
 ### MVC Architecture
-- **Models**: Located in `app/Model/` - handle data and business logic
+- **Models**: Located in `app/Models/` - handle data and business logic (PSR-4 standard)
 - **Views**: Located in `resources/views/` - Blade templates for UI
 - **Controllers**: Located in `app/Http/Controllers/` - handle HTTP requests and coordinate between models and views
 
-### Namespace Structure
-- `App\Http\Controllers\Admin` - Admin panel functionality
-- `App\Http\Controllers\Agent` - Agent/staff functionality
-- `App\Http\Controllers\Client` - Customer-facing functionality
+### Namespace Structure (PSR-4 Compliant)
+- `App\Http\Controllers\Admin\Helpdesk` - Admin panel functionality (PascalCase directories)
+- `App\Http\Controllers\Agent\Helpdesk` - Agent/staff functionality (PascalCase directories)
+- `App\Http\Controllers\Client\Helpdesk` - Customer-facing functionality (PascalCase directories)
 - `App\Http\Controllers\Auth` - Authentication and authorization
 - `App\Http\Controllers\Common` - Shared functionality
+- **IMPORTANT**: All directory names must be PascalCase, never lowercase
 
 ## Code Generation Guidelines
+
+### Modern Laravel Standards (2025)
+
+**CRITICAL RULES - ALWAYS FOLLOW:**
+1. **NEVER use `Lang::get()`** - Always use `trans()` function
+2. **NEVER use `__()`** - Always use `trans()` for consistency  
+3. **NEVER use Form facades** (`Form::open`, `Form::close`, etc.) - Use pure Blade HTML
+4. **NEVER use `Session::get()` in Blade** - Use `session()` helper
+5. **NEVER use underscores in class names or file names** - Use PascalCase
+6. **NEVER use lowercase directory names** - Use PascalCase following PSR-4
+7. **NEVER declare `strict_types=1`** - Follow strict programming without declaration
+8. **NEVER use `readonly` keyword** - Use standard dependency injection
+9. **ALWAYS follow PSR-4** for autoloading
+10. **ALWAYS follow PSR-12** for coding style
 
 ### When Creating Controllers
 
@@ -184,15 +199,52 @@ When implementing features that involve repetitive calculations or data access:
 
 ## Common Patterns in This Project
 
+### Modern Blade Templates
+
+**Translation Functions:**
+```blade
+<!-- NEVER do this -->
+{!! Lang::get('lang.welcome') !!}
+{{ __('lang.welcome') }}
+
+<!-- ALWAYS do this -->
+{{ trans('lang.welcome') }}
+```
+
+**Session Access:**
+```blade
+<!-- NEVER do this -->
+{{ Session::get('success') }}
+
+<!-- ALWAYS do this -->
+{{ session('success') }}
+```
+
+**Forms:**
+```blade
+<!-- NEVER do this (Laravel Collective - deprecated pattern) -->
+{!! Form::open(['route' => 'users.store']) !!}
+{!! Form::text('name', null, ['class' => 'form-control']) !!}
+{!! Form::close() !!}
+
+<!-- ALWAYS do this (Modern Blade) -->
+<form method="POST" action="{{ route('users.store') }}">
+    @csrf
+    <input type="text" name="name" value="{{ old('name') }}" class="form-control">
+</form>
+```
+
 ### Authentication
 - Uses Laravel's built-in authentication
 - Custom role-based access control (admin, agent, user)
 - Middleware: `auth`, `roles`, `role.agent`
 
 ### Database
-- Models are in `app/Model/` directory
+- Models should be in `app/Models/` directory (PSR-4 standard)
 - Uses Eloquent ORM
 - Migrations in `database/migrations/`
+- **File Naming**: PascalCase without underscores (e.g., `TicketStatus.php`, not `Ticket_Status.php`)
+- **Class Naming**: PascalCase without underscores (e.g., `class TicketStatus`, not `class Ticket_Status`)
 
 ### Views
 - Blade templating engine
@@ -214,6 +266,11 @@ When implementing features that involve repetitive calculations or data access:
 6. **Don't** ignore exceptions or catch them without proper handling
 7. **Don't** write tests without the `it_` prefix
 8. **Don't** create overly complex queries in controllers (use query scopes or repositories)
+9. **Don't** use `Lang::get()` or `__()` - use `trans()` instead
+10. **Don't** use Form facades - use pure Blade HTML
+11. **Don't** use `Session::get()` in Blade - use `session()` helper
+12. **Don't** use underscores in class names or file names
+13. **Don't** use lowercase directory names - follow PSR-4 with PascalCase
 
 ## Code Review Checklist
 

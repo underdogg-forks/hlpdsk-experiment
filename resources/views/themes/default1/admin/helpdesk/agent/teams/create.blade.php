@@ -20,7 +20,7 @@ class="nav-link active"
 @stop
 <!-- header -->
 @section('PageHeader')
-<h1>{{Lang::get('lang.teams')}}</h1>
+<h1>{{ trans('lang.teams') }}</h1>
 @stop
 <!-- /header -->
 <!-- breadcrumbs -->
@@ -33,9 +33,10 @@ class="nav-link active"
 <!-- content -->
 @section('content')
 <!-- open a form -->
-{!! Form::open(array('route' => 'teams.store') )!!}
+<form method="POST" action="{{ route('teams.store') }}">
+    @csrf
 
-@if(Session::has('errors'))
+@if(session()->has('errors'))
     <div class="alert alert-danger alert-dismissable">
         <i class="fa fa-ban"></i>
         <b>Alert!</b>
@@ -56,7 +57,7 @@ class="nav-link active"
 <div class="card card-light">
     
     <div class="card-header">
-        <h3 class="card-title">{!! Lang::get('lang.create_a_team') !!}	</h3>
+        <h3 class="card-title">{{ trans('lang.create_a_team') }}	</h3>
     </div>
 
     <div class="card-body">
@@ -64,25 +65,37 @@ class="nav-link active"
         <div class="row">
             <!-- name -->
             <div class="col-sm-5 form-group {{ $errors->has('name') ? 'has-error' : '' }}">
-                {!! Form::label('name',Lang::get('lang.name')) !!} <span class="text-red"> *</span>
-                {!! Form::text('name',null,['class' => 'form-control']) !!}
+                <label for="name">{{ trans('lang.name') }}</label> <span class="text-red"> *</span>
+                <input type="text" name="name" id="name" value="{{ old('name') }}" class="form-control">
             </div>
             <!-- team lead -->
             <div class="col-sm-4 form-group {{ $errors->has('team_lead') ? 'has-error' : '' }}">
-                {!! Form::label('team_lead',Lang::get('lang.team_lead')) !!} 
-                {!! Form::select('team_lead',[''=>Lang::get('lang.select_a_team_lead'), Lang::get('lang.members')=>$user->pluck('full_name','id')->toArray()],null,['class' => 'form-control']) !!}	
+                <label for="team_lead">{{ trans('lang.team_lead') }}</label> 
+                <select name="team_lead" id="team_lead" class="form-control">
+    @foreach([''=>trans('lang.select_a_team_lead'), trans('lang.members')=>$user->pluck('full_name','id')->toArray()] as $key => $value)
+        @if(is_array($value))
+            <optgroup label="{{ $key }}">
+                @foreach($value as $subKey => $subValue)
+                    <option value="{{ $subKey }}">{{ $subValue }}</option>
+                @endforeach
+            </optgroup>
+        @else
+            <option value="{{ $key }}">{{ $value }}</option>
+        @endif
+    @endforeach
+</select>	
             </div>
 
             <div class="col-sm-3">
                 <!-- status -->
                 <div class="form-group {{ $errors->has('status') ? 'has-error' : '' }}">
-                    {!! Form::label('status',Lang::get('lang.status')) !!}
+                    <label for="status">{{ trans('lang.status') }}</label>
                     <div class="row">
                         <div class="col-sm-6">
-                            {!! Form::radio('status','1',true) !!} {{Lang::get('lang.active')}}
+                            <input type="radio" name="status" value="'1'"> {{ trans('lang.active') }}
                         </div>
                         <div class="col-sm-6">
-                            {!! Form::radio('status','0',null) !!} {{Lang::get('lang.inactive')}}
+                            <input type="radio" name="status" value="'0'"> {{ trans('lang.inactive') }}
                         </div>
                     </div>
                 </div>
@@ -90,13 +103,13 @@ class="nav-link active"
         </div>
         <!-- admin notes -->
         <div>
-            {!! Form::label('admin_notes',Lang::get('lang.admin_notes')) !!}
-            {!! Form::textarea('admin_notes',null,['class' => 'form-control','size' => '30x5']) !!}
+            <label for="admin_notes">{{ trans('lang.admin_notes') }}</label>
+            <textarea name="admin_notes" id="admin_notes" class="form-control" rows="5">{{ old('admin_notes') }}</textarea>
         </div>
     </div>
     <div class="card-footer">
-        {!! Form::submit(Lang::get('lang.submit'),['class'=>'btn btn-primary'])!!}
+        <button type="submit" class="btn btn-primary">{{ trans('lang.submit') }}</button>
     </div>
 </div>
-{!!Form::close()!!}
+</form>
 @stop

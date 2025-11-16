@@ -20,7 +20,7 @@ class="nav-link active"
 @stop
 <!-- header -->
 @section('PageHeader')
-<h1>{{Lang::get('lang.manage')}}</h1>
+<h1>{{ trans('lang.manage') }}</h1>
 @stop
 <!-- /header -->
 <!-- breadcrumbs -->
@@ -33,31 +33,31 @@ class="nav-link active"
 <!-- content -->
 @section('content')
 <!-- check whether success or not -->
-@if(Session::has('success'))
+@if(session()->has('success'))
 <div class="alert alert-success alert-dismissable">
   <i class="fa  fa-check-circle"></i>
   <b>Success!</b>
   <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-  {!! Session::get('success') !!}
+  {{ session('success') }}
 </div>
 @endif
 <!-- failure message -->
-@if(Session::has('fails'))
+@if(session()->has('fails'))
 <div class="alert alert-danger alert-dismissable">
   <i class="fa fa-ban"></i>
   <b>Fail!</b>
   <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-  {!! Session::get('fails') !!}
+  {{ session('fails') }}
 </div>
 @endif
 
 <div class="card card-light">
 	
 	<div class="card-header">
-		<h3 class="card-title">{{Lang::get('lang.SLA_plan')}}</h3>
+		<h3 class="card-title">{{ trans('lang.SLA_plan') }}</h3>
 		<div class="card-tools">
 			<a href="{{route('sla.create')}}" class="btn btn-default btn-tool">
-				<span class="fas fa-plus"></span>&nbsp;{{Lang::get('lang.create_SLA')}}
+				<span class="fas fa-plus"></span>&nbsp;{{ trans('lang.create_SLA') }}
 			</a>
 		</div>
 	</div>
@@ -67,12 +67,12 @@ class="nav-link active"
 		<table class="table table-bordered dataTable" style="overflow:scroll;">
 
 			<tr>
-				<th width="100px">{{Lang::get('lang.name')}}</th>
-				<th width="100px">{{Lang::get('lang.status')}}</th>
-				<th width="100px">{{Lang::get('lang.grace_period')}}</th>
-				<th width="100px">{{Lang::get('lang.created')}}</th>
-				<th width="100px">{{Lang::get('lang.last_updated')}}</th>
-				<th width="100px">{{Lang::get('lang.action')}}</th>
+				<th width="100px">{{ trans('lang.name') }}</th>
+				<th width="100px">{{ trans('lang.status') }}</th>
+				<th width="100px">{{ trans('lang.grace_period') }}</th>
+				<th width="100px">{{ trans('lang.created') }}</th>
+				<th width="100px">{{ trans('lang.last_updated') }}</th>
+				<th width="100px">{{ trans('lang.action') }}</th>
 			</tr>
 
 			<?php
@@ -112,22 +112,24 @@ class="nav-link active"
 		<td> {!! UTC::usertimezone($sla->updated_at) !!} </td>
 		<!-- Deleting Fields -->
 		<td>
-			{!! Form::open(['route'=>['sla.destroy', $sla->id],'method'=>'DELETE']) !!}
-			<a href="{{route('sla.edit',$sla->id)}}" class="btn btn-primary btn-xs"><i class="fas fa-edit"> </i> {!! Lang::get('lang.edit') !!}</a>
+			<form method="POST" action="{{ route('sla.destroy', $sla->id) }}">
+    @csrf
+    @method('DELETE')
+			<a href="{{route('sla.edit',$sla->id)}}" class="btn btn-primary btn-xs"><i class="fas fa-edit"> </i> {{ trans('lang.edit') }}</a>
 			<!-- To pop up a confirm Message -->
 			@if($sla->id == $default_sla)
-				{!! Form::button('<i class="fas fa-trash"> </i> '.Lang::get('lang.delete'),
+				{!! Form::button('<i class="fas fa-trash"> </i> '.trans('lang.delete'),
 		   		['class'=> 'btn btn-danger btn-xs '.$disable])
 		   	!!}
 			@else
-			{!! Form::button('<i class="fas fa-trash"> </i> '.Lang::get('lang.delete'),
+			{!! Form::button('<i class="fas fa-trash"> </i> '.trans('lang.delete'),
 	   		['type' => 'submit',
 	   		'class'=> 'btn btn-danger btn-xs',
 	   		'onclick'=>'return confirm("Are you sure?")'])
 	   	!!}
 			@endif
 				
-			{!! Form::close() !!}
+			</form>
 		</td>
 		@endforeach
 	</tr>

@@ -6,8 +6,8 @@ class="nav-item active"
 @section('breadcrumb')
     {{--<div class="site-hero clearfix">--}}
     <ol class="breadcrumb float-sm-right ">
-        <li class="breadcrumb-item"> <i class="fas fa-home"> </i> {!! Lang::get('lang.you_are_here') !!} : &nbsp;</li>
-        <li><a href="{!! URL::route('client.profile') !!}">{!! Lang::get('lang.my_profile') !!}</a></li>
+        <li class="breadcrumb-item"> <i class="fas fa-home"> </i> {{ trans('lang.you_are_here') }} : &nbsp;</li>
+        <li><a href="{!! URL::route('client.profile') !!}">{{ trans('lang.my_profile') }}</a></li>
     </ol>
 
 @stop
@@ -19,22 +19,22 @@ class="nav-item active"
 
         <header class="entry-header">
 
-            <h2 class="entry-title">{!! Lang::get('lang.profile_settings') !!}</h2>
+            <h2 class="entry-title">{{ trans('lang.profile_settings') }}</h2>
         </header>
 
         <div class="entry-content clearfix">
 
-            @if(Session::has('success1'))
+            @if(session()->has('success1'))
             <div class="alert alert-success alert-dismissable">
                 <i class="fa fa-check-circle"></i>
                 <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-                {{Session::get('success1')}}
+                {{ session('success1') }}
             </div>
             @endif
             @if (count($errors) > 0)
             <div class="alert alert-danger alert-dismissable">
                 <i class="fa fa-ban"></i>
-                <b>{!! Lang::get('lang.alert') !!} !</b>
+                <b>{{ trans('lang.alert') }} !</b>
                 <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
                 @foreach ($errors->all() as $error)
                 <li>{{ $error }}</li>
@@ -42,29 +42,29 @@ class="nav-item active"
             </div>
             @endif
             <!-- fail message -->
-            @if(Session::has('fails1'))
+            @if(session()->has('fails1'))
             <div class="alert alert-danger alert-dismissable">
                 <i class="fa fa-ban"></i>
-                <b>{!! Lang::get('lang.alert') !!}!</b>
+                <b>{{ trans('lang.alert') }}!</b>
                 <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-                {{Session::get('fails1')}}
+                {{ session('fails1') }}
             </div>
             @endif
 
-             @if(Session::has('success2'))
+             @if(session()->has('success2'))
             <div class="alert alert-success alert-dismissable">
                 <i class="fa fa-check-circle"></i>
                 <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-                {{Session::get('success2')}}
+                {{ session('success2') }}
             </div>
             @endif
             <!-- fail message -->
-            @if(Session::has('fails2'))
+            @if(session()->has('fails2'))
             <div class="alert alert-danger alert-dismissable">
                 <i class="fa fa-ban"></i>
-                <b>{!! Lang::get('lang.alert') !!} !</b>
+                <b>{{ trans('lang.alert') }} !</b>
                 <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-                {{Session::get('fails2')}}
+                {{ session('fails2') }}
             </div>
             @endif
 
@@ -72,7 +72,9 @@ class="nav-item active"
 
                 <div class="col-md-6">
 
-                     {!! Form::model($user,['url'=>'client-profile-edit', 'id' => 'client-profile', 'method' => 'PATCH','files'=>true]) !!}
+                     <form method="POST">
+    @csrf
+    @method('PATCH')
 
                     <div id="form-border" class="comment-respond form-border" style="background : #fff">
 
@@ -80,89 +82,89 @@ class="nav-item active"
 
                             <h2 class="section-title h4 clearfix">
 
-                                <i class="line" style="border-color: rgb(0, 154, 186);"></i>{!! Lang::get('lang.profile') !!}
+                                <i class="line" style="border-color: rgb(0, 154, 186);"></i>{{ trans('lang.profile') }}
                             </h2>
 
                             <div>
 
                                 <div class="form-group {{ $errors->has('first_name') ? 'has-error' : '' }}">
                                     <!-- first name -->
-                                    {!! Form::label('first_name',Lang::get('lang.first_name')) !!}<span class="text-red"> *</span>
+                                    <label for="first_name">{{ trans('lang.first_name') }}</label><span class="text-red"> *</span>
 
-                                    {!! Form::text('first_name',null,['class' => 'form-control']) !!}
+                                    <input type="text" name="first_name" id="first_name" value="{{ old('first_name') }}" class="form-control">
                                 </div>
                                 <div class="form-group {{ $errors->has('last_name') ? 'has-error' : '' }}">
                                     <!-- last name -->
-                                    {!! Form::label('last_name',Lang::get('lang.last_name')) !!}
+                                    <label for="last_name">{{ trans('lang.last_name') }}</label>
 
-                                    {!! Form::text('last_name',null,['class' => 'form-control']) !!}
+                                    <input type="text" name="last_name" id="last_name" value="{{ old('last_name') }}" class="form-control">
                                 </div>
                                 <div class="form-group">
                                     <!-- gender -->
-                                    {!! Form::label('gender',Lang::get('lang.gender')) !!}
+                                    <label for="gender">{{ trans('lang.gender') }}</label>
                                     <div class="row">
                                         <div class="col-sm-3">
-                                            {!! Form::radio('gender','1',true) !!}&nbsp;&nbsp;{{Lang::get('lang.male')}}
+                                            <input type="radio" name="gender" value="'1'">&nbsp;&nbsp;{{ trans('lang.male') }}
                                         </div>
                                         <div class="col-sm-3">
-                                            {!! Form::radio('gender','0') !!}&nbsp;&nbsp;{{Lang::get('lang.female')}}
+                                            <input type="radio" name="gender" value="'0'">&nbsp;&nbsp;{{ trans('lang.female') }}
                                         </div>
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <!-- email -->
-                                    {!! Form::label('email',Lang::get('lang.email_address')) !!}
+                                    <label for="email">{{ trans('lang.email_address') }}</label>
                                     <div>
                                         {{$user->email}}
                                     </div>
                                 </div>
                                 <div class="form-group {{ $errors->has('company') ? 'has-error' : '' }}">
                                     <!-- company -->
-                                    {!! Form::label('company',Lang::get('lang.company')) !!}
+                                    <label for="company">{{ trans('lang.company') }}</label>
 
-                                    {!! Form::text('company',null,['class' => 'form-control']) !!}
+                                    <input type="text" name="company" id="company" value="{{ old('company') }}" class="form-control">
                                 </div>
                                 <div class="row">
                                     <div class="col-sm-2 form-group {{ $errors->has('country_code') ? 'has-error' : '' }}">
                                         <!-- phone extensionn -->
-                                        {!! Form::label('country_code',Lang::get('lang.country-code')) !!}
-                                        {!! Form::text('country_code',null,['class' => 'form-control', 'placeholder' => $phonecode, 'title' => Lang::get('lang.enter-country-phone-code'), 'id' => 'code']) !!}
+                                        <label for="country_code">{{ trans('lang.country-code') }}</label>
+                                        <input type="text" name="country_code" id="code" value="{{ old('country_code') }}" class="form-control">
 
                                     </div>
                                     <div class="col-sm-2 form-group {{ $errors->has('ext') ? 'has-error' : '' }}">
                                         <!-- phone extensionn -->
-                                        {!! Form::label('ext',Lang::get('lang.ext')) !!}
+                                        <label for="ext">{{ trans('lang.ext') }}</label>
 
-                                        {!! Form::text('ext',null,['class' => 'form-control']) !!}
+                                        <input type="text" name="ext" id="ext" value="{{ old('ext') }}" class="form-control">
                                     </div>
                                     <div class="col-sm-8 form-group {{ $errors->has('phone_number') ? 'has-error' : '' }}">
                                         <!-- phone number -->
-                                        {!! Form::label('phone_number',Lang::get('lang.phone')) !!}
+                                        <label for="phone_number">{{ trans('lang.phone') }}</label>
 
-                                        {!! Form::text('phone_number',null,['class' => 'form-control']) !!}
+                                        <input type="text" name="phone_number" id="phone_number" value="{{ old('phone_number') }}" class="form-control">
                                     </div>
                                 </div>
                                 <div class="form-group {{ $errors->has('mobile') ? 'has-error' : '' }}">
                                     <!-- mobile -->
-                                    {!! Form::label('mobile',Lang::get('lang.mobile_number')) !!}
+                                    <label for="mobile">{{ trans('lang.mobile_number') }}</label>
 
-                                    {!! Form::input('number', 'mobile',null,['class' => 'form-control', 'id' => 'mobile']) !!}
+                                    <input type="number" name="mobile" id="mobile" value="{{ old('mobile') }}" class="form-control">
                                 </div>
                                 <div class="form-group {{ $errors->has('profile_pic') ? 'has-error' : '' }}">
                                     <!-- profile pic -->
-                                    {!! Form::label('profile_pic',Lang::get('lang.profile_pic')) !!}
+                                    <label for="profile_pic">{{ trans('lang.profile_pic') }}</label>
 
-                                    {!! Form::file('profile_pic') !!}
+                                    <input type="file" name="profile_pic') !!}
                                 </div>
 
-                                {!! Form::token() !!}
-                                {!! Form::close() !!}
+                                @csrf
+                                </form>
 
                                 <div class="form-group" style="padding-bottom: 10px;">
 
 
                                     <button type="submit" class="btn btn-primary float-right" style="background-color: #337ab7 !important; border-color: #337ab7 !important; color: white;">
-                                        <i class="fas fa-sync"></i> {{ Lang::get('lang.update') }}
+                                        <i class="fas fa-sync"></i> {{ trans('lang.update') }}
                                     </button>                                </div>
                             </div>
                         </section>
@@ -171,7 +173,27 @@ class="nav-item active"
 
                 <div class="col-md-6">
 
-                    {!! Form::model($user,['url'=>'client-profile-password' , 'method' => 'PATCH']) !!}
+                    <form method="POST">
+    @csrf
+                                </div>
+
+                                @csrf
+                                </form>
+
+                                <div class="form-group" style="padding-bottom: 10px;">
+
+
+                                    <button type="submit" class="btn btn-primary float-right" style="background-color: #337ab7 !important; border-color: #337ab7 !important; color: white;">
+                                        <i class="fas fa-sync"></i> {{ trans('lang.update') }}
+                                    </button>                                </div>
+                            </div>
+                        </section>
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+
+                    {!! Form::model($user">
 
                     <div id="form-border" class="comment-respond form-border" style="background : #fff">
 
@@ -179,34 +201,34 @@ class="nav-item active"
 
                             <h2 class="section-title h4 clearfix">
 
-                                <i class="line"></i>{!! Lang::get('lang.change_password') !!}
+                                <i class="line"></i>{{ trans('lang.change_password') }}
                             </h2>
 
                             <div>
-                                 {!! Form::label('old_password',Lang::get('lang.old_password')) !!}<span class="text-red"> *</span>
+                                 <label for="old_password">{{ trans('lang.old_password') }}</label><span class="text-red"> *</span>
                                 <div class="form-group has-feedback {{ $errors->has('old_password') ? 'has-error' : '' }}" style="display: -webkit-box;">
-                                    {!! Form::password('old_password',['class' => 'form-control']) !!}
+                                    <input type="password" name="old_password" id="old_password" class="form-control">
                                     <span class="fa fa-lock form-control-feedback" style="top: 9px;left: -25px;color: #6c757d !important;"></span> <!--change the "glyphicon glyphicon-lock form-control-feedback" to "fa fa-lock form-control-feedback" bcoz bs5 has removed the Glyphicons icon font that was included in earlier versions of Bootstrap-->
                                 </div>
                                 <!-- new password -->
-                                  {!! Form::label('new_password',Lang::get('lang.new_password')) !!}<span class="text-red"> *</span>
+                                  <label for="new_password">{{ trans('lang.new_password') }}</label><span class="text-red"> *</span>
                                 <div class="form-group has-feedback {{ $errors->has('new_password') ? 'has-error' : '' }}" style="display: -webkit-box;">
-                                    {!! Form::password('new_password',['class' => 'form-control']) !!}
+                                    <input type="password" name="new_password" id="new_password" class="form-control">
                                     <span class="fa fa-lock form-control-feedback" style="top: 9px;left: -25px;color: #6c757d !important;"></span>
                                 </div>
                                 <!-- cofirm password -->
-                                 {!! Form::label('confirm_password',Lang::get('lang.confirm_password')) !!}<span class="text-red"> *</span>
+                                 <label for="confirm_password">{{ trans('lang.confirm_password') }}</label><span class="text-red"> *</span>
                                 <div class="form-group has-feedback {{ $errors->has('confirm_password') ? 'has-error' : '' }}" style="display: -webkit-box;">
-                                    {!! Form::password('confirm_password',['class' => 'form-control']) !!}
+                                    <input type="password" name="confirm_password" id="confirm_password" class="form-control">
                                     <span class="fa fa-lock form-control-feedback" style="top: 9px;left: -25px;color: #6c757d !important;"></span>
                                 </div>
 
-                                {!! Form::close() !!}
+                                </form>
 
                                 <div class="form-group" style="padding-bottom: 10px;">
 
                                     <button type="submit" class="btn btn-primary float-right" style="background-color: #337ab7 !important; border-color: #337ab7 !important; color: white;">
-                                        <i class="fas fa-sync"></i> {{ Lang::get('lang.update') }}
+                                        <i class="fas fa-sync"></i> {{ trans('lang.update') }}
                                     </button>
                                 </div>
                             </div>
@@ -223,7 +245,7 @@ class="nav-item active"
         <div class="col-md-12" style="height:40%">
             <div class="modal-content">
                 <div class="modal-header">
-                    <span style="font-size:1.2em">{{Lang::get('lang.verify-number')}}</span>
+                    <span style="font-size:1.2em">{{ trans('lang.verify-number') }}</span>
                     <button type="button" class="close closemodal" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
                 </div>
                 <div class="modal-body">
@@ -238,29 +260,30 @@ class="nav-item active"
                                 <span id = "success_message"></span>
                             </div>
                             <div id="verify-fail" style="display:none" class="alert alert-danger alert-dismissable">
-                                <i class="fa fa-ban"> </i> <b> {!! Lang::get('lang.alert') !!}! </b>
+                                <i class="fa fa-ban"> </i> <b> {{ trans('lang.alert') }}! </b>
                                 <span id = "error_message"></span>
                             </div>
                             </div>
                         </div>
                     </div>
                     <div id="verify-number-form">
-                    {!! Form::open(['id'=>'verify-otp','method' => 'POST'] )!!}
+                    <form method="POST">
+    @csrf
                         <div class="row">
                             <div class="col-md-8">
-                                {{ Lang::get('lang.get-verify-message') }}
+                                {{ trans('lang.get-verify-message') }}
                             </div>
                             <div class="col-md-4">
-                                {!! Form::text('token','',['class' => 'form-control', 'required' => true, 'placeholder' => Lang::get('lang.enter-otp'), 'id' => 'otp']) !!}
+                                <input type="text" name="token" id="otp" value="''" class="form-control" required>
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="modal-footer" style="justify-content: space-between;">
-                    <button type="button" id="close-last" class="btn btn-default closemodal float-left">{{Lang::get('lang.close')}}</button>
-                    <div id="last-submit"><input  type="submit" id="merge-btn" class="btn btn-primary float-right" value="{!! Lang::get('lang.verify') !!}"></input></div>
+                    <button type="button" id="close-last" class="btn btn-default closemodal float-left">{{ trans('lang.close') }}</button>
+                    <div id="last-submit"><input  type="submit" id="merge-btn" class="btn btn-primary float-right" value="{{ trans('lang.verify') }}"></input></div>
                 </div>
-                {!! Form::close() !!}
+                </form>
             </div>
         </div>
     </div>
@@ -320,7 +343,7 @@ class="nav-item active"
                             success: function(response){
                                 if( response == 1) {
                                     $('#loader2').css('display', 'none');
-                                    var message = "{{Lang::get('lang.number-verification-sussessfull')}}";
+                                    var message = "{{ trans('lang.number-verification-sussessfull') }}";
                                     $('#success_message').html(message);
                                     $('#verify-success').css('display', 'block');
                                     $('#client-profile').unbind('submit').submit();
@@ -336,7 +359,7 @@ class="nav-item active"
                 },
                 complete: function( jqXHR, textStatus) {
                     if (textStatus === "parsererror" || textStatus === "timeout" || textStatus === "abort" || textStatus === "error") {
-                        var message = "{{Lang::get('lang.otp-not-sent')}}";
+                        var message = "{{ trans('lang.otp-not-sent') }}";
                         $('#loader2').css('display', 'none');
                         $("#error_message").html(message);
                         $("#merge-btn").css('display', 'none');

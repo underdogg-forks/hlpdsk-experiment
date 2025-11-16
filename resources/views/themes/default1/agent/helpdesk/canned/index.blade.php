@@ -17,35 +17,35 @@ class="nav-link active"
 @stop
 
 @section('PageHeader')
-<h1>{{Lang::get('lang.tools')}}</h1>
+<h1>{{ trans('lang.tools') }}</h1>
 @stop
 
 <!-- content -->
 @section('content')
 <!-- check whether success or not -->
         {{-- Success message --}}
-        @if(Session::has('success'))
+        @if(session()->has('success'))
         <div class="alert alert-success alert-dismissable">
             <i class="fas  fa-check-circle"></i>
             <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-            {{Session::get('success')}}
+            {{ session('success') }}
         </div>
         @endif
         {{-- failure message --}}
-        @if(Session::has('fails'))
+        @if(session()->has('fails'))
         <div class="alert alert-danger alert-dismissable">
             <i class="fas fa-ban"></i>
-            <b>{!! Lang::get('lang.alert') !!}!</b>
+            <b>{{ trans('lang.alert') }}!</b>
             <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-            {{Session::get('fails')}}
+            {{ session('fails') }}
         </div>
         @endif
 <div class="card card-light">
     <div class="card-header">
-        <h3 class="card-title">{!! Lang::get('lang.canned_response') !!}</h3>
+        <h3 class="card-title">{{ trans('lang.canned_response') }}</h3>
         <div class="card-tools">
             <a href="{{route('canned.create')}}" class="btn btn-default btn-tool"><i class="fas fa-plus"> </i> 
-            {!! Lang::get('lang.create_canned_response') !!}</a>
+            {{ trans('lang.create_canned_response') }}</a>
         </div>
     </div>
     <div class="card-body">
@@ -55,8 +55,8 @@ class="nav-link active"
         <!-- Agent table -->
         <table class="table table-bordered table-hover" id="example1"  >
             <tr>
-                <th width="100px">{{Lang::get('lang.name')}}</th>
-                <th width="100px">{{Lang::get('lang.action')}}</th>
+                <th width="100px">{{ trans('lang.name') }}</th>
+                <th width="100px">{{ trans('lang.action') }}</th>
             </tr>
             @if($Canneds->isEmpty())
                 <td  colspan="4" class="dataTables_empty">No data available in table</td>
@@ -66,15 +66,17 @@ class="nav-link active"
             <tr>
                 <td>{{$Canned->title }}</td>
                 <td>
-                    {!! Form::open(['route'=>['canned.destroy', $Canned->id],'method'=>'DELETE']) !!}
-                    <a data-toggle="modal" data-target="#view{!! $Canned->id !!}" href="#" class="btn btn-info btn-xs" onClick="updateModelTitle('{{$Canned->title}}')">{!! Lang::get('lang.view') !!}</a>
-                    <a href="{!! URL::route('canned.edit',$Canned->id) !!}" class="btn btn-primary btn-xs">{!! Lang::get('lang.edit') !!}</a>
-                    {!! Form::button(' '.Lang::get('lang.delete'),
+                    <form method="POST" action="{{ route('canned.destroy', $Canned->id) }}">
+    @csrf
+    @method('DELETE')
+                    <a data-toggle="modal" data-target="#view{!! $Canned->id !!}" href="#" class="btn btn-info btn-xs" onClick="updateModelTitle('{{$Canned->title}}')">{{ trans('lang.view') }}</a>
+                    <a href="{!! URL::route('canned.edit',$Canned->id) !!}" class="btn btn-primary btn-xs">{{ trans('lang.edit') }}</a>
+                    {!! Form::button(' '.trans('lang.delete'),
                     ['type' => 'submit',
                     'class'=> 'btn btn-warning btn-xs',
                     'onclick'=>'return confirm("Are you sure?")'])
                     !!}
-                    {!! Form::close() !!}
+                    </form>
                 </td>
             </tr>
             <!-- Surrender Modal -->
@@ -91,7 +93,7 @@ class="nav-link active"
                             <p><pre>{!! $Canned->message !!}</pre></p>
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-default" data-dismiss="modal" id="dismis6">{!! Lang::get('lang.close') !!}</button>
+                            <button type="button" class="btn btn-default" data-dismiss="modal" id="dismis6">{{ trans('lang.close') }}</button>
                         </div>
                     </div><!-- /.modal-content -->
                 </div><!-- /.modal-dialog -->

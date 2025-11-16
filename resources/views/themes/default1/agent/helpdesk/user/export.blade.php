@@ -20,7 +20,8 @@ class="active"
 <!-- content -->
 @section('content')
 <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/bootstrap.daterangepicker/2/daterangepicker.css" />
-{!! Form::open(['url'=>'user-export','method'=>'post']) !!}
+<form method="POST" action="user-export">
+    @csrf
 <div class="box box-primary">
     @if (count($errors) > 0)
     <div class="alert alert-danger">
@@ -33,17 +34,17 @@ class="active"
     </div>
     @endif
 
-    @if(Session::has('success'))
+    @if(session()->has('success'))
     <div class="alert alert-success alert-dismissable">
         <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-        {{Session::get('success')}}
+        {{ session('success') }}
     </div>
     @endif
     <!-- fail message -->
-    @if(Session::has('fails'))
+    @if(session()->has('fails'))
     <div class="alert alert-danger alert-dismissable">
         <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-        {{Session::get('fails')}}
+        {{ session('fails') }}
     </div>
     @endif
     <div class="box-header with-border">
@@ -60,13 +61,13 @@ class="active"
                 </div>
             </div>
             <div class="col-md-6">
-                {!! Form::hidden('date',null,['id'=>'hidden']) !!}
-                {!! Form::submit('Export',['class'=>'btn btn-success','id'=>'submit']) !!}
+                <input type="hidden" name="date" value="null" id="hidden">
+                <button type="submit" class="btn btn-success">'Export'</button>
             </div>
         </div>
     </div>
 </div>
-{!! Form::close() !!}
+</form>
 @stop
 @section('FooterInclude')
 <script type="text/javascript" src="//cdn.jsdelivr.net/bootstrap.daterangepicker/2/daterangepicker.js"></script>

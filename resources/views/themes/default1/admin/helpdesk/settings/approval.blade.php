@@ -16,7 +16,7 @@ class="active"
 @stop
 <!-- header -->
 @section('PageHeader')
-<h1>{!! Lang::get('lang.settings') !!}</h1>
+<h1>{{ trans('lang.settings') }}</h1>
 @stop
 <!-- /header -->
 <!-- breadcrumbs -->
@@ -32,24 +32,24 @@ class="active"
     <div class="col-md-12">
         <div class="box box-primary">
             <div class="box-header with-border">
-                <h3 class="box-title">{{Lang::get('lang.approval_settings')}}</h3>
+                <h3 class="box-title">{{ trans('lang.approval_settings') }}</h3>
             </div>
             <!-- check whether success or not -->
             <div class="box-body table-responsive"style="overflow:hidden;">
-                @if(Session::has('success'))
+                @if(session()->has('success'))
                 <div class="alert alert-success alert-dismissable">
                     <i class="fa fa-check-circle"></i>
                     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-                    {!!Session::get('success')!!}
+                    {{ session('success') }}
                 </div>
                 @endif
                 <!-- failure message -->
-                @if(Session::has('fails'))
+                @if(session()->has('fails'))
                 <div class="alert alert-danger alert-dismissable">
                     <i class="fa fa-ban"></i>
                     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-                    <b> {!! Lang::get('lang.alert') !!} ! </b>
-                    <li class="error-message-padding">{!!Session::get('fails')!!}</li>
+                    <b> {{ trans('lang.alert') }} ! </b>
+                    <li class="error-message-padding">{{ session('fails') }}</li>
                 </div>
                 @endif
 
@@ -58,7 +58,7 @@ class="active"
                     <div class="col-md-12">
                         <div class="col-md-3 no-padding">
                             <div class="form-group">
-                                {!! Form::label('del_noti', Lang::get('lang.close_all_ticket_for_approval')) !!}
+                                <label for="del_noti">{{ trans('lang.close_all_ticket_for_approval') }}</label>
                             </div>
                         </div>
      
@@ -97,7 +97,7 @@ class="active"
             url: '{{route("settingsUpdateApproval.settings")}}',
             data: {settings_approval: settings_approval},
             success: function (result) {
-                // with('success', Lang::get('lang.approval_settings-created-successfully'));
+                // with('success', trans('lang.approval_settings-created-successfully'));
                 // alert("Hi, testing");
                 alert(result);
                 location.reload(); 

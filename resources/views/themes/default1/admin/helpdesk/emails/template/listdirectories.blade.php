@@ -30,23 +30,24 @@ class="active"
 @section('content')
 <div class="box box-primary">
 <div class="box-header">
-  <h2 class="box-title">{{Lang::get('lang.template_set')}}</h2>
-<button class="btn btn-primary pull-right" data-toggle="modal" data-target="#createtemp">{{Lang::get('lang.create_template')}}</button> 
+  <h2 class="box-title">{{ trans('lang.template_set') }}</h2>
+<button class="btn btn-primary pull-right" data-toggle="modal" data-target="#createtemp">{{ trans('lang.create_template') }}</button> 
                                    
                                   <div class="modal fade" id="createtemp">
                                        <div class="modal-dialog">
                                           <div class="modal-content">
-                                  {!! Form::open(['route'=>'template.createnew']) !!}
+                                  <form method="POST" action="{{ route('template.createnew') }}">
+    @csrf
                     <div class="modal-header">
                  <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-            <h4 class="modal-title">{{Lang::get('lang.create_template')}}</h4>
+            <h4 class="modal-title">{{ trans('lang.create_template') }}</h4>
         </div>
                      <div class="modal-body">
                               <div class="form-group {{ $errors->has('title') ? 'has-error' : '' }}">
 
-    {!! Form::label('folder_name', 'Template Set Name:',['style'=>'display: block']) !!}
+    <label for="folder_name">'Template Set Name:'</label>
 
-    {!! Form::text('folder_name',null,['class'=>'form-control'])!!}
+    <input type="text" name="folder_name" id="folder_name" value="{{ old('folder_name') }}" class="form-control">
 
     {!! $errors->first('folder', '<spam class="help-block">:message</spam>') !!}
   
@@ -54,11 +55,11 @@ class="active"
                                      </div>
                                                                         <div class="modal-footer">
                                                                             <div class="form-group">
-                                                                                {!! Form::submit('Create Template Set',['class'=>'btn btn-primary'])!!}
+                                                                                <button type="submit" class="btn btn-primary">'Create Template Set'</button>
                                                                             
                                                                             <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
                                                                         </div></div>
-                                                                        {!! Form::close() !!}
+                                                                        </form>
                                                                     </div> 
                                                                 </div>
                                                             </div></div>
@@ -67,29 +68,29 @@ class="active"
 
 <!-- check whether success or not -->
 
-@if(Session::has('success'))
+@if(session()->has('success'))
     <div class="alert alert-success alert-dismissable">
         <i class="fa  fa-check-circle"></i>
         <b>Success!</b>
         <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-        {{Session::get('success')}}
+        {{ session('success') }}
     </div>
     @endif
     <!-- failure message -->
-    @if(Session::has('fails'))
+    @if(session()->has('fails'))
     <div class="alert alert-danger alert-dismissable">
         <i class="fa fa-ban"></i>
         <b>Fail!</b>
         <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-        {{Session::get('fails')}}
+        {{ session('fails') }}
     </div>
     @endif
 
         <table id="example1" class="table table-bordered table-striped">
   <tr>
-    <th width="100px">{{Lang::get('lang.name')}}</th>
-                <th width="100px">{{Lang::get('lang.status')}}</th>
-                <th width="100px">{{Lang::get('lang.action')}}</th>
+    <th width="100px">{{ trans('lang.name') }}</th>
+                <th width="100px">{{ trans('lang.status') }}</th>
+                <th width="100px">{{ trans('lang.action') }}</th>
   </tr>
   <!-- Foreach @var templates as @var template -->
     @foreach($directories as $dir)

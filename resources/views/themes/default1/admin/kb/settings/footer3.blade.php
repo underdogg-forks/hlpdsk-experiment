@@ -13,11 +13,13 @@
 
 @section('content')
 
-	{!! Form::model($footer3,['url' => 'post-create-footer3/'.$footer3->id, 'method' => 'PATCH','files'=>true]) !!}
+	<form method="POST">
+    @csrf
+    @method('PATCH')
 
 <div class="box box-primary">
     <div class="box-header">
-        <h3 class="box-title">{{Lang::get('lang.footer3')}}</h3>  {!! Form::submit(Lang::get('lang.save'),['class'=>'form-group btn btn-primary pull-right'])!!}
+        <h3 class="box-title">{{ trans('lang.footer3') }}</h3>  <button type="submit" class="form-group btn btn-primary pull-right">{{ trans('lang.save') }}</button>
     </div>
 
     <div class="box-body">
@@ -29,16 +31,16 @@
 
         <div class="form-group {{ $errors->has('title') ? 'has-error' : '' }}">
 
-            {!! Form::label('title',Lang::get('lang.title')) !!}
+            <label for="title">{{ trans('lang.title') }}</label>
             {!! $errors->first('title', '<spam class="help-block">:message</spam>') !!}
-            {!! Form::text('title',null,['class' => 'form-control']) !!}
+            <input type="text" name="title" id="title" value="{{ old('title') }}" class="form-control">
 
         </div>
 
         <div class="form-group {{ $errors->has('footer') ? 'has-error' : '' }}">
-            {!! Form::label('footer',Lang::get('lang.footer')) !!}
+            <label for="footer">{{ trans('lang.footer') }}</label>
             {!! $errors->first('footer', '<spam class="help-block">:message</spam>') !!}
-            {!! Form::textarea('footer',null,['class' => 'form-control','size' => '128x10','id'=>'footer','placeholder'=>'Enter the description']) !!}
+            <textarea name="footer" id="footer" class="form-control" rows="10">{{ old('footer') }}</textarea>
         </div>
 
     </div>

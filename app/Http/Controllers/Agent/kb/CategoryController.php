@@ -90,20 +90,20 @@ class CategoryController extends Controller
                         /* add column Actions */
                         /* there are action buttons and modal popup to delete a data column */
                         ->addColumn('Actions', function ($model) {
-                            return '<span  data-toggle="modal" data-target="#deletecategory'.$model->slug.'"><a href="#" ><button class="btn btn-danger btn-xs"></a>'.\Lang::get('lang.delete').'</button></span>&nbsp;<a href=category/'.$model->id.'/edit class="btn btn-warning btn-xs">'.\Lang::get('lang.edit').'</a>&nbsp;<a href=article-list class="btn btn-primary btn-xs">'.\Lang::get('lang.view').'</a>
+                            return '<span  data-toggle="modal" data-target="#deletecategory'.$model->slug.'"><a href="#" ><button class="btn btn-danger btn-xs"></a>'.\trans('lang.delete').'</button></span>&nbsp;<a href=category/'.$model->id.'/edit class="btn btn-warning btn-xs">'.\trans('lang.edit').'</a>&nbsp;<a href=article-list class="btn btn-primary btn-xs">'.\trans('lang.view').'</a>
 				<div class="modal fade" id="deletecategory'.$model->slug.'">
         			<div class="modal-dialog">
             			<div class="modal-content">
                 			<div class="modal-header">
-                                <h4 class="modal-title">'.Lang::get('lang.delete').'</h4>
+                                <h4 class="modal-title">'.trans('lang.delete').'</h4>
                     			<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                 			</div>
                 			<div class="modal-body">
-                				<span>'.Lang::get('lang.are_you_sure_you_want_to_delete').'</span>&nbsp;<b>'.$model->name.'</b>
+                				<span>'.trans('lang.are_you_sure_you_want_to_delete').'</span>&nbsp;<b>'.$model->name.'</b>
                 			</div>
                 			<div class="modal-footer justify-content-between">
-                    			<button type="button" class="btn btn-default" data-dismiss="modal" id="dismis2">'.Lang::get('lang.close').'</button>
-                    			<a href="category/delete/'.$model->id.'"><button class="btn btn-danger">'.Lang::get('lang.delete').'</button></a>
+                    			<button type="button" class="btn btn-default" data-dismiss="modal" id="dismis2">'.trans('lang.close').'</button>
+                    			<a href="category/delete/'.$model->id.'"><button class="btn btn-danger">'.trans('lang.delete').'</button></a>
                 			</div>
             			</div>
         			</div>
@@ -152,9 +152,9 @@ class CategoryController extends Controller
         try {
             $category->fill($request->input())->save();
 
-            return redirect('category')->with('success', Lang::get('lang.category_inserted_successfully'));
+            return redirect('category')->with('success', trans('lang.category_inserted_successfully'));
         } catch (Exception $e) {
-            return redirect('category')->with('fails', Lang::get('lang.category_not_inserted').'<li>'.$e->getMessage().'</li>');
+            return redirect('category')->with('fails', trans('lang.category_not_inserted').'<li>'.$e->getMessage().'</li>');
         }
     }
 
@@ -198,10 +198,10 @@ class CategoryController extends Controller
             $category->slug = $slug;
             $category->fill($request->input())->save();
 
-            return redirect('category')->with('success', Lang::get('lang.category_updated_successfully'));
+            return redirect('category')->with('success', trans('lang.category_updated_successfully'));
         } catch (Exception $e) {
             //redirect to index with fails message
-            return redirect('category')->with('fails', Lang::get('lang.category_not_updated').'<li>'.$e->getMessage().'</li>');
+            return redirect('category')->with('fails', trans('lang.category_not_updated').'<li>'.$e->getMessage().'</li>');
         }
     }
 
@@ -218,7 +218,7 @@ class CategoryController extends Controller
     {
         $relation = $relation->where('category_id', $id)->first();
         if ($relation != null) {
-            return Redirect::back()->with('fails', Lang::get('lang.category_not_deleted'));
+            return Redirect::back()->with('fails', trans('lang.category_not_deleted'));
         } else {
             /*  delete the category selected, id == $id */
             $category = $category->whereId($id)->first();
@@ -227,9 +227,9 @@ class CategoryController extends Controller
             try {
                 $category->delete();
 
-                return Redirect::back()->with('success', Lang::get('lang.category_deleted_successfully'));
+                return Redirect::back()->with('success', trans('lang.category_deleted_successfully'));
             } catch (Exception $e) {
-                return Redirect::back()->with('fails', Lang::get('lang.category_not_deleted').'<li>'.$e->getMessage().'</li>');
+                return Redirect::back()->with('fails', trans('lang.category_not_deleted').'<li>'.$e->getMessage().'</li>');
             }
         }
     }

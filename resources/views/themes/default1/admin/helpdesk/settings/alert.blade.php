@@ -21,7 +21,7 @@ class="nav-link active"
 @stop
 <!-- header -->
 @section('PageHeader')
-<h1>{{Lang::get('lang.settings')}}</h1>
+<h1>{{ trans('lang.settings') }}</h1>
 @stop
 <!-- /header -->
 <!-- breadcrumbs -->
@@ -34,25 +34,27 @@ class="nav-link active"
 <!-- content -->
 @section('content')
 <!-- open a form -->
-{!! Form::model($alerts,['url' => 'postalert/'.$alerts->id, 'method' => 'PATCH']) !!}
-@if(Session::has('success'))
+<form method="POST">
+    @csrf
+    @method('PATCH')
+@if(session()->has('success'))
 <div class="alert alert-success alert-dismissable">
     <i class="fas fa-check-circle"></i>
     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-    {!!Session::get('success')!!}
+    {{ session('success') }}
 </div>
 @endif
 <!-- failure message -->
-@if(Session::has('fails'))
+@if(session()->has('fails'))
 <div class="alert alert-danger alert-dismissable">
     <i class="fas fa-ban"></i><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
     <b>{!! lang::get('lang.alert') !!}!</b><br/>
-    {!!Session::get('fails')!!}
+    {{ session('fails') }}
 </div>
 @endif
 <div class="card card-light">
     <div class="card-header">
-        <h3 class="card-title">{{Lang::get('lang.alert_notices_setitngs')}}</h3> 
+        <h3 class="card-title">{{ trans('lang.alert_notices_setitngs') }}</h3> 
     </div>
 
     <div class="card-body">
@@ -62,24 +64,24 @@ class="nav-link active"
                 <!-- general form elements -->
                 <div class="card card-light">
                     <div class="card-header">
-                        <h3 class="card-title">{{Lang::get('lang.new_ticket_alert')}}</h3>
+                        <h3 class="card-title">{{ trans('lang.new_ticket_alert') }}</h3>
                     </div><!-- /.box-header -->
                     <!-- form start -->
                     <div class="card-body">
                         <div class="form-group">
                             <!-- Status:     Enable   Disable     -->
-                            {!! Form::label('ticket_status',Lang::get('lang.status').":") !!}&nbsp;&nbsp;
-                            {!! Form::radio('ticket_status',1) !!} {!! Lang::get('lang.enable') !!} &nbsp;&nbsp; {!! Form::radio('ticket_status',0) !!}  {!! Lang::get('lang.disable') !!}
+                            {!! Form::label('ticket_status',trans('lang.status').":") !!}&nbsp;&nbsp;
+                            <input type="radio" name="ticket_status" value="1) !!} {{ trans('lang.enable') }} &nbsp;&nbsp; {!! Form::radio('ticket_status'">  {{ trans('lang.disable') }}
                         </div>
                         <div class="form-group">
                             <!-- Admin Email -->
-                            {!! Form::checkbox('ticket_admin_email',1) !!}
-                            {!! Form::label('ticket_admin_email',Lang::get('lang.admin_email_2')) !!}
+                            <input type="checkbox" name="ticket_admin_email" value="1">
+                            <label for="ticket_admin_email">{{ trans('lang.admin_email_2') }}</label>
                         </div>
                         <!-- Department Members -->
                         <div class="form-group">
-                            {!! Form::checkbox('ticket_department_member',1) !!}
-                            {!! Form::label('ticket_department_member',Lang::get('lang.department_members')) !!}
+                            <input type="checkbox" name="ticket_department_member" value="1">
+                            <label for="ticket_department_member">{{ trans('lang.department_members') }}</label>
                         </div>
                     </div><!-- /.box-body -->
                 </div><!-- /.box -->
@@ -88,23 +90,23 @@ class="nav-link active"
             <div class="col-md-6">
                 <div class="card card-light">
                     <div class="card-header">
-                        <h3 class="card-title">{{Lang::get('lang.ticket_assignment_alert')}}</h3>
+                        <h3 class="card-title">{{ trans('lang.ticket_assignment_alert') }}</h3>
                     </div><!-- /.box-header -->
                     <div class="card-body">
                         <!-- Status:     Enable      Disable      -->
                         <div class="form-group">
-                            {!! Form::label('assignment_status',Lang::get('lang.status').":") !!}
-                            {!! Form::radio('assignment_status',1) !!} {!! Lang::get('lang.enable') !!} &nbsp;&nbsp; {!! Form::radio('assignment_status',0) !!}  {!! Lang::get('lang.disable') !!}
+                            {!! Form::label('assignment_status',trans('lang.status').":") !!}
+                            <input type="radio" name="assignment_status" value="1) !!} {{ trans('lang.enable') }} &nbsp;&nbsp; {!! Form::radio('assignment_status'">  {{ trans('lang.disable') }}
                         </div>
                         <!-- Assigned Agent / Team -->
                         <div class="form-group">
-                            {!! Form::checkbox('assignment_assigned_agent',1) !!}
-                            {!! Form::label('assignment_assigned_agent',Lang::get('lang.agent')) !!}
+                            <input type="checkbox" name="assignment_assigned_agent" value="1">
+                            <label for="assignment_assigned_agent">{{ trans('lang.agent') }}</label>
                         </div>
                         <!-- Team Members -->
                         <div class="form-group">
-                            {!! Form::checkbox('assignment_team_member',1) !!}
-                            {!! Form::label('assignment_team_member',Lang::get('lang.team_members')) !!}
+                            <input type="checkbox" name="assignment_team_member" value="1">
+                            <label for="assignment_team_member">{{ trans('lang.team_members') }}</label>
                         </div>
                     </div><!-- /.box-body -->
                 </div><!-- /.box -->
@@ -113,7 +115,7 @@ class="nav-link active"
     </div>
 
     <div class="card-footer">
-        {!! Form::submit(Lang::get('lang.submit'),['class'=>' btn btn-primary'])!!}
+        <button type="submit" class=" btn btn-primary">{{ trans('lang.submit') }}</button>
     </div>
 </div>
 @stop
