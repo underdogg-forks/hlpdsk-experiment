@@ -1,349 +1,475 @@
 <!DOCTYPE html>
-<html>
-    <head>
-        <meta charset="UTF-8">
-        <title>Faveo | HELP DESK</title>
-        <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
-        <!-- Bootstrap 3.3.2 -->
-        <link href="{{asset("lb-faveo/downloads/bootstrap.min.css")}}" rel="stylesheet" type="text/css" />
-        <!-- Font Awesome Icons -->
-        <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
-        <!-- Ionicons -->
-        <link href="{{asset("lb-faveo/downloads/ionicons.min.css")}}" rel="stylesheet" type="text/css" />
-        <!-- fullCalendar 2.2.5-->
-        <link href="{{asset("lb-faveo/plugins/fullcalendar/fullcalendar.min.css")}}" rel="stylesheet" type="text/css" />
-        <link href="{{asset("lb-faveo/plugins/fullcalendar/fullcalendar.print.css")}}" rel="stylesheet" type="text/css" media='print' />
-        <!-- Theme style -->
-        <link href="{{asset("lb-faveo/dist/css/AdminLTE.min.css")}}" rel="stylesheet" type="text/css" />
-        <!-- AdminLTE Skins. Choose a skin from the css/skins
-             folder instead of downloading all of them to reduce the load. -->
-        <link href="{{asset("lb-faveo/dist/css/skins/_all-skins.min.css")}}" rel="stylesheet" type="text/css" />
-        <!-- iCheck -->
-        <link href="{{asset("lb-faveo/plugins/iCheck/flat/blue.css")}}" rel="stylesheet" type="text/css" />
-        <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-        <link rel="stylesheet" href="{{asset("lb-faveo/dist/css/tabby.css")}}" type="text/css">
-        <link href="{{asset("lb-faveo/downloads/jquerysctipttop.css")}}" rel="stylesheet" type="text/css">
-        <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-        <link rel="stylesheet" href="{{asset("lb-faveo/dist/css/editor.css")}}" type="text/css">
-        <link href="{{asset("lb-faveo/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css")}}" rel="stylesheet" type="text/css" />
-        <!--[if lt IE 9]>
-            <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-            <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
-        <![endif]-->
-        @yield('HeadInclude')
-    </head>
-    <body class="skin-yellow fixed">
-        <div class="wrapper">
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Faveo HELPDESK - Admin Panel">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+    <title>@yield('title', 'Faveo HELPDESK')</title>
+    
+    <!-- Tailwind CSS via Vite -->
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
+    
+    <!-- Font Awesome Icons -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
+    
+    @yield('HeadInclude')
+</head>
 
-            <header class="main-header">
-                <a href="../../index2.html" class="logo"><b>Faveo </b>HELPDESK</a>
-                <!-- Header Navbar: style can be found in header.less -->
-                <nav class="navbar navbar-static-top" role="navigation">
-                    <!-- Sidebar toggle button-->
-                    <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
-                        <span class="sr-only">Toggle navigation</span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
+<body class="flex min-h-screen bg-gray-100">
+    <!-- Sidebar -->
+    <aside class="sidebar sidebar-width fixed left-0 top-0 h-full transition-sidebar z-40 flex-shrink-0">
+        <!-- User Panel -->
+        <div class="p-4 border-b border-white border-opacity-10">
+            <div class="flex flex-col items-center text-center">
+                @if(Auth::user())
+                    @if(Auth::user()->profile_pic)
+                        <img src="{{ asset('lb-faveo/dist/img/'.Auth::user()->profile_pic) }}" class="w-20 h-20 rounded-full mb-2" alt="User Image">
+                    @else
+                        <img src="{{ Gravatar::src(Auth::user()->email) }}" class="w-20 h-20 rounded-full mb-2" alt="User Image">
+                    @endif
+                    <div class="text-white font-semibold">
+                        {{ Auth::user()->first_name }} {{ Auth::user()->last_name }}
+                    </div>
+                    <div class="text-sm text-white text-opacity-60">
+                        @if(Auth::user() && Auth::user()->active == 1)
+                            <i class="fas fa-circle text-green-400 text-xs"></i> Online
+                        @else
+                            <i class="fas fa-circle text-gray-400 text-xs"></i> Offline
+                        @endif
+                    </div>
+                @endif
+            </div>
+        </div>
+
+        <!-- Search Form -->
+        <div class="p-3">
+            <form action="#" method="get">
+                <div class="relative">
+                    <input type="text" name="q" class="w-full px-3 py-2 bg-white bg-opacity-10 border border-white border-opacity-20 rounded text-white placeholder-white placeholder-opacity-60 focus:outline-none focus:bg-opacity-20" placeholder="Search...">
+                    <button type="submit" class="absolute right-2 top-2 text-white text-opacity-60 hover:text-opacity-100">
+                        <i class="fas fa-search"></i>
+                    </button>
+                </div>
+            </form>
+        </div>
+
+        <!-- Sidebar Navigation -->
+        <nav class="flex-1 overflow-y-auto">
+            <div class="px-2 py-2">
+                <div class="text-xs font-semibold text-white text-opacity-60 px-4 py-2 uppercase tracking-wider">TICKETS</div>
+                
+                <?php
+                    $inbox = App\Model\helpdesk\Ticket\Tickets::get();
+                    $myticket = App\Model\helpdesk\Ticket\Tickets::where('assigned_to', Auth::user()->id)->where('status','1')->get();
+                    $unassigned = App\Model\helpdesk\Ticket\Tickets::where('assigned_to', '0')->where('status','1')->get();
+                    $tickets = App\Model\helpdesk\Ticket\Tickets::where('status','1')->get();
+                    $i = count($tickets);
+                ?>
+                
+                <a href="{{ url('/ticket/open') }}" class="sidebar-link flex items-center px-4 py-2 rounded hover:bg-blue-600 transition-colors">
+                    <i class="fas fa-envelope sidebar-icon w-6"></i>
+                    <span class="flex-1 ml-2">Inbox</span>
+                    <span class="badge badge-success">{{ $i }}</span>
+                </a>
+                
+                <a href="{{ url('ticket/myticket') }}" class="sidebar-link flex items-center px-4 py-2 rounded hover:bg-blue-600 transition-colors @yield('myticket')">
+                    <i class="fas fa-user sidebar-icon w-6"></i>
+                    <span class="flex-1 ml-2">My Tickets</span>
+                    <span class="badge badge-success">{{ count($myticket) }}</span>
+                </a>
+                
+                <a href="{{ url('unassigned') }}" class="sidebar-link flex items-center px-4 py-2 rounded hover:bg-blue-600 transition-colors">
+                    <i class="fas fa-th sidebar-icon w-6"></i>
+                    <span class="flex-1 ml-2">Unassigned</span>
+                    <span class="badge badge-success">{{ count($unassigned) }}</span>
+                </a>
+                
+                <a href="{{ url('trash') }}" class="sidebar-link flex items-center px-4 py-2 rounded hover:bg-blue-600 transition-colors">
+                    <i class="fas fa-trash sidebar-icon w-6"></i>
+                    <span class="flex-1 ml-2">Trash</span>
+                    <?php $deleted = App\Model\helpdesk\Ticket\Tickets::where('status', '5')->get(); ?>
+                    <span class="badge badge-success">{{ count($deleted) }}</span>
+                </a>
+
+                @yield('sidebar-extra')
+            </div>
+        </nav>
+        
+        <!-- Minimize Button -->
+        <button class="w-full p-3 border-t border-white border-opacity-10 hover:bg-white hover:bg-opacity-10 transition-colors" type="button" data-toggle="sidebar-minimize">
+            <i class="fas fa-angle-left"></i>
+        </button>
+    </aside>
+
+    <!-- Main Content Area -->
+    <div class="flex-1 flex flex-col sidebar-width ml-64">
+        <!-- Header -->
+        <header class="navbar navbar-height sticky top-0 z-30 flex items-center justify-between px-4 shadow-sm">
+            <!-- Mobile Menu Toggle -->
+            <button class="lg:hidden text-gray-600 hover:text-gray-900" type="button" data-toggle="sidebar">
+                <i class="fas fa-bars"></i>
+            </button>
+            
+            <!-- Logo -->
+            <div class="hidden lg:block">
+                <a href="{{ url('/') }}" class="text-xl font-bold text-gray-800">
+                    <span class="text-blue-600">Faveo</span> HELPDESK
+                </a>
+            </div>
+
+            <!-- Top Navigation Tabs -->
+            <nav class="hidden md:flex items-center space-x-1">
+                <a href="#" class="px-3 py-2 text-sm font-medium text-gray-600 hover:text-gray-900 hover:bg-gray-100 rounded">Home</a>
+                <a href="#" class="px-3 py-2 text-sm font-medium text-gray-600 hover:text-gray-900 hover:bg-gray-100 rounded @yield('Staffs')">Staffs</a>
+                <a href="#" class="px-3 py-2 text-sm font-medium text-gray-600 hover:text-gray-900 hover:bg-gray-100 rounded @yield('Emails')">Emails</a>
+                <a href="#" class="px-3 py-2 text-sm font-medium text-gray-600 hover:text-gray-900 hover:bg-gray-100 rounded @yield('Manage')">Manage</a>
+                <a href="#" class="px-3 py-2 text-sm font-medium text-gray-600 hover:text-gray-900 hover:bg-gray-100 rounded @yield('Settings')">Settings</a>
+                <a href="#" class="px-3 py-2 text-sm font-medium text-gray-600 hover:text-gray-900 hover:bg-gray-100 rounded @yield('Themes')">Themes</a>
+            </nav>
+
+            <!-- Right Side -->
+            <div class="flex items-center space-x-4">
+                <a href="{{ url('user') }}" class="text-sm font-medium text-gray-600 hover:text-gray-900">Agent Panel</a>
+                
+                <!-- Dark Mode Toggle -->
+                <button class="dark-mode-toggle" data-toggle="dark-mode" title="Toggle Dark Mode">
+                    <i class="fas fa-sun icon-sun absolute text-yellow-500"></i>
+                    <i class="fas fa-moon icon-moon absolute text-blue-400"></i>
+                </button>
+                
+                <!-- User Dropdown -->
+                <div class="relative">
+                    <button class="flex items-center space-x-2 hover:bg-gray-100 rounded-full p-1 transition-colors" data-toggle="dropdown">
+                        @if(Auth::user())
+                            @if(Auth::user()->profile_pic)
+                                <img src="{{ asset('lb-faveo/dist/img/'.Auth::user()->profile_pic) }}" class="w-8 h-8 rounded-full" alt="{{ Auth::user()->first_name }}">
+                            @else
+                                <img src="{{ Gravatar::src(Auth::user()->email) }}" class="w-8 h-8 rounded-full" alt="{{ Auth::user()->first_name }}">
+                            @endif
+                            <span class="hidden md:block text-sm font-medium text-gray-700">{{ Auth::user()->first_name }} {{ Auth::user()->last_name }}</span>
+                            <i class="fas fa-chevron-down text-xs text-gray-500"></i>
+                        @endif
+                    </button>
+                    <div class="dropdown-menu hidden">
+                        <div class="px-4 py-3 border-b border-gray-200">
+                            <p class="text-sm font-semibold text-gray-900">Account</p>
+                        </div>
+                        <a href="{{ url('admin-profile') }}" class="dropdown-item">
+                            <i class="fas fa-user w-4"></i> Profile
+                        </a>
+                        <div class="dropdown-divider"></div>
+                        <a href="{{ url('auth/logout') }}" class="dropdown-item text-red-600">
+                            <i class="fas fa-sign-out-alt w-4"></i> Logout
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="flex-1 overflow-x-hidden overflow-y-auto">
+            <!-- Breadcrumb -->
+            @hasSection('breadcrumbs')
+            <div class="bg-white border-b border-gray-200 px-4 py-3">
+                <nav class="breadcrumb">
+                    @yield('breadcrumbs')
+                </nav>
+            </div>
+            @endif
+
+            <!-- Sub Navigation -->
+            @hasSection('sub-navigation')
+            <div class="bg-white border-b border-gray-200 px-4">
+                <div class="flex space-x-4">
+                    @yield('sub-navigation')
+                </div>
+            </div>
+            @endif
+
+            <div class="container mx-auto px-4 py-6">
+                <!-- Page Header -->
+                @yield('PageHeader')
+                
+                <!-- Flash Messages -->
+                @if(Session::has('success'))
+                    <div class="alert alert-success flex items-center justify-between mb-4">
+                        <div class="flex items-center">
+                            <i class="fas fa-check-circle mr-2"></i>
+                            <span><strong>Success!</strong> {{ Session::get('success') }}</span>
+                        </div>
+                        <button type="button" class="text-green-800 hover:text-green-900" data-dismiss="alert">
+                            <i class="fas fa-times"></i>
+                        </button>
+                    </div>
+                @endif
+                
+                @if(Session::has('fails'))
+                    <div class="alert alert-danger flex items-center justify-between mb-4">
+                        <div class="flex items-center">
+                            <i class="fas fa-exclamation-circle mr-2"></i>
+                            <span><strong>Error!</strong> {{ Session::get('fails') }}</span>
+                        </div>
+                        <button type="button" class="text-red-800 hover:text-red-900" data-dismiss="alert">
+                            <i class="fas fa-times"></i>
+                        </button>
+                    </div>
+                @endif
+
+                <!-- Main Content -->
+                @yield('content')
+            </div>
+        </main>
+
+        <!-- Footer -->
+        <footer class="app-footer mt-auto py-4 px-6 text-sm">
+            <div class="flex items-center justify-between">
+                <div>
+                    <?php
+                        $company = App\Model\helpdesk\Settings\Company::where('id', '=', '1')->first();
+                    ?>
+                    <strong>Copyright &copy; {{ date('Y') }} 
+                        <a href="{{ $company->website ?? '#' }}" class="text-blue-600 hover:text-blue-800">{{ $company->company_name ?? 'Faveo' }}</a>.
+                    </strong> All rights reserved. 
+                    Powered by <a href="http://www.faveohelpdesk.com/" target="_blank" class="text-blue-600 hover:text-blue-800">Faveo</a>
+                </div>
+                <div>
+                    <span class="font-semibold">Version</span> 0.1
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    @yield('FooterInclude')
+</body>
+</html>
+
+    <!-- Header -->
+    <header class="app-header navbar">
+        <button class="navbar-toggler sidebar-toggler d-lg-none mr-auto" type="button" data-toggle="sidebar-show">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        
+        <a class="navbar-brand" href="{{ url('/') }}">
+            <span class="navbar-brand-full">
+                <b>Faveo </b>HELPDESK
+            </span>
+            <span class="navbar-brand-minimized">
+                <b>F</b>H
+            </span>
+        </a>
+        
+        <button class="navbar-toggler sidebar-toggler d-md-down-none" type="button" data-toggle="sidebar-lg-show">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <!-- Top Navigation Tabs -->
+        <ul class="nav navbar-nav d-md-down-none">
+            <li class="nav-item px-3">
+                <a class="nav-link" href="#">Home</a>
+            </li>
+            <li class="nav-item px-3 @yield('Staffs')">
+                <a class="nav-link" href="#">Staffs</a>
+            </li>
+            <li class="nav-item px-3 @yield('Emails')">
+                <a class="nav-link" href="#">Emails</a>
+            </li>
+            <li class="nav-item px-3 @yield('Manage')">
+                <a class="nav-link" href="#">Manage</a>
+            </li>
+            <li class="nav-item px-3 @yield('Settings')">
+                <a class="nav-link" href="#">Settings</a>
+            </li>
+            <li class="nav-item px-3 @yield('Themes')">
+                <a class="nav-link" href="#">Themes</a>
+            </li>
+        </ul>
+
+        <ul class="nav navbar-nav ml-auto">
+            <li class="nav-item px-3">
+                <a class="nav-link" href="{{ url('user') }}">Agent Panel</a>
+            </li>
+            
+            <!-- User Dropdown -->
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle nav-link" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+                    @if(Auth::user())
+                        @if(Auth::user()->profile_pic)
+                            <img src="{{ asset('lb-faveo/dist/img/'.Auth::user()->profile_pic) }}" class="img-avatar" alt="{{ Auth::user()->first_name }}">
+                        @else
+                            <img src="{{ Gravatar::src(Auth::user()->email) }}" class="img-avatar" alt="{{ Auth::user()->first_name }}">
+                        @endif
+                        <span class="d-md-down-none">{{ Auth::user()->first_name }} {{ Auth::user()->last_name }}</span>
+                    @endif
+                </a>
+                <div class="dropdown-menu dropdown-menu-right">
+                    <div class="dropdown-header text-center">
+                        <strong>Account</strong>
+                    </div>
+                    <a class="dropdown-item" href="{{ url('admin-profile') }}">
+                        <i class="fa fa-user"></i> Profile
                     </a>
-                    <!-- Collect the nav links, forms, and other content for toggling -->
-                    <div class="collapse navbar-collapse" id="navbar-collapse">
-                        <ul class="tabs tabs-horizontal nav navbar-nav">
-                            <li><a data-target="#tabA" href="#">Home</a></li>
-                            <li @yield('Staffs')><a data-target="#tabB" href="#">Staffs</a></li>
-                            <li @yield('Emails')><a data-target="#tabC" href="#">Emails</a></li>
-                            <li @yield('Manage')><a data-target="#tabD" href="#">Manage</a></li>
-                            <li @yield('Settings')><a data-target="#tabE" href="#">Settings</a></li>
-                            <li @yield('Themes')><a data-target="#tabF" href="#">Themes</a></li>
-                        </ul>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="{{ url('auth/logout') }}">
+                        <i class="fa fa-lock"></i> Logout
+                    </a>
+                </div>
+            </li>
+        </ul>
+    </header>
 
-                        <ul class="nav navbar-nav navbar-right">
-                            <li><a href="{{url('user')}}">Agent Panel</a></li>
-                            <!-- User Account: style can be found in dropdown.less -->
-                            <li class="dropdown user user-menu">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                @if(Auth::user())
-                                    @if(Auth::user()->profile_pic)
-                                        <img src="{{asset('lb-faveo/dist/img')}}{{'/'}}{{Auth::user()->profile_pic}}"class="user-image" alt="User Image"/>
-                                    @else
-                                        <img src="{{ Gravatar::src(Auth::user()->email) }}" class="user-image" alt="User Image">
-                                    @endif
-                                    <span class="hidden-xs">{!! Auth::user()->first_name." ".Auth::user()->last_name !!}</span>
-                                @endif
-                                </a>
-                                <ul class="dropdown-menu">
-                                    <!-- User image -->
-                                    <li class="user-header" style="background-color:#343F44;">
-                                    @if(Auth::user())
-                                        @if(Auth::user()->profile_pic)
-                                            <img src="{{asset('lb-faveo/lb-faveo/dist/img')}}{{'/'}}{{Auth::user()->profile_pic}}" class="img-circle" alt="User Image" />
-                                        @else
-                                            <img src="{{ Gravatar::src(Auth::user()->email) }}" class="img-circle" alt="User Image">
-                                        @endif
-                                        <p>
-                                            {!! Auth::user()->first_name !!}{!! " ". Auth::user()->last_name !!} - {{Auth::user()->role}}
-                                            <small></small>
-                                        </p>
-                                    @endif
-                                    </li>
-                                    <!-- Menu Footer-->
+    <div class="app-body">
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <nav class="sidebar-nav">
+                <!-- User Panel -->
+                <div class="sidebar-header text-center py-3">
+                    @if(Auth::user())
+                        @if(Auth::user()->profile_pic)
+                            <img src="{{ asset('lb-faveo/dist/img/'.Auth::user()->profile_pic) }}" class="img-avatar" alt="User Image" width="80">
+                        @else
+                            <img src="{{ Gravatar::src(Auth::user()->email) }}" class="img-avatar" alt="User Image" width="80">
+                        @endif
+                        <div class="mt-2">
+                            <strong>{{ Auth::user()->first_name }} {{ Auth::user()->last_name }}</strong>
+                        </div>
+                        <div class="text-muted">
+                            @if(Auth::user() && Auth::user()->active == 1)
+                                <i class="fa fa-circle text-success"></i> Online
+                            @else
+                                <i class="fa fa-circle text-muted"></i> Offline
+                            @endif
+                        </div>
+                    @endif
+                </div>
 
-                                    <li class="user-footer"  style="background-color:#1a2226;">
-                                        <div class="pull-left">
-                                            <a href="{{url('admin-profile')}}" class="btn btn-info btn-sm"><b>Profile</b></a>
-                                        </div>
-                                        <div class="pull-right">
-                                            <a href="{{url('auth/logout')}}" class="btn btn-danger btn-sm"><b>Sign out</b></a>
-                                        </div>
-                                    </li>
-                                </ul>
-                            </li>
-
-                            </nav>
-                            </header>
-                            <!-- Left side column. contains the logo and sidebar -->
-                            <aside class="main-sidebar">
-                                <!-- sidebar: style can be found in sidebar.less -->
-                                <section class="sidebar">
-                                    <div class="user-panel">
-                                    <div class = "row">
-                                        <div class="col-xs-3"></div>
-
-                                        <div class="col-xs-2" style="width:50%;">
-                                        @if(Auth::user() && Auth::user()->profile_pic)
-                                            <img src="{{asset('lb-faveo/dist/img')}}{{'/'}}{{Auth::user()->profile_pic}}" class="img-circle" alt="User Image" />
-                                        @else
-                                            <img src="{{ Gravatar::src(Auth::user()->email) }}" class="img-circle" alt="User Image">
-                                        @endif
-
-                                        </div>
-                                    </div>
-                                        <div class="info" style="text-align:center;">
-                                            @if(Auth::user())
-                                                <p>{!! Auth::user()->first_name !!}{!! " ". Auth::user()->last_name !!}</p>
-                                            @endif
-                                            @if(Auth::user() && Auth::user()->active==1)
-                                                <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
-                                            @else
-                                                <a href="#"><i class="fa fa-circle"></i> Offline</a>
-                                            @endif
-                                        </div>
-                                    </div>
-                                    <!-- search form -->
-                                    <form action="#" method="get" class="sidebar-form">
-                                        <div class="input-group">
-                                            <input type="text" name="q" class="form-control" placeholder="Search..."/>
-                                            <span class="input-group-btn">
-                                                <button type='submit' name='seach' id='search-btn' class="btn btn-flat"><i class="fa fa-search"></i></button>
-                                            </span>
-                                        </div>
-                                    </form>
-                                    <!-- /.search form -->
-                                    <!-- sidebar menu: : style can be found in sidebar.less -->
-                                    <ul class="sidebar-menu">
-                                                                                <li class="header">TICKETS</li>
-
-<?php
- $inbox = App\Model\helpdesk\Ticket\Tickets::get();
-    ?>
-     <?php $myticket = App\Model\helpdesk\Ticket\Tickets::where('assigned_to', Auth::user()->id)->where('status','1')->get();?>
-     <?php $unassigned = App\Model\helpdesk\Ticket\Tickets::where('assigned_to', '0')->where('status','1')->get();
-            $tickets = App\Model\helpdesk\Ticket\Tickets::where('status','1')->get();
-            $i = count($tickets);
-     ?>
-                                        <li>
-                                            <a href="{{ url('/ticket/open') }}">
-                                                <i class="fa fa-envelope"></i> <span>Inbox</span> <small class="label pull-right bg-green"><?php echo $i;?></small>
-                                            </a>
-                                        </li>
-<?php
-//}
-?>
-
-                                        <li @yield('myticket')>
-                                             <a href="{{url('ticket/myticket')}}">
-                                                <i class="fa fa-user"></i> <span>My Tickets</span>
-
-                                                <small class="label pull-right bg-green">{{count($myticket) }}</small>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="{{url('unassigned')}}">
-                                                <i class="fa fa-th"></i> <span>Unassigned</span>
-
-                                                <small class="label pull-right bg-green">{{count($unassigned)}}</small>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="{{url('trash')}}">
-                                                <i class="fa fa-trash-o"></i> <span>Trash</span>
-                                                <?php $deleted = App\Model\helpdesk\Ticket\Tickets::where('status', '5')->get();?>
-                                                <small class="label pull-right bg-green">{{count($deleted)}}</small>
-                                            </a>
-                                        </li>
-                                </section>
-                                <!-- /.sidebar -->
-                            </aside>
-
-                            <!-- Right side column. Contains the navbar and content of the page -->
-                            <div class="content-wrapper">
-                                <!-- Content Header (Page header) -->
-                                <div class="tab-content" style="background-color: white;padding: 0 20px 0 20px">
-                                    <div class="collapse navbar-collapse" id="navbar-collapse">
-                                        <div class="tabs-content">
-                                            <div class="tabs-pane active" id="tabA">
-                                                <ul class="nav navbar-nav">
-
-                                                </ul>
-                                            </div>
-                                            <div class="tabs-pane @yield('staffs-bar')" id="tabB">
-                                                <ul class="nav navbar-nav">
-                                                    <li id="bar" @yield('staffs')><a href="{{ url('agents') }}" >Staffs</a></li></a></li>
-                                                    <li id="bar" @yield('departments')><a href="{{ url('departments') }}" >Departments</a></li></a></li>
-                                                    <li id="bar" @yield('teams')><a href="{{ url('teams') }}" >Teams</a></li></a></li>
-                                                    <li id="bar" @yield('groups')><a href="{{ url('groups') }}" >Groups</a></li></a></li>
-                                                </ul>
-                                            </div>
-                                            <div class="tabs-pane @yield('emails-bar')" id="tabC">
-                                                <ul class="nav navbar-nav">
-                                                    <li id="bar" @yield('emails')><a href="{{ url('emails') }}" >Emails</a></li></a></li>
-                                                    <li id="bar" @yield('ban')><a href="{{ url('banlist') }}" >Ban List</a></li>
-                                                    <li id="bar" @yield('template')><a href="{{ url('template') }}" >Template</a></li>
-                                                    <li id="bar" @yield('diagno')><a href="{{ url('getdiagno') }}" >Diagnostic</a></li>
-                                                    <li id="bar" @yield('smtp')><a href="{{ url('getsmtp') }}" >Smtp</a></li>
-                                                </ul>
-                                            </div>
-                                            <div class="tabs-pane @yield('manage-bar')" id="tabD">
-                                                <ul class="nav navbar-nav">
-                                                    <li id="bar" @yield('help')><a href="{{url('helptopic')}}">Help Topic</a></li>
-                                                    <li id="bar" @yield('sla')><a href="{{url('sla')}}">SLA Plans</a></li>
-                                                    {{-- <li id="bar" @yield('forms')><a href="#">Forms</a></li> --}}
-                                                </ul>
-                                            </div>
-                                            <div class="tabs-pane @yield('settings-bar')" id="tabE">
-                                                <ul class="nav navbar-nav">
-                                                    <li id="bar" @yield('company')><a href="{{url('getcompany')}}">Company</a></li>
-                                                    <li id="bar" @yield('system')><a href="{{url('getsystem')}}">System</a></li>
-                                                    <li id="bar" @yield('email')><a href="{{url('getemail')}}">Email</a></li>
-                                                    <li id="bar" @yield('tickets')><a href="{{url('getticket')}}">Tickets</a></li>
-                                                    <li id="bar" @yield('access')><a href="{{url('getaccess')}}">Access</a></li>
-                                                    <li id="bar" @yield('auto-response')><a href="{{url('getresponder')}}">Auto-Responce</a></li>
-                                                    <li id="bar" @yield('alert')><a href="{{url('getalert')}}">Alert & Notice</a></li>
-                                                </ul>
-                                            </div>
-                                            <div class="tabs-pane @yield('theme-bar')" id="tabF">
-                                                <ul class="nav navbar-nav">
-                                                    <li id="bar" @yield('footer')><a href="{{ url('create-footer') }}" >Footer</a></li></a></li>
-                                                    <li id="bar" @yield('footer2')><a href="{{ url('create-footer2') }}" >Footer2</a></li></a></li>
-                                                    <li id="bar" @yield('footer3')><a href="{{ url('create-footer3') }}" >Footer3</a></li></a></li>
-                                                    <li id="bar" @yield('footer4')><a href="{{ url('create-footer4') }}" >Footer4</a></li></a></li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <section class="content-header">
-                                    @yield('PageHeader')
-                                    @yield('breadcrumbs')
-                                </section>
-
-                                <!-- Main content -->
-                                <section class="content">
-                                    @yield('content')
-                                </section><!-- /.content -->
-                                <!-- /.content-wrapper -->
+                <!-- Search Form -->
+                <div class="px-3 py-2">
+                    <form action="#" method="get">
+                        <div class="input-group">
+                            <input type="text" name="q" class="form-control" placeholder="Search...">
+                            <div class="input-group-append">
+                                <button class="btn btn-secondary" type="submit">
+                                    <i class="fa fa-search"></i>
+                                </button>
                             </div>
-                            <footer class="main-footer">
-                                <div class="pull-right hidden-xs">
-                                    <b>{!! Lang::get('lang.version') !!}</b> 0.1
-                                </div>
-                                <?php
-                                $company = App\Model\helpdesk\Settings\Company::where('id','=','1')->first();
-                                ?>
-                                <strong>Copyright &copy; {!! date('Y') !!}  <a href="{!! $company->website !!}">{!! $company->company_name !!}</a>.</strong> All rights reserved. Powered by <a href="http://www.faveohelpdesk.com/" target="blank">Faveo</a>
-                            </footer>
-                    </div><!-- ./wrapper -->
+                        </div>
+                    </form>
+                </div>
 
-                    <!-- jQuery 2.1.3 -->
-                    <script src="{{asset("lb-faveo/downloads/ajax-jquery.min.js")}}"></script>
-                    <!-- Bootstrap 3.3.2 JS -->
-                    <script src="{{asset("lb-faveo/downloads/bootstrap.min.js")}}" type="text/javascript"></script>
-                    <!-- Slimscroll -->
-                    <script src="{{asset("lb-faveo/plugins/slimScroll/jquery.slimscroll.min.js")}}" type="text/javascript"></script>
-                    <!-- FastClick -->
-                    <script src="{{asset("lb-faveo/plugins/fastclick/fastclick.min.js")}}"></script>
-                    <!-- AdminLTE App -->
-                    <script src="{{asset("lb-faveo/dist/js/app.min.js")}}" type="text/javascript"></script>
-                    <!-- AdminLTE for demo purposes -->
-                    {{-- // <script src="{{asset("dist/js/demo.js")}}" type="text/javascript"></script> --}}
-                    <!-- iCheck -->
-                    <script src="{{asset("lb-faveo/plugins/iCheck/icheck.min.js")}}" type="text/javascript"></script>
-                    <!-- Page Script -->
-                    <script src="ckeditor/ckeditor.js"></script>
-                    <script>
-$(function() {
-    //Enable iCheck plugin for checkboxes
-    //iCheck for checkbox and radio inputs
-    $('input[type="checkbox"]').iCheck({
-        checkboxClass: 'icheckbox_flat-blue',
-        radioClass: 'iradio_flat-blue'
-    });
+                <ul class="nav">
+                    <li class="nav-title">TICKETS</li>
+                    
+                    <?php
+                        $inbox = App\Model\helpdesk\Ticket\Tickets::get();
+                        $myticket = App\Model\helpdesk\Ticket\Tickets::where('assigned_to', Auth::user()->id)->where('status','1')->get();
+                        $unassigned = App\Model\helpdesk\Ticket\Tickets::where('assigned_to', '0')->where('status','1')->get();
+                        $tickets = App\Model\helpdesk\Ticket\Tickets::where('status','1')->get();
+                        $i = count($tickets);
+                    ?>
+                    
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url('/ticket/open') }}">
+                            <i class="nav-icon fa fa-envelope"></i> Inbox
+                            <span class="badge badge-success">{{ $i }}</span>
+                        </a>
+                    </li>
+                    
+                    <li class="nav-item @yield('myticket')">
+                        <a class="nav-link" href="{{ url('ticket/myticket') }}">
+                            <i class="nav-icon fa fa-user"></i> My Tickets
+                            <span class="badge badge-success">{{ count($myticket) }}</span>
+                        </a>
+                    </li>
+                    
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url('unassigned') }}">
+                            <i class="nav-icon fa fa-th"></i> Unassigned
+                            <span class="badge badge-success">{{ count($unassigned) }}</span>
+                        </a>
+                    </li>
+                    
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url('trash') }}">
+                            <i class="nav-icon fa fa-trash"></i> Trash
+                            <?php $deleted = App\Model\helpdesk\Ticket\Tickets::where('status', '5')->get(); ?>
+                            <span class="badge badge-success">{{ count($deleted) }}</span>
+                        </a>
+                    </li>
 
-    //Enable check and uncheck all functionality
-    $(".checkbox-toggle").click(function() {
-        var clicks = $(this).data('clicks');
-        if (clicks) {
-            //Uncheck all checkboxes
-            $("input[type='checkbox']", ".mailbox-messages").iCheck("uncheck");
-        } else {
-            //Check all checkboxes
-            $("input[type='checkbox']", ".mailbox-messages").iCheck("check");
-        }
-        $(this).data("clicks", !clicks);
-    });
+                    @yield('sidebar-extra')
+                </ul>
+            </nav>
+            
+            <button class="sidebar-minimizer brand-minimizer" type="button"></button>
+        </div>
 
-    //Handle starring for glyphicon and font awesome
-    $(".mailbox-star").click(function(e) {
-        e.preventDefault();
-        //detect type
-        var $this = $(this).find("a > i");
-        var glyph = $this.hasClass("glyphicon");
-        var fa = $this.hasClass("fa");
+        <!-- Main Content -->
+        <main class="main">
+            <!-- Breadcrumb -->
+            <ol class="breadcrumb">
+                @yield('breadcrumbs')
+            </ol>
 
-        //Switch states
-        if (glyph) {
-            $this.toggleClass("glyphicon-star");
-            $this.toggleClass("glyphicon-star-empty");
-        }
+            <!-- Sub Navigation -->
+            @hasSection('sub-navigation')
+            <div class="container-fluid">
+                <div class="card">
+                    <div class="card-header">
+                        @yield('sub-navigation')
+                    </div>
+                </div>
+            </div>
+            @endif
 
-        if (fa) {
-            $this.toggleClass("fa-star");
-            $this.toggleClass("fa-star-o");
-        }
-    });
-});
-                    </script>
-                    <script type="text/javascript">
-                        //     $(document).ready(function() {
+            <div class="container-fluid">
+                <!-- Page Header -->
+                @yield('PageHeader')
+                
+                <!-- Flash Messages -->
+                @if(Session::has('success'))
+                    <div class="alert alert-success alert-dismissible fade show">
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                        <strong>Success!</strong> {{ Session::get('success') }}
+                    </div>
+                @endif
+                
+                @if(Session::has('fails'))
+                    <div class="alert alert-danger alert-dismissible fade show">
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                        <strong>Error!</strong> {{ Session::get('fails') }}
+                    </div>
+                @endif
 
-                        //         $("#content").Editor();
+                <!-- Main Content -->
+                @yield('content')
+            </div>
+        </main>
+    </div>
 
-                        //     });
-                        // </script>
-                   <!-- // <script src="../plugins/jQuery/jQuery-2.1.3.min.js"></script> -->
-                    <script src="{{asset("lb-faveo/dist/js/tabby.js")}}"></script>
-                     <!-- // <script src="{{asset("dist/js/editor.js")}}"></script> -->
-                    <!-- CK Editor -->
-                    <!-- // <script src="{{asset("//cdn.ckeditor.com/4.4.3/standard/ckeditor.js")}}"></script> -->
-                    <script src="{{asset("lb-faveo/downloads/CKEditor.js")}}"></script>
-                    <script src="{{asset("lb-faveo/plugins/filebrowser/plugin.js")}}"></script>
-                    <script src="{{asset("lb-faveo/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js")}}" type="text/javascript"></script>
-                    <script>
-                        $(function () {
-                        //Add text editor
-                        $("textarea").wysihtml5();
-                        });
-                    </script>
-                    @yield('FooterInclude')
-                    </body>
-                    </html>
+    <!-- Footer -->
+    <footer class="app-footer">
+        <div>
+            <?php
+                $company = App\Model\helpdesk\Settings\Company::where('id', '=', '1')->first();
+            ?>
+            <strong>Copyright &copy; {{ date('Y') }} 
+                <a href="{{ $company->website ?? '#' }}">{{ $company->company_name ?? 'Faveo' }}</a>.
+            </strong> All rights reserved. 
+            Powered by <a href="http://www.faveohelpdesk.com/" target="_blank">Faveo</a>
+        </div>
+        <div class="ml-auto">
+            <span><b>Version</b> 0.1</span>
+        </div>
+    </footer>
+
+    <!-- CoreUI and necessary plugins-->
+    <script src="{{ asset('js/app.js') }}"></script>
+    
+    @yield('FooterInclude')
+</body>
+</html>

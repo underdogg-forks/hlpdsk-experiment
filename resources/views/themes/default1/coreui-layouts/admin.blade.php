@@ -3,9 +3,9 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-    <meta name="description" content="Faveo HELPDESK - Agent Panel">
+    <meta name="description" content="Faveo HELPDESK - Admin Panel">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title>@yield('title', 'Faveo HELPDESK - Agent Panel')</title>
+    <title>@yield('title', 'Faveo HELPDESK')</title>
     
     <!-- CoreUI CSS -->
     <link href="{{ asset('css/coreui.css') }}" rel="stylesheet">
@@ -14,6 +14,13 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
     
     @yield('HeadInclude')
+    
+    <style>
+        /* Additional inline styles for CoreUI customization */
+        body {
+            font-family: var(--font-family-sans-serif);
+        }
+    </style>
 </head>
 
 <body class="app header-fixed sidebar-fixed aside-menu-fixed">
@@ -38,20 +45,29 @@
 
         <!-- Top Navigation Tabs -->
         <ul class="nav navbar-nav d-md-down-none">
-            <li class="nav-item px-3 @yield('Dashboard')">
-                <a class="nav-link" href="#">Dashboard</a>
+            <li class="nav-item px-3">
+                <a class="nav-link" href="#">Home</a>
             </li>
-            <li class="nav-item px-3 @yield('Users')">
-                <a class="nav-link" href="#">Users</a>
+            <li class="nav-item px-3 @yield('Staffs')">
+                <a class="nav-link" href="#">Staffs</a>
             </li>
-            <li class="nav-item px-3 @yield('Tickets')">
-                <a class="nav-link" href="#">Tickets</a>
+            <li class="nav-item px-3 @yield('Emails')">
+                <a class="nav-link" href="#">Emails</a>
+            </li>
+            <li class="nav-item px-3 @yield('Manage')">
+                <a class="nav-link" href="#">Manage</a>
+            </li>
+            <li class="nav-item px-3 @yield('Settings')">
+                <a class="nav-link" href="#">Settings</a>
+            </li>
+            <li class="nav-item px-3 @yield('Themes')">
+                <a class="nav-link" href="#">Themes</a>
             </li>
         </ul>
 
         <ul class="nav navbar-nav ml-auto">
             <li class="nav-item px-3">
-                <a class="nav-link" href="{{ url('agents') }}">Admin Panel</a>
+                <a class="nav-link" href="{{ url('user') }}">Agent Panel</a>
             </li>
             
             <!-- User Dropdown -->
@@ -70,7 +86,7 @@
                     <div class="dropdown-header text-center">
                         <strong>Account</strong>
                     </div>
-                    <a class="dropdown-item" href="{{ URL::route('profile') }}">
+                    <a class="dropdown-item" href="{{ url('admin-profile') }}">
                         <i class="fa fa-user"></i> Profile
                     </a>
                     <div class="dropdown-divider"></div>
@@ -89,13 +105,10 @@
                 <!-- User Panel -->
                 <div class="sidebar-header text-center py-3">
                     @if(Auth::user())
-                        @yield('profileimg')
-                        @if(!trim($__env->yieldContent('profileimg')))
-                            @if(Auth::user()->profile_pic)
-                                <img src="{{ asset('lb-faveo/dist/img/'.Auth::user()->profile_pic) }}" class="img-avatar" alt="User Image" width="80">
-                            @else
-                                <img src="{{ Gravatar::src(Auth::user()->email) }}" class="img-avatar" alt="User Image" width="80">
-                            @endif
+                        @if(Auth::user()->profile_pic)
+                            <img src="{{ asset('lb-faveo/dist/img/'.Auth::user()->profile_pic) }}" class="img-avatar" alt="User Image" width="80">
+                        @else
+                            <img src="{{ Gravatar::src(Auth::user()->email) }}" class="img-avatar" alt="User Image" width="80">
                         @endif
                         <div class="mt-2">
                             <strong>{{ Auth::user()->first_name }} {{ Auth::user()->last_name }}</strong>
@@ -125,12 +138,10 @@
                 </div>
 
                 <ul class="nav">
-                    @yield('sidebar')
-                    
                     <li class="nav-title">TICKETS</li>
                     
                     <?php
-                        $inbox = App\Model\helpdesk\Ticket\Tickets::all();
+                        $inbox = App\Model\helpdesk\Ticket\Tickets::get();
                         $myticket = App\Model\helpdesk\Ticket\Tickets::where('assigned_to', Auth::user()->id)->where('status','1')->get();
                         $unassigned = App\Model\helpdesk\Ticket\Tickets::where('assigned_to', '0')->where('status','1')->get();
                         $tickets = App\Model\helpdesk\Ticket\Tickets::where('status','1')->get();
@@ -166,85 +177,7 @@
                         </a>
                     </li>
 
-                    <li class="nav-title">DEPARTMENTS</li>
-                    
-                    <?php
-                        $depts = App\Model\helpdesk\Agent\Department::all();
-                        foreach ($depts as $dept) {
-                            $open = App\Model\helpdesk\Ticket\Tickets::where('status','=','1')->where('dept_id','=',$dept->id)->get();
-                            $open = count($open);
-                            
-                            $closed = App\Model\helpdesk\Ticket\Tickets::where('status','=','2')->where('dept_id','=',$dept->id)->get();
-                            $closed = count($closed);
-                            
-                            $underprocess = 0;
-                            foreach ($inbox as $ticket4) {
-                                if ($ticket4->assigned_to != null) {
-                                    $underprocess++;
-                                }
-                            }
-                            
-                            if (Auth::user()->role == 'admin') {
-                    ?>
-                                <li class="nav-item nav-dropdown">
-                                    <a class="nav-link nav-dropdown-toggle" href="#">
-                                        <i class="nav-icon fa fa-folder-open"></i> {{ $dept->name }}
-                                    </a>
-                                    <ul class="nav-dropdown-items">
-                                        <li class="nav-item">
-                                            <a class="nav-link" href="">
-                                                <i class="nav-icon fa fa-circle"></i> Open
-                                                <span class="badge badge-success">{{ $open }}</span>
-                                            </a>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a class="nav-link" href="">
-                                                <i class="nav-icon fa fa-circle"></i> In Progress
-                                                <span class="badge badge-success">{{ $underprocess }}</span>
-                                            </a>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a class="nav-link" href="">
-                                                <i class="nav-icon fa fa-circle"></i> Closed
-                                                <span class="badge badge-success">{{ $closed }}</span>
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </li>
-                    <?php
-                            }
-                            
-                            if (Auth::user()->role == 'agent' && Auth::user()->primary_dpt == $dept->name) {
-                    ?>
-                                <li class="nav-item nav-dropdown">
-                                    <a class="nav-link nav-dropdown-toggle" href="#">
-                                        <i class="nav-icon fa fa-folder-open"></i> {{ $dept->name }}
-                                    </a>
-                                    <ul class="nav-dropdown-items">
-                                        <li class="nav-item">
-                                            <a class="nav-link" href="">
-                                                <i class="nav-icon fa fa-circle"></i> Open
-                                                <span class="badge badge-success">{{ $open }}</span>
-                                            </a>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a class="nav-link" href="">
-                                                <i class="nav-icon fa fa-circle"></i> In Progress
-                                                <span class="badge badge-success">{{ $underprocess }}</span>
-                                            </a>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a class="nav-link" href="">
-                                                <i class="nav-icon fa fa-circle"></i> Closed
-                                                <span class="badge badge-success">{{ $closed }}</span>
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </li>
-                    <?php
-                            }
-                        }
-                    ?>
+                    @yield('sidebar-extra')
                 </ul>
             </nav>
             
@@ -253,11 +186,6 @@
 
         <!-- Main Content -->
         <main class="main">
-            <?php 
-                $agent_group = Auth::user()->assign_group;
-                $group = App\Model\helpdesk\Agent\Groups::where('name', '=', $agent_group)->where('group_status', '=', '1')->first();
-            ?>
-            
             <!-- Breadcrumb -->
             <ol class="breadcrumb">
                 @yield('breadcrumbs')
@@ -268,9 +196,7 @@
             <div class="container-fluid">
                 <div class="card">
                     <div class="card-header">
-                        <ul class="nav nav-tabs card-header-tabs">
-                            @yield('sub-navigation')
-                        </ul>
+                        @yield('sub-navigation')
                     </div>
                 </div>
             </div>
