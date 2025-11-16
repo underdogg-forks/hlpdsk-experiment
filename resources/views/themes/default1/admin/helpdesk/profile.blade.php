@@ -17,7 +17,7 @@
                         <i class="fa fa-ban"></i>
                         <b>Alert!</b> Success.
                         <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-                        {{Session::get('success')}}
+                        {{ session('success') }}
                     </div>
                     @endif
                     <!-- fail message -->
@@ -26,7 +26,7 @@
                         <i class="fa fa-ban"></i>
                         <b>Alert!</b> Failed.
                         <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-                        {{Session::get('fails')}}
+                        {{ session('fails') }}
                     </div>
                     @endif
 

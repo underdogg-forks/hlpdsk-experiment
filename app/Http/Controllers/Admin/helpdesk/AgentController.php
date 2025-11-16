@@ -112,11 +112,11 @@ class AgentController extends Controller
     public function store(AgentRequest $request, User $user)
     {
         if ($request->get('country_code') == '' && ($request->get('phone_number') != '' || $request->get('mobile') != '')) {
-            return redirect()->back()->with(['fails2' => Lang::get('lang.country-code-required-error'), 'country_code' => 1])->withInput();
+            return redirect()->back()->with(['fails2' => trans('lang.country-code-required-error'), 'country_code' => 1])->withInput();
         } else {
             $code = CountryCode::select('phonecode')->where('phonecode', '=', $request->get('country_code'))->get();
             if (!count($code)) {
-                return redirect()->back()->with(['fails2' => Lang::get('lang.incorrect-country-code-error'), 'country_code' => 1])->withInput();
+                return redirect()->back()->with(['fails2' => trans('lang.incorrect-country-code-error'), 'country_code' => 1])->withInput();
             }
         }
         // fixing the user role to agent
@@ -152,7 +152,7 @@ class AgentController extends Controller
                     $this->PhpMailController->sendmail($from = $this->PhpMailController->mailfrom('1', '0'), $to = ['name' => $name, 'email' => $email], $message = ['subject' => null, 'scenario' => 'registration-notification'], $template_variables = ['user' => $name, 'email_address' => $email, 'user_password' => $password]);
                 } catch (Exception $e) {
                     // returns if try fails
-                    return redirect('agents')->with('warning', Lang::get('lang.agent_send_mail_error_on_agent_creation'));
+                    return redirect('agents')->with('warning', trans('lang.agent_send_mail_error_on_agent_creation'));
                 }
             }
             // returns for the success case
@@ -160,10 +160,10 @@ class AgentController extends Controller
                 event(new \App\Events\LoginEvent($request));
             }
 
-            return redirect('agents')->with('success', Lang::get('lang.agent_creation_success'));
+            return redirect('agents')->with('success', trans('lang.agent_creation_success'));
         } else {
             // returns if fails
-            return redirect('agents')->with('fails', Lang::get('lang.failed_to_create_agent'));
+            return redirect('agents')->with('fails', trans('lang.failed_to_create_agent'));
         }
     }
 
@@ -197,7 +197,7 @@ class AgentController extends Controller
 
             return view('themes.default1.admin.helpdesk.agent.agents.edit', compact('teams', 'assign', 'table', 'teams1', 'user', 'timezones', 'groups', 'departments', 'team'))->with('phonecode', $phonecode->phonecode);
         } catch (Exception $e) {
-            return redirect('agents')->with('fail', Lang::get('lang.failed_to_edit_agent'));
+            return redirect('agents')->with('fail', trans('lang.failed_to_edit_agent'));
         }
     }
 
@@ -214,11 +214,11 @@ class AgentController extends Controller
     public function update($id, User $user, AgentUpdate $request, Assign_team_agent $team_assign_agent)
     {
         if ($request->get('country_code') == '' && ($request->get('phone_number') != '' || $request->get('mobile') != '')) {
-            return redirect()->back()->with(['fails2' => Lang::get('lang.country-code-required-error'), 'country_code' => 1])->withInput();
+            return redirect()->back()->with(['fails2' => trans('lang.country-code-required-error'), 'country_code' => 1])->withInput();
         } else {
             $code = CountryCode::select('phonecode')->where('phonecode', '=', $request->get('country_code'))->get();
             if (!count($code)) {
-                return redirect()->back()->with(['fails2' => Lang::get('lang.incorrect-country-code-error'), 'country_code' => 1])->withInput();
+                return redirect()->back()->with(['fails2' => trans('lang.incorrect-country-code-error'), 'country_code' => 1])->withInput();
             }
         }
         // storing all the details
@@ -248,9 +248,9 @@ class AgentController extends Controller
             $user->agent_tzone = $request->agent_time_zone;
             $user->save();
 
-            return redirect('agents')->with('success', Lang::get('lang.agent_updated_sucessfully'));
+            return redirect('agents')->with('success', trans('lang.agent_updated_sucessfully'));
         } catch (Exception $e) {
-            return redirect('agents')->with('fails', Lang::get('lang.unable_to_update_agent').'<li>'.$e->errorInfo[2].'</li>');
+            return redirect('agents')->with('fails', trans('lang.unable_to_update_agent').'<li>'.$e->errorInfo[2].'</li>');
         }
     }
 
@@ -274,13 +274,13 @@ class AgentController extends Controller
         $user = $user->whereId($id)->first();
 
         try {
-            $error = Lang::get('lang.this_staff_is_related_to_some_tickets');
+            $error = trans('lang.this_staff_is_related_to_some_tickets');
             $user->id;
             $user->delete();
 
             throw new \Exception($error);
 
-            return redirect('agents')->with('success', Lang::get('lang.agent_deleted_sucessfully'));
+            return redirect('agents')->with('success', trans('lang.agent_deleted_sucessfully'));
         } catch (\Exception $e) {
             return redirect('agents')->with('fails', $error);
         }

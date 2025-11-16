@@ -17,7 +17,7 @@ class="nav-link active"
 @stop
 
 @section('PageHeader')
-<h1>{!! Lang::get('lang.settings') !!}</h1>
+<h1>{{ trans('lang.settings') }}</h1>
 @stop
 
 @section('header')
@@ -27,15 +27,15 @@ class="nav-link active"
 @if(Session::has('success'))
 <div class="alert alert-success alert-dismissable">
     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-    <span>{{Session::get('success')}}</span>                
+    <span>{{ session('success') }}</span>                
 </div>
 @endif
 <div class="card card-light">
     <div class="card-header">
-        <h3 class="card-title">{!! Lang::get('lang.current_ratings') !!}</h3>
+        <h3 class="card-title">{{ trans('lang.current_ratings') }}</h3>
         <div class="card-tools">
-            <a class="btn btn-default btn-tool" href="{{ route('rating.create') }}" title="{!! Lang::get('lang.create') !!}">
-                <i class="fas fa-plus"></i> {!! Lang::get('lang.create') !!}
+            <a class="btn btn-default btn-tool" href="{{ route('rating.create') }}" title="{{ trans('lang.create') }}">
+                <i class="fas fa-plus"></i> {{ trans('lang.create') }}
             </a>
         </div><!-- /.box-header -->
     </div>
@@ -43,10 +43,10 @@ class="nav-link active"
         <table id="example1" class="table table-bordered table-striped">
             <thead>
                 <tr>
-                    <th>{!! Lang::get('lang.name') !!}</th>
-                    <th>{!! Lang::get('lang.display_order') !!}</th>
-                    <th>{!! Lang::get('lang.rating_area') !!}</th>
-                    <th>{!! Lang::get('lang.action') !!}</th>
+                    <th>{{ trans('lang.name') }}</th>
+                    <th>{{ trans('lang.display_order') }}</th>
+                    <th>{{ trans('lang.rating_area') }}</th>
+                    <th>{{ trans('lang.action') }}</th>
                 </tr>
             </thead>
             <tbody>
@@ -62,15 +62,15 @@ class="nav-link active"
                             <div class="modal-dialog">
                                 <div class="modal-content">
                                     <div class="modal-header">
-                                        <h4 class="modal-title">{!! Lang::get('lang.delete') !!}</h4>
+                                        <h4 class="modal-title">{{ trans('lang.delete') }}</h4>
                                         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                                     </div>
                                     <div class="modal-body">
-                                        <span>{!! Lang::get('lang.are_you_sure_you_want_to_delete') !!} ?</span>
+                                        <span>{{ trans('lang.are_you_sure_you_want_to_delete') }} ?</span>
                                     </div>
                                     <div class="modal-footer justify-content-between">
-                                        <button type="button" class="btn btn-default btn-sm" data-dismiss="modal">{!! Lang::get('lang.close') !!}</button>
-                                        {!! link_to_route('ratings.delete',Lang::get('lang.delete'),[$rating->id],['id'=>'delete','class'=>'btn btn-danger btn-sm']) !!}
+                                        <button type="button" class="btn btn-default btn-sm" data-dismiss="modal">{{ trans('lang.close') }}</button>
+                                        {!! link_to_route('ratings.delete',trans('lang.delete'),[$rating->id],['id'=>'delete','class'=>'btn btn-danger btn-sm']) !!}
                                     </div>
                                 </div> 
                             </div>

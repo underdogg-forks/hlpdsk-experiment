@@ -62,7 +62,7 @@ $thread = App\Model\helpdesk\Ticket\Ticket_Thread::where('ticket_id', '=', $tick
 
                                 <i class="fas fa-exchange-alt" style="color:teal;"> </i>
 
-                                {!! Lang::get('lang.change_status') !!}
+                                {{ trans('lang.change_status') }}
 
                                 <span class="caret"></span>
                             </button>
@@ -71,15 +71,15 @@ $thread = App\Model\helpdesk\Ticket\Ticket_Thread::where('ticket_id', '=', $tick
                             <div class="dropdown-menu">
 
                                 <a class="dropdown-item" href="#" id="open">
-                                    <i class="fas fa-folder-open" style="color:#FFD600;"> </i> {!! Lang::get('lang.open') !!}
+                                    <i class="fas fa-folder-open" style="color:#FFD600;"> </i> {{ trans('lang.open') }}
                                 </a>
 
                                 <a class="dropdown-item" href="#" id="close">
-                                    <i class="fas fa-check" style="color:#15F109;"> </i> {!! Lang::get('lang.close') !!}
+                                    <i class="fas fa-check" style="color:#15F109;"> </i> {{ trans('lang.close') }}
                                 </a>
 
                                 <a class="dropdown-item" href="#" id="resolved">
-                                    <i class="fas fa-check-circle " style="color:#0EF1BE;"> </i> {!! Lang::get('lang.resolved') !!}
+                                    <i class="fas fa-check-circle " style="color:#0EF1BE;"> </i> {{ trans('lang.resolved') }}
                                 </a>
                             </div>
                         </div>
@@ -151,13 +151,13 @@ $thread = App\Model\helpdesk\Ticket\Ticket_Thread::where('ticket_id', '=', $tick
                                 $sla = $tickets->sla;
                                 $SlaPlan = App\Model\helpdesk\Manage\Sla_plan::where('id', '=', $sla)->first();
                                 ?>
-                                <b>{!! Lang::get('lang.sla_plan') !!}: {{$SlaPlan->grace_period}} </b>
+                                <b>{{ trans('lang.sla_plan') }}: {{$SlaPlan->grace_period}} </b>
                             </div>
                             <div class="col-md-3">
-                                <b>{!! Lang::get('lang.created_date') !!}: </b> {{ UTC::usertimezone($tickets->created_at) }}
+                                <b>{{ trans('lang.created_date') }}: </b> {{ UTC::usertimezone($tickets->created_at) }}
                             </div>
                             <div class="col-md-3">
-                                <b>{!! Lang::get('lang.due_date') !!}: </b>
+                                <b>{{ trans('lang.due_date') }}: </b>
                                 <?php
                                 $time = $tickets->created_at;
                                 $time = date_create($time);
@@ -170,7 +170,7 @@ $thread = App\Model\helpdesk\Ticket\Ticket_Thread::where('ticket_id', '=', $tick
                                 @foreach($response as $last)
                                         <?php $ResponseDate = $last->created_at; ?>
                                 @endforeach
-                                <b>{!! Lang::get('lang.last_response') !!}: </b> {{ UTC::usertimezone($ResponseDate)}}
+                                <b>{{ trans('lang.last_response') }}: </b> {{ UTC::usertimezone($ResponseDate)}}
                             </div>
                         </div>
                     </div>
@@ -184,7 +184,7 @@ $thread = App\Model\helpdesk\Ticket\Ticket_Thread::where('ticket_id', '=', $tick
 
                             <tr>
 
-                                <td><b>{!! Lang::get('lang.status') !!}:</b></td>
+                                <td><b>{{ trans('lang.status') }}:</b></td>
 
                                 <?php $status = App\Model\helpdesk\Ticket\Ticket_Status::where('id', '=', $tickets->status)->first(); ?>
 
@@ -205,7 +205,7 @@ $thread = App\Model\helpdesk\Ticket\Ticket_Thread::where('ticket_id', '=', $tick
 
                             <tr>
 
-                                <td><b>{!! Lang::get('lang.priority') !!}:</b></td>
+                                <td><b>{{ trans('lang.priority') }}:</b></td>
 
                                 <?php $priority = App\Model\helpdesk\Ticket\Ticket_Priority::where('priority_id', '=', $tickets->priority_id)->first(); ?>
 
@@ -226,7 +226,7 @@ $thread = App\Model\helpdesk\Ticket\Ticket_Thread::where('ticket_id', '=', $tick
 
                             <tr>
 
-                                <td><b>{!! Lang::get('lang.department') !!}:</b></td>
+                                <td><b>{{ trans('lang.department') }}:</b></td>
                                 <?php
                                 $help_topic = App\Model\helpdesk\Manage\Help_topic::where('id', '=', $tickets->help_topic_id)->first();
                                 $department = App\Model\helpdesk\Agent\Department::where('id', '=', $help_topic->department)->first();
@@ -242,7 +242,7 @@ $thread = App\Model\helpdesk\Ticket\Ticket_Thread::where('ticket_id', '=', $tick
 
                             <tr>
 
-                                <td><b>{!! Lang::get('lang.help_topic') !!}:</b></td>
+                                <td><b>{{ trans('lang.help_topic') }}:</b></td>
 
                                 <?php $help_topic = App\Model\helpdesk\Manage\Help_topic::where('id', '=', $tickets->help_topic_id)->first(); ?>
 
@@ -251,7 +251,7 @@ $thread = App\Model\helpdesk\Ticket\Ticket_Thread::where('ticket_id', '=', $tick
 
                             <tr>
 
-                                <td><b>{!! Lang::get('lang.last_message') !!}:</b></td>
+                                <td><b>{{ trans('lang.last_message') }}:</b></td>
 
                                 <td>{{ucwords($last->poster)}}</td>
                             </tr>
@@ -435,23 +435,23 @@ foreach ($conversations as $conversation) {
 <div class="alert alert-success alert-dismissable" id='formabc'>
     <i class="fa  fa-check-circle"></i>
     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-    {{Session::get('success1')}}
+    {{ session('success1') }}
 </div>
 @endif
 <!-- failure message -->
 @if(Session::has('fails1'))
 <div class="alert alert-danger alert-dismissable" id='formabc'>
     <i class="fa fa-ban"></i>
-    <b>{!! Lang::get('lang.alert') !!}!</b>
+    <b>{{ trans('lang.alert') }}!</b>
     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-    {{Session::get('fails1')}}
+    {{ session('fails1') }}
 </div>
 @endif
 <?php $id2 = $tickets->id; ?>
 
                 <div id="respond" class="comment-respond form-border">
 
-                    <h3 id="reply-title" class="comment-reply-title section-title"><i class="line"></i>{!! Lang::get('lang.leave_a_reply') !!}</h3>
+                    <h3 id="reply-title" class="comment-reply-title section-title"><i class="line"></i>{{ trans('lang.leave_a_reply') }}</h3>
                     @if(Auth::user())
                         {!! Form::open(['url'=>'post/reply/'.$id2.'#formabc']) !!}
                     @else
@@ -467,7 +467,7 @@ foreach ($conversations as $conversation) {
 
                     <div class="text-right">
 
-                        <button type="submit" onClick="return checkFunction();" class="btn btn-custom btn-lg" style="background-color: #009aba; hov: #00c0ef; color: #fff">{!! Lang::get('lang.post_comment') !!}</button>
+                        <button type="submit" onClick="return checkFunction();" class="btn btn-custom btn-lg" style="background-color: #009aba; hov: #00c0ef; color: #fff">{{ trans('lang.post_comment') }}</button>
                     </div>
                     {!! Form::close() !!}
                 </div>

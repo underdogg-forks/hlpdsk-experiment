@@ -84,10 +84,10 @@ class SlaController extends Controller
             $sla->fill($request->input())->save();
 
             /* redirect to Index page with Success Message */
-            return redirect('sla')->with('success', Lang::get('lang.sla_plan_created_successfully'));
+            return redirect('sla')->with('success', trans('lang.sla_plan_created_successfully'));
         } catch (Exception $e) {
             /* redirect to Index page with Fails Message */
-            return redirect('sla')->with('fails', Lang::get('lang.sla_plan_can_not_create').'<li>'.$e->getMessage().'</li>');
+            return redirect('sla')->with('fails', trans('lang.sla_plan_can_not_create').'<li>'.$e->getMessage().'</li>');
         }
     }
 
@@ -141,10 +141,10 @@ class SlaController extends Controller
                      ->update(['sla' => $id]);
             }
 
-            return redirect('sla')->with('success', Lang::get('lang.sla_plan_updated_successfully'));
+            return redirect('sla')->with('success', trans('lang.sla_plan_updated_successfully'));
         } catch (Exception $e) {
             /* redirect to Index page with Fails Message */
-            return redirect('sla')->with('fails', Lang::get('lang.sla_plan_can_not_update').'<li>'.$e->getMessage().'</li>');
+            return redirect('sla')->with('fails', trans('lang.sla_plan_can_not_update').'<li>'.$e->getMessage().'</li>');
         }
     }
 
@@ -160,7 +160,7 @@ class SlaController extends Controller
     {
         $default_sla = Ticket::where('id', '=', '1')->first();
         if ($default_sla->sla == $id) {
-            return redirect('departments')->with('fails', Lang::get('lang.you_cannot_delete_default_department'));
+            return redirect('departments')->with('fails', trans('lang.you_cannot_delete_default_department'));
         } else {
             $tickets = DB::table('tickets')->where('sla', '=', $id)->update(['sla' => $default_sla->sla]);
             if ($tickets > 0) {
@@ -169,7 +169,7 @@ class SlaController extends Controller
                 } else {
                     $text_tickets = 'Ticket';
                 }
-                $ticket = '<li>'.$tickets.' '.$text_tickets.Lang::get('lang.have_been_moved_to_default_sla').'</li>';
+                $ticket = '<li>'.$tickets.' '.$text_tickets.trans('lang.have_been_moved_to_default_sla').'</li>';
             } else {
                 $ticket = '';
             }
@@ -180,7 +180,7 @@ class SlaController extends Controller
                 } else {
                     $text_dept = 'Email';
                 }
-                $dept = '<li>'.Lang::get('lang.associated_department_have_been_moved_to_default_sla').'</li>';
+                $dept = '<li>'.trans('lang.associated_department_have_been_moved_to_default_sla').'</li>';
             } else {
                 $dept = '';
             }
@@ -191,7 +191,7 @@ class SlaController extends Controller
                 } else {
                     $text_topic = 'Email';
                 }
-                $topic = '<li>'.Lang::get('lang.associated_help_topic_have_been_moved_to_default_sla').'</li>';
+                $topic = '<li>'.trans('lang.associated_help_topic_have_been_moved_to_default_sla').'</li>';
             } else {
                 $topic = '';
             }
@@ -204,10 +204,10 @@ class SlaController extends Controller
                 $slas->delete();
 
                 /* redirect to Index page with Success Message */
-                return redirect('sla')->with('success', Lang::get('lang.sla_plan_deleted_successfully').$message);
+                return redirect('sla')->with('success', trans('lang.sla_plan_deleted_successfully').$message);
             } catch (Exception $e) {
                 /* redirect to Index page with Fails Message */
-                return redirect('sla')->with('fails', Lang::get('lang.sla_plan_can_not_delete').'<li>'.$e->getMessage().'</li>');
+                return redirect('sla')->with('fails', trans('lang.sla_plan_can_not_delete').'<li>'.$e->getMessage().'</li>');
             }
         }
     }

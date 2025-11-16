@@ -82,12 +82,12 @@ class ErrorAndDebuggingController extends Controller
 
                 return redirect()->back()->with(
                     'success',
-                    Lang::get('lang.error-debug-settings-saved-message')
+                    trans('lang.error-debug-settings-saved-message')
                 );
             } else {
                 return redirect()->back()->with(
                     'fails',
-                    Lang::get('lang.error-debug-settings-error-message')
+                    trans('lang.error-debug-settings-error-message')
                 );
             }
         } catch (Exception $e) {

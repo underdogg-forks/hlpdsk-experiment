@@ -196,7 +196,7 @@ class WorkflowController extends Controller
                 $workflow_action->save();
             }
 
-            return redirect('workflow')->with('success', Lang::get('lang.workflow_created_successfully'));
+            return redirect('workflow')->with('success', trans('lang.workflow_created_successfully'));
         } catch (Exception $e) {
             return redirect()->back()->with('fails', $e->getMessage());
         }
@@ -267,7 +267,7 @@ class WorkflowController extends Controller
                 $workflow_action->save();
             }
 
-            return redirect('workflow')->with('success', Lang::get('lang.workflow_updated_successfully'));
+            return redirect('workflow')->with('success', trans('lang.workflow_updated_successfully'));
         } catch (Exception $e) {
             return redirect()->back()->with('fails', $e->getMessage());
         }
@@ -286,7 +286,7 @@ class WorkflowController extends Controller
             $workflow_rules = WorkflowRules::where('workflow_id', '=', $id)->delete();
             $workflow = WorkflowName::whereId($id)->delete();
 
-            return redirect('workflow')->with('success', Lang::get('lang.workflow_deleted_successfully'));
+            return redirect('workflow')->with('success', trans('lang.workflow_deleted_successfully'));
         } catch (Exception $e) {
             return redirect()->back()->with('fails', $e->getMessage());
         }

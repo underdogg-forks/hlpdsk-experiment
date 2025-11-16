@@ -196,7 +196,7 @@
                     <div class="alert alert-success flex items-center justify-between mb-4">
                         <div class="flex items-center">
                             <i class="fas fa-check-circle mr-2"></i>
-                            <span><strong>Success!</strong> {{ Session::get('success') }}</span>
+                            <span><strong>Success!</strong> {{ session('success') }}</span>
                         </div>
                         <button type="button" class="text-green-800 hover:text-green-900" data-dismiss="alert">
                             <i class="fas fa-times"></i>
@@ -208,7 +208,7 @@
                     <div class="alert alert-danger flex items-center justify-between mb-4">
                         <div class="flex items-center">
                             <i class="fas fa-exclamation-circle mr-2"></i>
-                            <span><strong>Error!</strong> {{ Session::get('fails') }}</span>
+                            <span><strong>Error!</strong> {{ session('fails') }}</span>
                         </div>
                         <button type="button" class="text-red-800 hover:text-red-900" data-dismiss="alert">
                             <i class="fas fa-times"></i>
@@ -432,7 +432,7 @@
                         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
-                        <strong>Success!</strong> {{ Session::get('success') }}
+                        <strong>Success!</strong> {{ session('success') }}
                     </div>
                 @endif
                 
@@ -441,7 +441,7 @@
                         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
-                        <strong>Error!</strong> {{ Session::get('fails') }}
+                        <strong>Error!</strong> {{ session('fails') }}
                     </div>
                 @endif
 

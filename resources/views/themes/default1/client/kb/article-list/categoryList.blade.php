@@ -16,10 +16,10 @@ class = "nav-item active"
             margin-right: 10px; /* Adjust the value to increase or decrease the gap between list items */
         }
     </style>
-    <li class="breadcrumb-item"> <i class="fas fa-home"> </i> {!! Lang::get('lang.you_are_here') !!} : &nbsp;</li>
-    <li><a class="words" href="{!! URL::route('home') !!}">{!! Lang::get('lang.knowledge_base') !!}</a></li>
+    <li class="breadcrumb-item"> <i class="fas fa-home"> </i> {{ trans('lang.you_are_here') }} : &nbsp;</li>
+    <li><a class="words" href="{!! URL::route('home') !!}">{{ trans('lang.knowledge_base') }}</a></li>
     <li class="words">></li>
-            <li><a href="{!! URL::route('category-list') !!}">{!! Lang::get('lang.category') !!}</a></li>
+            <li><a href="{!! URL::route('category-list') !!}">{{ trans('lang.category') }}</a></li>
         </ol>
 {{--    </div>--}}
 @stop
@@ -78,11 +78,11 @@ class = "nav-item active"
                         </h3>
                     </li>
                     @empty
-{{--                    <p>{!! Lang::get('lang.no_article') !!}</p>--}}
+{{--                    <p>{{ trans('lang.no_article') }}</p>--}}
                     @endforelse
                 <?php } ?>
                 </ul>
-                <p class="more-link text-center"><a href="{{url('category-list/'.$category->slug)}}" class="btn btn-custom btn-sm" style="background-color: #009aba; hov: #00c0ef; color: #fff ">{!! Lang::get('lang.view_all') !!}</a></p>
+                <p class="more-link text-center"><a href="{{url('category-list/'.$category->slug)}}" class="btn btn-custom btn-sm" style="background-color: #009aba; hov: #00c0ef; color: #fff ">{{ trans('lang.view_all') }}</a></p>
             </section>
         </div>
         @endforeach

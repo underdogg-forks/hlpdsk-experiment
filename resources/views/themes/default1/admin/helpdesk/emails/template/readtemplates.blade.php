@@ -34,7 +34,7 @@ class="active"
     {!! Form::model($contents,['route'=>['template.write', $template,$path],'method'=>'PATCH','files' => true]) !!}
 <div class="box-header">
 
-	<h2 class="box-title">{{Lang::get('lang.edit_template')}}: <b><?php $parts = explode('.',$template); $names  = $parts[0]; $name = str_replace('-', ' ', $names); $cname = ucfirst($name); echo $cname?></b></h2><button type="submit" class="btn btn-primary pull-right">Save changes</button>
+	<h2 class="box-title">{{ trans('lang.edit_template') }}: <b><?php $parts = explode('.',$template); $names  = $parts[0]; $name = str_replace('-', ' ', $names); $cname = ucfirst($name); echo $cname?></b></h2><button type="submit" class="btn btn-primary pull-right">Save changes</button>
 </div>
 <div class="box-body table-responsive">
 
@@ -45,7 +45,7 @@ class="active"
         <i class="fa  fa-check-circle"></i>
         <b>Success!</b>
         <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-        {{Session::get('success')}}
+        {{ session('success') }}
     </div>
     @endif
     <!-- failure message -->
@@ -54,7 +54,7 @@ class="active"
         <i class="fa fa-ban"></i>
         <b>Fail!</b>
         <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-        {{Session::get('fails')}}
+        {{ session('fails') }}
     </div>
     @endif
 

@@ -3,7 +3,7 @@
 @stop
 <!-- header -->
 @section('PageHeader')
-<h1>{!! Lang::get('lang.admin_panel') !!}</h1>
+<h1>{{ trans('lang.admin_panel') }}</h1>
 @stop
 <!-- /header -->
 <!-- breadcrumbs -->
@@ -47,15 +47,15 @@
 <!-- failure message -->
 @if(Session::has('fails'))
 <div class="alert alert-danger alert-dismissable">
-    <i class="fas fa-ban"> </i> <b> {!! Lang::get('lang.alert') !!}! </b>
+    <i class="fas fa-ban"> </i> <b> {{ trans('lang.alert') }}! </b>
     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-    {{Session::get('fails')}}
+    {{ session('fails') }}
 </div>
 @endif
 
 <div class="card card-light">
     <div class="card-header">
-        <h3 class="card-title">{!! Lang::get('lang.staffs') !!}</h3>
+        <h3 class="card-title">{{ trans('lang.staffs') }}</h3>
     </div>
     <!-- /.box-header -->
     <div class="card-body">
@@ -70,7 +70,7 @@
                             </span>
                         </a>
                     </div>
-                    <div class="text-center text-sm">{!! Lang::get('lang.agents') !!}</div>
+                    <div class="text-center text-sm">{{ trans('lang.agents') }}</div>
                 </div>
             </div>
 
@@ -83,7 +83,7 @@
                                 </span>
                             </a>
                         </div>
-                        <div class="text-center text-sm">{!! Lang::get('lang.departments') !!}</div>
+                        <div class="text-center text-sm">{{ trans('lang.departments') }}</div>
                     </div>
                 </div>
 
@@ -96,7 +96,7 @@
                                 </span>
                             </a>
                         </div>
-                        <div class="text-center text-sm">{!! Lang::get('lang.teams') !!}</div>
+                        <div class="text-center text-sm">{{ trans('lang.teams') }}</div>
                     </div>
                 </div>
 
@@ -109,7 +109,7 @@
                                 </span>
                             </a>
                         </div>
-                        <div class="text-center text-sm">{!! Lang::get('lang.groups') !!}</div>
+                        <div class="text-center text-sm">{{ trans('lang.groups') }}</div>
                     </div>
                 </div>
         </div>
@@ -119,7 +119,7 @@
 <div class="card card-light">
     
     <div class="card-header">
-        <h3 class="card-title">{!! Lang::get('lang.email') !!}</h3>
+        <h3 class="card-title">{{ trans('lang.email') }}</h3>
     </div>
     
     <div class="card-body">
@@ -135,7 +135,7 @@
                             </span>
                         </a>
                     </div>
-                    <div class="text-center text-sm">{!! Lang::get('lang.emails') !!}</div>
+                    <div class="text-center text-sm">{{ trans('lang.emails') }}</div>
                 </div>
             </div>
             <!--/.col-md-2-->
@@ -149,7 +149,7 @@
                             </span>
                         </a>
                     </div>
-                    <div class="text-center text-sm">{!! Lang::get('lang.ban_lists') !!}</div>
+                    <div class="text-center text-sm">{{ trans('lang.ban_lists') }}</div>
                 </div>
             </div>
             <!--/.col-md-2-->
@@ -163,7 +163,7 @@
                             </span>
                         </a>
                     </div>
-                    <div class="text-center text-sm">{!! Lang::get('lang.templates') !!}</div>
+                    <div class="text-center text-sm">{{ trans('lang.templates') }}</div>
                 </div>
             </div>
             <!--/.col-md-2-->
@@ -177,7 +177,7 @@
                             </span>
                         </a>
                     </div>
-                    <div class="text-center text-sm">{!! Lang::get('lang.email-settings') !!}</div>
+                    <div class="text-center text-sm">{{ trans('lang.email-settings') }}</div>
                 </div>
             </div>
 
@@ -190,7 +190,7 @@
                             </span>
                         </a>
                     </div>
-                    <div class="text-center text-sm">{!! Lang::get('lang.queues') !!}</div>
+                    <div class="text-center text-sm">{{ trans('lang.queues') }}</div>
                 </div>
             </div>
 
@@ -204,7 +204,7 @@
                             </span>
                         </a>
                     </div>
-                    <div class="text-center text-sm">{!! Lang::get('lang.diagnostics') !!}</div>
+                    <div class="text-center text-sm">{{ trans('lang.diagnostics') }}</div>
                 </div>
             </div>
         </div>
@@ -216,7 +216,7 @@
 <div class="card card-light">
     
     <div class="card-header">
-        <h3 class="card-title">{!! Lang::get('lang.manage') !!}</h3>
+        <h3 class="card-title">{{ trans('lang.manage') }}</h3>
     </div>
     
     <!-- /.box-header -->
@@ -232,7 +232,7 @@
                             </span>
                         </a>
                     </div>
-                    <div class="text-center text-sm">{!! Lang::get('lang.help_topics') !!}</div>
+                    <div class="text-center text-sm">{{ trans('lang.help_topics') }}</div>
                 </div>
             </div>
             <!--/.col-md-2-->
@@ -246,7 +246,7 @@
                             </span>
                         </a>
                     </div>
-                    <div class="text-center text-sm">{!! Lang::get('lang.sla_plans') !!}</div>
+                    <div class="text-center text-sm">{{ trans('lang.sla_plans') }}</div>
                 </div>
             </div>
             <!--/.col-md-2-->
@@ -261,7 +261,7 @@
                             </span>
                         </a>
                     </div>
-                    <div class="text-center text-sm">{!! Lang::get('lang.forms') !!}</div>
+                    <div class="text-center text-sm">{{ trans('lang.forms') }}</div>
                 </div>
             </div>
             <!--/.col-md-2-->
@@ -275,7 +275,7 @@
                             </span>
                         </a>
                     </div>
-                    <div class="text-center text-sm">{!! Lang::get('lang.workflow') !!}</div>
+                    <div class="text-center text-sm">{{ trans('lang.workflow') }}</div>
                 </div>
             </div>
                 <!-- priority -->
@@ -289,7 +289,7 @@
                             </span>
                         </a>
                     </div>
-                    <div class="text-center text-sm">{!! Lang::get('lang.priority') !!}</div>
+                    <div class="text-center text-sm">{{ trans('lang.priority') }}</div>
                 </div>
             </div>
             <!--/.col-md-2-->
@@ -315,7 +315,7 @@
 <div class="card card-light">
     
     <div class="card-header">
-        <h3 class="card-title">{!! Lang::get('lang.ticket') !!}</h3>
+        <h3 class="card-title">{{ trans('lang.ticket') }}</h3>
     </div>
     <!-- /.box-header -->
     <div class="card-body">
@@ -331,7 +331,7 @@
                             </span>
                         </a>
                     </div>
-                    <div class="text-center text-sm">{!! Lang::get('lang.ticket') !!}</div>
+                    <div class="text-center text-sm">{{ trans('lang.ticket') }}</div>
                 </div>
             </div>
                 <!--/.col-md-2-->
@@ -346,7 +346,7 @@
                             </span>
                         </a>
                     </div>
-                    <div class="text-center text-sm">{!! Lang::get('lang.auto_response') !!}</div>
+                    <div class="text-center text-sm">{{ trans('lang.auto_response') }}</div>
                 </div>
             </div>
             <!--/.col-md-2-->
@@ -361,7 +361,7 @@
                             </span>
                         </a>
                     </div>
-                    <div class="text-center text-sm">{!! Lang::get('lang.alert_notices') !!}</div>
+                    <div class="text-center text-sm">{{ trans('lang.alert_notices') }}</div>
                 </div>
             </div>
             <!--/.col-md-2-->
@@ -388,7 +388,7 @@
                             </span>
                         </a>
                     </div>
-                    <div class="text-center text-sm">{!! Lang::get('lang.ratings') !!}</div>
+                    <div class="text-center text-sm">{{ trans('lang.ratings') }}</div>
                 </div>
             </div>
 
@@ -401,7 +401,7 @@
                             </span>
                         </a>
                     </div>
-                    <div class="text-center text-sm">{!! Lang::get('lang.close_ticket_workflow') !!}</div>
+                    <div class="text-center text-sm">{{ trans('lang.close_ticket_workflow') }}</div>
                 </div>
             </div>
            <?php \Illuminate\Support\Facades\Event::dispatch('settings.ticket.view',[]); ?>
@@ -413,7 +413,7 @@
 </div>
 <div class="card card-light">
     <div class="card-header">
-        <h3 class="card-title">{!! Lang::get('lang.settings') !!}</h3>
+        <h3 class="card-title">{{ trans('lang.settings') }}</h3>
     </div>
     <!-- /.box-header -->
     <div class="card-body">
@@ -428,7 +428,7 @@
                             </span>
                         </a>
                     </div>
-                    <div class="text-center text-sm">{!! Lang::get('lang.company') !!}</div>
+                    <div class="text-center text-sm">{{ trans('lang.company') }}</div>
                 </div>
             </div>
             <!--/.col-md-2-->
@@ -442,7 +442,7 @@
                             </span>
                         </a>
                     </div>
-                    <div class="text-center text-sm">{!! Lang::get('lang.system') !!}</div>
+                    <div class="text-center text-sm">{{ trans('lang.system') }}</div>
                 </div>
             </div>
             <!--/.col-md-2-->
@@ -458,7 +458,7 @@
                             </span>
                         </a>
                     </div>
-                    <div class="text-center text-sm">{{Lang::get('lang.social-login')}}</div>
+                    <div class="text-center text-sm">{{ trans('lang.social-login') }}</div>
                 </div>
             </div>
             <!--/.col-md-2-->
@@ -471,7 +471,7 @@
                             </span>
                         </a>
                     </div>
-                    <div class="text-center text-sm">{!! Lang::get('lang.language') !!}</div>
+                    <div class="text-center text-sm">{{ trans('lang.language') }}</div>
                 </div>
             </div>
             <!--/.col-md-2-->
@@ -484,7 +484,7 @@
                             </span>
                         </a>
                     </div>
-                    <div class="text-center text-sm">{!! Lang::get('lang.cron') !!}</div>
+                    <div class="text-center text-sm">{{ trans('lang.cron') }}</div>
                 </div>
             </div>
             <!--/.col-md-2-->
@@ -497,7 +497,7 @@
                             </span>
                         </a>
                     </div>
-                    <div class="text-center text-sm">{!! Lang::get('lang.security') !!}</div>
+                    <div class="text-center text-sm">{{ trans('lang.security') }}</div>
                 </div>
             </div>
             <!--/.col-md-2-->
@@ -511,7 +511,7 @@
                             </span>
                         </a>
                     </div>
-                    <div class="text-center text-sm">{!! Lang::get('lang.notifications') !!}</div>
+                    <div class="text-center text-sm">{{ trans('lang.notifications') }}</div>
                 </div>
             </div>
             
@@ -525,7 +525,7 @@
 
 <div class="card card-light">
     <div class="card-header">
-        <h3 class="card-title">{!! Lang::get('lang.error-debug') !!}</h3>
+        <h3 class="card-title">{{ trans('lang.error-debug') }}</h3>
     </div>
     <!-- /.box-header -->
     <div class="card-body">
@@ -539,7 +539,7 @@
                             </span>
                         </a>
                     </div>
-                    <div class="text-center text-sm">{!! Lang::get('lang.debug-options') !!}</div>
+                    <div class="text-center text-sm">{{ trans('lang.debug-options') }}</div>
                 </div></div>
                     @if(Config::get('app.debug'))
                         <div class="col-md-2 col-sm-6">
@@ -552,7 +552,7 @@
                                     </a>
                                 </div>
 
-                                <div class="text-center text-sm">{!!Lang::get('lang.clock-work')!!}</div>
+                                <div class="text-center text-sm">{{ trans('lang.clock-work') }}</div>
                             </div>
                         </div>
                     @endif
@@ -565,7 +565,7 @@
 
 <div class="card card-light">
     <div class="card-header">
-        <h3 class="card-title">{!! Lang::get('lang.widgets') !!}</h3>
+        <h3 class="card-title">{{ trans('lang.widgets') }}</h3>
     </div>
     <!-- /.box-header -->
     <div class="card-body">
@@ -580,7 +580,7 @@
                             </span>
                         </a>
                     </div>
-                    <div class="text-center text-sm">{!! Lang::get('lang.widgets') !!}</div>
+                    <div class="text-center text-sm">{{ trans('lang.widgets') }}</div>
                 </div>
             </div>
             <!--/.col-md-2-->                                        
@@ -594,7 +594,7 @@
                             </span>
                         </a>
                     </div>
-                    <div class="text-center text-sm">{!! Lang::get('lang.social') !!}</div>
+                    <div class="text-center text-sm">{{ trans('lang.social') }}</div>
                 </div>
             </div>
             
@@ -606,7 +606,7 @@
 
 <div class="card card-light">
     <div class="card-header">
-        <h3 class="card-title">{!! Lang::get('lang.plugin') !!}</h3>
+        <h3 class="card-title">{{ trans('lang.plugin') }}</h3>
     </div>
     <!-- /.box-header -->
     <div class="card-body">
@@ -621,7 +621,7 @@
                             </span>
                         </a>
                     </div>
-                    <div class="text-center text-sm">{!! Lang::get('lang.plugin') !!}</div>
+                    <div class="text-center text-sm">{{ trans('lang.plugin') }}</div>
                 </div>
             </div>
         </div>
@@ -631,7 +631,7 @@
 </div>
 <div class="card card-light">
     <div class="card-header">
-        <h3 class="card-title">{!! Lang::get('lang.api') !!}</h3>
+        <h3 class="card-title">{{ trans('lang.api') }}</h3>
     </div>
     <!-- /.box-header -->
     <div class="card-body">
@@ -646,7 +646,7 @@
                             </span>
                         </a>
                     </div>
-                    <div class="text-center text-sm">{!! Lang::get('lang.api') !!}</div>
+                    <div class="text-center text-sm">{{ trans('lang.api') }}</div>
                 </div>
             </div>
         </div>
@@ -656,7 +656,7 @@
 </div>
 <div class="card card-light">
     <div class="card-header">
-        <h3 class="card-title">{{Lang::get('log::lang.logs')}}</h3>
+        <h3 class="card-title">{{ trans('log::lang.logs') }}</h3>
     </div>
     <!-- /.box-header -->
     <div class="card-body">
@@ -671,7 +671,7 @@
                             </span>
                         </a>
                     </div>
-                    <div class="text-center text-sm">{{Lang::get('log::lang.logs')}}</div>
+                    <div class="text-center text-sm">{{ trans('log::lang.logs') }}</div>
                 </div>
             </div>
         </div>

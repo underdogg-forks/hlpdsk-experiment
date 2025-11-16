@@ -102,7 +102,7 @@ Route::middleware('web')->group(function () {
         Route::get('/teams/show/{id}', [Admin\helpdesk\TeamController::class, 'show'])->name('teams.show'); /*  Get Team View */
         Breadcrumbs::register('teams.show', function ($breadcrumbs) {
             $breadcrumbs->parent('teams.index');
-            $breadcrumbs->push(Lang::get('lang.show'), url('teams/{teams}/show'));
+            $breadcrumbs->push(trans('lang.show'), url('teams/{teams}/show'));
         });
         Route::get('getshow/{id}', [Admin\helpdesk\TeamController::class, 'getshow'])->name('teams.getshow.list');
         Route::resource('agents', Admin\helpdesk\AgentController::class); // in agents module, for CRUD
@@ -802,7 +802,7 @@ Route::middleware('web')->group(function () {
 
     // Breadcrumbs::register('open.ticket', function ($breadcrumbs) {
     //     $breadcrumbs->parent('dashboard');
-    //     $breadcrumbs->push(Lang::get('lang.tickets') . '&nbsp; > &nbsp;' . Lang::get('lang.open'), route('open.ticket'));
+    //     $breadcrumbs->push(trans('lang.tickets') . '&nbsp; > &nbsp;' . trans('lang.open'), route('open.ticket'));
     // });
     Route::get('check_ticket/swtich-language/{id}', [Client\helpdesk\UnAuthController::class, 'changeUserLanguage']);
     Route::get('category-list/swtich-language/{id}', [Client\helpdesk\UnAuthController::class, 'changeUserLanguage']);

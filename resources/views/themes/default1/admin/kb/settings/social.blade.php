@@ -17,7 +17,7 @@
 <div class="col-md-12">
 <div class="box box-primary">
 	<div class="box-header">
-        <h3 class="box-title">{{Lang::get('lang.social')}}</h3>  {!! Form::submit(Lang::get('lang.save'),['class'=>'form-group btn btn-primary pull-right'])!!}
+        <h3 class="box-title">{{ trans('lang.social') }}</h3>  {!! Form::submit(trans('lang.save'),['class'=>'form-group btn btn-primary pull-right'])!!}
     </div>
 
     <!-- check whether success or not -->
@@ -27,7 +27,7 @@
         <i class="fa  fa-check-circle"></i>
         <b>Success!</b>
         <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-        {{Session::get('success')}}
+        {{ session('success') }}
     </div>
     @endif
     <!-- failure message -->
@@ -36,7 +36,7 @@
         <i class="fa fa-ban"></i>
         <b>Alert!</b> Failed.
         <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-        {{Session::get('fails')}}
+        {{ session('fails') }}
     </div>
     @endif
 

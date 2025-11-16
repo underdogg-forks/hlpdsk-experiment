@@ -26,7 +26,7 @@ class="active"
     }
 </style>
 @section('PageHeader')
-<h1>{{Lang::get('lang.tickets')}}</h1>
+<h1>{{ trans('lang.tickets') }}</h1>
 @stop
 
 @section('content')
@@ -37,22 +37,22 @@ class="active"
 <div class="alert alert-success alert-dismissable">
     <i class="fas fa-check-circle"></i>
     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-    {{Session::get('success')}}
+    {{ session('success') }}
 </div>
 @endif
 <!-- failure message -->
 @if(Session::has('fails'))
 <div class="alert alert-danger alert-dismissable">
     <i class="fas fa-ban"></i>
-    <b>{!! Lang::get('lang.alert') !!}!</b>
+    <b>{{ trans('lang.alert') }}!</b>
     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-    {{Session::get('fails')}}
+    {{ session('fails') }}
 </div>
 @endif
 @if(Session::has('errors'))
 <div class="alert alert-danger alert-dismissable">
     <i class="fas fa-ban"></i>
-    <b>{!! Lang::get('lang.alert') !!}!</b>
+    <b>{{ trans('lang.alert') }}!</b>
     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
     <br/>
     @if($errors->first('email'))
@@ -82,7 +82,7 @@ class="active"
 <div class="card card-light">
     
     <div class="card-header" id='box-header1'>
-        <h3 class="card-title">{!! Lang::get('lang.create_ticket') !!}</h3>
+        <h3 class="card-title">{{ trans('lang.create_ticket') }}</h3>
     </div><!-- /.box-header -->
     
     <div class="card-body">
@@ -90,7 +90,7 @@ class="active"
         <div class="card card-light">
             
             <div class="card-header">
-                <h3 class="card-title">{!! Lang::get('lang.user_details') !!}:</h3>
+                <h3 class="card-title">{{ trans('lang.user_details') }}:</h3>
             </div>
 
             <div class="card-body">
@@ -100,7 +100,7 @@ class="active"
                         <div class="col-md-4">
                             <!-- email -->
                             <div class="form-group {{ $errors->has('email') ? 'has-error' : '' }}">
-                                {!! Form::label('email',Lang::get('lang.email')) !!}
+                                {!! Form::label('email',trans('lang.email')) !!}
                                 @if ($email_mandatory->status == 1)
                                 <span class="text-red"> *</span>
                                 @endif
@@ -112,7 +112,7 @@ class="active"
                         <div class="col-md-4">
                             <!-- email -->
                             <div class="form-group {{ $errors->has('first_name') ? 'has-error' : '' }}">
-                                {!! Form::label('email',Lang::get('lang.first_name')) !!} <span class="text-red"> *</span>
+                                {!! Form::label('email',trans('lang.first_name')) !!} <span class="text-red"> *</span>
                                <!--  {!! Form::text('email',null,['class' => 'form-control'],['id' => 'email']) !!} -->
                                <input type="text" name="first_name" id="first_name" class="form-control">
                             </div>
@@ -121,7 +121,7 @@ class="active"
                         <div class="col-md-4">
                             <!-- full name -->
                             <div class="form-group {{ $errors->has('last_name') ? 'has-error' : '' }}">
-                                {!! Form::label('fullname',Lang::get('lang.last_name')) !!} <span class="text-red"></span>
+                                {!! Form::label('fullname',trans('lang.last_name')) !!} <span class="text-red"></span>
                                 <input type="text" name="last_name" id="last_name" class="form-control">
                             </div>
                         </div>
@@ -129,18 +129,18 @@ class="active"
                     <div class="row">
                         <div class="col-md-1 form-group {{ Session::has('country_code_error') ? 'has-error' : '' }}">
                             <div class="form-group {{ $errors->has('code') ? 'has-error' : '' }}">
-                            {!! Form::label('code',Lang::get('lang.country-code')) !!}
+                            {!! Form::label('code',trans('lang.country-code')) !!}
                             @if ($email_mandatory->status == 0 || $settings->status == 1)
                                  <span class="text-red"> *</span>
                             @endif
 
-                            {!! Form::text('code',null,['class' => 'form-control', 'id' => 'country_code', 'placeholder' => $phonecode, 'title' => Lang::get('lang.enter-country-phone-code')]) !!}
+                            {!! Form::text('code',null,['class' => 'form-control', 'id' => 'country_code', 'placeholder' => $phonecode, 'title' => trans('lang.enter-country-phone-code')]) !!}
                             </div>
                         </div>
                         <div class="col-md-5">
                             <!-- phone -->
                             <div class="form-group {{ $errors->has('mobile') ? 'has-error' : '' }}">
-                                <label>{!! Lang::get('lang.mobile_number') !!}:</label>
+                                <label>{{ trans('lang.mobile_number') }}:</label>
                                 @if ($email_mandatory->status == 0 || $settings->status == 1)
                                  <span class="text-red"> *</span>
                                 @endif
@@ -150,7 +150,7 @@ class="active"
                         <div class="col-md-6">
                             <!-- phone -->
                             <div class="form-group {{ $errors->has('phone') ? 'has-error' : '' }}">
-                                <label>{!! Lang::get('lang.phone') !!}:</label>
+                                <label>{{ trans('lang.phone') }}:</label>
                                 {!! Form::input('number','phone',null,['class' => 'form-control', 'id' => 'phone_number']) !!}
                                 {!! $errors->first('phone', '<spam class="help-block text-red">:message</spam>') !!}
                             </div>
@@ -173,7 +173,7 @@ class="active"
             
             <div class="card-header">
 
-                <h3 class="card-title">{!! Lang::get('lang.ticket_option') !!}:</h3>
+                <h3 class="card-title">{{ trans('lang.ticket_option') }}:</h3>
             </div>
 
             <div class="card-body">
@@ -182,7 +182,7 @@ class="active"
                     <div class="row">
                         <div class="col-md-3">
                             <div class="form-group">
-                                <label>{!! Lang::get('lang.help_topic') !!}:</label>
+                                <label>{{ trans('lang.help_topic') }}:</label>
                                 <!-- helptopic -->
                                 <?php $helptopic = App\Model\helpdesk\Manage\Help_topic::where('status', '=', 1)->select('topic', 'id')->get(); ?>
                                 {!! Form::select('helptopic', ['Helptopic'=>$helptopic->pluck('topic','id')->toArray()],null,['class' => 'form-control select','id'=>'selectid']) !!}
@@ -191,7 +191,7 @@ class="active"
                         <div class="col-md-3">
                             <!-- sla plan -->
                             <div class="form-group">
-                                <label>{!! Lang::get('lang.sla_plan') !!}:</label>
+                                <label>{{ trans('lang.sla_plan') }}:</label>
                                 <?php $sla_plan = App\Model\helpdesk\Manage\Sla_plan::where('status', '=', 1)->select('grace_period', 'id')->get(); ?>
                                 {!! Form::select('sla', ['SLA'=>$sla_plan->pluck('grace_period','id')->toArray()],null,['class' => 'form-control select']) !!}
                             </div>
@@ -199,7 +199,7 @@ class="active"
                         <div class="col-md-3">
                             <!-- due date -->
                             <div class="form-group" id="duedate">
-                                <label>{!! Lang::get('lang.due_date') !!}:</label>
+                                <label>{{ trans('lang.due_date') }}:</label>
                                 {!! Form::text('duedate',null,['class' => 'form-control','id'=>'datemask']) !!}
                                 <button class="btn  clear-input" id="duedates" style="display: none" type="button"><i class="fas fa-times"></i></button>
                             </div>
@@ -207,7 +207,7 @@ class="active"
                         <div class="col-md-3">
                             <!-- assign to -->
                             <div class="form-group">
-                                <label>{!! Lang::get('lang.assign_to') !!}:</label>
+                                <label>{{ trans('lang.assign_to') }}:</label>
                                 <?php $agents = App\User::where('role', '!=', 'user')->where('active', '=', 1)->get(); ?>
                                 {!! Form::select('assignto', [''=>'Select an Agent','Agents'=>$agents->pluck('first_name','id')->toArray()],null,['class' => 'form-control select']) !!}
                             </div>
@@ -225,7 +225,7 @@ class="active"
         <div class="card card-light">
             
             <div class="card-header">
-                <h3 class="card-title">{!! Lang::get('lang.ticket_detail') !!}:</h3>
+                <h3 class="card-title">{{ trans('lang.ticket_detail') }}:</h3>
             </div>
 
             <div class="card-body">
@@ -235,7 +235,7 @@ class="active"
                     <div class="form-group {{ $errors->has('subject') ? 'has-error' : '' }}">
                         <div class="row">
                             <div class="col-md-1">
-                                <label>{!! Lang::get('lang.subject') !!}:<span class="text-red"> *</span></label>
+                                <label>{{ trans('lang.subject') }}:<span class="text-red"> *</span></label>
                             </div>
                             <div class="col-md-11">
                                 {!! Form::text('subject',null,['class' => 'form-control']) !!}
@@ -246,7 +246,7 @@ class="active"
                         <!-- details -->
                         <div class="row">
                             <div class="col-md-1">
-                                <label>{!! Lang::get('lang.detail') !!}:<span class="text-red"> *</span></label>
+                                <label>{{ trans('lang.detail') }}:<span class="text-red"> *</span></label>
                             </div>
                             <div class="col-md-11">
                                 {!! Form::textarea('body',null,['class' => 'form-control','id' => 'body', 'style'=>"width:100%; height:150px;"]) !!}
@@ -258,11 +258,11 @@ class="active"
                         <!-- priority -->
                         <div class="row">
                             <div class="col-md-1">
-                                <label>{!! Lang::get('lang.priority') !!}:</label>
+                                <label>{{ trans('lang.priority') }}:</label>
                             </div>
                             <div class="col-md-5">
                                 <?php $Priority = App\Model\helpdesk\Ticket\Ticket_Priority::where('status','=',1)->get(); ?>
-                                {!! Form::select('priority', [Lang::get('lang.priorities')=>$Priority->pluck('priority_desc','priority_id')->toArray()],null,['class' => 'form-control select']) !!}
+                                {!! Form::select('priority', [trans('lang.priorities')=>$Priority->pluck('priority_desc','priority_id')->toArray()],null,['class' => 'form-control select']) !!}
                             </div>
                             
                         </div>
@@ -275,7 +275,7 @@ class="active"
     <div class="card-footer">
         <div class="row">
             <div class="col-md-3">
-                <input type="submit" value="{!! Lang::get('lang.create_ticket') !!}" class="btn btn-primary" onclick="this.disabled=true;this.value='Sending, please wait...';this.form.submit();">
+                <input type="submit" value="{{ trans('lang.create_ticket') }}" class="btn btn-primary" onclick="this.disabled=true;this.value='Sending, please wait...';this.form.submit();">
             </div>
         </div>
     </div>

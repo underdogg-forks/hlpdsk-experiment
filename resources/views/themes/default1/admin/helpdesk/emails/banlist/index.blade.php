@@ -20,7 +20,7 @@ class="nav-link active"
 @stop
 <!-- header -->
 @section('PageHeader')
-<h1>{!! Lang::get('lang.ban_email') !!}</h1>
+<h1>{{ trans('lang.ban_email') }}</h1>
 @stop
 <!-- /header -->
 <!-- breadcrumbs -->
@@ -37,32 +37,32 @@ class="nav-link active"
 <div class="alert alert-success alert-dismissable">
     <i class="fa  fa-check-circle"></i>
     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-    {{Session::get('success')}}
+    {{ session('success') }}
 </div>
 @endif
 <!-- failure message -->
 @if(Session::has('fails'))
 <div class="alert alert-danger alert-dismissable">
     <i class="fa fa-ban"></i>
-    <b>{!! Lang::get('lang.fails') !!} ! </b>
+    <b>{{ trans('lang.fails') }} ! </b>
     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-    {{Session::get('fails')}}
+    {{ session('fails') }}
 </div>
 @endif
 <div class="card card-light">
     <div class="card-header">
-        <h3 class="card-title">{{Lang::get('lang.list_of_banned_emails')}}</h3>
+        <h3 class="card-title">{{ trans('lang.list_of_banned_emails') }}</h3>
         <div class="card-tools">
-            <a href="{{route('banlist.create')}}" class="btn btn-default btn-tool"><i class="fas fa-ban"> </i> {{Lang::get('lang.ban_email')}}</a>
+            <a href="{{route('banlist.create')}}" class="btn btn-default btn-tool"><i class="fas fa-ban"> </i> {{ trans('lang.ban_email') }}</a>
         </div>
     </div>
     <div class="card-body">
         
         <table class="table table-bordered dataTable" style="overflow:scroll;">
             <tr>
-                <th width="100px">{{Lang::get('lang.email_address')}}</th>
-                <th width="100px">{{Lang::get('lang.last_updated')}}</th>
-                <th width="100px">{{Lang::get('lang.action')}}</th>
+                <th width="100px">{{ trans('lang.email_address') }}</th>
+                <th width="100px">{{ trans('lang.last_updated') }}</th>
+                <th width="100px">{{ trans('lang.action') }}</th>
             </tr>
             <!-- Foreach @var bans as @var ban -->
             @foreach($bans as $ban)
@@ -73,8 +73,8 @@ class="nav-link active"
                 <td> {!! UTC::usertimezone($ban->updated_at) !!} </td>
                 <!-- Deleting Fields -->
                 <td>
-                    <a href="{{route('banlist.edit',$ban->id)}}" class="btn btn-primary btn-xs"><i class="fas fa-edit"> </i> {!! Lang::get('lang.edit') !!}</a> 
-                    <a href="{{route('banlist.delete',$ban->id)}}" class="btn btn-danger btn-xs"><i class="fas fa-trash"> </i> {!! Lang::get('lang.delete') !!}</a>
+                    <a href="{{route('banlist.edit',$ban->id)}}" class="btn btn-primary btn-xs"><i class="fas fa-edit"> </i> {{ trans('lang.edit') }}</a> 
+                    <a href="{{route('banlist.delete',$ban->id)}}" class="btn btn-danger btn-xs"><i class="fas fa-trash"> </i> {{ trans('lang.delete') }}</a>
                 </td>
                 @endforeach
             </tr>

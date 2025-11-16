@@ -33,7 +33,7 @@ class="nav-link active"
 {!! Form::open(['url' => 'social/media/'.$provider, 'method' => 'POST']) !!}
 @if (count($errors) > 0)
 <div class="alert alert-danger">
-    <strong>{{Lang::get('lang.woops')}}</strong> {{Lang::get('lang.theirisproblem')}}<br><br>
+    <strong>{{ trans('lang.woops') }}</strong> {{ trans('lang.theirisproblem') }}<br><br>
     <ul>
         @foreach ($errors->all() as $error)
         <li>{{ $error }}</li>
@@ -47,23 +47,23 @@ class="nav-link active"
 <div class="alert alert-warning alert-dismissable">
     <i class="fas fa-check-circle"></i>
     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-    {!!Session::get('warn')!!}
+    {{ session('warn') }}
 </div>
 @endif
 @if(Session::has('success'))
 <div class="alert alert-success alert-dismissable">
     <i class="fas fa-check-circle"></i>
     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-    {!!Session::get('success')!!}
+    {{ session('success') }}
 </div>
 @endif
 <!-- failure message -->
 @if(Session::has('fails'))
 <div class="alert alert-danger alert-dismissable">
     <i class="fas fa-ban"></i>
-    <b>{!! Lang::get('lang.alert') !!}!</b>
+    <b>{{ trans('lang.alert') }}!</b>
     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-    {!!Session::get('fails')!!}
+    {{ session('fails') }}
 </div>
 @endif
 <div class="card card-light">
@@ -75,14 +75,14 @@ class="nav-link active"
         <div class="row">
             <div class="col-md-6">
                 <div class="form-group {{ $errors->has('client_id') ? 'has-error' : '' }}">
-                    {!! Form::label('client_id',Lang::get('lang.client_id')) !!}<spam class="help-block"> *</spam>
+                    {!! Form::label('client_id',trans('lang.client_id')) !!}<spam class="help-block"> *</spam>
                     {!! Form::text('client_id',$social->getvalueByKey($provider,'client_id'),['class' => 'form-control']) !!}
                     {!! $errors->first('client_id', '<spam class="help-block">:message</spam>') !!}
                 </div>
             </div>
             <div class="col-md-6">
                 <div class="form-group {{ $errors->has('client_secret') ? 'has-error' : '' }}">
-                    {!! Form::label('client_secret',Lang::get('lang.client_secret')) !!}<spam class="help-block"> *</spam>
+                    {!! Form::label('client_secret',trans('lang.client_secret')) !!}<spam class="help-block"> *</spam>
                     {!! Form::text('client_secret',$social->getvalueByKey($provider,'client_secret'),['class' => 'form-control']) !!}
                      {!! $errors->first('client_secret', '<spam class="help-block">:message</spam>') !!}
                 </div>
@@ -91,7 +91,7 @@ class="nav-link active"
         <div class="row">
             <div class="col-md-6">
                 <div class="form-group {{ $errors->has('redirect') ? 'has-error' : '' }}">
-                    {!! Form::label('redirect',Lang::get('lang.redirect')) !!}
+                    {!! Form::label('redirect',trans('lang.redirect')) !!}
                     {!! Form::text('redirect',$social->getvalueByKey($provider,'redirect'),['class' => 'form-control']) !!}
                     {!! $errors->first('redirect', '<spam class="help-block">:message</spam>') !!}
                 </div>
@@ -100,13 +100,13 @@ class="nav-link active"
                 <div class="form-group {{ $errors->has('status') ? 'has-error' : '' }}">
                     <div class="row">
                         <div class="col-md-12">
-                            {!! Form::label('status',Lang::get('lang.status')) !!} 
+                            {!! Form::label('status',trans('lang.status')) !!} 
                         </div>
                         <div class="col-md-6">
-                            <p>{!! Form::radio('status',1,$social->checkActive($provider)) .Lang::get('lang.active')!!}</p>
+                            <p>{!! Form::radio('status',1,$social->checkActive($provider)) .trans('lang.active')!!}</p>
                         </div>
                         <div class="col-md-6">
-                            <p>{!! Form::radio('status',0,$social->checkInactive($provider)) .Lang::get('lang.inactive')!!} </p>
+                            <p>{!! Form::radio('status',0,$social->checkInactive($provider)) .trans('lang.inactive')!!} </p>
                         </div>
                         <div class="col-md-12">
                             <i>Activate login via {{ucfirst($provider)}}</i>
@@ -119,7 +119,7 @@ class="nav-link active"
 
     </div>
     <div class="card-footer">
-        {!! Form::submit(Lang::get('lang.submit'),['class'=>'btn btn-primary'])!!}
+        {!! Form::submit(trans('lang.submit'),['class'=>'btn btn-primary'])!!}
     </div>
 </div>
 {!! Form::close() !!}

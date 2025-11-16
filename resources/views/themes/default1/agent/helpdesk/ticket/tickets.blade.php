@@ -74,7 +74,7 @@ if (Request::has('assigned'))
 @endif
 
 @section('PageHeader')
-<h1>{{Lang::get('lang.tickets')}}</h1>
+<h1>{{ trans('lang.tickets') }}</h1>
 <style>
     .tooltip1 {
         position: relative;
@@ -107,31 +107,31 @@ if (Request::has('assigned'))
     <div class="card-header">
         <h3 class="card-title">
             @if($activepage == 'trash')
-            {{Lang::get('lang.trash')}}
+            {{ trans('lang.trash') }}
             @elseif ($activepage == 'mytickets')
-            {{Lang::get('lang.my_tickets')}}
+            {{ trans('lang.my_tickets') }}
             @elseif ($activepage == 'followup')
-            {{Lang::get('lang.followup')}}
+            {{ trans('lang.followup') }}
             @elseif($activepage == 'inbox')
-            {{Lang::get('lang.inbox')}}
+            {{ trans('lang.inbox') }}
             @elseif($activepage == 'overdue')
-            {{Lang::get('lang.overdue')}}
+            {{ trans('lang.overdue') }}
             @elseif($activepage == 'closed')
-{{--            {{Lang::get('lang.closed')}}--}}
+{{--            {{ trans('lang.closed') }}--}}
             @elseif($activepage == 'approval')
-            {{Lang::get('lang.approval')}}
+            {{ trans('lang.approval') }}
             @elseif($activepage == 0)
-            {{Lang::get('lang.unassigned')}}
+            {{ trans('lang.unassigned') }}
             @else
-            {{Lang::get('lang.inbox')}}
+            {{ trans('lang.inbox') }}
             @endif 
             @if(count(Request::all()) > 2 && $activepage != '0')
-            / {{Lang::get('lang.filtered-results')}}
+            / {{ trans('lang.filtered-results') }}
             @else()
             @if(count(Request::get('departments')) == 1 && Request::get('departments')[0] != 'All')
-            / {{Lang::get('lang.filtered-results')}}
+            / {{ trans('lang.filtered-results') }}
             @elseif (count(Request::get('departments')) > 1)
-            / {{Lang::get('lang.filtered-results')}}
+            / {{ trans('lang.filtered-results') }}
             @endif
             @endif
         </h3>
@@ -142,33 +142,33 @@ if (Request::has('assigned'))
         <div class="alert alert-success alert-dismissable">
             <i class="fas fa-check-circle"> </i>
             <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-            {{Session::get('success')}}
+            {{ session('success') }}
         </div>
         @endif
         <!-- failure message -->
         @if(Session::has('fails'))
         <div class="alert alert-danger alert-dismissable">
-            <i class="fas fa-ban"> </i> <b> {!! Lang::get('lang.alert') !!}! </b>
+            <i class="fas fa-ban"> </i> <b> {{ trans('lang.alert') }}! </b>
             <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-            {{Session::get('fails')}}
+            {{ session('fails') }}
         </div>
         @endif
 
         <div class="alert alert-success alert-dismissable" style="display: none;">
             <i class="fas fa-check-circle"> </i> <span class="success-message"></span>
             <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-            {{Session::get('success')}}
+            {{ session('success') }}
         </div>
         <div class="alert alert-danger alert-dismissable" style="display: none;">
-            <i class="fas fa-ban"> </i> <b> {!! Lang::get('lang.alert') !!}!</b> <span class="error-message"></span>
+            <i class="fas fa-ban"> </i> <b> {{ trans('lang.alert') }}!</b> <span class="error-message"></span>
             <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-            {{Session::get('fails')}}
+            {{ session('fails') }}
         </div>
         <!--<div class="mailbox-controls">-->
         <!-- Check all button -->
 
         <button type="button" class="btn btn-sm btn-default text-green" id="Edit_Ticket" data-toggle="modal" data-target="#MergeTickets">
-            <i class="fas fa-cogs"> </i> {!! Lang::get('lang.merge') !!}
+            <i class="fas fa-cogs"> </i> {{ trans('lang.merge') }}
         </button>
         
         <?php $inputs   = Request::all(); ?>
@@ -178,7 +178,7 @@ if (Request::has('assigned'))
             <button type="button" class="btn btn-sm btn-default dropdown-toggle" data-toggle="dropdown" id="d1">
                 <i class="fas fa-exchange-alt" style="color:teal;" id="hidespin"> </i>
                 <i class="fas fa-spinner fa-spin" style="color:teal; display:none;" id="spin"></i>
-                {!! Lang::get('lang.change_status') !!} <span class="caret"></span>
+                {{ trans('lang.change_status') }} <span class="caret"></span>
             </button>
 
             <div class="dropdown-menu">
@@ -192,12 +192,12 @@ if (Request::has('assigned'))
         </div>
 
         <button type="button" class="btn btn-sm btn-default" id="assign_Ticket" data-toggle="modal" data-target="#AssignTickets" style="display: none;">
-            <i class="fas fa-hand-point-right"> </i> {!! Lang::get('lang.assign') !!}
+            <i class="fas fa-hand-point-right"> </i> {{ trans('lang.assign') }}
         </button>
 
         @if($activepage == 'trash')
         <button form="modalpopup" class="btn btn-sm btn-danger" id="hard-delete" name="submit" type="submit">
-            <i class="fas fa-trash"></i>&nbsp;{{Lang::get('lang.clean-up')}}
+            <i class="fas fa-trash"></i>&nbsp;{{ trans('lang.clean-up') }}
         </button>
         @endif
         <p><p/>
@@ -229,7 +229,7 @@ if (Request::has('assigned'))
 @include('themes.default1.agent.helpdesk.ticket.more.tickets-options-script')
 <script>
     $(document).ready(function () { /// Wait till page is loaded
-            var date_options = '<option value="any-time">{{Lang::get("lang.any-time")}}</option><option value="5-minutes">{{Lang::get("lang.5-minutes")}}</option><option value="10-minutes">{{Lang::get("lang.10-minutes")}}</option><option value="15-minutes">{{Lang::get("lang.15-minutes")}}</option><option value="30-minutes">{{Lang::get("lang.30-minutes")}}</option><option value="1-hour">{{Lang::get("lang.1-hour")}}</option><option value="4-hours">{{Lang::get("lang.4-hours")}}</option><option value="8-hours">{{Lang::get("lang.8-hours")}}</option><option value="12-hours">{{Lang::get("lang.12-hours")}}</option><option value="24-hours">{{Lang::get("lang.24-hours")}}</option><option value="today">{{Lang::get("lang.today")}}</option><option value="yesterday">{{Lang::get("lang.yesterday")}}</option><option value="this-week">{{Lang::get("lang.this-week")}}</option><option value="last-week">{{Lang::get("lang.last-week")}}</option><option value="15-days">{{Lang::get("lang.15-days")}}</option><option value="30-days">{{Lang::get("lang.30-days")}}</option><option value="this-month">{{Lang::get("lang.this-month")}}</option><option value="last-month">{{Lang::get("lang.last-month")}}</option><option value="last-2-months">{{Lang::get("lang.last-2-months")}}</option><option value="last-3-months">{{Lang::get("lang.last-3-months")}}</option><option value="last-6-months">{{Lang::get("lang.last-6-months")}}</option><option value="last-year">{{Lang::get("lang.last-year")}}</option>';
+            var date_options = '<option value="any-time">{{ trans("lang.any-time") }}</option><option value="5-minutes">{{ trans("lang.5-minutes") }}</option><option value="10-minutes">{{ trans("lang.10-minutes") }}</option><option value="15-minutes">{{ trans("lang.15-minutes") }}</option><option value="30-minutes">{{ trans("lang.30-minutes") }}</option><option value="1-hour">{{ trans("lang.1-hour") }}</option><option value="4-hours">{{ trans("lang.4-hours") }}</option><option value="8-hours">{{ trans("lang.8-hours") }}</option><option value="12-hours">{{ trans("lang.12-hours") }}</option><option value="24-hours">{{ trans("lang.24-hours") }}</option><option value="today">{{ trans("lang.today") }}</option><option value="yesterday">{{ trans("lang.yesterday") }}</option><option value="this-week">{{ trans("lang.this-week") }}</option><option value="last-week">{{ trans("lang.last-week") }}</option><option value="15-days">{{ trans("lang.15-days") }}</option><option value="30-days">{{ trans("lang.30-days") }}</option><option value="this-month">{{ trans("lang.this-month") }}</option><option value="last-month">{{ trans("lang.last-month") }}</option><option value="last-2-months">{{ trans("lang.last-2-months") }}</option><option value="last-3-months">{{ trans("lang.last-3-months") }}</option><option value="last-6-months">{{ trans("lang.last-6-months") }}</option><option value="last-year">{{ trans("lang.last-year") }}</option>';
             $('#modified, #created').append(date_options);
             $('#modified, #created').trigger("change");
             var create_dropdown = $("#created").select2({maximumSelectionLength : 1});

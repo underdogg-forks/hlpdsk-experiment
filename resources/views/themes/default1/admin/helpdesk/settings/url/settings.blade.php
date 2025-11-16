@@ -20,7 +20,7 @@ class="nav-link active"
 @stop
 <!-- header -->
 @section('PageHeader')
-<h1>{!! Lang::get('lang.url') !!}</h1>
+<h1>{{ trans('lang.url') }}</h1>
 @stop
 <!-- /header -->
 <!-- breadcrumbs -->
@@ -34,7 +34,7 @@ class="nav-link active"
 
 @if (count($errors) > 0)
 <div class="alert alert-danger">
-    <strong>{{Lang::get('lang.woops')}}</strong> {{Lang::get('lang.theirisproblem')}} <br><br>
+    <strong>{{ trans('lang.woops') }}</strong> {{ trans('lang.theirisproblem') }} <br><br>
     <ul>
         @foreach ($errors->all() as $error)
         <li>{{ $error }}</li>
@@ -47,16 +47,16 @@ class="nav-link active"
 <div class="alert alert-success alert-dismissable">
     <i class="fa  fa-check-circle"></i>
     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-    {!!Session::get('success')!!}
+    {{ session('success') }}
 </div>
 @endif
 <!-- failure message -->
 @if(Session::has('fails'))
 <div class="alert alert-danger alert-dismissable">
     <i class="fa fa-ban"></i>
-    <b>{!! Lang::get('lang.alert') !!}!</b>
+    <b>{{ trans('lang.alert') }}!</b>
     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-    {!!Session::get('fails')!!}
+    {{ session('fails') }}
 </div>
 @endif
 <div class="card card-light">
@@ -85,7 +85,7 @@ class="nav-link active"
     </div>
     
     <div class="card-footer">
-        {!! Form::submit(Lang::get('lang.submit'),['class'=>'btn btn-primary'])!!}
+        {!! Form::submit(trans('lang.submit'),['class'=>'btn btn-primary'])!!}
     </div>
 </div>
 {!! Form::close() !!}

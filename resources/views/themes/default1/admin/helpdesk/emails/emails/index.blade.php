@@ -20,7 +20,7 @@ class="nav-link active"
 @stop
 <!-- header -->
 @section('PageHeader')
-<h1>{{Lang::get('lang.emails')}}</h1>
+<h1>{{ trans('lang.emails') }}</h1>
 @stop
 <!-- /header -->
 <!-- breadcrumbs -->
@@ -38,7 +38,7 @@ class="nav-link active"
   <i class="fa  fa-check-circle"></i>
   <b>Success!</b>
   <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-  {{Session::get('success')}}
+  {{ session('success') }}
 </div>
 @endif
 <!-- failure message -->
@@ -47,7 +47,7 @@ class="nav-link active"
   <i class="fa fa-ban"></i>
   <b>Fail!</b>
   <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-  {{Session::get('fails')}}
+  {{ session('fails') }}
 </div>
 @endif
 
@@ -55,12 +55,12 @@ class="nav-link active"
 
 	<div class="card-header">
 		
-		<h3 class="card-title">{!! Lang::get('lang.emails') !!}</h3>
+		<h3 class="card-title">{{ trans('lang.emails') }}</h3>
 
 		<div class="card-tools">
 			
 			<a href="{{route('emails.create')}}" class="btn btn-default btn-tool">
-				<span class="fas fa-plus"></span>&nbsp;{{Lang::get('lang.create_email')}}
+				<span class="fas fa-plus"></span>&nbsp;{{ trans('lang.create_email') }}
 			</a>
 		</div>	
 	</div>
@@ -77,12 +77,12 @@ class="nav-link active"
     	<!-- table -->
 		<table class="table table-bordered dataTable" style="overflow:hidden;">
 			<tr>
-				<th width="100px">{{Lang::get('lang.email')}}</th>
-				<th width="100px">{{Lang::get('lang.priority')}}</th>
-				<th width="100px">{{Lang::get('lang.department')}}</th>
-				<th width="100px">{{Lang::get('lang.created')}}</th>
-				<th width="100px">{{Lang::get('lang.last_updated')}}</th>
-				<th width="100px">{{Lang::get('lang.action')}}</th>
+				<th width="100px">{{ trans('lang.email') }}</th>
+				<th width="100px">{{ trans('lang.priority') }}</th>
+				<th width="100px">{{ trans('lang.department') }}</th>
+				<th width="100px">{{ trans('lang.created') }}</th>
+				<th width="100px">{{ trans('lang.last_updated') }}</th>
+				<th width="100px">{{ trans('lang.action') }}</th>
 			</tr>
 
 			@foreach($emails as $email)
@@ -114,15 +114,15 @@ class="nav-link active"
 				<td>{!! UTC::usertimezone($email->updated_at) !!}</td>
 				<td>
 				{!! Form::open(['route'=>['emails.destroy', $email->id],'method'=>'DELETE']) !!}
-				<a href="{{route('emails.edit', $email->id)}}" class="btn btn-primary btn-xs"><i class="fas fa-edit"> </i>{{Lang::get('lang.edit')}}</a>
+				<a href="{{route('emails.edit', $email->id)}}" class="btn btn-primary btn-xs"><i class="fas fa-edit"> </i>{{ trans('lang.edit') }}</a>
 				<!-- To pop up a confirm Message -->
 
 				@if($default_email == $email->id) 
-					{!! Form::button('<i class="fas fa-trash"> </i>'.Lang::get('lang.delete'),
+					{!! Form::button('<i class="fas fa-trash"> </i>'.trans('lang.delete'),
 	            		['class'=> 'btn btn-danger btn-xs '. $disabled])
 	            	!!}
 				@else
-					{!! Form::button('<i class="fas fa-trash"> </i>'.Lang::get('lang.delete'),
+					{!! Form::button('<i class="fas fa-trash"> </i>'.trans('lang.delete'),
 	            		['type' => 'submit',
 	            		'class'=> 'btn btn-danger btn-xs',
 	            		'onclick'=>'return confirm("Are you sure?")'])

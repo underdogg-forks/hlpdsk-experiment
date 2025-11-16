@@ -128,21 +128,21 @@
 
                     <ul class="navbar-nav navbar-menu site-navigate ml-auto">
 
-                        <li @yield('home') class="nav-item"><a href="{{url('/')}}" class="nav-link">{!! Lang::get('lang.home') !!}</a></li>
+                        <li @yield('home') class="nav-item"><a href="{{url('/')}}" class="nav-link">{{ trans('lang.home') }}</a></li>
 
                         @if($system->first()->status == 1)
                             <li @yield('submit') class="nav-item">
-                                <a href="{{URL::route('form')}}" class="nav-link">{!! Lang::get('lang.submit_a_ticket') !!}</a>
+                                <a href="{{URL::route('form')}}" class="nav-link">{{ trans('lang.submit_a_ticket') }}</a>
                             </li>
                         @endif
 
                         <li @yield('kb') class="nav-item dropdown">
                             <a href="{!! url('knowledgebase') !!}" class="dropdown-toggle nav-link" id="navbarDropdown" role="button" data-toggle=""
-                               aria-haspopup="true" aria-expanded="false">{!! Lang::get('lang.knowledge_base') !!}
+                               aria-haspopup="true" aria-expanded="false">{{ trans('lang.knowledge_base') }}
                             </a>
                             <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu">
-                                <li><a href="{{route('category-list')}}" class="dropdown-item">{!! Lang::get('lang.categories') !!}</a></li>
-                                <li><a href="{{route('article-list')}}" class="dropdown-item">{!! Lang::get('lang.articles') !!}</a></li>
+                                <li><a href="{{route('category-list')}}" class="dropdown-item">{{ trans('lang.categories') }}</a></li>
+                                <li><a href="{{route('article-list')}}" class="dropdown-item">{{ trans('lang.articles') }}</a></li>
                             </ul>
                         </li>
 
@@ -159,7 +159,7 @@
                         @if(count($pages))
                             <li @yield('pages') class="nav-item dropdown">
                                 <a class="dropdown-toggle nav-link"  id="navbarDropdown" role="button" data-toggle=""
-                                   aria-haspopup="true" aria-expanded="false">{!! Lang::get('lang.pages') !!}
+                                   aria-haspopup="true" aria-expanded="false">{{ trans('lang.pages') }}
                                 </a>
                                 <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu">
                                     @foreach($pages as $page)
@@ -172,12 +172,12 @@
                         @if(Auth::user())
 
                             <li @yield('myticket') class="nav-item">
-                                <a href="{{url('mytickets')}}" class="nav-link">{!! Lang::get('lang.my_tickets') !!}</a>
+                                <a href="{{url('mytickets')}}" class="nav-link">{{ trans('lang.my_tickets') }}</a>
                             </li>
 
                             <li @yield('profile') class="nav-item dropdown">
                                 <a href="#" class="dropdown-toggle nav-link"  id="navbarDropdown" role="button" data-toggle=""
-                                   aria-haspopup="true" aria-expanded="false">{!! Lang::get('lang.my_profile') !!}
+                                   aria-haspopup="true" aria-expanded="false">{{ trans('lang.my_profile') }}
                                 </a>
                                 <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu">
                                     <li>
@@ -192,16 +192,16 @@
 
                                             <div class="banner-content" id="dropdown_content">
 
-                                                <a href="{{url('auth/logout')}}" class="btn btn-custom btn-sm text-white profile_btn">{!! Lang::get('lang.log_out') !!}</a>
+                                                <a href="{{url('auth/logout')}}" class="btn btn-custom btn-sm text-white profile_btn">{{ trans('lang.log_out') }}</a>
 
                                                 @if(Auth::user())
                                                     @if(Auth::user()->role != 'user')
-                                                        <a href="{{url('dashboard')}}" class="btn btn-custom btn-sm text-white profile_btn">{!! Lang::get('lang.dashboard') !!}</a>
+                                                        <a href="{{url('dashboard')}}" class="btn btn-custom btn-sm text-white profile_btn">{{ trans('lang.dashboard') }}</a>
                                                     @endif
                                                 @endif
                                                 @if(Auth::user())
                                                     @if(Auth::user()->role == 'user')
-                                                        <a href="{{url('client-profile')}}" class="btn btn-custom btn-sm text-white profile_btn">{!! Lang::get('lang.profile') !!}</a>
+                                                        <a href="{{url('client-profile')}}" class="btn btn-custom btn-sm text-white profile_btn">{{ trans('lang.profile') }}</a>
                                                     @endif
                                                 @endif
                                             </div>
@@ -250,14 +250,14 @@
                         <div class="alert alert-success alert-dismissable">
                             <i class="fa  fa-check-circle"></i>
                             <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-                            {{Session::get('success')}}
+                            {{ session('success') }}
                         </div>
                     @endif
                     @if(Session::has('warning'))
                         <div class="alert alert-warning alert-dismissable">
                             <i class="fa  fa-check-circle"></i>
                             <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-                            {!! Session::get('warning') !!}
+                            {{ session('warning') }}
                         </div>
                     @endif
                     <!-- failure message -->
@@ -267,9 +267,9 @@
                         @endif
                         <div class="alert alert-danger alert-dismissable">
                             <i class="fa fa-ban"></i>
-                            <b>{!! Lang::get('lang.alert') !!} !</b>
+                            <b>{{ trans('lang.alert') }} !</b>
                             <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-                            {{Session::get('fails')}}
+                            {{ session('fails') }}
                         </div>
                             <?php a: ?>
                     @endif
@@ -352,7 +352,7 @@
             <hr style="color:#E5E5E5"/>
             <div class="row">
                 <div class="site-info col-md-6">
-                    <p class="text-muted">{!! Lang::get('lang.copyright') !!} &copy; {!! date('Y') !!}  <a href="{!! $company->website !!}" target="_blank">{!! $company->company_name !!}</a>. {!! Lang::get('lang.all_rights_reserved') !!}. {!! Lang::get('lang.powered_by') !!} <a href="http://www.faveohelpdesk.com/"  target="_blank">Faveo</a></p>
+                    <p class="text-muted">{{ trans('lang.copyright') }} &copy; {!! date('Y') !!}  <a href="{!! $company->website !!}" target="_blank">{!! $company->company_name !!}</a>. {{ trans('lang.all_rights_reserved') }}. {{ trans('lang.powered_by') }} <a href="http://www.faveohelpdesk.com/"  target="_blank">Faveo</a></p>
                 </div>
                 <div class="site-social text-right col-md-6">
                     <?php $socials = App\Model\helpdesk\Theme\Widgets::all(); ?>

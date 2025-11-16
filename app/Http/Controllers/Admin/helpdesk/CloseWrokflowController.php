@@ -59,7 +59,7 @@ class CloseWrokflowController extends Controller
             $securitys->status = $request->input('status');
             $securitys->save();
 
-            return \Redirect::back()->with('success', Lang::get('lang.successfully_saved_your_settings'));
+            return \Redirect::back()->with('success', trans('lang.successfully_saved_your_settings'));
         } catch (Exception $ex) {
             return redirect()->back()->with('fails', $ex->getMessage());
         }

@@ -29,7 +29,7 @@ class="active"
 @section('content')
  <div class="box box-primary">
             <div class="box-header">
-  <h2 class="box-title">{{Lang::get('lang.error-logs')}}</h2>
+  <h2 class="box-title">{{ trans('lang.error-logs') }}</h2>
 </div>
             <!-- /.box-header -->
             <div class="box-body">
@@ -38,7 +38,7 @@ class="active"
         <i class="fa  fa-check-circle"></i>
         <b>Success!</b>
         <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-        {{Session::get('success')}}
+        {{ session('success') }}
     </div>
     @endif
     <!-- failure message -->
@@ -47,7 +47,7 @@ class="active"
         <i class="fa fa-ban"></i>
         <b>Fail!</b>
         <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-        {{Session::get('fails')}}
+        {{ session('fails') }}
     </div>
     @endif
               <table id="example1" class="table table-bordered table-striped">

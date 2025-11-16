@@ -17,7 +17,7 @@ class="nav-link active"
 @stop
 
 @section('PageHeader')
-<h1>{!! Lang::get('lang.widgets') !!}</h1>
+<h1>{{ trans('lang.widgets') }}</h1>
 @stop
 @section('content')
 <!-- check whether success or not -->
@@ -25,27 +25,27 @@ class="nav-link active"
 <div class="alert alert-success alert-dismissable">
     <i class="fa fa-check-circle"></i>
     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-    {{Session::get('success')}}
+    {{ session('success') }}
 </div>
 @endif
 <!-- failure message -->
 @if(Session::has('fails'))
 <div class="alert alert-danger alert-dismissable">
     <i class="fa fa-ban"></i>
-    <b>{!! Lang::get('lang.alert') !!} !</b> 
+    <b>{{ trans('lang.alert') }} !</b> 
     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-    {{Session::get('fails')}}
+    {{ session('fails') }}
 </div>
 @endif
 <div class="card card-light">
     <div class="card-header">
-        <h3 class="card-title">{!! Lang::get('lang.social-widget-settings') !!} </h3>
+        <h3 class="card-title">{{ trans('lang.social-widget-settings') }} </h3>
     </div>
     <div class="card-body">
         {!! Datatable::table()
-        ->addColumn(Lang::get('lang.name'),
-        Lang::get('lang.link'),
-        Lang::get('lang.action'))  // these are the column headings to be shown
+        ->addColumn(trans('lang.name'),
+        trans('lang.link'),
+        trans('lang.action'))  // these are the column headings to be shown
         ->setUrl('list-social-buttons')  // this is the route where data will be retrieved
         ->render() !!}
     </div>

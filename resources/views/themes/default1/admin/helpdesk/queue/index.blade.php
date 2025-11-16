@@ -20,7 +20,7 @@ class="nav-link active"
 @stop
 <!-- header -->
 @section('PageHeader')
-<h1>{{Lang::get('lang.queue')}}</h1>
+<h1>{{ trans('lang.queue') }}</h1>
 @stop
 <!-- /header -->
 <!-- breadcrumbs -->
@@ -36,32 +36,32 @@ class="nav-link active"
 <div class="alert alert-success alert-dismissable">
     <i class="fa fa-check-circle"></i>
     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-    {{Session::get('success')}}
+    {{ session('success') }}
 </div>
 @endif
 @if(Session::has('fails'))
 <div class="alert alert-danger alert-dismissable">
     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-    {{Session::get('fails')}}
+    {{ session('fails') }}
 </div>
 @endif
 @if(Session::has('warn'))
 <div class="alert alert-warning alert-dismissable">
     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-    {{Session::get('warn')}}
+    {{ session('warn') }}
 </div>
 @endif
 <div class="card card-light">
     <div class="card-header">
-        <h3 class="card-title">{!! Lang::get('lang.queues') !!}</h3>
+        <h3 class="card-title">{{ trans('lang.queues') }}</h3>
     </div>
     <div class="card-body">
         <table id="example2" class="table table-bordered table-striped">
             <thead>
                 <tr>
-                    <th>{!! Lang::get('lang.name') !!}</th>
-                    <th>{!! Lang::get('lang.status') !!}</th>
-                    <th>{!! Lang::get('lang.action') !!}</th>
+                    <th>{{ trans('lang.name') }}</th>
+                    <th>{{ trans('lang.status') }}</th>
+                    <th>{{ trans('lang.action') }}</th>
                 </tr>
             </thead>
             <tbody>

@@ -27,12 +27,12 @@ $category_id = $all->pluck('category_id')->toArray();
                 margin-right: 10px; /* Adjust the value to increase or decrease the gap between list items */
             }
         </style>
-        <li class="breadcrumb-item"> <i class="fas fa-home"> </i> {!! Lang::get('lang.you_are_here') !!} : &nbsp;</li>
+        <li class="breadcrumb-item"> <i class="fas fa-home"> </i> {{ trans('lang.you_are_here') }} : &nbsp;</li>
         <?php $category = App\Model\kb\Category::where('id', $category_id)->first(); ?>
-        <li><a class="words" href="{!! URL::route('home') !!}">{!! Lang::get('lang.knowledge_base') !!}</a></li>
+        <li><a class="words" href="{!! URL::route('home') !!}">{{ trans('lang.knowledge_base') }}</a></li>
         <li class="words">></li>
 
-        <li><a  class="words" href="{{url('article-list')}}">{!! Lang::get('lang.article_list') !!}</a></li>
+        <li><a  class="words" href="{{url('article-list')}}">{{ trans('lang.article_list') }}</a></li>
         <li class="words">></li>
         <li><a class="words" href="{{url('category-list/'.$category->slug)}}">{{$category->name}}</a></li>
         <li class="words"> > </li>
@@ -121,7 +121,7 @@ $category_id = $all->pluck('category_id')->toArray();
 {{--        <div id="respond" class="comment-respond form-border">--}}
 
 {{--            <h3 id="reply-title" class="comment-reply-title section-title">--}}
-{{--                <i class="line" style="border-color: rgb(0, 154, 186);"<></i>{!! Lang::get('lang.leave_a_reply') !!}--}}
+{{--                <i class="line" style="border-color: rgb(0, 154, 186);"<></i>{{ trans('lang.leave_a_reply') }}--}}
 {{--            </h3>--}}
 
             {!! Form::open(['method'=>'post','url'=>'postcomment/'.$arti->slug,'id'=>'comment-form']) !!}
@@ -129,7 +129,7 @@ $category_id = $all->pluck('category_id')->toArray();
 
             <div id="respond" class="comment-respond form-border">
                 <h3 id="reply-title" class="comment-reply-title section-title">
-                    <i class="line" style="border-color: rgb(0, 154, 186);"></i>{!! Lang::get('lang.leave_a_reply') !!}
+                    <i class="line" style="border-color: rgb(0, 154, 186);"></i>{{ trans('lang.leave_a_reply') }}
                 </h3>
 
                 @if(Auth::check())
@@ -142,7 +142,7 @@ $category_id = $all->pluck('category_id')->toArray();
                             <p class="banner-title ellipsize_first_name h4" STYLE="margin-left: 5%">{{Auth::user()->first_name." ".Auth::user()->last_name}}</p>
                             <div class="banner-content" id="dropdown_content">
                                 <p data-v-43e70d45="">If you are not? </p>
-                                <a href="{{url('auth/logout')}}" class="btn btn-custom btn-sm text-white profile_btn" STYLE="width: 50%;height: 200%;margin-left: 7%; background-color: #009aba; hov: #00c0ef; color: #fff">{!! Lang::get('lang.log_out') !!}</a>
+                                <a href="{{url('auth/logout')}}" class="btn btn-custom btn-sm text-white profile_btn" STYLE="width: 50%;height: 200%;margin-left: 7%; background-color: #009aba; hov: #00c0ef; color: #fff">{{ trans('lang.log_out') }}</a>
 
                             </div>
                             </div>
@@ -150,12 +150,12 @@ $category_id = $all->pluck('category_id')->toArray();
 
                         <div class="col-md-10" style="width: 65%">
                             <div class="form-group {{ $errors->has('comment') ? 'has-error' : '' }}">
-                                {!! Form::label('comment',Lang::get('lang.message'),['class' => 'label']) !!}
+                                {!! Form::label('comment',trans('lang.message'),['class' => 'label']) !!}
                                 {!! Form::textarea('comment',null,['class' => 'form-control','size' => '30x8','id'=>'comment']) !!}
                                 {!! $errors->first('comment', '<spam class="help-block">:message</spam>') !!}
                             </div>
                             <button type="submit" class="btn btn-custom btn-lg float-right" style="background-color: #009aba; hov: #00c0ef; color: #fff">
-                                {{ Lang::get('lang.post_message') }}
+                                {{ trans('lang.post_message') }}
                             </button>
                         </div>
             </div><script>
@@ -212,19 +212,19 @@ $category_id = $all->pluck('category_id')->toArray();
                     <div class="row">
                         <div class="col-md-4">
                             <div class="form-group {{ $errors->has('name') ? 'has-error' : '' }}">
-                                {!! Form::label('name', Lang::get('lang.name'), ['class' => 'label']) !!}
+                                {!! Form::label('name', trans('lang.name'), ['class' => 'label']) !!}
                                 {!! Form::text('name', null, ['class' => 'form-control', 'id' => 'comment-name']) !!}
                                 {!! $errors->first('name', '<span class="help-block">:message</span>') !!}
                             </div>
 
                             <div class="form-group {{ $errors->has('email') ? 'has-error' : '' }}">
-                                {!! Form::label('email', Lang::get('lang.email'), ['class' => 'label']) !!}
+                                {!! Form::label('email', trans('lang.email'), ['class' => 'label']) !!}
                                 {!! Form::text('email', null, ['class' => 'form-control', 'id' => 'comment-email']) !!}
                                 {!! $errors->first('email', '<span class="help-block">:message</span>') !!}
                             </div>
 
                             <div class="form-group {{ $errors->has('website') ? 'has-error' : '' }}">
-                                {!! Form::label('website', Lang::get('lang.website'), ['class' => 'label']) !!}
+                                {!! Form::label('website', trans('lang.website'), ['class' => 'label']) !!}
                                 {!! Form::text('website', null, ['class' => 'form-control']) !!}
                                 {!! $errors->first('website', '<span class="help-block">:message</span>') !!}
                             </div>
@@ -233,12 +233,12 @@ $category_id = $all->pluck('category_id')->toArray();
 
                         <div class="col-md-10" style="width: 65%">
                             <div class="form-group {{ $errors->has('comment') ? 'has-error' : '' }}">
-                                {!! Form::label('comment',Lang::get('lang.message'),['class' => 'label']) !!}
+                                {!! Form::label('comment',trans('lang.message'),['class' => 'label']) !!}
                                 {!! Form::textarea('comment',null,['class' => 'form-control','size' => '30x8','id'=>'comment']) !!}
                                 {!! $errors->first('comment', '<spam class="help-block">:message</spam>') !!}
                             </div>
                             <button type="submit" class="btn btn-custom btn-lg float-right" style="background-color: #009aba; hov: #00c0ef; color: #fff">
-                                {{ Lang::get('lang.post_message') }}
+                                {{ trans('lang.post_message') }}
                             </button>
                         </div>
 
@@ -335,7 +335,7 @@ $category_id = $all->pluck('category_id')->toArray();
                     
                     <h2 class="section-title h4 clearfix">
 
-                        <b>   <i class="line" style="border-color: rgb(0, 154, 186);"></i>{!! Lang::get('lang.categories') !!}</b>
+                        <b>   <i class="line" style="border-color: rgb(0, 154, 186);"></i>{{ trans('lang.categories') }}</b>
 
                         <small class="float-right"><i class="far fa-hdd fa-fw"></i></small>
                     </h2>

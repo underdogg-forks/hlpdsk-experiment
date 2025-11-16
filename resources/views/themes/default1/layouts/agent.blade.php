@@ -286,7 +286,7 @@
                         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
-                        <strong>Success!</strong> {{ Session::get('success') }}
+                        <strong>Success!</strong> {{ session('success') }}
                     </div>
                 @endif
                 
@@ -295,7 +295,7 @@
                         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
-                        <strong>Error!</strong> {{ Session::get('fails') }}
+                        <strong>Error!</strong> {{ session('fails') }}
                     </div>
                 @endif
 

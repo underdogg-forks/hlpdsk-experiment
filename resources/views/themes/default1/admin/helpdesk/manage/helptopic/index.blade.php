@@ -20,7 +20,7 @@ class="nav-link active"
 @stop
 <!-- header -->
 @section('PageHeader')
-<h1>{{Lang::get('lang.manage')}}</h1>
+<h1>{{ trans('lang.manage') }}</h1>
 @stop
 <!-- /header -->
 <!-- breadcrumbs -->
@@ -37,24 +37,24 @@ class="nav-link active"
 <div class="alert alert-success alert-dismissable">
     <i class="fa  fa-check-circle"></i>
     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-    {!! Session::get('success') !!}
+    {{ session('success') }}
 </div>
 @endif
 <!-- failure message -->
 @if(Session::has('fails'))
 <div class="alert alert-danger alert-dismissable">
     <i class="fa fa-ban"></i>
-    <b>{!! Lang::get('lang.alert') !!} !</b>
+    <b>{{ trans('lang.alert') }} !</b>
     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-    {!! Session::get('fails') !!}
+    {{ session('fails') }}
 </div>
 @endif
 <div class="card card-light">
     <div class="card-header">
-        <h3 class="card-title">{{Lang::get('lang.help_topic')}}</h3>
+        <h3 class="card-title">{{ trans('lang.help_topic') }}</h3>
         <div class="card-tools">
             <a href="{{route('helptopic.create')}}" class="btn btn-default btn-tool">
-                <span class="fas fa-plus"></span>&nbsp;{{Lang::get('lang.create_help_topic')}}
+                <span class="fas fa-plus"></span>&nbsp;{{ trans('lang.create_help_topic') }}
             </a>        
         </div>
     </div>
@@ -62,13 +62,13 @@ class="nav-link active"
         
         <table class="table table-bordered dataTable">
             <tr>
-                <th width="100px">{{Lang::get('lang.topic')}}</th>
-                <th width="100px">{{Lang::get('lang.status')}}</th>
-                <th width="100px">{{Lang::get('lang.type')}}</th>
-                <th width="100px">{{Lang::get('lang.priority')}}</th>
-                <th width="100px">{{Lang::get('lang.department')}}</th>
-                <th width="100px">{{Lang::get('lang.last_updated')}}</th>
-                <th width="100px">{{Lang::get('lang.action')}}</th>
+                <th width="100px">{{ trans('lang.topic') }}</th>
+                <th width="100px">{{ trans('lang.status') }}</th>
+                <th width="100px">{{ trans('lang.type') }}</th>
+                <th width="100px">{{ trans('lang.priority') }}</th>
+                <th width="100px">{{ trans('lang.department') }}</th>
+                <th width="100px">{{ trans('lang.last_updated') }}</th>
+                <th width="100px">{{ trans('lang.action') }}</th>
             </tr>
             <?php
             $default_helptopic = App\Model\helpdesk\Settings\Ticket::where('id', '=', '1')->first();
@@ -94,9 +94,9 @@ class="nav-link active"
                 <!-- topic Status : if status==1 active -->
                 <td>
                     @if($topic->status=='1')
-                    <span style="color:green">{!! Lang::get('lang.active') !!}</span>
+                    <span style="color:green">{{ trans('lang.active') }}</span>
                     @else
-                    <span style="color:red">{!! Lang::get('lang.disable') !!}</span>
+                    <span style="color:red">{{ trans('lang.disable') }}</span>
                     @endif
                 </td>
 
@@ -104,9 +104,9 @@ class="nav-link active"
 
                 <td>
                     @if($topic->type=='1')
-                    <span style="color:green">{!! Lang::get('lang.public') !!}</span>
+                    <span style="color:green">{{ trans('lang.public') }}</span>
                     @else
-                    <span style="color:red">{!! Lang::get('lang.private') !!}</span>
+                    <span style="color:red">{{ trans('lang.private') }}</span>
                     @endif
                 </td>
                 <!-- Priority -->
@@ -127,14 +127,14 @@ class="nav-link active"
                 <!-- Deleting Fields -->
                 <td>
                     {!! Form::open(['route'=>['helptopic.destroy', $topic->id],'method'=>'DELETE']) !!}
-                    <a href="{{route('helptopic.edit',$topic->id)}}" class="btn btn-primary btn-xs"><i class="fas fa-edit"> </i> {!! Lang::get('lang.edit') !!}</a>
+                    <a href="{{route('helptopic.edit',$topic->id)}}" class="btn btn-primary btn-xs"><i class="fas fa-edit"> </i> {{ trans('lang.edit') }}</a>
                     <!-- To pop up a confirm Message -->
                     @if($topic->id == $default_helptopic)
-                        {!! Form::button('<i class="fas fa-trash"> </i> '.Lang::get('lang.delete'),
+                        {!! Form::button('<i class="fas fa-trash"> </i> '.trans('lang.delete'),
                         ['class'=> 'btn btn-danger btn-xs '.$disable])
                         !!}
                     @else
-                        {!! Form::button('<i class="fas fa-trash"> </i> '.Lang::get('lang.delete'),
+                        {!! Form::button('<i class="fas fa-trash"> </i> '.trans('lang.delete'),
                         ['type' => 'submit',
                         'class'=> 'btn btn-danger btn-xs',
                         'onclick'=>'return confirm("Are you sure?")'])

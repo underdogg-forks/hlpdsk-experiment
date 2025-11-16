@@ -30,7 +30,7 @@ class="nav-item menu-open"
 @stop
 
 @section('PageHeader')
-<h1>{{Lang::get('lang.pages')}}</h1>
+<h1>{{ trans('lang.pages') }}</h1>
 @stop
 
 @section('content')
@@ -41,7 +41,7 @@ class="nav-item menu-open"
 <?php //dd($errors); ?>
 <div class="alert alert-danger alert-dismissable">
     <i class="fa fa-ban"></i>
-    <b>{!! Lang::get('lang.alert') !!}!</b>
+    <b>{{ trans('lang.alert') }}!</b>
     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
     <br/>
     @if($errors->first('name'))
@@ -69,19 +69,19 @@ class="nav-item menu-open"
         <div class="card card-light">
 
             <div class="card-header">  
-                <h3 class="card-title">{!! Lang::get('lang.editpage') !!}</h3>
+                <h3 class="card-title">{{ trans('lang.editpage') }}</h3>
             </div>
 
             <div class="card-body">
                 <div class="row">
                     <div class="col-md-6 form-group {{ $errors->has('name') ? 'has-error' : '' }}">
-                        {!! Form::label('name',Lang::get('lang.name')) !!}<span class="text-red"> *</span>
+                        {!! Form::label('name',trans('lang.name')) !!}<span class="text-red"> *</span>
 
                         {!! Form::text('name',null,['class' => 'form-control']) !!}
                     </div>
                     
                     <div class="col-sm-12 form-group {{ $errors->has('description') ? 'has-error' : '' }}">
-                        {!! Form::label('description',Lang::get('lang.description')) !!}
+                        {!! Form::label('description',trans('lang.description')) !!}
 
                         <div class="form-group" style="background-color:white">
                             {!! Form::textarea('description',null,['class' => 'form-control color','size' => '110x15','id'=>'myNicEditor','placeholder'=>'Enter the description']) !!}
@@ -97,33 +97,33 @@ class="nav-item menu-open"
         <div class="card card-light">
 
             <div class="card-header">
-                <h3 class="card-title">{{Lang::get('lang.publish')}}</h3>
+                <h3 class="card-title">{{ trans('lang.publish') }}</h3>
             </div>
 
             <div class="card-body">
                 
                 <div class="form-group {{ $errors->has('status') ? 'has-error' : '' }}">
-                    {!! Form::label('status',Lang::get('lang.status')) !!}
+                    {!! Form::label('status',trans('lang.status')) !!}
 
                     <div class="row">
                         <div class="col-sm-5">
-                            {!! Form::radio('status',1,true) !!} {{Lang::get('lang.published')}}
+                            {!! Form::radio('status',1,true) !!} {{ trans('lang.published') }}
                         </div>
                         <div class="col-sm-5">
-                            {!! Form::radio('status',0,null) !!} {{Lang::get('lang.draft')}}
+                            {!! Form::radio('status',0,null) !!} {{ trans('lang.draft') }}
                         </div>
                     </div>
                 </div>
 
                 <div class="form-group {{ $errors->has('visibility') ? 'has-error' : '' }}">
-                    {!! Form::label('visibility',Lang::get('lang.visibility')) !!}
+                    {!! Form::label('visibility',trans('lang.visibility')) !!}
 
                     <div class="row">
                         <div class="col-sm-5">
-                            {!! Form::radio('visibility','1',true) !!} {{Lang::get('lang.public')}}
+                            {!! Form::radio('visibility','1',true) !!} {{ trans('lang.public') }}
                         </div>
                         <div class="col-sm-5">
-                            {!! Form::radio('visibility','0',null) !!} {{Lang::get('lang.private')}}
+                            {!! Form::radio('visibility','0',null) !!} {{ trans('lang.private') }}
                         </div>
                     </div>
                 </div>
@@ -131,7 +131,7 @@ class="nav-item menu-open"
 
             <div class="card-footer">
 
-                {!! Form::submit(Lang::get('lang.publish'),['class'=>'btn btn-primary'])!!}
+                {!! Form::submit(trans('lang.publish'),['class'=>'btn btn-primary'])!!}
             </div>
         </div>
     </div>    

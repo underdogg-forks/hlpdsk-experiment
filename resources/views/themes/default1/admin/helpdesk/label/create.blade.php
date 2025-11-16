@@ -32,20 +32,20 @@ class="active"
 <div class="alert alert-success alert-dismissable">
     <i class="fa fa-check-circle"></i>
     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-    {{Session::get('success')}}
+    {{ session('success') }}
 </div>
 @endif
 @if(Session::has('fails'))
 <div class="alert alert-danger alert-dismissable">
     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-    {{Session::get('fails')}}
+    {{ session('fails') }}
 </div>
 @endif
  @if(Session::has('errors'))
         <br><br>
         <div class="alert alert-danger alert-dismissable">
             <i class="fa fa-ban"></i>
-            <b>{!! Lang::get('lang.alert') !!}!</b>
+            <b>{{ trans('lang.alert') }}!</b>
             <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
             <br/>
             @if($errors->first('title'))
@@ -62,7 +62,7 @@ class="active"
 @if(Session::has('warn'))
 <div class="alert alert-warning alert-dismissable">
     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-    {{Session::get('warn')}}
+    {{ session('warn') }}
 </div>
 @endif
 <div class="box">
@@ -106,7 +106,7 @@ class="active"
             
              <tr>
                 <td>{!! Form::label('status','Status') !!}</td>
-                <td><input type="checkbox" name="status" id="status" checked="true">&nbsp;&nbsp;{{Lang::get('lang.enable')}}</td>
+                <td><input type="checkbox" name="status" id="status" checked="true">&nbsp;&nbsp;{{ trans('lang.enable') }}</td>
             </tr>
             
         </table>

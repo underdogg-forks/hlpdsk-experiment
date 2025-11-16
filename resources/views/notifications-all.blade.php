@@ -45,7 +45,7 @@ active
 class="active"
 @stop
 @section('PageHeader')
-<h3>{!! Lang::get('lang.notifications') !!}</h3>
+<h3>{{ trans('lang.notifications') }}</h3>
 @stop
 
 <!-- /breadcrumbs -->
@@ -56,7 +56,7 @@ class="active"
         <i class="fa fa-ban"></i>
         <b>Alert!</b> Success.
         <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-        {{Session::get('success')}}
+        {{ session('success') }}
     </div>
     @endif
     <!-- fail message -->
@@ -65,7 +65,7 @@ class="active"
         <i class="fa fa-ban"></i>
         <b>Alert!</b> Failed.
         <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-        {{Session::get('fails')}}
+        {{ session('fails') }}
     </div>
     @endif
     <div id="alert21" class="alert alert-success alert-dismissable" style="display:none;">
@@ -75,7 +75,7 @@ class="active"
     </div>
             <div class="box">
                 <div class="box-header">
-                    <h3 class="box-title">{!! Lang::get('lang.view_all_notifications')!!}</h3>
+                    <h3 class="box-title">{{ trans('lang.view_all_notifications') }}</h3>
                     <div class="pull-right">
                         <a href="{{url('notifications-list/delete')}}" class="btn btn-danger">Delete all</a>
                     </div>
@@ -184,7 +184,7 @@ class="active"
                                     @else
                                     <li>
 
-                                        <h6 class="textcontent marginzero">{!! Lang::get('lang.no_notification_available') !!}</h6>
+                                        <h6 class="textcontent marginzero">{{ trans('lang.no_notification_available') }}</h6>
                                         <small class="label label-warning" ><i class="fa fa-bell-slash-o"></i></small>
 
                                     </li>

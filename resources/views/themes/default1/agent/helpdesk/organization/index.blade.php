@@ -17,7 +17,7 @@ class="nav-link active"
 @stop
 
 @section('PageHeader')
-<h1>{!! Lang::get('lang.organizations') !!}</h1>
+<h1>{{ trans('lang.organizations') }}</h1>
 @stop
 <!-- content -->
 @section('content')
@@ -26,16 +26,16 @@ class="nav-link active"
 <div class="alert alert-success alert-dismissable">
     <i class="fas fa-check-circle"></i>
     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-    {{Session::get('success')}}
+    {{ session('success') }}
 </div>
 @endif
 <!-- failure message -->
 @if(Session::has('fails'))
 <div class="alert alert-danger alert-dismissable">
     <i class="fas fa-ban"></i>
-    <b>{!! Lang::get('lang.alert') !!} !</b>
+    <b>{{ trans('lang.alert') }} !</b>
     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-    {{Session::get('fails')}}
+    {{ session('fails') }}
 </div>
 @endif
 
@@ -43,11 +43,11 @@ class="nav-link active"
 
     <div class="card-header">
 
-        <h3 class="card-title">{{Lang::get('lang.organization_list')}}</h3>
+        <h3 class="card-title">{{ trans('lang.organization_list') }}</h3>
 
         <div class="card-tools">
 
-            <a href="{{route('organizations.create')}}" class="btn btn-default btn-tool"><i class="fas fa-plus"> </i> {{Lang::get('lang.create_organization')}}</a>
+            <a href="{{route('organizations.create')}}" class="btn btn-default btn-tool"><i class="fas fa-plus"> </i> {{ trans('lang.create_organization') }}</a>
         </div>
 
     </div>
@@ -55,10 +55,10 @@ class="nav-link active"
     <div class="card-body">
 
         {!! Datatable::table()
-        ->addColumn(Lang::get('lang.name'),
-        Lang::get('lang.website'),
-        Lang::get('lang.phone'),
-        Lang::get('lang.action'))  // these are the column headings to be shown
+        ->addColumn(trans('lang.name'),
+        trans('lang.website'),
+        trans('lang.phone'),
+        trans('lang.action'))  // these are the column headings to be shown
         ->setUrl(route('org.list'))  // this is the route where data will be retrieved
         ->render() !!}
     </div>

@@ -53,7 +53,7 @@ active
         @if(Session::has('fails'))
             <div class="woocommerce-message woocommerce-tracker">
                 <div class="fail">
-                    <span id="fail">{{Session::get('fails')}} </span><br/><br/>
+                    <span id="fail">{{ session('fails') }} </span><br/><br/>
                 </div>
             </div>
         @endif
@@ -66,7 +66,7 @@ active
                 <div>
                     <tr>
                         <td>
-                            <label for="box1">{!! Lang::get('lang.name') !!}<span style="color
+                            <label for="box1">{{ trans('lang.name') }}<span style="color
                                 : red;font-size:12px;">*</span></label>
                         </td>
                         <td>
@@ -159,7 +159,7 @@ active
                 <div>
                     <tr>
                         <td>
-                            {!! Form::label('date',Lang::get('lang.date_time')) !!}
+                            {!! Form::label('date',trans('lang.date_time')) !!}
                         </td>
                         <td>
                             <div class="side-by-side clearfix moveleft">
@@ -179,7 +179,7 @@ active
                     </tr>
                     <tr>
                         <td>
-                            {!! Form::label('time_zone',Lang::get('lang.time_zone')) !!}
+                            {!! Form::label('time_zone',trans('lang.time_zone')) !!}
                         </td>
                         <?php  
 
@@ -201,7 +201,7 @@ active
                             <div class="side-by-side clearfix moveleft">
                                 <div>
 
-                     {!! Form::select('timezone', [Lang::get('lang.choose')=>$timezones],null,['class' => 'selectpicker chosen-select','required','data-live-search'=>'true','data-live-search-placeholder'=>'Search','style'=>'width:295px;']) !!}
+                     {!! Form::select('timezone', [trans('lang.choose')=>$timezones],null,['class' => 'selectpicker chosen-select','required','data-live-search'=>'true','data-live-search-placeholder'=>'Search','style'=>'width:295px;']) !!}
                                </div>
                             </div>                
                         </td>
@@ -212,7 +212,7 @@ active
                     </tr>
                     <tr>
                         <td>
-                            {!! Form::label('language',Lang::get('lang.language')) !!}
+                            {!! Form::label('language',trans('lang.language')) !!}
                         </td>
                         <td>
                             <div class="side-by-side clearfix moveleft">

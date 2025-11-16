@@ -20,7 +20,7 @@ class="nav-link active"
 @stop
 <!-- header -->
 @section('PageHeader')
-<h1>{!! Lang::get('lang.forms') !!}</h1>
+<h1>{{ trans('lang.forms') }}</h1>
 @stop
 <!-- /header -->
 <!-- breadcrumbs -->
@@ -45,25 +45,25 @@ class="nav-link active"
 <div class="alert alert-success alert-dismissable">
     <i class="fa fa-check-circle"></i>
     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-    {{Session::get('success')}}
+    {{ session('success') }}
 </div>
 @endif
 @if(Session::has('fails'))
 <div class="alert alert-danger alert-dismissable">
     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-    {{Session::get('fails')}}
+    {{ session('fails') }}
 </div>
 @endif
 @if(Session::has('warn'))
 <div class="alert alert-warning alert-dismissable">
     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-    {{Session::get('warn')}}
+    {{ session('warn') }}
 </div>
 @endif
 <div class="card card-light">
 
     <div class="card-header">
-        <h3 class="card-title">{!! Lang::get('lang.edit') !!}</h3>
+        <h3 class="card-title">{{ trans('lang.edit') }}</h3>
     </div>
 
     <div class="card-body">
@@ -74,23 +74,23 @@ class="nav-link active"
 
             <div class="form-group col-sm-6">
 
-                <label>{!! Lang::get('lang.form_name') !!}: <span class="text-red"> *</span></label>
+                <label>{{ trans('lang.form_name') }}: <span class="text-red"> *</span></label>
                  {!! Form::text('formname',null,['class'=>'form-control']) !!}
             </div>
         </div>
         
-        <div class="callout callout-default" style="font-style: oblique;">{!! Lang::get('lang.instructions_on_creating_form') !!}.</div>
-        <div class="callout callout-default"> {!! Lang::get('lang.click_add_fields_button_to_add_fields') !!} </div>
+        <div class="callout callout-default" style="font-style: oblique;">{{ trans('lang.instructions_on_creating_form') }}.</div>
+        <div class="callout callout-default"> {{ trans('lang.click_add_fields_button_to_add_fields') }} </div>
 
         <div class="card card-light">
             
             <div class="card-header">
             
-                <h3 class="card-title">{!! Lang::get('lang.adding_fields') !!}</h3> 
+                <h3 class="card-title">{{ trans('lang.adding_fields') }}</h3> 
 
                 <div class="card-tools"> 
                     <button type="button" class="btn btn-default btn-tool addField" value="Show Div" onclick="showDiv()" >
-                        <i class="fas fa-plus"></i>&nbsp;{!! Lang::get('lang.add_fields') !!}
+                        <i class="fas fa-plus"></i>&nbsp;{{ trans('lang.add_fields') }}
                     </button>
                 </div>    
             </div> 
@@ -98,12 +98,12 @@ class="nav-link active"
             <div class="card-body" id="welcomeDiv">
                 <table id="example2" class="table table-bordered table-striped">
                     <thead>
-                    <th>{!! Lang::get('lang.label') !!} </th>
-                    <th>{!! Lang::get('lang.name') !!} </th>
-                    <th>{!! Lang::get('lang.type') !!} </th>
-                    <th>{!! Lang::get('lang.values(selected_fields)') !!} </th>
-                    <th>{!! Lang::get('lang.required') !!} </th>
-                    <th>{!! Lang::get('lang.action') !!} </th>
+                    <th>{{ trans('lang.label') }} </th>
+                    <th>{{ trans('lang.name') }} </th>
+                    <th>{{ trans('lang.type') }} </th>
+                    <th>{!! trans('lang.values(selected_fields)') !!} </th>
+                    <th>{{ trans('lang.required') }} </th>
+                    <th>{{ trans('lang.action') }} </th>
                     </thead>
                     <tbody class="inputField">
 
@@ -116,7 +116,7 @@ class="nav-link active"
                             <td>{!! Form::select('type[]',['text'=>'text','email'=>'email','password'=>'password','textarea'=>'textarea','select'=>'select','radio'=>'radio','checkbox'=>'checkbox','hidden'=>'hidden'],$field->type,['class'=>'form-control']) !!}</td>
                             <td><input type="text" name="value[]" value="{{$field->valuesAsString()}}" class="form-control"></td>
                             
-                            <td>{!! Form::radio('required['.$key.']',1,true) !!}&nbsp;&nbsp;{!! Lang::get("lang.yes") !!}&nbsp;&nbsp;{!! Form::radio('required['.$key.']',0,$field->nonRequiredFieldForCheck()) !!}&nbsp;&nbsp;{!! Lang::get("lang.no") !!}</td>
+                            <td>{!! Form::radio('required['.$key.']',1,true) !!}&nbsp;&nbsp;{{ trans("lang.yes") }}&nbsp;&nbsp;{!! Form::radio('required['.$key.']',0,$field->nonRequiredFieldForCheck()) !!}&nbsp;&nbsp;{{ trans("lang.no") }}</td>
                             <td><button type="button" class="remove_field btn btn-danger"><i class="fas fa-trash"></i></button></td>
                         </tr> 
                         @empty 
@@ -129,7 +129,7 @@ class="nav-link active"
         </div> 
     </div>
     <div class="card-footer">
-        <input type="submit" class="btn btn-primary" value="{!! Lang::get('lang.save_form') !!}">
+        <input type="submit" class="btn btn-primary" value="{{ trans('lang.save_form') }}">
     </div>
 </div>
 {!! Form::close() !!}
@@ -152,7 +152,7 @@ class="nav-link active"
     <td><input type="text" class="form-control" name="name[]"></td>\n\
     <td><select name="type[]" class="form-control"><option>text</option><option>email</option><option>password</option><option>textarea</option><option>select</option><option>radio</option><option>checkbox</option><option>hidden</option></select>\n\
     </td><td><input type="text" name="value[]" class="form-control"></td>\n\
-    <td><input type=radio name="required[]" value=1 checked>&nbsp;&nbsp;{!! Lang::get("lang.yes") !!}&nbsp;&nbsp;<input type=radio name="required[]" value=0>&nbsp;&nbsp;{!! Lang::get("lang.no") !!}</td>\n\
+    <td><input type=radio name="required[]" value=1 checked>&nbsp;&nbsp;{{ trans("lang.yes") }}&nbsp;&nbsp;<input type=radio name="required[]" value=0>&nbsp;&nbsp;{{ trans("lang.no") }}</td>\n\
     <td><button type="button" class="remove_field btn btn-danger"><i class="fas fa-trash"></i></button></td></tr>');
             }
         });

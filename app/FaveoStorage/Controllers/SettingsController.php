@@ -29,7 +29,7 @@ class SettingsController extends Controller
                                 </span>
                             </a>
                         </div>
-                        <div class="text-center text-sm">'.Lang::get('storage::lang.storage').'</div>
+                        <div class="text-center text-sm">'.trans('storage::lang.storage').'</div>
                     </div>
                 </div>';
     }

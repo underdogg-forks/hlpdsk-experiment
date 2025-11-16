@@ -85,9 +85,9 @@ class QueueService extends BaseModel
     public function getStatus()
     {
         $status = $this->attributes['status'];
-        $html = "<span style='color:red'>".Lang::get('lang.inactive').'</span>';
+        $html = "<span style='color:red'>".trans('lang.inactive').'</span>';
         if ($status == 1) {
-            $html = "<span style='color:green'>".Lang::get('lang.active').'</span>';
+            $html = "<span style='color:green'>".trans('lang.active').'</span>';
         }
 
         return $html;
@@ -97,9 +97,9 @@ class QueueService extends BaseModel
     {
         $id = $this->attributes['id'];
         $status = $this->attributes['status'];
-        $html = '<a href='.url('queue/'.$id.'/activate')." class='btn btn-primary'>".Lang::get('lang.activate').'</a>';
+        $html = '<a href='.url('queue/'.$id.'/activate')." class='btn btn-primary'>".trans('lang.activate').'</a>';
         if ($status == 1) {
-            $html = "<a href='#' class='btn btn-primary' disabled>".Lang::get('lang.activate').'</a>';
+            $html = "<a href='#' class='btn btn-primary' disabled>".trans('lang.activate').'</a>';
         }
 
         return $html;

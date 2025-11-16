@@ -20,7 +20,7 @@ class="nav-link active"
 @stop
 <!-- header -->
 @section('PageHeader')
-<h1>{{Lang::get('lang.departments')}}</h1>
+<h1>{{ trans('lang.departments') }}</h1>
 @stop
 <!-- /header -->
 <!-- breadcrumbs -->
@@ -38,27 +38,27 @@ class="nav-link active"
 <div class="alert alert-success alert-dismissable">
     <i class="fa  fa-check-circle"></i>
     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-    {!! Session::get('success') !!}
+    {{ session('success') }}
 </div>
 @endif
 <!-- failure message -->
 @if(Session::has('fails'))
 <div class="alert alert-danger alert-dismissable">
     <i class="fa fa-ban"></i>
-    <b>{!! Lang::get('lang.fails') !!}!</b>
+    <b>{{ trans('lang.fails') }}!</b>
     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-    {!! Session::get('fails') !!}
+    {{ session('fails') }}
 </div>
 @endif
 
 <div class="card card-light">
     <div class="card-header">
-        <h3 class="card-title">{!! Lang::get('lang.list_of_departments') !!}</h3>
+        <h3 class="card-title">{{ trans('lang.list_of_departments') }}</h3>
 
         <div class="card-tools">
             
             <a href="{{route('departments.create')}}" class="btn btn-default btn-tool">
-                <span class="fas fa-plus"></span>&nbsp;{{Lang::get('lang.create_a_department')}}
+                <span class="fas fa-plus"></span>&nbsp;{{ trans('lang.create_a_department') }}
             </a>        
         </div>    
     </div>
@@ -68,11 +68,11 @@ class="nav-link active"
         <!-- table -->
         <table class="table table-bordered dataTable" style="overflow:scroll;">
             <tr>
-                <th>{{Lang::get('lang.name')}}</th>
-                <th>{{Lang::get('lang.type')}}</th>
-                <th>{{Lang::get('lang.sla_plan')}}</th>
-                <th>{{Lang::get('lang.department_manager')}}</th>
-                <th>{{Lang::get('lang.action')}}</th>
+                <th>{{ trans('lang.name') }}</th>
+                <th>{{ trans('lang.type') }}</th>
+                <th>{{ trans('lang.sla_plan') }}</th>
+                <th>{{ trans('lang.department_manager') }}</th>
+                <th>{{ trans('lang.action') }}</th>
             </tr>
             <?php
             $default_department = App\Model\helpdesk\Settings\System::where('id', '=', '1')->first();
@@ -94,9 +94,9 @@ class="nav-link active"
                     </a></td>
                 <td>
                     @if($department->type=='1')
-                    <span style="color:green">{!! Lang::get('lang.public') !!}</span>
+                    <span style="color:green">{{ trans('lang.public') }}</span>
                     @else
-                    <span style="color:red">{!! Lang::get('lang.private') !!}</span>
+                    <span style="color:red">{{ trans('lang.private') }}</span>
                     @endif
                 </td>
                 <?php
@@ -119,17 +119,17 @@ class="nav-link active"
                 <td>{{ $manager }}</td>
                 <td>
                     {!! Form::open(['route'=>['departments.destroy', $department->id],'method'=>'DELETE']) !!}
-                    <a href="{{route('departments.edit', $department->id)}}" class="btn btn-primary btn-xs"><i class="fas fa-edit"> </i> {!! Lang::get('lang.edit') !!}</a>
+                    <a href="{{route('departments.edit', $department->id)}}" class="btn btn-primary btn-xs"><i class="fas fa-edit"> </i> {{ trans('lang.edit') }}</a>
                     {{-- @if($default_department == $department->id) --}}
                     {{-- @else --}}
                     <!-- To pop up a confirm Message -->
                    
                     @if($default_department == $department->id)
-                    {!! Form::button('<i class="fas fa-trash"> </i> '.Lang::get('lang.delete'),
+                    {!! Form::button('<i class="fas fa-trash"> </i> '.trans('lang.delete'),
                     ['class'=> 'btn btn-danger btn-xs '.$disable])
                     !!}
                     @else
-                     {!! Form::button('<i class="fas fa-trash"> </i> '.Lang::get('lang.delete'),
+                     {!! Form::button('<i class="fas fa-trash"> </i> '.trans('lang.delete'),
                     ['type' => 'submit',
                     'class'=> 'btn btn-danger btn-xs',
                     'onclick'=>'return confirm("Are you sure?")'])

@@ -17,7 +17,7 @@ class="nav-link active"
 @stop
 
 @section('PageHeader')
-<h1>{!! Lang::get('lang.settings') !!}</h1>
+<h1>{{ trans('lang.settings') }}</h1>
 @stop
 
 @section('header')
@@ -28,21 +28,21 @@ class="nav-link active"
 <div class="alert alert-success alert-dismissable">
     <i class="fas fa-check-circle"></i>
     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-    {!! Session::get('success') !!}
+    {{ session('success') }}
 </div>
 @endif
 @if(Session::has('failed'))
 <div class="alert alert-danger alert-dismissable">
     <i class="fas fa-ban"></i>
-    <b>{!! Lang::get('lang/alert') !!}!</b>
+    <b>{{ trans('lang/alert') }}!</b>
     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-    <p>{{Session::get('failed')}}</p>                
+    <p>{{ session('failed') }}</p>                
 </div>
 @endif
 @if(Session::has('errors'))
 <div class="alert alert-danger alert-dismissable">
     <i class="fas fa-ban"></i>
-    <b>{!! Lang::get('lang.alert') !!}!</b>
+    <b>{{ trans('lang.alert') }}!</b>
     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
     <br/>
     @if($errors->first('lockout_message'))
@@ -58,7 +58,7 @@ class="nav-link active"
 @endif
 <div class="card card-light">
     <div class="card-header">
-        <h3 class="card-title">{!! Lang::get('lang.security_settings') !!}</h3>
+        <h3 class="card-title">{{ trans('lang.security_settings') }}</h3>
     </div><!-- /.card-header -->
     <div class="card-body">
         {!! Form::model($security,['route'=>['securitys.update', $security->id],'method'=>'PATCH','files' => true]) !!}
@@ -68,7 +68,7 @@ class="nav-link active"
                     <label for="title">{{trans('lang.Lockout_Message:')}}<span class="text-red"> *</span></label>
                 </div>
                 <div  class="col-md-9">
-                    <div class="callout callout-default" style="font-style: oblique;">{!! Lang::get('lang.security_msg1') !!}</div>
+                    <div class="callout callout-default" style="font-style: oblique;">{{ trans('lang.security_msg1') }}</div>
                     {!! Form::textarea('lockout_message',null,['class'=>'form-control'])!!}
                 </div>
             </div>
@@ -76,11 +76,11 @@ class="nav-link active"
         <div class="form-group {{ $errors->has('backlist_threshold') ? 'has-error' : '' }}">
             <div class="row">
                 <div class="col-md-3">
-                    <label for="title">{!! Lang::get('lang.max_attempt') !!}: <span class="text-red"> *</span></label>
+                    <label for="title">{{ trans('lang.max_attempt') }}: <span class="text-red"> *</span></label>
                 </div>
                 <div class="col-md-9">
-                    <div class="callout callout-default" style="font-style: oblique;">{!! Lang::get('lang.security_msg2') !!}</div>
-                    <span>{!! Form::text('backlist_threshold',null,['class'=>'form-control'])!!} {!! Lang::get('lang.lockouts') !!}</span>
+                    <div class="callout callout-default" style="font-style: oblique;">{{ trans('lang.security_msg2') }}</div>
+                    <span>{!! Form::text('backlist_threshold',null,['class'=>'form-control'])!!} {{ trans('lang.lockouts') }}</span>
                 </div>     
             </div>
         </div>
@@ -90,8 +90,8 @@ class="nav-link active"
                     <label for="title">{{trans('lang.lockout_period:')}}<span class="text-red"> *</span></label>
                 </div>
                 <div class="col-md-8">
-                    <div class="callout callout-default" style="font-style: oblique;">{!! Lang::get('lang.security_msg3') !!}</div>
-                    <span> {!! Form::text('lockout_period',null,['class'=>'form-control'])!!} {!! Lang::get('lang.minutes') !!}</span>
+                    <div class="callout callout-default" style="font-style: oblique;">{{ trans('lang.security_msg3') }}</div>
+                    <span> {!! Form::text('lockout_period',null,['class'=>'form-control'])!!} {{ trans('lang.minutes') }}</span>
                 </div>
             </div>
         </div>

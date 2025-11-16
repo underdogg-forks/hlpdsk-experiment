@@ -18,7 +18,7 @@ class="nav-link active"
 
 <!-- header -->
 @section('PageHeader')
-<h1>{!! Lang::get('lang.forms') !!}</h1>
+<h1>{{ trans('lang.forms') }}</h1>
 @stop
 <!-- /header -->
 
@@ -34,20 +34,20 @@ class="nav-link active"
 <div class="alert alert-success alert-dismissable">
     <i class="fas fa-check-circle"></i>
     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-    {{Session::get('success')}}
+    {{ session('success') }}
 </div>
 @endif
 @if(Session::has('fails'))
 <div class="alert alert-success alert-dismissable">
     <i class="fas fa-ban"></i><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-    <b>{!! Lang::get('lang.alert') !!} !</b> <br>
-    <li class="error-message-padding">{{Session::get('fails')}}</li>
+    <b>{{ trans('lang.alert') }} !</b> <br>
+    <li class="error-message-padding">{{ session('fails') }}</li>
 </div>
 @endif
 <!-- -->    
 <div class="card card-light">
     <div class="card-header">
-        <h3 class="card-title">{!! Lang::get('lang.form_name') !!} : {!! $form->formname !!}</h3>
+        <h3 class="card-title">{{ trans('lang.form_name') }} : {!! $form->formname !!}</h3>
     </div>
     <div class="card-body">
         @foreach($fields as $field)

@@ -33,7 +33,7 @@ class="nav-link active"
 @section('content')
 @if (count($errors) > 0)
 <div class="alert alert-danger">
-    <strong>{{Lang::get('lang.woops')}}</strong> {{Lang::get('lang.theirisproblem')}}<br><br>
+    <strong>{{ trans('lang.woops') }}</strong> {{ trans('lang.theirisproblem') }}<br><br>
     <ul>
         @foreach ($errors->all() as $error)
         <li>{{ $error }}</li>
@@ -45,24 +45,24 @@ class="nav-link active"
 <div class="alert alert-success alert-dismissable">
     <i class="fa fa-check-circle"></i>
     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-    {{Session::get('success')}}
+    {{ session('success') }}
 </div>
 @endif
 @if(Session::has('fails'))
 <div class="alert alert-danger alert-dismissable">
     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-    {{Session::get('fails')}}
+    {{ session('fails') }}
 </div>
 @endif
 @if(Session::has('warn'))
 <div class="alert alert-warning alert-dismissable">
     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-    {{Session::get('warn')}}
+    {{ session('warn') }}
 </div>
 @endif
 <div class="card card-light">
     <div class="card-header">
-        <h3 class="card-title">{!! Lang::get('lang.queues') !!}</h3>
+        <h3 class="card-title">{{ trans('lang.queues') }}</h3>
     </div>
     <div class="card-body">
         {!! Form::open(['url'=>'queue/'.$queue->id,'method'=>'post','id'=>'form']) !!}
@@ -72,7 +72,7 @@ class="nav-link active"
     </div>
 
     <div class="card-footer">
-        {!! Form::submit(Lang::get('lang.save'),['class'=>'btn btn-primary']) !!}
+        {!! Form::submit(trans('lang.save'),['class'=>'btn btn-primary']) !!}
         {!! Form::close() !!}
     </div>
 </div>

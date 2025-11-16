@@ -77,12 +77,12 @@ class Handler extends ExceptionHandler
                 return response()->json(['message' => $e->getMessage(), 'code' => $e->getStatusCode()]);
             case $e instanceof TokenMismatchException:
                 if ($request->ajax() || $request->wantsJson()) {
-                    $result = ['fails' => \Lang::get('lang.session-expired')];
+                    $result = ['fails' => \trans('lang.session-expired')];
 
                     return response()->json(compact('result'), 402);
                 }
 
-                return redirect()->back()->with('fails', \Lang::get('lang.session-expired'));
+                return redirect()->back()->with('fails', \trans('lang.session-expired'));
             default:
                 return $this->common($request, $e);
         }
@@ -193,17 +193,17 @@ class Handler extends ExceptionHandler
 //                }
             case $e instanceof TokenMismatchException:
                 if ($request->ajax() || $request->wantsJson()) {
-                    $result = ['fails' => \Lang::get('lang.session-expired')];
+                    $result = ['fails' => \trans('lang.session-expired')];
 
                     return response()->json(compact('result'), 402);
                 }
 
-                return redirect()->back()->with('fails', \Lang::get('lang.session-expired'));
+                return redirect()->back()->with('fails', \trans('lang.session-expired'));
             case $e instanceof AuthorizationException:
-                return redirect('/')->with('fails', \Lang::get('lang.access-denied'));
+                return redirect('/')->with('fails', \trans('lang.access-denied'));
             case $e instanceof MethodNotAllowedHttpException:
                 if (stripos($request->url(), 'api')) {
-                    $result = ['message' => \Lang::get('lang.methon_not_allowed'), 'success' => false];
+                    $result = ['message' => \trans('lang.methon_not_allowed'), 'success' => false];
 
                     return response()->json($result, 405);
                 }

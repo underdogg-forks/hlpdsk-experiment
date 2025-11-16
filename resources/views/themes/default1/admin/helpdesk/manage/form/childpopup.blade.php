@@ -27,7 +27,7 @@
             </div>
             <div class="modal-footer justify-content-between">
                 <button type="button" id="close" class="btn btn-default" data-dismiss="modal">Close</button>
-                <input type="submit" class="btn btn-primary" value="{{Lang::get('lang.save')}}">
+                <input type="submit" class="btn btn-primary" value="{{ trans('lang.save') }}">
                 {!! Form::close() !!}
             </div>
             <!-- /Form -->

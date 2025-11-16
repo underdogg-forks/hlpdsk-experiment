@@ -20,7 +20,7 @@ class="nav-link active"
 @stop
 <!-- header -->
 @section('PageHeader')
-<h1>{!! Lang::get('lang.ban_email') !!}</h1>
+<h1>{{ trans('lang.ban_email') }}</h1>
 @stop
 <!-- /header -->
 <!-- breadcrumbs -->
@@ -38,13 +38,13 @@ class="nav-link active"
 <div class="alert alert-success alert-dismissable">
     <i class="fa  fa-check-circle"></i>
     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-    {{Session::get('success')}}
+    {{ session('success') }}
 </div>
 @endif
 @if(Session::has('errors'))
 <div class="alert alert-danger alert-dismissable">
     <i class="fa fa-ban"></i>
-    <b>{!! Lang::get('lang.alert') !!}!</b>
+    <b>{{ trans('lang.alert') }}!</b>
     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
     <br/>
     @if($errors->first('ban'))
@@ -57,7 +57,7 @@ class="nav-link active"
 @endif
 <div class="card card-light">
     <div class="card-header">
-        <h3 class="card-title">{{Lang::get('lang.create_a_banned_email')}}</h3>
+        <h3 class="card-title">{{ trans('lang.create_a_banned_email') }}</h3>
     </div>
     <!-- Ban Status : Radio form : Required -->
     <div class="card-body">
@@ -65,31 +65,31 @@ class="nav-link active"
         <div class="row">
             <!-- email Address : Text form : Required -->
             <div class="form-group col-sm-6 {{ $errors->has('email') ? 'has-error' : '' }}">
-                {!! Form::label('email',Lang::get('lang.email_address')) !!} <span class="text-red"> *</span>
+                {!! Form::label('email',trans('lang.email_address')) !!} <span class="text-red"> *</span>
                 {!! Form::text('email',null,['class' => 'form-control']) !!}
 
             </div>
 
             <div class="form-group col-sm-6 {{ $errors->has('ban') ? 'has-error' : '' }}">
-                {!! Form::label('ban',Lang::get('lang.ban_status')) !!} <span class="text-red"> *</span>
+                {!! Form::label('ban',trans('lang.ban_status')) !!} <span class="text-red"> *</span>
                 <div class="row">
                     <div class="col-sm-3">
-                        {!! Form::radio('ban',1) !!} {{Lang::get('lang.active')}}
+                        {!! Form::radio('ban',1) !!} {{ trans('lang.active') }}
                     </div>
                     <div class="col-sm-3">
-                        {!! Form::radio('ban',0) !!} {{Lang::get('lang.inactive')}}
+                        {!! Form::radio('ban',0) !!} {{ trans('lang.inactive') }}
                     </div>
                 </div>
             </div>
         </div>
         <!-- intrnal Notes : Textarea :  -->
         <div class="form-group">
-            {!! Form::label('internal_note',Lang::get('lang.internal_notes')) !!}
+            {!! Form::label('internal_note',trans('lang.internal_notes')) !!}
             {!! Form::textarea('internal_note',null,['class' => 'form-control']) !!}
         </div>
     </div>
     <div class="card-footer">
-        {!! Form::submit(Lang::get('lang.submit'),['class'=>'btn btn-primary'])!!}
+        {!! Form::submit(trans('lang.submit'),['class'=>'btn btn-primary'])!!}
     </div>
 </div>
 @stop

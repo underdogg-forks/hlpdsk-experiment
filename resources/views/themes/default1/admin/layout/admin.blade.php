@@ -136,7 +136,7 @@
                     <li class="nav-item d-none d-sm-inline-block">
 
                         <a id="dash" @yield('settings') href="{!! url('dashboard') !!}"  class="nav-link">
-                            {!! Lang::get('lang.agent_panel') !!}
+                            {{ trans('lang.agent_panel') }}
                         </a>
                     </li>
                     @else
@@ -147,7 +147,7 @@
                 <ul class="navbar-nav ml-auto">
 
                     <li class="nav-item d-none d-sm-inline-block">
-                        <a href="{{url('admin')}}" class="nav-link">{!! Lang::get('lang.admin_panel') !!}</a>
+                        <a href="{{url('admin')}}" class="nav-link">{{ trans('lang.admin_panel') }}</a>
                     </li>
 
                     @include('themes.default1.update.notification')
@@ -325,9 +325,9 @@
                             <!-- Menu Footer-->
                             <li class="user-footer">
 
-                                <a href="{{url('admin-profile')}}" class="btn btn-primary btn-flat">{!! Lang::get('lang.profile') !!}</a>
+                                <a href="{{url('admin-profile')}}" class="btn btn-primary btn-flat">{{ trans('lang.profile') }}</a>
 
-                                <a href="{{url('auth/logout')}}" class="btn btn-danger btn-flat float-right">{!! Lang::get('lang.sign_out') !!}</a>
+                                <a href="{{url('auth/logout')}}" class="btn btn-danger btn-flat float-right">{{ trans('lang.sign_out') }}</a>
                             </li>
                         </ul>
                     </li>
@@ -363,13 +363,13 @@
                         <ul class="nav nav-pills nav-sidebar flex-column nav-child-indent" data-widget="treeview" role="menu" data-accordion="false">
                             @if($replaceside==0)
 
-                            <li class="nav-header">{!! Lang::get('lang.settings-2') !!}</li>
+                            <li class="nav-header">{{ trans('lang.settings-2') }}</li>
 
                             <li @yield('staff-menu-parent') class="nav-item">
 
                                 <a  href="#" @yield('Staffs') class="nav-link">
                                     <i class="nav-icon fas fa-users"></i>
-                                    <p>{!! Lang::get('lang.staffs') !!} <i class="right fas fa-angle-left"></i></p>
+                                    <p>{{ trans('lang.staffs') }} <i class="right fas fa-angle-left"></i></p>
                                 </a>
 
                                 <ul @yield('staff-menu-open') class="nav nav-treeview">
@@ -377,28 +377,28 @@
                                     <li class="nav-item">
                                         <a href="{{ url('agents') }}" @yield('agents') class="nav-link">
                                             <i class="nav-icon fas fa-user "></i>
-                                            <p>{!! Lang::get('lang.agents') !!}</p>
+                                            <p>{{ trans('lang.agents') }}</p>
                                         </a>
                                     </li>
 
                                     <li class="nav-item">
                                         <a href="{{ url('departments') }}" @yield('departments') class="nav-link">
                                             <i class="nav-icon fas fa-sitemap"></i>
-                                            <p>{!! Lang::get('lang.departments') !!}</p>
+                                            <p>{{ trans('lang.departments') }}</p>
                                         </a>
                                     </li>
 
                                     <li class="nav-item">
                                         <a href="{{ url('teams') }}" @yield('teams') class="nav-link">
                                             <i class="nav-icon fas fa-users"></i>
-                                            <p>{!! Lang::get('lang.teams') !!}</p>
+                                            <p>{{ trans('lang.teams') }}</p>
                                         </a>
                                     </li>
 
                                     <li class="nav-item">
                                         <a href="{{ url('groups') }}" @yield('groups') class="nav-link">
                                             <i class="nav-icon fas fa-object-group"></i>
-                                            <p>{!! Lang::get('lang.groups') !!}</p>
+                                            <p>{{ trans('lang.groups') }}</p>
                                         </a>
                                     </li>
                                 </ul>
@@ -408,7 +408,7 @@
 
                                 <a href="#" @yield('Emails') class="nav-link">
                                     <i class="nav-icon fas fa-envelope"></i>
-                                    <p>{!! Lang::get('lang.email') !!} <i class="fas fa-angle-left right"></i></p>
+                                    <p>{{ trans('lang.email') }} <i class="fas fa-angle-left right"></i></p>
                                 </a>
 
                                 <ul @yield('email-menu-open') class="nav nav-treeview">
@@ -416,42 +416,42 @@
                                     <li class="nav-item">
                                         <a href="{{ url('emails') }}" @yield('emails') class="nav-link">
                                             <i class="nav-icon fas fa-envelope"></i>
-                                            <p>{!! Lang::get('lang.emails') !!}</p>
+                                            <p>{{ trans('lang.emails') }}</p>
                                         </a>
                                     </li>
 
                                     <li class="nav-item">
                                         <a href="{{ url('banlist') }}" @yield('ban') class="nav-link">
                                             <i class="nav-icon fas fa-ban"></i>
-                                            <p>{!! Lang::get('lang.ban_lists') !!}</p>
+                                            <p>{{ trans('lang.ban_lists') }}</p>
                                         </a>
                                     </li>
 
                                     <li class="nav-item">
                                         <a href="{{ url('template-sets') }}" @yield('template') class="nav-link">
                                             <i class="nav-icon fas fa-reply"></i>
-                                            <p>{!! Lang::get('lang.templates') !!}</p>
+                                            <p>{{ trans('lang.templates') }}</p>
                                         </a>
                                     </li>
 
                                     <li class="nav-item">
                                         <a href="{{url('getemail')}}" @yield('email') class="nav-link">
                                             <i class="nav-icon fas fa-at"></i>
-                                            <p>{!! Lang::get('lang.email-settings') !!}</p>
+                                            <p>{{ trans('lang.email-settings') }}</p>
                                         </a>
                                     </li>
 
                                     <li class="nav-item">
                                         <a href="{{ url('queue') }}" @yield('queue') class="nav-link">
                                             <i class="nav-icon fas fa-upload"></i>
-                                            <p>{!! Lang::get('lang.queues') !!}</p>
+                                            <p>{{ trans('lang.queues') }}</p>
                                         </a>
                                     </li>
 
                                     <li class="nav-item">
                                         <a href="{{ url('getdiagno') }}" @yield('diagnostics') class="nav-link">
                                             <i class="nav-icon fas fa-plus"></i>
-                                            <p>{!! Lang::get('lang.diagnostics') !!}</p>
+                                            <p>{{ trans('lang.diagnostics') }}</p>
                                         </a>
                                     </li>
                                 </ul>
@@ -461,7 +461,7 @@
 
                                 <a href="#" @yield('Manage') class="nav-link">
                                     <i class="nav-icon fas fa-cubes"></i>
-                                    <p>{!! Lang::get('lang.manage') !!} <i class="fas fa-angle-left right"></i></p>
+                                    <p>{{ trans('lang.manage') }} <i class="fas fa-angle-left right"></i></p>
                                 </a>
 
                                 <ul @yield('manage-menu-open') class="nav nav-treeview">
@@ -469,42 +469,42 @@
                                     <li class="nav-item">
                                         <a href="{{url('helptopic')}}" @yield('help') class="nav-link">
                                             <i class="nav-icon fas fa-file-alt"></i>
-                                            <p>{!! Lang::get('lang.help_topics') !!}</p>
+                                            <p>{{ trans('lang.help_topics') }}</p>
                                         </a>
                                     </li>
 
                                     <li class="nav-item">
                                         <a href="{{url('sla')}}" @yield('sla') class="nav-link">
                                             <i class="nav-icon fas fa-clock"></i>
-                                            <p>{!! Lang::get('lang.sla_plans') !!}</p>
+                                            <p>{{ trans('lang.sla_plans') }}</p>
                                         </a>
                                     </li>
 
                                     <li class="nav-item">
                                         <a href="{{url('forms')}}" @yield('forms') class="nav-link">
                                             <i class="nav-icon fas fa-file-alt"></i>
-                                            <p>{!! Lang::get('lang.forms') !!}</p>
+                                            <p>{{ trans('lang.forms') }}</p>
                                         </a>
                                     </li>
 
                                     <li class="nav-item">
                                         <a href="{{url('workflow')}}" @yield('workflow') class="nav-link">
                                             <i class="nav-icon fas fa-sitemap"></i>
-                                            <p>{!! Lang::get('lang.workflow') !!}</p>
+                                            <p>{{ trans('lang.workflow') }}</p>
                                         </a>
                                     </li>
 
                                     <li class="nav-item">
                                         <a href="{{url('ticket/priority')}}" @yield('priority') class="nav-link">
                                             <i class="nav-icon fas fa-asterisk"></i>
-                                            <p>{!! Lang::get('lang.priority') !!}</p>
+                                            <p>{{ trans('lang.priority') }}</p>
                                         </a>
                                     </li>
 
                                     <li class="nav-item">
                                         <a href="{{url('url/settings')}}" @yield('url') class="nav-link">
                                             <i class="nav-icon fas fa-server"></i>
-                                            <p>{!! Lang::get('lang.url') !!}</p>
+                                            <p>{{ trans('lang.url') }}</p>
                                         </a>
                                     </li>
                                 </ul>
@@ -514,7 +514,7 @@
 
                                 <a href="#" @yield('Tickets') class="nav-link">
                                     <i class="nav-icon fas fa-ticket-alt"></i>
-                                    <p>{!! Lang::get('lang.tickets') !!} <i class="fas fa-angle-left right"></i></p>
+                                    <p>{{ trans('lang.tickets') }} <i class="fas fa-angle-left right"></i></p>
                                 </a>
 
                                 <ul @yield('ticket-menu-open') class="nav nav-treeview">
@@ -522,42 +522,42 @@
                                     <li class="nav-item">
                                         <a href="{{url('getticket')}}" @yield('tickets') class="nav-link">
                                             <i class="nav-icon fas fa-file-alt"></i>
-                                            <p>{!! Lang::get('lang.ticket') !!}</p>
+                                            <p>{{ trans('lang.ticket') }}</p>
                                         </a>
                                     </li>
 
                                     <li class="nav-item">
                                         <a href="{{url('getresponder')}}" @yield('auto-response') class="nav-link">
                                             <i class="nav-icon fas fa-reply-all"></i>
-                                            <p>{!! Lang::get('lang.auto_response') !!}</p>
+                                            <p>{{ trans('lang.auto_response') }}</p>
                                         </a>
                                     </li>
 
                                     <li class="nav-item">
                                         <a href="{{url('getalert')}}" @yield('alert') class="nav-link">
                                             <i class="nav-icon fas fa-bell"></i>
-                                            {!! Lang::get('lang.alert_notices') !!}
+                                            {{ trans('lang.alert_notices') }}
                                         </a>
                                     </li>
 
                                     <li class="nav-item">
                                         <a href="{{url('setting-status')}}" @yield('status') class="nav-link">
                                             <i class="nav-icon fas fa-plus-square"></i>
-                                            <p>{!! Lang::get('lang.status') !!}</p>
+                                            <p>{{ trans('lang.status') }}</p>
                                         </a>
                                     </li>
 
                                     <li class="nav-item">
                                         <a href="{{url('getratings')}}" @yield('ratings') class="nav-link">
                                             <i class="nav-icon fas fa-star"></i>
-                                            <p>{!! Lang::get('lang.ratings') !!}</p>
+                                            <p>{{ trans('lang.ratings') }}</p>
                                         </a>
                                     </li>
 
                                     <li class="nav-item">
                                         <a href="{{url('close-workflow')}}" @yield('close-workflow') class="nav-link">
                                             <i class="nav-icon fa fa-sitemap"></i>
-                                            <p>{!! Lang::get('lang.close-workflow') !!}</p>
+                                            <p>{{ trans('lang.close-workflow') }}</p>
                                         </a>
                                     </li>
                                 </ul>
@@ -567,7 +567,7 @@
 
                                 <a href="#" @yield('Settings') class="nav-link">
                                     <i class="nav-icon fas fa-cog"></i>
-                                    <p>{!! Lang::get('lang.settings') !!} <i class="fas fa-angle-left right"></i></p>
+                                    <p>{{ trans('lang.settings') }} <i class="fas fa-angle-left right"></i></p>
                                 </a>
 
                                 <ul @yield('settings-menu-open') class="nav nav-treeview">
@@ -575,56 +575,56 @@
                                     <li class="nav-item">
                                         <a href="{{url('getcompany')}}" @yield('company') class="nav-link">
                                             <i class="nav-icon fas fa-building"></i>
-                                            <p>{!! Lang::get('lang.company') !!}</p>
+                                            <p>{{ trans('lang.company') }}</p>
                                         </a>
                                     </li>
 
                                     <li class="nav-item">
                                         <a href="{{url('getsystem')}}" @yield('system') class="nav-link">
                                             <i class="nav-icon fas fa-laptop"></i>
-                                            <p>{!! Lang::get('lang.system') !!}</p>
+                                            <p>{{ trans('lang.system') }}</p>
                                         </a>
                                     </li>
 
                                     <li class="nav-item">
                                         <a href="{{ url('social/media') }}" @yield('social-login') class="nav-link">
                                             <i class="nav-icon fas fa-globe"></i>
-                                            <p>{!! Lang::get('lang.social-login') !!}</p>
+                                            <p>{{ trans('lang.social-login') }}</p>
                                         </a>
                                     </li>
 
                                     <li class="nav-item">
                                         <a href="{{url('languages')}}" @yield('languages') class="nav-link">
                                             <i class="nav-icon fas fa-language"></i>
-                                            <p>{!! Lang::get('lang.language') !!}</p>
+                                            <p>{{ trans('lang.language') }}</p>
                                         </a>
                                     </li>
 
                                     <li class="nav-item">
                                         <a href="{{url('job-scheduler')}}" @yield('cron') class="nav-link">
                                             <i class="nav-icon fas fa-hourglass"></i>
-                                            <p>{!! Lang::get('lang.cron') !!}</p>
+                                            <p>{{ trans('lang.cron') }}</p>
                                         </a>
                                     </li>
 
                                     <li class="nav-item">
                                         <a href="{{url('security')}}" @yield('security') class="nav-link">
                                             <i class="nav-icon fas fa-lock"></i>
-                                            <p>{!! Lang::get('lang.security') !!}</p>
+                                            <p>{{ trans('lang.security') }}</p>
                                         </a>
                                     </li>
 
                                     <li class="nav-item">
                                         <a href="{{url('settings-notification')}}" @yield('notification') class="nav-link">
                                             <i class="nav-icon fas fa-bell"></i>
-                                            <p>{!! Lang::get('lang.notifications') !!}</p>
+                                            <p>{{ trans('lang.notifications') }}</p>
                                         </a>
                                     </li>
 
                                     <li class="nav-item">
                                         <a href="{{url('storage')}}" @yield('storage') class="nav-link">
                                             <i class="nav-icon fas fa-save"></i>
-                                            <p>{!! Lang::get('storage::lang.storage') !!}</p>
+                                            <p>{{ trans('storage::lang.storage') }}</p>
                                         </a>
                                     </li>
                                 </ul>
@@ -634,7 +634,7 @@
 
                                 <a href="#" @yield('error-bugs') class="nav-link">
                                     <i class="nav-icon fas fa-heartbeat"></i>
-                                    <p>{!! Lang::get('lang.error-debug') !!} <i class="fas fa-angle-left right"></i></p>
+                                    <p>{{ trans('lang.error-debug') }} <i class="fas fa-angle-left right"></i></p>
                                 </a>
 
                                 <ul @yield('error-menu-open') class="nav nav-treeview">
@@ -642,7 +642,7 @@
                                     <li class="nav-item">
                                         <a href="{{ route('err.debug.settings') }}" @yield('debugging-option') class="nav-link">
                                             <i class="nav-icon fas fa-bug"></i>
-                                            <p>{!! Lang::get('lang.debug-options') !!}</p>
+                                            <p>{{ trans('lang.debug-options') }}</p>
                                         </a>
                                     </li>
                                 </ul>
@@ -652,7 +652,7 @@
 
                                 <a href="#" @yield('Themes') class="nav-link">
                                     <i class="nav-icon fas fa-chart-pie"></i>
-                                    <p>{!! Lang::get('lang.widgets') !!} <i class="fas fa-angle-left right"></i></p>
+                                    <p>{{ trans('lang.widgets') }} <i class="fas fa-angle-left right"></i></p>
                                 </a>
 
                                 <ul @yield('widget-menu-open') class="nav nav-treeview">
@@ -660,14 +660,14 @@
                                     <li class="nav-item">
                                         <a href="{{ url('widgets') }}" @yield('widget') class="nav-link">
                                             <i class="nav-icon fas fa-list-alt"></i>
-                                            <p>{!! Lang::get('lang.widgets') !!}</p>
+                                            <p>{{ trans('lang.widgets') }}</p>
                                         </a>
                                     </li>
 
                                     <li class="nav-item">
                                         <a href="{{ url('social-buttons') }}" @yield('social') class="nav-link">
                                             <i class="nav-icon fas fa-cubes"></i>
-                                            <p>{!! Lang::get('lang.social') !!}</p>
+                                            <p>{{ trans('lang.social') }}</p>
                                         </a>
                                     </li>
                                 </ul>
@@ -676,21 +676,21 @@
                             <li class="nav-item">
                                 <a href="{{ url('plugins') }}" @yield('Plugins') class="nav-link">
                                     <i class="nav-icon fas fa-plug"></i>
-                                    <p>{!! Lang::get('lang.plugin') !!}</p>
+                                    <p>{{ trans('lang.plugin') }}</p>
                                 </a>
                             </li>
 
                             <li class="nav-item">
                                 <a href="{{ url('api') }}" @yield('API') class="nav-link">
                                     <i class="nav-icon fas fa-cogs"></i>
-                                    <p>{!! Lang::get('lang.api') !!}</p>
+                                    <p>{{ trans('lang.api') }}</p>
                                 </a>
                             </li>
 
                             <li class="nav-item">
                                 <a href="{{ url('logs') }}" @yield('Log') class="nav-link">
                                     <i class="nav-icon fas fa-lock"></i>
-                                    <p>{{Lang::get('log::lang.logs')}}</p>
+                                    <p>{{ trans('log::lang.logs') }}</p>
                                 </a>
                             </li>
                             @endif
@@ -732,8 +732,8 @@
 
                     <div class="alert alert-info alert-dismissible">
                         <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-                        <i class="icon fas  fa-exclamation-triangle"></i> {{Lang::get('lang.dummy_data_installation_message')}}
-                        <a href="{{route('clean-database')}}">{{Lang::get('lang.click')}}</a> {{Lang::get('lang.clear-dummy-data')}}
+                        <i class="icon fas  fa-exclamation-triangle"></i> {{ trans('lang.dummy_data_installation_message') }}
+                        <a href="{{route('clean-database')}}">{{ trans('lang.click') }}</a> {{ trans('lang.clear-dummy-data') }}
                     </div>
 
                     @elseif (!$is_mail_conigured)
@@ -743,9 +743,9 @@
                                 <p>
                                     <i class="fas fa-exclamation-triangle"></i>
                                     @if (\Auth::user()->role == 'admin')
-                                        {{Lang::get('lang.system-outgoing-incoming-mail-not-configured')}}&nbsp;<a href="{{URL::route('emails.create')}}">{{Lang::get('lang.confihure-the-mail-now')}}</a>
+                                        {{ trans('lang.system-outgoing-incoming-mail-not-configured') }}&nbsp;<a href="{{URL::route('emails.create')}}">{{ trans('lang.confihure-the-mail-now') }}</a>
                                     @else
-                                        {{Lang::get('lang.system-mail-not-configured-agent-message')}}
+                                        {{ trans('lang.system-mail-not-configured-agent-message') }}
                                     @endif
                                 </p>
                             </div>
@@ -762,10 +762,10 @@
 
                 <div class="float-right d-none d-sm-block">
 
-                    <span style="font-weight: 500">{!! Lang::get('lang.version') !!}</span> {!! Config::get('app.version') !!}
+                    <span style="font-weight: 500">{{ trans('lang.version') }}</span> {!! Config::get('app.version') !!}
                 </div>
 
-                <span style="font-weight: 500">{!! Lang::get('lang.copyright') !!} &copy; {!! date('Y') !!}  <a href="{!! $company->website !!}" target="_blank">{!! $company->company_name !!}</a>.</span> {!! Lang::get('lang.all_rights_reserved') !!}. {!! Lang::get('lang.powered_by') !!} <a href="http://www.faveohelpdesk.com/" target="_blank">Faveo</a>
+                <span style="font-weight: 500">{{ trans('lang.copyright') }} &copy; {!! date('Y') !!}  <a href="{!! $company->website !!}" target="_blank">{!! $company->company_name !!}</a>.</span> {{ trans('lang.all_rights_reserved') }}. {{ trans('lang.powered_by') }} <a href="http://www.faveohelpdesk.com/" target="_blank">Faveo</a>
             </footer>
         </div><!-- ./wrapper -->
 

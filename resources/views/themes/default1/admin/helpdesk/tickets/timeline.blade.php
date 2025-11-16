@@ -583,7 +583,7 @@
             </div><!-- /.content-wrapper -->
             <footer class="main-footer">
                 <div class="pull-right hidden-xs">
-                    <b>{!! Lang::get('lang.version') !!}</b> 2.0
+                    <b>{{ trans('lang.version') }}</b> 2.0
                 </div>
                 <strong>Copyright &copy; 2014-2015 <a href="http://www.ladybirdweb.com">Ladybird Web Solution</a>.</strong> All rights reserved.
             </footer>

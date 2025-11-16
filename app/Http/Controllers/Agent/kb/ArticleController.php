@@ -87,20 +87,20 @@ class ArticleController extends Controller
                         /* add column action */
                         ->addColumn('Actions', function ($model) {
                             /* here are all the action buttons and modal popup to delete articles with confirmations */
-                            return '<span  data-toggle="modal" data-target="#deletearticle'.$model->id.'"><a href="#" ><button class="btn btn-danger btn-xs"></a> '.\Lang::get('lang.delete').' </button></span>&nbsp;<a href='.url("article/$model->id/edit").' class="btn btn-warning btn-xs">'.\Lang::get('lang.edit').'</a>&nbsp;<a href='.url("show/$model->slug").' class="btn btn-primary btn-xs">'.\Lang::get('lang.view').'</a>
+                            return '<span  data-toggle="modal" data-target="#deletearticle'.$model->id.'"><a href="#" ><button class="btn btn-danger btn-xs"></a> '.\trans('lang.delete').' </button></span>&nbsp;<a href='.url("article/$model->id/edit").' class="btn btn-warning btn-xs">'.\trans('lang.edit').'</a>&nbsp;<a href='.url("show/$model->slug").' class="btn btn-primary btn-xs">'.\trans('lang.view').'</a>
 				<div class="modal fade" id="deletearticle'.$model->id.'">
         			<div class="modal-dialog">
             			<div class="modal-content">
                 			<div class="modal-header">
-                                <h4 class="modal-title">'.Lang::get('lang.delete').'</h4>
+                                <h4 class="modal-title">'.trans('lang.delete').'</h4>
                     			<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                 			</div>
                 			<div class="modal-body">
-                				<span>'.Lang::get('lang.are_you_sure_you_want_to_delete').'</span>&nbsp; <b> '.$model->name.' </b> ?
+                				<span>'.trans('lang.are_you_sure_you_want_to_delete').'</span>&nbsp; <b> '.$model->name.' </b> ?
                 			</div>
                 			<div class="modal-footer justify-content-between">
-                    			<button type="button" class="btn btn-default" data-dismiss="modal" id="dismis2">'.Lang::get('lang.close').'</button>
-                    			<a href='.url("article/delete/$model->slug").'><button class="btn btn-danger">'.Lang::get('lang.delete').'</button></a>
+                    			<button type="button" class="btn btn-default" data-dismiss="modal" id="dismis2">'.trans('lang.close').'</button>
+                    			<a href='.url("article/delete/$model->slug").'><button class="btn btn-danger">'.trans('lang.delete').'</button></a>
                 			</div>
             			</div>
         			</div>
@@ -176,9 +176,9 @@ class ArticleController extends Controller
         try {
             $article->fill($request->except('slug'))->save();
 
-            return redirect('article')->with('success', Lang::get('lang.article_inserted_successfully'));
+            return redirect('article')->with('success', trans('lang.article_inserted_successfully'));
         } catch (Exception $e) {
-            return redirect('article')->with('fails', Lang::get('lang.article_not_inserted').'<li>'.$e->getMessage().'</li>');
+            return redirect('article')->with('fails', trans('lang.article_not_inserted').'<li>'.$e->getMessage().'</li>');
         }
     }
 
@@ -256,9 +256,9 @@ class ArticleController extends Controller
             $article->publish_time = $publishTime;
             $article->save();
 
-            return redirect()->back()->with('success', Lang::get('lang.article_updated_successfully'));
+            return redirect()->back()->with('success', trans('lang.article_updated_successfully'));
         } catch (Exception $e) {
-            return redirect()->back()->with('fails', Lang::get('lang.article_not_updated').'<li>'.$e->getMessage().'</li>');
+            return redirect()->back()->with('fails', trans('lang.article_not_updated').'<li>'.$e->getMessage().'</li>');
         }
     }
 
@@ -288,12 +288,12 @@ class ArticleController extends Controller
         }
         if ($article) {
             if ($article->delete()) {//true:redirect to index page with success message
-                return redirect('article')->with('success', Lang::get('lang.article_deleted_successfully'));
+                return redirect('article')->with('success', trans('lang.article_deleted_successfully'));
             } else { //redirect to index page with fails message
-                return redirect('article')->with('fails', Lang::get('lang.article_not_deleted'));
+                return redirect('article')->with('fails', trans('lang.article_not_deleted'));
             }
         } else {
-            return redirect('article')->with('fails', Lang::get('lang.article_can_not_deleted'));
+            return redirect('article')->with('fails', trans('lang.article_can_not_deleted'));
         }
     }
 

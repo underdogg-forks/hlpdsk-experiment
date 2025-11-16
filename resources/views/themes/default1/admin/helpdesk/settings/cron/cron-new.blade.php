@@ -1,7 +1,7 @@
 {!! Form::model($emails,['url' => 'post-scheduler', 'method' => 'PATCH']) !!}
 @if (count($errors) > 0)
 <div class="alert alert-danger">
-    <strong>{{Lang::get('lang.woops')}}</strong> {{Lang::get('lang.theirisproblem')}}<br><br>
+    <strong>{{ trans('lang.woops') }}</strong> {{ trans('lang.theirisproblem') }}<br><br>
     <ul>
         @foreach ($errors->all() as $error)
         <li>{{ $error }}</li>
@@ -20,16 +20,16 @@
 <div class="alert alert-success alert-dismissable">
     <i class="fas  fa-check-circle"></i>
     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-    {!!Session::get('success')!!}
+    {{ session('success') }}
 </div>
 @endif
 <!-- failure message -->
 @if(Session::has('fails'))
 <div class="alert alert-danger alert-dismissable">
     <i class="fas fa-ban"></i>
-    <b>{!! Lang::get('lang.alert') !!}!</b>
+    <b>{{ trans('lang.alert') }}!</b>
     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-    {!!Session::get('fails')!!}
+    {{ session('fails') }}
 </div>
 @endif
 <!--        <div class="alert  alert-dismissable" style="background: #F3F3F3">
@@ -39,7 +39,7 @@
 
 <div class="card card-light">
     <div class="card-header">
-        <h3 class="card-title">{{Lang::get('lang.cron_settings')}}</h3>
+        <h3 class="card-title">{{ trans('lang.cron_settings') }}</h3>
     </div>
 
     <div class="card-body">
@@ -50,8 +50,8 @@
         </div>
 
         <div class="alert  alert-dismissable" style="background: #F3F3F3">
-            <i class="fas fa-info-circle"></i>&nbsp;{!!Lang::get('lang.crone-url-message')!!}
-            <a href="https://support.faveohelpdesk.com/show/how-to-configure-cron-jobs-in-faveo" style="color:black" target="blank">{!!Lang::get('lang.click')!!}</a> {!!Lang::get('lang.check-cron-set')!!}
+            <i class="fas fa-info-circle"></i>&nbsp;{{ trans('lang.crone-url-message') }}
+            <a href="https://support.faveohelpdesk.com/show/how-to-configure-cron-jobs-in-faveo" style="color:black" target="blank">{{ trans('lang.click') }}</a> {{ trans('lang.check-cron-set') }}
         </div>
         
         <div class="row">
@@ -68,8 +68,8 @@
                             
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    {!! Form::label('email_fetching',Lang::get('lang.email_fetch')) !!}<br>
-                                    {!! Form::checkbox('email_fetching',1,$condition->checkActiveJob()['fetching'],['id'=>'email_fetching']) !!}&nbsp;{{Lang::get('lang.fetch_auto-corn')}}
+                                    {!! Form::label('email_fetching',trans('lang.email_fetch')) !!}<br>
+                                    {!! Form::checkbox('email_fetching',1,$condition->checkActiveJob()['fetching'],['id'=>'email_fetching']) !!}&nbsp;{{ trans('lang.fetch_auto-corn') }}
                                 </div>
 
                             </div>
@@ -94,8 +94,8 @@
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
-                                {!! Form::label('notification_cron',Lang::get('lang.notification-email')) !!}<br>
-                                {!! Form::checkbox('notification_cron',1,$condition->checkActiveJob()['notification'],['id'=>'notification_cron']) !!}&nbsp;{{Lang::get('lang.cron_notification')}}
+                                {!! Form::label('notification_cron',trans('lang.notification-email')) !!}<br>
+                                {!! Form::checkbox('notification_cron',1,$condition->checkActiveJob()['notification'],['id'=>'notification_cron']) !!}&nbsp;{{ trans('lang.cron_notification') }}
                             </div>
                         </div>
                         <div class="col-md-6" id="notification">
@@ -119,9 +119,9 @@
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
-                                {!! Form::label('condition',Lang::get('lang.auto_close_workflow')) !!}<br>
+                                {!! Form::label('condition',trans('lang.auto_close_workflow')) !!}<br>
                                 {!! Form::checkbox('condition',1,$condition->checkActiveJob()['work'],['id'=>'auto_close']) !!}
-                                       {{Lang::get('lang.enable_workflow')}}
+                                       {{ trans('lang.enable_workflow') }}
                             </div>
                         </div>
                         <div class="col-md-6" id="workflow">
@@ -138,7 +138,7 @@
 
     </div>
     <div class="card-footer">
-        {!! Form::submit(Lang::get('lang.submit'),['class'=>'btn btn-primary'])!!}
+        {!! Form::submit(trans('lang.submit'),['class'=>'btn btn-primary'])!!}
     </div>
 </div>
 <script>

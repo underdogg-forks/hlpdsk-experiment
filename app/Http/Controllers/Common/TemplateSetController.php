@@ -65,7 +65,7 @@ class TemplateSetController extends Controller
                 \DB::table('templates')->insert(['set_id' => $sets->id, 'name' => $template->name, 'variable' => $template->variable, 'type' => $template->type, 'subject' => $template->subject, 'message' => $template->message]);
             }
 
-            return redirect('template-sets')->with('success', Lang::get('lang.you_have_created_a_new_template_set'));
+            return redirect('template-sets')->with('success', trans('lang.you_have_created_a_new_template_set'));
         } catch (Exception $ex) {
             return redirect('template-sets')->with('fails', $ex->getMessage());
         }
@@ -88,7 +88,7 @@ class TemplateSetController extends Controller
             }
             \DB::table('settings_email')->update(['template' => $ratName]);
 
-            return \Redirect::back()->with('success', Lang::get('lang.you_have_successfully_activated_this_set'));
+            return \Redirect::back()->with('success', trans('lang.you_have_successfully_activated_this_set'));
         } catch (Exception $ex) {
             return \Redirect::back()->with('fails', $ex->getMessage());
         }
@@ -144,7 +144,7 @@ class TemplateSetController extends Controller
             }
             TemplateSet::whereId($id)->delete();
 
-            return redirect()->back()->with('success', Lang::get('lang.template_set_deleted_successfully'));
+            return redirect()->back()->with('success', trans('lang.template_set_deleted_successfully'));
         } catch (Exception $ex) {
             return redirect()->back()->with('fails', $ex->getMessage());
         }

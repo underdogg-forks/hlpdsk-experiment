@@ -21,15 +21,15 @@ class="nav-link active"
 
 <!-- header -->
 @section('PageHeader')
-<h1>{!! Lang::get('lang.edit_workflow') !!}</h1>
+<h1>{{ trans('lang.edit_workflow') }}</h1>
 @stop
 <!-- /header -->
 <!-- breadcrumbs -->
 @section('breadcrumbs')
 <ol class="breadcrumb">
-    <li><a href="{!! URL::route('setting') !!}"><i class="fas fa-tachometer-alt"></i> {!! Lang::get('lang.home') !!}</a></li>
-    <li><a href="{!! URL::route('workflow') !!}">{!! Lang::get('lang.ticket_workflow') !!}</a></li>
-    <li class="active"><a href="">{!! Lang::get('lang.edit_workflow') !!}</a></li>
+    <li><a href="{!! URL::route('setting') !!}"><i class="fas fa-tachometer-alt"></i> {{ trans('lang.home') }}</a></li>
+    <li><a href="{!! URL::route('workflow') !!}">{{ trans('lang.ticket_workflow') }}</a></li>
+    <li class="active"><a href="">{{ trans('lang.edit_workflow') }}</a></li>
 </ol>
 @stop
 <!-- /breadcrumbs -->
@@ -42,21 +42,21 @@ class="nav-link active"
     <div class="alert alert-success alert-dismissable">
         <i class="fas fa-check-circle"></i>
         <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-        {{Session::get('success')}}
+        {{ session('success') }}
     </div>
     @endif
     <!-- failure message -->
     @if(Session::has('fails'))
     <div class="alert alert-danger alert-dismissable">
         <i class="fas fa-ban"></i><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-        <b>{!! Lang::get('lang.alert') !!} !</b><br>
-        {{Session::get('fails')}}
+        <b>{{ trans('lang.alert') }} !</b><br>
+        {{ session('fails') }}
     </div>
     @endif
     @if(Session::has('errors'))
     <div class="alert alert-danger alert-dismissable">
         <i class="fas fa-ban"></i>
-        <b>{!! Lang::get('lang.alert') !!}!</b>
+        <b>{{ trans('lang.alert') }}!</b>
         <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
         <br/>
         @if($errors->first('name'))
@@ -79,7 +79,7 @@ class="nav-link active"
     <div class="card card-light">
         <!-- /.box-header -->
         <div class="card-header">
-            <h3 class="card-title">{!! Lang::get('lang.edit_workflow') !!}</h3>    
+            <h3 class="card-title">{{ trans('lang.edit_workflow') }}</h3>    
         </div>
         
         <div class="card-body">
@@ -87,7 +87,7 @@ class="nav-link active"
             <div class="row">
                 
                 <div class="form-group col-sm-6 {!! $errors->has('name') ? 'has-error' : '' !!}">
-                    <label for="inputName">{!! Lang::get('lang.name') !!}</label>
+                    <label for="inputName">{{ trans('lang.name') }}</label>
                     <input type="text" class="form-control" placeholder="Name" id="name" name="name" value="{!! $workflow->name !!}" required>
                 </div>
                 
@@ -98,12 +98,12 @@ class="nav-link active"
                         if ($workflow->status == 1) {
                             echo "checked";
                         }
-                        ?> >&nbsp;&nbsp;{!! Lang::get('lang.active') !!}&nbsp;&nbsp;
+                        ?> >&nbsp;&nbsp;{{ trans('lang.active') }}&nbsp;&nbsp;
                         <input type="radio" id="inputEmail1" name="status" value="0" <?php
                         if ($workflow->status == 0) {
                             echo "checked";
                         }
-                        ?> >&nbsp;&nbsp;{!! Lang::get('lang.inactive') !!}&nbsp;&nbsp;
+                        ?> >&nbsp;&nbsp;{{ trans('lang.inactive') }}&nbsp;&nbsp;
                     </div>
                 </div>
             </div>
@@ -111,14 +111,14 @@ class="nav-link active"
             <div class="row">
                 
                 <div class="form-group col-sm-6 {!! $errors->has('execution_order') ? 'has-error' : '' !!}">
-                    <label for="Exceution">{!! Lang::get('lang.execution_order') !!}</label>
-                    <input type="number" class="form-control" id="execution_order" name="execution_order" placeholder="{!! Lang::get('lang.execution_order') !!}" value="{!! $workflow->order !!}" required>
+                    <label for="Exceution">{{ trans('lang.execution_order') }}</label>
+                    <input type="number" class="form-control" id="execution_order" name="execution_order" placeholder="{{ trans('lang.execution_order') }}" value="{!! $workflow->order !!}" required>
                 </div>
 
                 <div class="form-group col-sm-6 {!! $errors->has('target_channel') ? 'has-error' : '' !!}">
-                    <label>{!! Lang::get('lang.target_channel') !!}</label>
+                    <label>{{ trans('lang.target_channel') }}</label>
                     <select class="form-control" name="target_channel" required>
-                        <option value=""> -- {!! Lang::get('lang.select_a_channel') !!} -- </option>
+                        <option value=""> -- {{ trans('lang.select_a_channel') }} -- </option>
                         <option value="A-0" <?php
                         if ($workflow->target == "A-0") {
                             echo "selected='selected'";
@@ -147,17 +147,17 @@ class="nav-link active"
             <div class="card card-light">
                 
                 <div class="card-header">
-                    <h3 class="card-title">{!! Lang::get('lang.workflow_rules') !!}</h3>
+                    <h3 class="card-title">{{ trans('lang.workflow_rules') }}</h3>
                 </div>  
 
                 <div class="card-body">
                     <table  class="table table-bordered table-hover">
                         <thead>
                             <tr>
-                                <td>{!! Lang::get('lang.rules') !!}</td>
-                                <td>{!! Lang::get('lang.condition') !!}</td>
-                                <td>{!! Lang::get('lang.statement') !!}</td>
-                                <td>{!! Lang::get('lang.action') !!}</td>
+                                <td>{{ trans('lang.rules') }}</td>
+                                <td>{{ trans('lang.condition') }}</td>
+                                <td>{{ trans('lang.statement') }}</td>
+                                <td>{{ trans('lang.action') }}</td>
                             </tr>
                         </thead>
                         <tbody class="button1">
@@ -167,62 +167,62 @@ class="nav-link active"
                             <tr id="firstdata{!! $j !!}">
                                 <td>
                                     <select class="form-control" name="rule[{!! $j-1 !!}][a]" required>
-                                        <option value="">-- {!! Lang::get('lang.select_one') !!} --</option>
+                                        <option value="">-- {{ trans('lang.select_one') }} --</option>
                                         <option value="email" <?php
                                         if ($workflow_rule->matching_scenario == 'email') {
                                             echo "selected='selected'";
                                         }
-                                        ?> >{!! Lang::get('lang.email') !!}</option>
+                                        ?> >{{ trans('lang.email') }}</option>
                                         <option value="email_name" <?php
                                         if ($workflow_rule->matching_scenario == 'email_name') {
                                             echo "selected='selected'";
                                         }
-                                        ?> >{!! Lang::get('lang.email_name') !!}</option>
+                                        ?> >{{ trans('lang.email_name') }}</option>
                                         <option value="subject" <?php
                                         if ($workflow_rule->matching_scenario == 'subject') {
                                             echo "selected='selected'";
                                         }
-                                        ?>>{!! Lang::get('lang.subject') !!}</option>
+                                        ?>>{{ trans('lang.subject') }}</option>
                                         <option value="message"  <?php
                                         if ($workflow_rule->matching_scenario == 'message') {
                                             echo "selected='selected'";
                                         }
-                                        ?> >{!! Lang::get('lang.message') !!}/{!! Lang::get('lang.body') !!}</option>
+                                        ?> >{{ trans('lang.message') }}/{{ trans('lang.body') }}</option>
                                     </select>
                                 </td>
                                 <td>
                                     <select class="form-control" name="rule[{!! $j-1 !!}][b]" required>
-                                        <option value="">-- {!! Lang::get('lang.select_one') !!} --</option>
+                                        <option value="">-- {{ trans('lang.select_one') }} --</option>
                                         <option value="equal" <?php
                                         if ($workflow_rule->matching_relation == 'equal') {
                                             echo "selected='selected'";
                                         }
-                                        ?> >{!! Lang::get('lang.equal_to') !!}</option>
+                                        ?> >{{ trans('lang.equal_to') }}</option>
                                         <option value="not_equal" <?php
                                         if ($workflow_rule->matching_relation == 'not_equal') {
                                             echo "selected='selected'";
                                         }
-                                        ?> >{!! Lang::get('lang.not_equal_to') !!}</option>
+                                        ?> >{{ trans('lang.not_equal_to') }}</option>
                                         <option value="contains" <?php
                                         if ($workflow_rule->matching_relation == 'contains') {
                                             echo "selected='selected'";
                                         }
-                                        ?> >{!! Lang::get('lang.contains') !!}</option>
+                                        ?> >{{ trans('lang.contains') }}</option>
                                         <option value="dn_contain" <?php
                                         if ($workflow_rule->matching_relation == 'dn_contain') {
                                             echo "selected='selected'";
                                         }
-                                        ?> >{!! Lang::get('lang.does_not_contain') !!}</option>
+                                        ?> >{{ trans('lang.does_not_contain') }}</option>
                                         <option value="starts" <?php
                                         if ($workflow_rule->matching_relation == 'starts') {
                                             echo "selected='selected'";
                                         }
-                                        ?> >{!! Lang::get('lang.starts_with') !!}</option>
+                                        ?> >{{ trans('lang.starts_with') }}</option>
                                         <option value="ends" <?php
                                         if ($workflow_rule->matching_relation == 'ends') {
                                             echo "selected='selected'";
                                         }
-                                        ?> >{!! Lang::get('lang.ends_with') !!}</option>
+                                        ?> >{{ trans('lang.ends_with') }}</option>
                                         <!--                                                        <option value="match" <?php
                                         if ($workflow_rule->matching_relation == 'match') {
                                             echo "selected='selected'";
@@ -241,7 +241,7 @@ class="nav-link active"
                                 <td style="text-align: center">
                                     <div class="tools"> 
                                         <span class="btnRemove1" data-toggle="modal" data-target="#">
-                                            <a data-toggle="tooltip" data-placement="top" title="{!! Lang::get('lang.delete') !!}" onclick="document.getElementById('firstdata{!! $j !!}').innerHTML = ''">
+                                            <a data-toggle="tooltip" data-placement="top" title="{{ trans('lang.delete') }}" onclick="document.getElementById('firstdata{!! $j !!}').innerHTML = ''">
                                                 <i class="fas fa-trash text-red"></i>
                                             </a>
                                         </span> 
@@ -253,7 +253,7 @@ class="nav-link active"
                     </table>
                     <div class="mt-2">
                         <div class="float-right" >
-                            <a class="btn btn-primary btnAdd1" href="javascript:;"><i class="fas fa-plus"></i> {!! Lang::get('lang.add') !!}</a>
+                            <a class="btn btn-primary btnAdd1" href="javascript:;"><i class="fas fa-plus"></i> {{ trans('lang.add') }}</a>
                         </div>
                     </div>
                 </div>
@@ -262,16 +262,16 @@ class="nav-link active"
             <div class="card card-light">
                 
                 <div class="card-header">
-                    <h3 class="card-title">{!! Lang::get('lang.workflow_action') !!}</h3>
+                    <h3 class="card-title">{{ trans('lang.workflow_action') }}</h3>
                 </div>  
 
                 <div class="card-body">
                     <table  class="table table-bordered table-hover">
                         <thead>
                             <tr>
-                                <td>{!! Lang::get('lang.condition') !!}</td>
-                                <td>{!! Lang::get('lang.rules') !!}</td>
-                                <td>{!! Lang::get('lang.action') !!}</td>
+                                <td>{{ trans('lang.condition') }}</td>
+                                <td>{{ trans('lang.rules') }}</td>
+                                <td>{{ trans('lang.action') }}</td>
                             </tr>
                         </thead>
                         <tbody class="buttons">
@@ -281,48 +281,48 @@ class="nav-link active"
                             <tr id="seconddata{!! $i !!}">
                                 <td>
                                     <select class="form-control" onChange="selectdata({!! $i !!})" id="selected{!! $i !!}" name="action[{!! $i !!}][a]" required>
-                                        <option value="">-- {!! Lang::get('lang.select_an_action') !!} --</option>
+                                        <option value="">-- {{ trans('lang.select_an_action') }} --</option>
                                         <optgroup label={{trans('lang.ticket')}}>
                                             <option value="reject" <?php
                                             if ($workflow_action->condition == 'reject') {
                                                 echo "selected='selected'";
                                             }
-                                            ?> >{!! Lang::get('lang.reject_ticket') !!}</option>                        
+                                            ?> >{{ trans('lang.reject_ticket') }}</option>                        
                                             <option value="department" <?php
                                             if ($workflow_action->condition == 'department') {
                                                 echo "selected='selected'";
                                             }
-                                            ?> >{!! Lang::get('lang.set_department') !!}</option>
+                                            ?> >{{ trans('lang.set_department') }}</option>
                                             <option value="priority" <?php
                                             if ($workflow_action->condition == 'priority') {
                                                 echo "selected='selected'";
                                             }
-                                            ?> >{!! Lang::get('lang.set_priority') !!}</option>
+                                            ?> >{{ trans('lang.set_priority') }}</option>
                                             <option value="sla" <?php
                                             if ($workflow_action->condition == 'sla') {
                                                 echo "selected='selected'";
                                             }
-                                            ?> >{!! Lang::get('lang.set_sla_plan') !!}</option>
+                                            ?> >{{ trans('lang.set_sla_plan') }}</option>
                                             <option value="team" <?php
                                             if ($workflow_action->condition == 'team') {
                                                 echo "selected='selected'";
                                             }
-                                            ?> >{!! Lang::get('lang.assign_team') !!}</option>
+                                            ?> >{{ trans('lang.assign_team') }}</option>
                                             <option value="agent" <?php
                                             if ($workflow_action->condition == 'agent') {
                                                 echo "selected='selected'";
                                             }
-                                            ?> >{!! Lang::get('lang.assign_agent') !!}</option>
+                                            ?> >{{ trans('lang.assign_agent') }}</option>
                                             <option value="helptopic" <?php
                                             if ($workflow_action->condition == 'helptopic') {
                                                 echo "selected='selected'";
                                             }
-                                            ?> >{!! Lang::get('lang.set_help_topic') !!}</option>
+                                            ?> >{{ trans('lang.set_help_topic') }}</option>
                                             <option value="status" <?php
                                             if ($workflow_action->condition == 'status') {
                                                 echo "selected='selected'";
                                             }
-                                            ?> >{!! Lang::get('lang.set_ticket_status') !!}</option>
+                                            ?> >{{ trans('lang.set_ticket_status') }}</option>
                                         </optgroup> 
                                     </select>
                                 </td>
@@ -440,20 +440,20 @@ class="nav-link active"
                     </table>
                     <div class="mt-2">
                         <div class="float-right">
-                            <a class="btn btn-primary btnAdd" href="javascript:;"><i class="fas fa-plus"></i> {!! Lang::get('lang.add') !!}</a>                                            
+                            <a class="btn btn-primary btnAdd" href="javascript:;"><i class="fas fa-plus"></i> {{ trans('lang.add') }}</a>                                            
                         </div>
                     </div>
                 </div>
             </div>
 
             <div>
-                <label>{!! Lang::get('lang.internal_notes') !!}</label>
+                <label>{{ trans('lang.internal_notes') }}</label>
                 <textarea name="internal_note" class="textarea" placeholder="Please Enter an internal note for your team!" style="width: 100%; height: 200px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;"></textarea>       
             </div>
         </div>
 
         <div class="card-footer">
-            <input type="submit" class="btn btn-primary" value="{!! Lang::get('lang.submit') !!}">
+            <input type="submit" class="btn btn-primary" value="{{ trans('lang.submit') }}">
         </div>
     </div>
 </form>
@@ -490,16 +490,16 @@ class="nav-link active"
             $('.buttons').append('<tr id="firstdata1">' +
             '<td>' +
             '<select class="form-control" onChange="selectdata(' + n + ')" name="action[' + n + '][a]" id="selected' + n + '" required>' +
-            '<option value="">-- {!! Lang::get("lang.select_an_action") !!} --</option>' +
+            '<option value="">-- {{ trans("lang.select_an_action") }} --</option>' +
             '<optgroup label="Ticket">' +
-            '<option value="reject">{!! Lang::get("lang.reject_ticket") !!}</option>' +
-            '<option value="department">{!! Lang::get("lang.set_department") !!}</option>' +
-            '<option value="priority">{!! Lang::get("lang.set_priority") !!}</option>' +
-            '<option value="sla">{!! Lang::get("lang.set_sla_plan") !!}</option>' +
-            '<option value="team">{!! Lang::get("lang.assign_team") !!}</option>' +
-            '<option value="agent">{!! Lang::get("lang.assign_agent") !!} </option>' +
-            '<option value="helptopic">{!! Lang::get("lang.set_help_topic") !!} </option>' +
-            '<option value="status">{!! Lang::get("lang.set_ticket_status") !!} </option>' +
+            '<option value="reject">{{ trans("lang.reject_ticket") }}</option>' +
+            '<option value="department">{{ trans("lang.set_department") }}</option>' +
+            '<option value="priority">{{ trans("lang.set_priority") }}</option>' +
+            '<option value="sla">{{ trans("lang.set_sla_plan") }}</option>' +
+            '<option value="team">{{ trans("lang.assign_team") }}</option>' +
+            '<option value="agent">{{ trans("lang.assign_agent") }} </option>' +
+            '<option value="helptopic">{{ trans("lang.set_help_topic") }} </option>' +
+            '<option value="status">{{ trans("lang.set_ticket_status") }} </option>' +
             '</select>' +
             '</td>' +
             '<td id="fill' + n + '">' +
@@ -529,22 +529,22 @@ class="nav-link active"
             $('.button1').append('<tr>' +
             '<td>' +
             '<select class="form-control" name="rule[' + n + '][a]" required>' +
-            '<option>-- {!! Lang::get("lang.select_one") !!} --</option>' +
-            '<option value="email">{!! Lang::get("lang.email") !!}</option>' +
-            '<option value="email_name">{!! Lang::get("lang.email_name") !!}</option>' +
-            '<option value="subject">{!! Lang::get("lang.subject") !!}</option>' +
-            '<option value="message">{!! Lang::get("lang.message") !!}/{!! Lang::get("lang.body") !!}</option>' +
+            '<option>-- {{ trans("lang.select_one") }} --</option>' +
+            '<option value="email">{{ trans("lang.email") }}</option>' +
+            '<option value="email_name">{{ trans("lang.email_name") }}</option>' +
+            '<option value="subject">{{ trans("lang.subject") }}</option>' +
+            '<option value="message">{{ trans("lang.message") }}/{{ trans("lang.body") }}</option>' +
             '</select>' +
             '</td>' +
             '<td>' +
             '<select class="form-control" name="rule[' + n + '][b]" required>' +
-            '<option value="">-- {!! Lang::get("lang.select_one") !!} --</option>' +
-            '<option value="equal">{!! Lang::get("lang.equal_to") !!}</option>' +
-            '<option value="not_equal">{!! Lang::get("lang.not_equal_to") !!}</option>' +
-            '<option value="contains">{!! Lang::get("lang.contains") !!}</option>' +
-            '<option value="dn_contain">{!! Lang::get("lang.does_not_contain") !!}</option>' +
-            '<option value="starts">{!! Lang::get("lang.starts_with") !!}</option>' +
-            '<option value="ends">{!! Lang::get("lang.ends_with") !!}</option>' +
+            '<option value="">-- {{ trans("lang.select_one") }} --</option>' +
+            '<option value="equal">{{ trans("lang.equal_to") }}</option>' +
+            '<option value="not_equal">{{ trans("lang.not_equal_to") }}</option>' +
+            '<option value="contains">{{ trans("lang.contains") }}</option>' +
+            '<option value="dn_contain">{{ trans("lang.does_not_contain") }}</option>' +
+            '<option value="starts">{{ trans("lang.starts_with") }}</option>' +
+            '<option value="ends">{{ trans("lang.ends_with") }}</option>' +
             '</select>' +
             '</td>' +
             '<td> <input class="form-control" type="text" name="rule[' + n + '][c]" required> </td>' +

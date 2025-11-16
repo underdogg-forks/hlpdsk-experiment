@@ -12,7 +12,7 @@ active
                     <div class="wc-setup-content">
                         <div class="woocommerce-message woocommerce-tracker">
                             <div class="ok">
-                                <span id="fail">{{Session::get('success')}}</span><br/><br/>
+                                <span id="fail">{{ session('success') }}</span><br/><br/>
                             </div>
                         </div>
                     </div>
@@ -22,7 +22,7 @@ active
                     <div class="wc-setup-content">
                         <div class="woocommerce-message woocommerce-tracker">
                             <div class="fail">
-                                <span id="fail">{{Session::get('fails')}}</span><br/><br/>
+                                <span id="fail">{{ session('fails') }}</span><br/><br/>
                             </div>
                         </div>
                     </div>

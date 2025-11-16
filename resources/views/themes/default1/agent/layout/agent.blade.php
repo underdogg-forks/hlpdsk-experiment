@@ -142,31 +142,31 @@
 
                         <a id="dash" @yield('Dashboard') href="{{URL::route('dashboard')}}" onclick="clickDashboard(event);" 
                             class="nav-link">
-                            {!! Lang::get('lang.dashboard') !!}
+                            {{ trans('lang.dashboard') }}
                         </a>
                     </li>
                     
                     <li class="nav-item d-none d-sm-inline-block">
                         <a href="#tab_user" data-toggle="tab" @yield('Users') class="nav-link" onclick="clickUser(event);" id="user_tab">
-                            {!! Lang::get('lang.users') !!}
+                            {{ trans('lang.users') }}
                         </a>
                     </li>
                     
                     <li class="nav-item d-none d-sm-inline-block">
                         <a href="#tab_ticket" data-toggle="tab" @yield('Tickets') class="nav-link" onclick="clickTickets(event);" id="ticket_tab">
-                            {!! Lang::get('lang.tickets') !!}
+                            {{ trans('lang.tickets') }}
                         </a>
                     </li>
                     
                     <li class="nav-item d-none d-sm-inline-block">
                         <a href="#tab_tools" data-toggle="tab" @yield('Tools') class="nav-link" onclick="clickTools(event);" id="tools_tab">
-                            {!! Lang::get('lang.tools') !!}
+                            {{ trans('lang.tools') }}
                         </a>
                     </li>
                     
                     @if($auth_user_role == 'admin')
                     <li class="nav-item d-none d-sm-inline-block">
-                        <a href="{{URL::route('report.index')}}" onclick="clickReport(event);" @yield('Report') class="nav-link">{!! Lang::get('lang.report') !!}</a>
+                        <a href="{{URL::route('report.index')}}" onclick="clickReport(event);" @yield('Report') class="nav-link">{{ trans('lang.report') }}</a>
                     </li>
                     @endif
                     
@@ -181,7 +181,7 @@
                     @if($auth_user_role == 'admin')
 
                     <li class="nav-item d-none d-sm-inline-block">
-                        <a href="{{url('admin')}}" class="nav-link">{!! Lang::get('lang.admin_panel') !!}</a>
+                        <a href="{{url('admin')}}" class="nav-link">{{ trans('lang.admin_panel') }}</a>
                     </li>
                     @endif
 
@@ -358,9 +358,9 @@
                             <!-- Menu Footer-->
                             <li class="user-footer">
                                 
-                                <a href="{{URL::route('profile')}}" class="btn btn-primary btn-flat">{!! Lang::get('lang.profile') !!}</a>
+                                <a href="{{URL::route('profile')}}" class="btn btn-primary btn-flat">{{ trans('lang.profile') }}</a>
                                 
-                                <a href="{{url('auth/logout')}}" class="btn btn-danger btn-flat float-right">{!! Lang::get('lang.sign_out') !!}</a>
+                                <a href="{{url('auth/logout')}}" class="btn btn-danger btn-flat float-right">{{ trans('lang.sign_out') }}</a>
                             </li>
                         </ul>
                     </li>
@@ -401,12 +401,12 @@
                             
                             @if($replaceside==0)
                             @yield('sidebar')
-                            <li class="nav-header">{!! Lang::get('lang.Tickets') !!}</li>
+                            <li class="nav-header">{{ trans('lang.Tickets') }}</li>
 
                             <li class="nav-item">
                                 <a href="{{ url('tickets')}}" id="load-inbox" @yield('inbox') class="nav-link">
                                     <i class="nav-icon fas fa-envelope"></i> 
-                                    <p>{!! Lang::get('lang.inbox') !!}</p> 
+                                    <p>{{ trans('lang.inbox') }}</p> 
                                     <small class="right badge badge-success">{{$tickets -> count()}}</small>
                                 </a>
                             </li>
@@ -414,7 +414,7 @@
                             <li class="nav-item">
                                 <a href="{{url('/tickets?show=mytickets')}}" id="load-myticket" @yield('myticket') class="nav-link">
                                     <i class="nav-icon fas fa-user"></i> 
-                                    <p>{!! Lang::get('lang.my_tickets') !!} </p>
+                                    <p>{{ trans('lang.my_tickets') }} </p>
                                     <small class="right badge badge-success">{{$myticket -> count()}}</small>
                                 </a>
                             </li>
@@ -422,7 +422,7 @@
                             <li class="nav-item">
                                  <a href="{{url('/tickets?assigned[]=0')}}" id="load-unassigned" @yield('unassigned')  class="nav-link">
                                     <i class="nav-icon fas fa-th"></i> 
-                                    <p>{!! Lang::get('lang.unassigned') !!}</p>
+                                    <p>{{ trans('lang.unassigned') }}</p>
                                     <small class="right badge badge-success">{{$unassigned -> count()}}</small>
                                 </a>
                             </li>
@@ -430,7 +430,7 @@
                             <li class="nav-item">
                                  <a href="{{url('/tickets?show=overdue')}}" id="load-unassigned" @yield('overdue') class="nav-link">
                                     <i class="nav-icon fas fa-calendar-times"></i> 
-                                    <p>{!! Lang::get('lang.overdue') !!}</p>
+                                    <p>{{ trans('lang.overdue') }}</p>
                                     <small class="right badge badge-success">{{$overdues->count()}}</small>
                                 </a>
                             </li>
@@ -438,12 +438,12 @@
                             <li class="nav-item">
                                  <a href="{{url('/tickets?show=trash')}}" @yield('trash') class="nav-link">
                                     <i class="nav-icon fas fa-trash"></i> 
-                                    <p>{!! Lang::get('lang.trash') !!}</p>
+                                    <p>{{ trans('lang.trash') }}</p>
                                     <small class="right badge badge-success">{{$deleted -> count()}}</small>
                                 </a>
                             </li>
 
-                            <li class="nav-header">{!! Lang::get('lang.Departments') !!}</li>
+                            <li class="nav-header">{{ trans('lang.Departments') }}</li>
 
 
                             <?php
@@ -518,11 +518,11 @@
                           <ul class="navbar-nav">
                             
                             <li class="nav-item d-none d-sm-inline-block">
-                              <a href="{{ url('user')}}" @yield('user-directory') class="nav-link">{!! Lang::get('lang.user_directory') !!}</a>
+                              <a href="{{ url('user')}}" @yield('user-directory') class="nav-link">{{ trans('lang.user_directory') }}</a>
                             </li>
 
                             <li class="nav-item d-none d-sm-inline-block">
-                              <a href="{{ url('organizations')}}" @yield('organizations') class="nav-link">{!! Lang::get('lang.organizations') !!}</a>
+                              <a href="{{ url('organizations')}}" @yield('organizations') class="nav-link">{{ trans('lang.organizations') }}</a>
                             </li>
                           </ul>
                         </nav>
@@ -535,24 +535,24 @@
                           <ul class="navbar-nav">
                             
                             <li class="nav-item d-none d-sm-inline-block">
-                              <a href="{{ url('/tickets?last-response-by[]=Client') }}" @yield('open') class="nav-link" id="load-open">{!! Lang::get('lang.not-answered') !!}</a>
+                              <a href="{{ url('/tickets?last-response-by[]=Client') }}" @yield('open') class="nav-link" id="load-open">{{ trans('lang.not-answered') }}</a>
                             </li>
 
                             <li class="nav-item d-none d-sm-inline-block">
-                              <a href="{{ url('/tickets?last-response-by[]=Agent')}}" @yield('answered') class="nav-link" id="load-answered">{!! Lang::get('lang.answered') !!}</a>
+                              <a href="{{ url('/tickets?last-response-by[]=Agent')}}" @yield('answered') class="nav-link" id="load-answered">{{ trans('lang.answered') }}</a>
                             </li>
 
                             <li class="nav-item d-none d-sm-inline-block">
-                              <a href="{{ url('/tickets?assigned[]=1') }}"  @yield('assigned') class="nav-link" id="load-assigned">{!! Lang::get('lang.assigned') !!}</a>
+                              <a href="{{ url('/tickets?assigned[]=1') }}"  @yield('assigned') class="nav-link" id="load-assigned">{{ trans('lang.assigned') }}</a>
                             </li>
 
                             <li class="nav-item d-none d-sm-inline-block">
-                              <a href="{{ url('/tickets?show=closed') }}" @yield('closed') class="nav-link">{!! Lang::get('lang.closed') !!}</a>
+                              <a href="{{ url('/tickets?show=closed') }}" @yield('closed') class="nav-link">{{ trans('lang.closed') }}</a>
                             </li>
 
                             <?php if ($group->can_create_ticket == 1) { ?>
                             <li class="nav-item d-none d-sm-inline-block">
-                              <a href="{{ url('/newticket')}}" @yield('newticket') class="nav-link">{!! Lang::get('lang.create_ticket') !!}</a>
+                              <a href="{{ url('/newticket')}}" @yield('newticket') class="nav-link">{{ trans('lang.create_ticket') }}</a>
                             </li>
                             <?php } ?>
                           </ul>
@@ -566,11 +566,11 @@
                           <ul class="navbar-nav">
                             
                             <li class="nav-item d-none d-sm-inline-block">
-                              <a href="{{ url('/canned/list')}}" @yield('tools') class="nav-link">{!! Lang::get('lang.canned_response') !!}</a>
+                              <a href="{{ url('/canned/list')}}" @yield('tools') class="nav-link">{{ trans('lang.canned_response') }}</a>
                             </li>
 
                             <li class="nav-item d-none d-sm-inline-block">
-                              <a href="{{ url('/comment')}}" @yield('kb') class="nav-link">{!! Lang::get('lang.knowledge_base') !!}</a>
+                              <a href="{{ url('/comment')}}" @yield('kb') class="nav-link">{{ trans('lang.knowledge_base') }}</a>
                             </li>
                           </ul>
                         </nav>
@@ -616,9 +616,9 @@
                         <div class="alert alert-info alert-dismissible">
                             <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
                             <i class="icon fas  fa-exclamation-triangle"></i> @if (\Auth::user()->role == 'admin')
-                                {{Lang::get('lang.dummy_data_installation_message')}} <a href="{{route('clean-database')}}">{{Lang::get('lang.click')}}</a> {{Lang::get('lang.clear-dummy-data')}}
+                                {{ trans('lang.dummy_data_installation_message') }} <a href="{{route('clean-database')}}">{{ trans('lang.click') }}</a> {{ trans('lang.clear-dummy-data') }}
                             @else
-                                {{Lang::get('lang.clear-dummy-data-agent-message')}}
+                                {{ trans('lang.clear-dummy-data-agent-message') }}
                             @endif
                         </div>
                         @elseif (!$is_mail_conigured)
@@ -628,9 +628,9 @@
                                     <p>
                                         <i class="fa fa-exclamation-triangle"></i>
                                         @if (\Auth::user()->role == 'admin')
-                                            {{Lang::get('lang.system-outgoing-incoming-mail-not-configured')}}&nbsp;<a href="{{URL::route('emails.create')}}">{{Lang::get('lang.confihure-the-mail-now')}}</a>
+                                            {{ trans('lang.system-outgoing-incoming-mail-not-configured') }}&nbsp;<a href="{{URL::route('emails.create')}}">{{ trans('lang.confihure-the-mail-now') }}</a>
                                         @else
-                                            {{Lang::get('lang.system-mail-not-configured-agent-message')}}
+                                            {{ trans('lang.system-mail-not-configured-agent-message') }}
                                         @endif
                                     </p>
                                 </div>
@@ -647,10 +647,10 @@
 
                 <div class="float-right d-none d-sm-block">
                      
-                    <span style="font-weight: 500">{!! Lang::get('lang.version') !!}</span> {!! Config::get('app.version') !!}
+                    <span style="font-weight: 500">{{ trans('lang.version') }}</span> {!! Config::get('app.version') !!}
                 </div>
 
-                <span style="font-weight: 500">{!! Lang::get('lang.copyright') !!} &copy; {!! date('Y') !!}  <a href="{!! $company->website !!}" target="_blank">{!! $company->company_name !!}</a>.</span> {!! Lang::get('lang.all_rights_reserved') !!}. {!! Lang::get('lang.powered_by') !!} <a href="http://www.faveohelpdesk.com/" target="_blank">Faveo</a>
+                <span style="font-weight: 500">{{ trans('lang.copyright') }} &copy; {!! date('Y') !!}  <a href="{!! $company->website !!}" target="_blank">{!! $company->company_name !!}</a>.</span> {{ trans('lang.all_rights_reserved') }}. {{ trans('lang.powered_by') }} <a href="http://www.faveohelpdesk.com/" target="_blank">Faveo</a>
             </footer>
         </div><!-- ./wrapper -->
         <script src="{{asset("lb-faveo/adminlte3/js/adminlte3.2.0.min.js")}}" type="text/javascript"></script>

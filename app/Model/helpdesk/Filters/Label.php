@@ -57,9 +57,9 @@ class Label extends BaseModel
     public function status()
     {
         $status = $this->status;
-        $output = Lang::get('lang.disabled');
+        $output = trans('lang.disabled');
         if ($status == 1) {
-            $output = Lang::get('lang.enabled');
+            $output = trans('lang.enabled');
         }
 
         return $output;
