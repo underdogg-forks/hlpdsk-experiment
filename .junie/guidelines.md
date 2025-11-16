@@ -85,12 +85,15 @@ public function process($data)
 
 ### Naming Conventions
 
-- **Classes**: PascalCase (e.g., `GroupController`, `TicketService`)
+- **Classes**: PascalCase without underscores (e.g., `GroupController`, `TicketService`, `TicketStatus`)
+- **Files**: PascalCase without underscores, matching class names (e.g., `GroupController.php`, `TicketStatus.php`)
+- **Directories**: PascalCase without underscores (e.g., `Helpdesk`, `Agent`, `Controllers`)
 - **Methods**: camelCase (e.g., `getUserById`, `processTicket`)
 - **Variables**: camelCase (e.g., `$userId`, `$ticketData`)
 - **Constants**: UPPER_SNAKE_CASE (e.g., `MAX_ATTEMPTS`, `DEFAULT_TIMEOUT`)
 - **Database tables**: snake_case, plural (e.g., `tickets`, `user_groups`)
 - **Database columns**: snake_case (e.g., `created_at`, `user_id`)
+- **Namespaces**: PascalCase following PSR-4 standards (e.g., `App\Http\Controllers\Admin\Helpdesk`)
 
 ### Test Methods
 
@@ -144,7 +147,19 @@ public function store(Request $request)
 }
 ```
 
-## Laravel Best Practices
+## Laravel Best Practices (2025 Standards)
+
+### Modern Laravel Practices
+
+- **NEVER use `Lang::get()`** - Always use `trans()` function
+- **NEVER use `__()`** - Always use `trans()` function for consistency
+- **NEVER use Form facades** - Use pure Blade HTML with `@csrf`, `method` fields
+- **NEVER use `Session::get()` in Blade** - Use `session()` helper function
+- **NEVER declare `strict_types=1`** - Follow strict programming without explicit declaration
+- **NEVER use `readonly` keyword** - Use standard dependency injection
+- **ALWAYS follow PSR-4** for autoloading standards
+- **ALWAYS follow PSR-12** for coding style standards
+- **ALWAYS use modern helper functions** over facades when available
 
 ### Routing
 
@@ -160,6 +175,7 @@ public function store(Request $request)
 - Use Form Request classes for validation
 - Return consistent response types
 - Use resource controllers for RESTful resources
+- Use dependency injection through constructors (without `readonly`)
 
 ### Models
 
@@ -181,7 +197,24 @@ public function store(Request $request)
 - Use Form Request classes for complex validation
 - Define validation rules as array or pipe-separated string
 - Use custom validation rules for complex logic
-- Provide clear, user-friendly error messages
+- Provide clear, user-friendly error messages using `trans()` function
+
+### Blade Templates (Modern Standards)
+
+- **Translation**: Always use `trans('key')` instead of `Lang::get('key')` or `__('key')`
+- **Session Data**: Always use `session('key')` instead of `Session::get('key')`
+- **Forms**: Use pure HTML5 with `@csrf` directive instead of Form facades
+  ```blade
+  <!-- Bad (Old Laravel Collective) -->
+  {!! Form::open(['route' => 'users.store']) !!}
+  
+  <!-- Good (Modern Blade) -->
+  <form method="POST" action="{{ route('users.store') }}">
+      @csrf
+  ```
+- **Form Methods**: Use `@method('PUT')` for spoofing HTTP methods
+- **Old Input**: Use `old('field')` helper for repopulating form fields
+- **Errors**: Use `$errors` variable and `@error` directive for validation errors
 
 ## Database
 
