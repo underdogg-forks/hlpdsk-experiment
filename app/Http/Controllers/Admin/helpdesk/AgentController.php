@@ -109,7 +109,7 @@ class AgentController extends Controller
      *
      * @return type Response
      */
-    public function store(User $user, AgentRequest $request)
+    public function store(AgentRequest $request, User $user)
     {
         if ($request->get('country_code') == '' && ($request->get('phone_number') != '' || $request->get('mobile') != '')) {
             return redirect()->back()->with(['fails2' => Lang::get('lang.country-code-required-error'), 'country_code' => 1])->withInput();

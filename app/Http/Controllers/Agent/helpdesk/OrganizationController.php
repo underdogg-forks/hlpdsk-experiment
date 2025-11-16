@@ -147,7 +147,7 @@ class OrganizationController extends Controller
      *
      * @return type Redirect
      */
-    public function store(Organization $org, OrganizationRequest $request)
+    public function store(OrganizationRequest $request, Organization $org)
     {
         try {
             /* Insert the all input request to organization table */

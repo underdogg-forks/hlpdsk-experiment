@@ -2,13 +2,65 @@
 
 namespace App\Model\helpdesk\Guest;
 
-use Illuminate\Database\Eloquent\Model;
+use App\Models\BaseModel;
 
-class Guest_note extends Model
+class Guest_note extends BaseModel
 {
-    public $timestamps = false;
-
     protected $table = 'guest_note';
 
+    public $timestamps = false;
+
+    protected $casts = [];
+
+    protected $guarded = [];
+
     protected $fillable = ['id', 'heading', 'content'];
+
+    #region Static Methods
+    /*
+    |--------------------------------------------------------------------------
+    | Static Methods
+    |--------------------------------------------------------------------------
+    */
+
+    #endregion
+    #region Relationships
+    /*
+    |--------------------------------------------------------------------------
+    | Relationships
+    |--------------------------------------------------------------------------
+    */
+
+    #endregion
+    #region Accessors
+    /*
+    |--------------------------------------------------------------------------
+    | Accessors
+    |--------------------------------------------------------------------------
+    */
+
+    #endregion
+    #region Mutators
+    /*
+    |--------------------------------------------------------------------------
+    | Mutators
+    |--------------------------------------------------------------------------
+    */
+
+    #endregion
+    #region Scopes
+    /*
+    |--------------------------------------------------------------------------
+    | Scopes
+    |--------------------------------------------------------------------------
+    */
+
+    #endregion
+    #region Factory
+    /*
+    |--------------------------------------------------------------------------
+    | Factory
+    |--------------------------------------------------------------------------
+    */
+    #endregion
 }

@@ -2,13 +2,26 @@
 
 namespace App\Model\MailJob;
 
-use Illuminate\Database\Eloquent\Model;
+use App\Models\BaseModel;
 
-class Condition extends Model
+class Condition extends BaseModel
 {
     protected $table = 'conditions';
 
+    public $timestamps = true;
+
+    protected $casts = [];
+
+    protected $guarded = [];
+
     protected $fillable = ['job', 'value'];
+
+    #region Static Methods
+    /*
+    |--------------------------------------------------------------------------
+    | Static Methods
+    |--------------------------------------------------------------------------
+    */
 
     public function getConditionValue($job)
     {
@@ -61,4 +74,50 @@ class Condition extends Model
 
         return $result;
     }
+
+    #endregion
+
+    #region Relationships
+    /*
+    |--------------------------------------------------------------------------
+    | Relationships
+    |--------------------------------------------------------------------------
+    */
+
+    #endregion
+
+    #region Accessors
+    /*
+    |--------------------------------------------------------------------------
+    | Accessors
+    |--------------------------------------------------------------------------
+    */
+
+    #endregion
+
+    #region Mutators
+    /*
+    |--------------------------------------------------------------------------
+    | Mutators
+    |--------------------------------------------------------------------------
+    */
+
+    #endregion
+
+    #region Scopes
+    /*
+    |--------------------------------------------------------------------------
+    | Scopes
+    |--------------------------------------------------------------------------
+    */
+
+    #endregion
+
+    #region Factory
+    /*
+    |--------------------------------------------------------------------------
+    | Factory
+    |--------------------------------------------------------------------------
+    */
+    #endregion
 }

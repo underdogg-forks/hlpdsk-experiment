@@ -57,7 +57,7 @@ class PageControllerTest extends TestCase
         $response->assertStatus(200);
     }
 
-    public function testCreateMethod()
+    public function it_displays_the_create_page()
     {
         $this->setUp();
         $response = $this->get('/page/create');
@@ -65,7 +65,7 @@ class PageControllerTest extends TestCase
         $response->assertStatus(200);
     }
 
-    public function testValidationPasses()
+    public function it_passes_validation_with_valid_data()
     {
         $this->setUp();
         $data = [
@@ -84,7 +84,7 @@ class PageControllerTest extends TestCase
         $this->assertDatabaseHas('kb_pages', $data);
     }
 
-    public function testValidationFailsWhenNameMissing()
+    public function it_fails_validation_when_name_is_missing()
     {
         $this->setUp();
         $data = [
@@ -98,7 +98,7 @@ class PageControllerTest extends TestCase
         $this->assertTrue($validator->errors()->has('name'));
     }
 
-    public function testValidationFailsWhenNameNotUnique()
+    public function it_fails_validation_when_name_is_not_unique()
     {
         $this->setUp();
         $data = [
@@ -113,7 +113,7 @@ class PageControllerTest extends TestCase
         $this->assertTrue($validator->errors()->has('name'));
     }
 
-    public function testValidationFailsWhenDescriptionMissing()
+    public function it_fails_validation_when_description_is_missing()
     {
         $this->setUp();
         $data = [
@@ -127,7 +127,7 @@ class PageControllerTest extends TestCase
         $this->assertTrue($validator->errors()->has('description'));
     }
 
-    public function testEditPage()
+    public function it_edits_page()
     {
         $this->setUp();
         $page = Page::latest()->first();
@@ -137,7 +137,7 @@ class PageControllerTest extends TestCase
         $response->assertStatus(200);
     }
 
-    public function testUpdatePage()
+    public function it_updates_page()
     {
         $this->setUp();
         $page = Page::latest()->first();
@@ -157,7 +157,7 @@ class PageControllerTest extends TestCase
         // You can add more assertions as needed.
     }
 
-    public function testCannotUpdatePage()
+    public function it_cannot_update_page_with_invalid_data()
     {
         $this->setUp();
         $page = Page::latest()->first();
@@ -176,7 +176,7 @@ class PageControllerTest extends TestCase
         $this->assertTrue($validator->errors()->has('name'));
     }
 
-    public function testDestroyMethod()
+    public function it_destroys_page()
     {
         $this->setUp();
         $page = Page::latest()->first();

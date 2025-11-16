@@ -58,7 +58,7 @@ class CategoryControllerTest extends TestCase
         $response->assertStatus(200);
     }
 
-    public function testValidationPasses()
+    public function it_passes_validation_with_valid_data()
     {
         $data = [
             'name'        => 'New Category',
@@ -75,7 +75,7 @@ class CategoryControllerTest extends TestCase
         $this->assertDatabaseHas('kb_category', $data);
     }
 
-    public function testValidationFailsWhenNameMissing()
+    public function it_fails_validation_when_name_is_missing()
     {
         $data = [
             'description' => 'Category Description',
@@ -88,7 +88,7 @@ class CategoryControllerTest extends TestCase
         $this->assertTrue($validator->errors()->has('name'));
     }
 
-    public function testValidationFailsWhenNameExceedsMaxLength()
+    public function it_fails_validation_when_name_exceeds_max_length()
     {
         $data = [
             'name'        => str_repeat('A', 251),
@@ -102,7 +102,7 @@ class CategoryControllerTest extends TestCase
         $this->assertTrue($validator->errors()->has('name'));
     }
 
-    public function testValidationFailsWhenNameNotUnique()
+    public function it_fails_validation_when_name_is_not_unique()
     {
         $data = [
             'name'        => 'New Category',
@@ -116,7 +116,7 @@ class CategoryControllerTest extends TestCase
         $this->assertTrue($validator->errors()->has('name'));
     }
 
-    public function testValidationFailsWhenDescriptionMissing()
+    public function it_fails_validation_when_description_is_missing()
     {
         $data = [
             'name' => 'New Category',
@@ -129,7 +129,7 @@ class CategoryControllerTest extends TestCase
         $this->assertTrue($validator->errors()->has('description'));
     }
 
-    public function testEditCategory()
+    public function it_edits_category()
     {
         $category = Category::latest()->first();
         $categories = Category::pluck('name', 'id')->toArray();

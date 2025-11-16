@@ -9,7 +9,7 @@ class ExampleTest extends TestCase
      *
      * @return void
      */
-    public function testBasicExample()
+    public function it_performs_basic_example_calculation()
     {
         $this->assertEquals(1, 55 - 54);
     }

@@ -18,7 +18,7 @@ class TicketControllerTest extends TestCase
      *
      * @return void
      */
-    public function test_tooltip()
+    public function it_displays_ticket_tooltip()
     {
         $faker = FakerFactory::create();
 
@@ -97,8 +97,7 @@ class TicketControllerTest extends TestCase
         $response->assertStatus(200);
     }
 
-    //Testing Reply Alert and Last Activity filed
-    public function test_reply()
+    public function it_replies_to_ticket_successfully()
     {
         $faker = FakerFactory::create();
 
@@ -138,7 +137,7 @@ class TicketControllerTest extends TestCase
         $response3->assertSee(Lang::get('lang.you_have_successfully_replied_to_your_ticket'));
     }
 
-    public function test_user_change_the_status()
+    public function it_changes_ticket_status_when_user_submits_action()
     {
         $faker = FakerFactory::create();
 

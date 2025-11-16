@@ -154,7 +154,7 @@ class ArticleController extends Controller
      *
      * @return type redirect
      */
-    public function store(Article $article, ArticleRequest $request)
+    public function store(ArticleRequest $request, Article $article)
     {
         // requesting the values to store article data
         $publishTime = $request->input('year').'-'.$request->input('month').'-'.$request->input('day').' '.$request->input('hour').':'.$request->input('minute').':00';

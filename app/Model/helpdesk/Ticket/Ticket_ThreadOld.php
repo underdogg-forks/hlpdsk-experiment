@@ -2,43 +2,107 @@
 
 namespace App\Model\helpdesk\Ticket;
 
-//use App\BaseModel;
+use App\Models\BaseModel;
 use File;
-use Illuminate\Database\Eloquent\Model;
 
-class Ticket_ThreadOld extends Model
+class Ticket_ThreadOld extends BaseModel
 {
     protected $table = 'ticket_thread';
+
+    public $timestamps = true;
+
+    protected $casts = [];
+
+    protected $guarded = [];
 
     protected $fillable = [
         'id', 'ticket_id', 'staff_id', 'user_id', 'thread_type', 'poster', 'source', 'is_internal', 'title', 'body', 'format', 'ip_address', 'created_at', 'updated_at',
     ];
+
+    #region Static Methods
+    /*
+    |--------------------------------------------------------------------------
+    | Static Methods
+    |--------------------------------------------------------------------------
+    */
+
+    #endregion
+    #region Relationships
+    /*
+    |--------------------------------------------------------------------------
+    | Relationships
+    |--------------------------------------------------------------------------
+    */
+    #region Relationships
+    /*
+    |--------------------------------------------------------------------------
+    | Relationships
+    |--------------------------------------------------------------------------
+    */
 
     public function attach()
     {
         return $this->hasMany(\App\Model\helpdesk\Ticket\Ticket_attachments::class, 'thread_id');
     }
 
-    public function delete()
-    {
-        $this->attach()->delete();
-        parent::delete();
-    }
-
-//    public function setTitleAttribute($value) {
-//        $this->attributes['title'] = str_replace('"', "'", $value);
-//    }
+    #endregion
+    #region Accessors
+    /*
+    |--------------------------------------------------------------------------
+    | Accessors
+    |--------------------------------------------------------------------------
+    */
 
     public function getTitleAttribute($value)
     {
         return str_replace('"', "'", $value);
     }
 
+    #endregion
+    #region Mutators
+    /*
+    |--------------------------------------------------------------------------
+    | Mutators
+    |--------------------------------------------------------------------------
+    */
+
+    public function setTitleAttribute($value)
+    {
+        if ($value == '') {
+            $this->attributes['title'] = 'No available';
+        } else {
+            $this->attributes['title'] = $value;
+        }
+    }
+
+    #endregion
+    #region Scopes
+    /*
+    |--------------------------------------------------------------------------
+    | Scopes
+    |--------------------------------------------------------------------------
+    */
+
+    #endregion
+    #region Factory
+    /*
+    |--------------------------------------------------------------------------
+    | Factory
+    |--------------------------------------------------------------------------
+    */
+    #endregion
+
+    /**
+     * Delete with cascade
+     */
+    public function delete()
+    {
+        $this->attach()->delete();
+        parent::delete();
+    }
+
     public function thread($content)
     {
-        //         $porufi = $this->purify($content);
-//         dd($content,$porufi);
-        //return $content;
         return $this->purify($content);
     }
 
@@ -70,15 +134,6 @@ class Ticket_ThreadOld extends Model
         $content = $this->inlineAttachment($string);
 
         return $content;
-    }
-
-    public function setTitleAttribute($value)
-    {
-        if ($value == '') {
-            $this->attributes['title'] = 'No available';
-        } else {
-            $this->attributes['title'] = $value;
-        }
     }
 
     public function removeScript($html)

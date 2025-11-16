@@ -2,11 +2,20 @@
 
 namespace App\Model\helpdesk\Form;
 
-use App\BaseModel;
+use App\Models\BaseModel;
 
 class Fields extends BaseModel
 {
     protected $table = 'custom_form_fields';
+
+    public $timestamps = true;
+
+    protected $casts = [
+        'forms_id' => 'integer',
+        'required' => 'boolean',
+    ];
+
+    protected $guarded = [];
 
     /**
      * The attributes that are mass assignable.
@@ -14,6 +23,21 @@ class Fields extends BaseModel
      * @var array
      */
     protected $fillable = ['forms_id', 'label', 'name', 'type', 'value', 'required'];
+
+    #region Static Methods
+    /*
+    |--------------------------------------------------------------------------
+    | Static Methods
+    |--------------------------------------------------------------------------
+    */
+
+    #endregion
+    #region Relationships
+    /*
+    |--------------------------------------------------------------------------
+    | Relationships
+    |--------------------------------------------------------------------------
+    */
 
     public function valueRelation()
     {
@@ -28,6 +52,19 @@ class Fields extends BaseModel
 
         return $value;
     }
+
+    public function form()
+    {
+        return $this->belongsTo(\App\Model\helpdesk\Form\Form_name::class, 'forms_id', 'id');
+    }
+
+    #endregion
+    #region Accessors
+    /*
+    |--------------------------------------------------------------------------
+    | Accessors
+    |--------------------------------------------------------------------------
+    */
 
     public function valuesAsString()
     {
@@ -61,6 +98,36 @@ class Fields extends BaseModel
 
         return $check;
     }
+
+    #endregion
+    #region Mutators
+    /*
+    |--------------------------------------------------------------------------
+    | Mutators
+    |--------------------------------------------------------------------------
+    */
+
+    #endregion
+    #region Scopes
+    /*
+    |--------------------------------------------------------------------------
+    | Scopes
+    |--------------------------------------------------------------------------
+    */
+
+    public function scopeRequired($query)
+    {
+        return $query->where('required', '1');
+    }
+
+    #endregion
+    #region Factory
+    /*
+    |--------------------------------------------------------------------------
+    | Factory
+    |--------------------------------------------------------------------------
+    */
+    #endregion
 
     public function deleteValues()
     {

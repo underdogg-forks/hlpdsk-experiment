@@ -2,13 +2,49 @@
 
 namespace App\Model\helpdesk\Ticket;
 
-use App\BaseModel;
+use App\Models\BaseModel;
 
 class Ticket_Form_Data extends BaseModel
 {
     protected $table = 'ticket_form_data';
 
+    public $timestamps = true;
+
+    protected $casts = [
+        'ticket_id' => 'integer',
+    ];
+
+    protected $guarded = [];
+
     protected $fillable = ['id', 'ticket_id', 'title', 'content', 'created_at', 'updated_at'];
+
+    #region Static Methods
+    /*
+    |--------------------------------------------------------------------------
+    | Static Methods
+    |--------------------------------------------------------------------------
+    */
+
+    #endregion
+    #region Relationships
+    /*
+    |--------------------------------------------------------------------------
+    | Relationships
+    |--------------------------------------------------------------------------
+    */
+
+    public function ticket()
+    {
+        return $this->belongsTo(\App\Model\helpdesk\Ticket\Tickets::class, 'ticket_id', 'id');
+    }
+
+    #endregion
+    #region Accessors
+    /*
+    |--------------------------------------------------------------------------
+    | Accessors
+    |--------------------------------------------------------------------------
+    */
 
     public function getFieldKeyLabel()
     {
@@ -44,4 +80,29 @@ class Ticket_Form_Data extends BaseModel
             return $field->label;
         }
     }
+
+    #endregion
+    #region Mutators
+    /*
+    |--------------------------------------------------------------------------
+    | Mutators
+    |--------------------------------------------------------------------------
+    */
+
+    #endregion
+    #region Scopes
+    /*
+    |--------------------------------------------------------------------------
+    | Scopes
+    |--------------------------------------------------------------------------
+    */
+
+    #endregion
+    #region Factory
+    /*
+    |--------------------------------------------------------------------------
+    | Factory
+    |--------------------------------------------------------------------------
+    */
+    #endregion
 }

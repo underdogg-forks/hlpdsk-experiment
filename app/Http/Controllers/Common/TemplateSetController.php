@@ -55,7 +55,7 @@ class TemplateSetController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function store(TemplateSet $sets, TemplateSetRequest $request)
+    public function store(TemplateSetRequest $request, TemplateSet $sets)
     {
         try {
             $sets->name = $request->input('name');

@@ -2,14 +2,46 @@
 
 namespace App\Model\helpdesk\Filters;
 
-use Illuminate\Database\Eloquent\Model;
+use App\Models\BaseModel;
 use Lang;
 
-class Label extends Model
+class Label extends BaseModel
 {
     protected $table = 'labels';
 
+    public $timestamps = true;
+
+    protected $casts = [
+        'order' => 'integer',
+        'status' => 'integer',
+    ];
+
+    protected $guarded = [];
+
     protected $fillable = ['title', 'color', 'order', 'status'];
+
+    #region Static Methods
+    /*
+    |--------------------------------------------------------------------------
+    | Static Methods
+    |--------------------------------------------------------------------------
+    */
+
+    #endregion
+    #region Relationships
+    /*
+    |--------------------------------------------------------------------------
+    | Relationships
+    |--------------------------------------------------------------------------
+    */
+
+    #endregion
+    #region Accessors
+    /*
+    |--------------------------------------------------------------------------
+    | Accessors
+    |--------------------------------------------------------------------------
+    */
 
     public function titleWithColor()
     {
@@ -66,4 +98,34 @@ class Label extends Model
 
         return $output;
     }
+
+    #endregion
+    #region Mutators
+    /*
+    |--------------------------------------------------------------------------
+    | Mutators
+    |--------------------------------------------------------------------------
+    */
+
+    #endregion
+    #region Scopes
+    /*
+    |--------------------------------------------------------------------------
+    | Scopes
+    |--------------------------------------------------------------------------
+    */
+
+    public function scopeActive($query)
+    {
+        return $query->where('status', 1);
+    }
+
+    #endregion
+    #region Factory
+    /*
+    |--------------------------------------------------------------------------
+    | Factory
+    |--------------------------------------------------------------------------
+    */
+    #endregion
 }
