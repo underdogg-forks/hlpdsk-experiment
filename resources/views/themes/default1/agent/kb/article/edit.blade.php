@@ -207,7 +207,7 @@ class="nav-item menu-open"
             </form>
             <div class="card-footer">
 
-                {!! Form::submit(trans('lang.publish'),['class'=>'btn btn-primary'])!!}
+                <button type="submit" class="btn btn-primary">{{ trans('lang.publish') }}</button>
 
                 <a href="{{url('show/'.$article->slug)}}" target="_blank" class="btn btn-primary">{{ trans('lang.show') }}</a>
 
@@ -265,7 +265,7 @@ class="nav-item menu-open"
                             <div class="modal-footer justify-content-between" style="margin: -15px;">
                                 <button type="button" class="btn btn-default" data-dismiss="modal">{{ trans('lang.close') }}</button>
                                 <div class="form-group">
-                                    {!! Form::submit(trans('lang.add'),['class'=>'btn btn-primary'])!!}
+                                    <button type="submit" class="btn btn-primary">{{ trans('lang.add') }}</button>
                                 </div>      
                             </div>
                             </form>

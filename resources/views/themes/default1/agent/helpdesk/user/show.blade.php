@@ -1365,7 +1365,7 @@ class="nav-link active"
                         </div>
 
                         <div class="modal-footer">
-                            {!! Form::submit(trans('lang.confirm_deletion'),['class'=>'btn btn-primary float-right'])!!}
+                            <button type="submit" class="btn btn-primary float-right">{{ trans('lang.confirm_deletion') }}</button>
                         </div>
                     </div>
                 </div>
@@ -1432,7 +1432,7 @@ class="nav-link active"
                     </div>
 
                     <div class="modal-footer">
-                        {!! Form::submit(trans('lang.submit'),['class'=>'btn btn-primary float-right'])!!}
+                        <button type="submit" class="btn btn-primary float-right">{{ trans('lang.submit') }}</button>
                     </div>
                 </div>
             </div>
@@ -1463,7 +1463,7 @@ class="nav-link active"
                     </div>
 
                     <div class="modal-footer">
-                        {!! Form::submit(trans('lang.submit'),['class'=>'btn btn-primary float-right'])!!}
+                        <button type="submit" class="btn btn-primary float-right">{{ trans('lang.submit') }}</button>
                     </div>
                 </div>
             </div>
@@ -1528,7 +1528,7 @@ class="nav-link active"
                     </div>
 
                     <div class="modal-footer">
-                        {!! Form::submit(trans('lang.submit'),['class'=>'btn btn-primary float-right'])!!}
+                        <button type="submit" class="btn btn-primary float-right">{{ trans('lang.submit') }}</button>
                     </div>
                 </div>
             </div>
@@ -1599,7 +1599,7 @@ class="nav-link active"
                     </div>
 
                     <div class="modal-footer">
-                        {!! Form::submit(trans('lang.submit'),['class'=>'btn btn-primary float-right'])!!}
+                        <button type="submit" class="btn btn-primary float-right">{{ trans('lang.submit') }}</button>
                     </div>
                 </div>
             </div>

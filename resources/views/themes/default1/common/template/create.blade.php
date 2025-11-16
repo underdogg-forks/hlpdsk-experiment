@@ -5,7 +5,7 @@
     <div class="content-header">
         <form method="POST" action="{{ route('templates.store') }}">
     @csrf
-        <h4>{{ trans('lang.templates') }}	{!! Form::submit(trans('lang.save'),['class'=>'form-group btn btn-primary pull-right'])!!}</h4>
+        <h4>{{ trans('lang.templates') }}	<button type="submit" class="form-group btn btn-primary pull-right">{{ trans('lang.save') }}</button></h4>
 
     </div>
 
@@ -48,14 +48,14 @@
 
                     <div class="col-md-6 form-group {{ $errors->has('name') ? 'has-error' : '' }}">
                         <!-- first name -->
-                        {!! Form::label('name',trans('lang.name'),['class'=>'required']) !!}
+                        <label for="name" class="required">{{ trans('lang.name') }}</label>
                         <input type="text" name="name" id="name" value="{{ old('name') }}" class="form-control">
 
                     </div>
 
                     <div class="col-md-6 form-group {{ $errors->has('type') ? 'has-error' : '' }}">
                         <!-- last name -->
-                        {!! Form::label('type',trans('lang.template-types'),['class'=>'required']) !!}
+                        <label for="type" class="required">{{ trans('lang.template-types') }}</label>
                         <select name="type" id="type" class="form-control">
     @foreach([''=>'Select','Type'=>$type] as $key => $value)
         @if(is_array($value))
@@ -87,7 +87,7 @@
                     <div class="col-md-12 form-group {{ $errors->has('message') ? 'has-error' : '' }}">
                        
                         
-                        {!! Form::label('message',trans('lang.content'),['class'=>'required']) !!}
+                        <label for="message" class="required">{{ trans('lang.content') }}</label>
                         <textarea name="message" id="textarea" class="form-control">{{ old('message') }}</textarea>
                        
                     </div>

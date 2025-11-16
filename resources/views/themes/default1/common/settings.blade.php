@@ -44,13 +44,13 @@
 
                     <tr>
                         <td><h3 class="box-title">{{ trans('message.company') }}</h3></td>
-                        <td>{!! Form::submit(trans('message.update'),['class'=>'btn btn-primary pull-right'])!!}</td>
+                        <td><button type="submit" class="btn btn-primary pull-right">{{ trans('message.update') }}</button></td>
 
                     </tr>
 
                     <tr>
 
-                        <td><b>{!! Form::label('company',trans('message.company'),['class'=>'required']) !!}</b></td>
+                        <td><b><label for="company" class="required">{{ trans('message.company') }}</label></b></td>
                         <td>
                             <div class="form-group {{ $errors->has('company') ? 'has-error' : '' }}">
 
@@ -93,7 +93,7 @@
                     </tr>
                     <tr>
 
-                        <td><b>{!! Form::label('address',trans('message.address'),['class'=>'required']) !!}</b></td>
+                        <td><b><label for="address" class="required">{{ trans('message.address') }}</label></b></td>
                         <td>
                             <div class="form-group {{ $errors->has('address') ? 'has-error' : '' }}">
 
@@ -125,7 +125,7 @@
                     </tr>
                     <tr>
 
-                        <td><b>{!! Form::label('driver',trans('message.driver'),['class'=>'required']) !!}</b></td>
+                        <td><b><label for="driver" class="required">{{ trans('message.driver') }}</label></b></td>
                         <td>
                             <div class="form-group {{ $errors->has('driver') ? 'has-error' : '' }}">
 
@@ -193,7 +193,7 @@
                     </tr>
                     <tr>
 
-                        <td><b>{!! Form::label('email',trans('message.email'),['class'=>'required']) !!}</b></td>
+                        <td><b><label for="email" class="required">{{ trans('message.email') }}</label></b></td>
                         <td>
                             <div class="form-group {{ $errors->has('email') ? 'has-error' : '' }}">
 
@@ -206,7 +206,7 @@
                     </tr>
                     <tr>
 
-                        <td><b>{!! Form::label('password',trans('message.password'),['class'=>'required']) !!}</b></td>
+                        <td><b><label for="password" class="required">{{ trans('message.password') }}</label></b></td>
                         <td>
                             <div class="form-group {{ $errors->has('password') ? 'has-error' : '' }}">
 

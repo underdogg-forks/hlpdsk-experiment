@@ -61,7 +61,7 @@
     @csrf
 <div>
     <div class="content-header">
-        <h4>Ticket {!! Form::submit(trans('lang.send'),['class'=>'form-group btn btn-info pull-right'])!!}</h4>
+        <h4>Ticket <button type="submit" class="form-group btn btn-info pull-right">{{ trans('lang.send') }}</button></h4>
     </div>
     <br/>
     <div>

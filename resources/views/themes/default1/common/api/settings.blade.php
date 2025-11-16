@@ -120,7 +120,7 @@ class="nav-link active"
                 <div class="row">
                     
                     <div class="form-group col-md-6 {{ $errors->has('ticket_detail') ? 'has-error' : '' }}">
-                        {!! Form::label('ticket_detail',trans('lang.enter_url_to_send_ticket_details'),['class'=>'required']) !!}
+                        <label for="ticket_detail" class="required">{{ trans('lang.enter_url_to_send_ticket_details') }}</label>
                         <input type="text" name="ticket_detail" id="ticket_detail" value="$ticket_detail" class="form-control">
                     </div>
                 </div>
@@ -129,7 +129,7 @@ class="nav-link active"
     </div>
 
     <div class="card-footer">
-        {!! Form::submit(trans('lang.update'),['class'=>'btn btn-primary'])!!} 
+        <button type="submit" class="btn btn-primary">{{ trans('lang.update') }}</button> 
     </div>
     </form>   
 </div>

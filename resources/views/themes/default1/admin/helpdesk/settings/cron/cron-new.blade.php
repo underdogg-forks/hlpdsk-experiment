@@ -78,7 +78,7 @@
                             <div class="col-md-6" id="fetching">
                                 {!! Form::select('fetching-commands',$commands,$condition->getConditionValue('fetching')['condition'],['class'=>'form-control','id'=>'fetching-command']) !!}
                                 <div id='fetching-daily-at'>
-                                    {!! Form::text('fetching-dailyAt',$condition->getConditionValue('fetching')['at'],['class'=>'form-control']) !!}
+                                    <input type="text" name="fetching-dailyAt" id="fetching-dailyAt" value="$condition->getConditionValue('fetching')['at']" class="form-control">
 
                                 </div>
                             </div>
@@ -103,7 +103,7 @@
                         <div class="col-md-6" id="notification">
                             {!! Form::select('notification-commands',$commands,$condition->getConditionValue('notification')['condition'],['class'=>'form-control','id'=>'notification-command']) !!}
                             <div id='notification-daily-at'>
-                                {!! Form::text('notification-dailyAt',$condition->getConditionValue('notification')['at'],['class'=>'form-control']) !!}
+                                <input type="text" name="notification-dailyAt" id="notification-dailyAt" value="$condition->getConditionValue('notification')['at']" class="form-control">
                             </div>
                         </div>
                     </div>
@@ -129,7 +129,7 @@
                         <div class="col-md-6" id="workflow">
                             {!! Form::select('work-commands',$commands,$condition->getConditionValue('work')['condition'],['class'=>'form-control','id'=>'workflow-command']) !!}
                             <div id='workflow-daily-at'>
-                                {!! Form::text('workflow-dailyAt',$condition->getConditionValue('work')['at'],['class'=>'form-control']) !!}
+                                <input type="text" name="workflow-dailyAt" id="workflow-dailyAt" value="$condition->getConditionValue('work')['at']" class="form-control">
                             </div>
                         </div>
                     </div>
@@ -140,7 +140,7 @@
 
     </div>
     <div class="card-footer">
-        {!! Form::submit(trans('lang.submit'),['class'=>'btn btn-primary'])!!}
+        <button type="submit" class="btn btn-primary">{{ trans('lang.submit') }}</button>
     </div>
 </div>
 <script>

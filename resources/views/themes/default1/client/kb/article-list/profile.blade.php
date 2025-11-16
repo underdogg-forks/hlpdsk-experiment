@@ -121,7 +121,7 @@
     @method('PATCH')
             <div class="box box-primary">
                 <div class="box-header with-border">
-                    <h4>{{ trans('lang.change_password') }}	{!! Form::submit(trans('lang.update'),['class'=>'form-group btn btn-primary pull-right'])!!}</h4>
+                    <h4>{{ trans('lang.change_password') }}	<button type="submit" class="form-group btn btn-primary pull-right">{{ trans('lang.update') }}</button></h4>
                 </div>
                 <div class="box-body">
                     @if(session()->has('success2'))

@@ -41,7 +41,7 @@ class="active"
 			<div class="box box-primary">
 				<div class="box-header">
                 <h3 class="box-title">{{ trans('lang.access') }}</h3> <div class="pull-right">
-                {!! Form::submit(trans('lang.save'),['class'=>'btn btn-primary'])!!}
+                <button type="submit" class="btn btn-primary">{{ trans('lang.save') }}</button>
               </div>
             </div>
 

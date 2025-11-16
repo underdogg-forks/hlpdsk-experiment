@@ -20,7 +20,7 @@
 
 <div class="box box-primary">
     <div class="box-header">
-        <h3 class="box-title">{{ trans('lang.footer4') }}</h3>  {!! Form::submit(trans('lang.save'),['class'=>'form-group btn btn-primary pull-right'])!!}
+        <h3 class="box-title">{{ trans('lang.footer4') }}</h3>  <button type="submit" class="form-group btn btn-primary pull-right">{{ trans('lang.save') }}</button>
     </div>
 
     <div class="box-body">

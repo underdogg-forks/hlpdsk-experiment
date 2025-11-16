@@ -64,7 +64,7 @@ class="nav-link active"
             </div>
             <div class="col-md-4 form-group {{ $errors->has('type') ? 'has-error' : '' }}">
                 <!-- last name -->
-                {!! Form::label('type',trans('lang.template-types'),['class'=>'required']) !!}<span style="color:red;">*</span>
+                <label for="type" class="required">{{ trans('lang.template-types') }}</label><span style="color:red;">*</span>
                 <select name="type" id="type" class="form-control">
     @foreach([''=>'Select','Type'=>$type] as $key => $value)
         @if(is_array($value))
@@ -94,13 +94,13 @@ class="nav-link active"
         </div>
         <div class="row">
             <div class="col-md-12 form-group {{ $errors->has('message') ? 'has-error' : '' }}">
-                {!! Form::label('message',trans('lang.content'),['class'=>'required']) !!}<span style="color:red;">*</span>
+                <label for="message" class="required">{{ trans('lang.content') }}</label><span style="color:red;">*</span>
                 <textarea name="message" id="textarea" class="form-control">{{ old('message') }}</textarea>
             </div>
         </div>
     </div>
     <div class="card-footer">
-        {!! Form::submit(trans('lang.update'),['class'=>'btn btn-primary'])!!}
+        <button type="submit" class="btn btn-primary">{{ trans('lang.update') }}</button>
     </div>
 </div>
 </form>

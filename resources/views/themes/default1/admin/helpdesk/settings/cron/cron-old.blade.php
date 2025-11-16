@@ -104,7 +104,7 @@
         </div>
     </div>
     <div class="box-footer">
-        {!! Form::submit(trans('lang.submit'),['class'=>'btn btn-primary'])!!}
+        <button type="submit" class="btn btn-primary">{{ trans('lang.submit') }}</button>
     </div>
 </div>
 <script type="text/javascript">

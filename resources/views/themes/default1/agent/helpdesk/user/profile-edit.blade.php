@@ -151,7 +151,7 @@ class="nav-link active"
                 </form>
             </div>
             <div class="card-footer">
-                {!! Form::submit(trans('lang.update'),['class'=>'btn btn-primary'])!!}
+                <button type="submit" class="btn btn-primary">{{ trans('lang.update') }}</button>
             </div>
         </div>
     </div>
@@ -187,7 +187,7 @@ class="nav-link active"
                 </div>
             </div>
             <div class="card-footer">
-                {!! Form::submit(trans('lang.update'),['class'=>'btn btn-primary'])!!}
+                <button type="submit" class="btn btn-primary">{{ trans('lang.update') }}</button>
             </div>
         </div>
     </div>

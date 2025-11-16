@@ -36,7 +36,7 @@
     </div>
     @endif
     <div class="box-header">
-        <h3 class="box-title">{{ trans('lang.sidewidget2') }}</h3>  {!! Form::submit(trans('lang.save'),['class'=>'form-group btn btn-primary pull-right'])!!}
+        <h3 class="box-title">{{ trans('lang.sidewidget2') }}</h3>  <button type="submit" class="form-group btn btn-primary pull-right">{{ trans('lang.save') }}</button>
     </div>
     <div class="box-body">
 

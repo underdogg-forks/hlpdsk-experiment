@@ -183,7 +183,7 @@ class="nav-link active"
             </div>
             <div class="modal-footer justify-content-between">
                 <button type="button" class="btn btn-default" data-dismiss="modal">{{ trans('lang.close') }}</button>
-                {!! Form::submit(trans('lang.create_set'),['class'=>'btn btn-primary'])!!}
+                <button type="submit" class="btn btn-primary">{{ trans('lang.create_set') }}</button>
             </div>
             </form>
         </div> 

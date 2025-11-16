@@ -34,7 +34,7 @@ class="active"
 <div class="box box-primary">
     <div class="box-header">
         
-        <h2 class="box-title"style="margin-left:-10px">{{ trans('lang.create') }}</h2>{!! Form::submit(trans('lang.save'),['class'=>'pull-right btn btn-primary'])!!}
+        <h2 class="box-title"style="margin-left:-10px">{{ trans('lang.create') }}</h2><button type="submit" class="pull-right btn btn-primary">{{ trans('lang.save') }}</button>
     </div>
     <div class="box-body">
         

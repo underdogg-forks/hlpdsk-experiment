@@ -97,7 +97,7 @@
         <div class="box-footer" style="background-color:#f5f5f5;">
         <div style="margin-left:140px;">
 
-                {!! Form::submit(trans('lang.publish'),['class'=>'btn btn-primary'])!!}
+                <button type="submit" class="btn btn-primary">{{ trans('lang.publish') }}</button>
         </div>
 
         </div>

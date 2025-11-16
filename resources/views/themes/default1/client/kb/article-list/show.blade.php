@@ -151,7 +151,7 @@ $category_id = $all->pluck('category_id')->toArray();
 
                         <div class="col-md-10" style="width: 65%">
                             <div class="form-group {{ $errors->has('comment') ? 'has-error' : '' }}">
-                                {!! Form::label('comment',trans('lang.message'),['class' => 'label']) !!}
+                                <label for="comment" class="label">{{ trans('lang.message') }}</label>
                                 <textarea name="comment" id="comment" class="form-control" rows="8">{{ old('comment') }}</textarea>
                                 {!! $errors->first('comment', '<spam class="help-block">:message</spam>') !!}
                             </div>
@@ -214,19 +214,19 @@ $category_id = $all->pluck('category_id')->toArray();
                     <div class="row">
                         <div class="col-md-4">
                             <div class="form-group {{ $errors->has('name') ? 'has-error' : '' }}">
-                                {!! Form::label('name', trans('lang.name'), ['class' => 'label']) !!}
+                                <label for="name" class="label">{{ trans('lang.name') }}</label>
                                 <input type="text" name="name" id="comment-name" value="{{ old('name') }}" class="form-control">
                                 {!! $errors->first('name', '<span class="help-block">:message</span>') !!}
                             </div>
 
                             <div class="form-group {{ $errors->has('email') ? 'has-error' : '' }}">
-                                {!! Form::label('email', trans('lang.email'), ['class' => 'label']) !!}
+                                <label for="email" class="label">{{ trans('lang.email') }}</label>
                                 <input type="text" name="email" id="comment-email" value="{{ old('email') }}" class="form-control">
                                 {!! $errors->first('email', '<span class="help-block">:message</span>') !!}
                             </div>
 
                             <div class="form-group {{ $errors->has('website') ? 'has-error' : '' }}">
-                                {!! Form::label('website', trans('lang.website'), ['class' => 'label']) !!}
+                                <label for="website" class="label">{{ trans('lang.website') }}</label>
                                 <input type="text" name="website" id="website" value="{{ old('website') }}" class="form-control">
                                 {!! $errors->first('website', '<span class="help-block">:message</span>') !!}
                             </div>
@@ -235,7 +235,7 @@ $category_id = $all->pluck('category_id')->toArray();
 
                         <div class="col-md-10" style="width: 65%">
                             <div class="form-group {{ $errors->has('comment') ? 'has-error' : '' }}">
-                                {!! Form::label('comment',trans('lang.message'),['class' => 'label']) !!}
+                                <label for="comment" class="label">{{ trans('lang.message') }}</label>
                                 <textarea name="comment" id="comment" class="form-control" rows="8">{{ old('comment') }}</textarea>
                                 {!! $errors->first('comment', '<spam class="help-block">:message</spam>') !!}
                             </div>

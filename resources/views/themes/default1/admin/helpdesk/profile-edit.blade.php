@@ -12,7 +12,7 @@
 
 	<div class="content-header">
 
-	 	<h4>Profile	{!! Form::submit(trans('lang.save'),['class'=>'form-group btn btn-primary pull-right'])!!}</h4>
+	 	<h4>Profile	<button type="submit" class="form-group btn btn-primary pull-right">{{ trans('lang.save') }}</button></h4>
 
 	</div>
 

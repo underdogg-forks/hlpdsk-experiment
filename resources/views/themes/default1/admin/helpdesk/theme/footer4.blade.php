@@ -19,7 +19,7 @@ class="active"
     @method('PATCH')
 <div class="box box-primary">
     <div class="box-header">
-        <h4 class="box-title">{{ trans('lang.footer4') }}</h4>{!! Form::submit(trans('lang.save'),['class'=>'form-group btn btn-primary pull-right'])!!}
+        <h4 class="box-title">{{ trans('lang.footer4') }}</h4><button type="submit" class="form-group btn btn-primary pull-right">{{ trans('lang.save') }}</button>
     </div>
     <!-- check whether success or not -->
     @if(session()->has('success'))

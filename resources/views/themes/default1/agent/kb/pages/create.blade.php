@@ -126,7 +126,7 @@ class="nav-item menu-open"
                 </div>
             </div>
             <div class="card-footer">
-                {!! Form::submit(trans('lang.publish'),['class'=>'btn btn-primary'])!!}
+                <button type="submit" class="btn btn-primary">{{ trans('lang.publish') }}</button>
             </div>
         </div>
     </div>    
