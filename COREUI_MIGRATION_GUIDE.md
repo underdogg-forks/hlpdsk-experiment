@@ -43,7 +43,7 @@ All colors, spacing, and component styles now use CSS variables defined in `:roo
 
 ### 3. Layout Files Converted
 
-The following main layout files have been converted to CoreUI:
+All 9 layout files have been converted to CoreUI:
 
 #### Admin Layout (`layouts/admin.blade.php`)
 - CoreUI header with navbar
@@ -63,6 +63,37 @@ The following main layout files have been converted to CoreUI:
 - Simple navigation
 - Login dropdown
 - Footer with customizable sections
+
+#### Login Layout (`layouts/login.blade.php`)
+- Centered login card design
+- Support for multiple authentication methods
+- Responsive design
+- Company branding support
+
+#### Register Layout (`layouts/register.blade.php`)
+- Clean registration form layout
+- Validation error display
+- Link to login page
+
+#### Guest Layout (`layouts/guest.blade.php`)
+- Minimal layout for guest pages
+- Basic alert message support
+- Flexible content area
+
+#### KB Layout (`layouts/kb.blade.php`)
+- Knowledge Base specific layout
+- Sidebar navigation support
+- Admin panel access
+
+#### Blank Layout (`layouts/blank.blade.php`)
+- Minimal HTML structure
+- For special purpose pages
+- No navigation or footer
+
+#### Installer Layout (`layouts/installer.blade.php`)
+- Step-by-step installer wizard
+- Progress indicator support
+- Error and success messages
 
 ### 4. AdminLTE Compatibility Classes
 
@@ -131,7 +162,7 @@ Dark mode is pre-configured. To enable it, add the `data-theme="dark"` attribute
 - [x] Convert agent layout to CoreUI
 - [x] Convert client layout to CoreUI
 - [x] Add AdminLTE compatibility classes
-- [ ] Convert remaining layouts (guest, blank, installer, kb, login, register)
+- [x] Convert remaining layouts (guest, blank, installer, kb, login, register)
 - [ ] Update admin panel views to use CoreUI classes
 - [ ] Update agent panel views to use CoreUI classes
 - [ ] Update client panel views to use CoreUI classes
