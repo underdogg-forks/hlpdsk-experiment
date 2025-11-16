@@ -1,7 +1,45 @@
 // Modern JavaScript for Tailwind CSS application
 
+// Dark Mode Functionality
+(function initDarkMode() {
+    // Check for saved theme preference or default to system preference
+    const savedTheme = localStorage.getItem('theme');
+    const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    
+    // Set initial theme
+    if (savedTheme === 'dark' || (!savedTheme && systemPrefersDark)) {
+        document.documentElement.setAttribute('data-theme', 'dark');
+    } else if (savedTheme === 'light') {
+        document.documentElement.setAttribute('data-theme', 'light');
+    }
+    
+    // Listen for system theme changes when no manual preference is set
+    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
+        if (!localStorage.getItem('theme')) {
+            document.documentElement.setAttribute('data-theme', e.matches ? 'dark' : 'light');
+        }
+    });
+})();
+
 // Sidebar toggle functionality
 document.addEventListener('DOMContentLoaded', function() {
+    // Dark mode toggle handler
+    const darkModeToggles = document.querySelectorAll('[data-toggle="dark-mode"]');
+    
+    darkModeToggles.forEach(toggle => {
+        toggle.addEventListener('click', function(e) {
+            e.preventDefault();
+            const currentTheme = document.documentElement.getAttribute('data-theme');
+            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            
+            document.documentElement.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+            
+            // Dispatch custom event for other components to react
+            window.dispatchEvent(new CustomEvent('themeChanged', { detail: { theme: newTheme } }));
+        });
+    });
+    
     // Mobile sidebar toggle
     const sidebarToggles = document.querySelectorAll('[data-toggle="sidebar"]');
     const sidebar = document.querySelector('.sidebar');

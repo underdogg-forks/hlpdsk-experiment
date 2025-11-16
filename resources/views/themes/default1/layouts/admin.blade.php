@@ -132,6 +132,12 @@
             <div class="flex items-center space-x-4">
                 <a href="{{ url('user') }}" class="text-sm font-medium text-gray-600 hover:text-gray-900">Agent Panel</a>
                 
+                <!-- Dark Mode Toggle -->
+                <button class="dark-mode-toggle" data-toggle="dark-mode" title="Toggle Dark Mode">
+                    <i class="fas fa-sun icon-sun absolute text-yellow-500"></i>
+                    <i class="fas fa-moon icon-moon absolute text-blue-400"></i>
+                </button>
+                
                 <!-- User Dropdown -->
                 <div class="relative">
                     <button class="flex items-center space-x-2 hover:bg-gray-100 rounded-full p-1 transition-colors" data-toggle="dropdown">
