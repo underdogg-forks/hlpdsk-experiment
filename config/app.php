@@ -160,7 +160,6 @@ return [
         'Illuminate\View\ViewServiceProvider',
         Illuminate\Notifications\NotificationServiceProvider::class,
         App\Providers\BroadcastServiceProvider::class,
-        Collective\Html\HtmlServiceProvider::class,
         /*
          * Application Service Providers...
          */
@@ -209,10 +208,8 @@ return [
         'FCM'         => LaravelFCM\Facades\FCM::class,
         'FCMGroup'    => LaravelFCM\Facades\FCMGroup::class,
         'Finder'      => App\Helper\Finder::class,
-        'Form'        => Collective\Html\FormFacade::class,
         'GeoIP'       => \Torann\GeoIP\Facades\GeoIP::class,
         'Gravatar'    => 'Thomaswelton\LaravelGravatar\Facades\Gravatar',
-        'Html'        => Collective\Html\HtmlFacade::class,
         'Image'       => Intervention\Image\Facades\Image::class,
         'Inspiring'   => 'Illuminate\Foundation\Inspiring',
         'JWTAuth'     => 'Tymon\JWTAuth\Facades\JWTAuth',
