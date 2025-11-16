@@ -54,9 +54,9 @@ class = "nav-item active"
                 <div>
                      <form method="POST" action="checkmyticket">
     @csrf
-                    {!! Form::label('email',trans('lang.email')) !!}<span class="text-red"> *</span>
+                    <label for="email">{{ trans('lang.email') }}</label><span class="text-red"> *</span>
                     <input type="text" name="email_address" id="email_address" value="{{ old('email_address') }}" class="form-control form-group">
-                    {!! Form::label('ticket_number',trans('lang.ticket_number')) !!}<span class="text-red"> *</span>
+                    <label for="ticket_number">{{ trans('lang.ticket_number') }}</label><span class="text-red"> *</span>
                     <input type="text" name="ticket_number" id="ticket_number" value="{{ old('ticket_number') }}" class="form-control form-group">
                     <button type="submit" class="btn btn-info" style=" border-color: rgb(0, 192, 239); background-color: rgb(0, 154, 186) !important; color: white">
                         <i class="fas fa-save"></i> {{ trans('lang.check_ticket_status') }}
@@ -126,7 +126,7 @@ class = "nav-item active"
                         @else
 
                         <div class="col-md-12 form-group {{ $errors->has('Name') ? 'has-error' : '' }}">
-                            {!! Form::label('Name',trans('lang.name')) !!}<span class="text-red"> *</span>
+                            <label for="Name">{{ trans('lang.name') }}</label><span class="text-red"> *</span>
                             <input type="text" name="Name" id="Name" value="{{ old('Name') }}" class="form-control">
                         </div>
                         @endif
@@ -137,7 +137,7 @@ class = "nav-item active"
 
                         @else
                         <div class="col-md-12 form-group {{ $errors->has('Email') ? 'has-error' : '' }}">
-                            {!! Form::label('Email',trans('lang.email')) !!}
+                            <label for="Email">{{ trans('lang.email') }}</label>
                             @if($email_mandatory->status == 1 || $email_mandatory->status == '1')
                                 <span class="text-red"> *</span>
                             @endif
@@ -148,7 +148,7 @@ class = "nav-item active"
                         @if(!Auth::user())
 
                         <div class="col-md-2 form-group {{ session()->has('country_code_error') ? 'has-error' : '' }}">
-                            {!! Form::label('Code',trans('lang.country-code')) !!}
+                            <label for="Code">{{ trans('lang.country-code') }}</label>
                              @if($email_mandatory->status == 0 || $email_mandatory->status == '0')
                                     <span class="text-red"> *</span>
                                     @endif
@@ -156,14 +156,14 @@ class = "nav-item active"
                             <input type="text" name="Code" id="Code" value="{{ old('Code') }}" class="form-control">
                         </div>
                         <div class="col-md-5 form-group {{ $errors->has('mobile') ? 'has-error' : '' }}">
-                            {!! Form::label('mobile',trans('lang.mobile_number')) !!}
+                            <label for="mobile">{{ trans('lang.mobile_number') }}</label>
                              @if($email_mandatory->status == 0 || $email_mandatory->status == '0')
                                     <span class="text-red"> *</span>
                                     @endif
                             <input type="text" name="mobile" id="mobile" value="{{ old('mobile') }}" class="form-control">
                         </div>
                         <div class="col-md-5 form-group {{ $errors->has('Phone') ? 'has-error' : '' }}">
-                            {!! Form::label('Phone',trans('lang.phone')) !!}
+                            <label for="Phone">{{ trans('lang.phone') }}</label>
                             <input type="text" name="Phone" id="Phone" value="{{ old('Phone') }}" class="form-control">
                         </div>
                         @else
@@ -173,7 +173,7 @@ class = "nav-item active"
 
                        @endif
                         <div class="col-md-12 form-group {{ $errors->has('help_topic') ? 'has-error' : '' }}">
-                            {!! Form::label('help_topic', trans('lang.choose_a_help_topic')) !!}
+                            <label for="help_topic">{{ trans('lang.choose_a_help_topic') }}</label>
                             {!! $errors->first('help_topic', '<spam class="help-block">:message</spam>') !!}
                             <?php
                             $forms = App\Model\helpdesk\Form\Forms::get();
@@ -204,7 +204,19 @@ class = "nav-item active"
                                 </div>
                                 <div class="col-md-12">
                                     <?php $Priority = App\Model\helpdesk\Ticket\Ticket_Priority::where('status','=',1)->get(); ?>
-                                    {!! Form::select('priority', ['Priority'=>$Priority->pluck('priority_desc','priority_id')->toArray()],null,['class' => 'form-control select']) !!}
+                                    <select name="priority" id="priority" class="form-control select">
+    @foreach(['Priority'=>$Priority->pluck('priority_desc','priority_id')->toArray()] as $key => $value)
+        @if(is_array($value))
+            <optgroup label="{{ $key }}">
+                @foreach($value as $subKey => $subValue)
+                    <option value="{{ $subKey }}">{{ $subValue }}</option>
+                @endforeach
+            </optgroup>
+        @else
+            <option value="{{ $key }}">{{ $value }}</option>
+        @endif
+    @endforeach
+</select>
                                 </div>
                              </div>
                         </div>
@@ -212,11 +224,11 @@ class = "nav-item active"
                         @endif
                         @endif
                         <div class="col-md-12 form-group {{ $errors->has('Subject') ? 'has-error' : '' }}">
-                            {!! Form::label('Subject',trans('lang.subject')) !!}<span class="text-red"> *</span>
+                            <label for="Subject">{{ trans('lang.subject') }}</label><span class="text-red"> *</span>
                             <input type="text" name="Subject" id="Subject" value="{{ old('Subject') }}" class="form-control">
                         </div>
                         <div class="col-md-12 form-group {{ $errors->has('Details') ? 'has-error' : '' }}">
-                            {!! Form::label('Details',trans('lang.message')) !!}<span class="text-red"> *</span>
+                            <label for="Details">{{ trans('lang.message') }}</label><span class="text-red"> *</span>
                             <textarea name="Details" id="Details" class="form-control">{{ old('Details') }}</textarea>
                         </div>
                         <div class="col-md-12 form-group">

@@ -55,25 +55,25 @@ class="nav-link active"
         <div class="row">
             <!-- email address -->
             <div class="col-sm-6 form-group {{ $errors->has('email_address') ? 'has-error' : '' }}" id="email_address_error">
-                {!! Form::label('email_address',trans('lang.email_address')) !!} <span class="text-red"> *</span>
+                <label for="email_address">{{ trans('lang.email_address') }}</label> <span class="text-red"> *</span>
                 {!! $errors->first('email_address', '<spam class="help-block">:message</spam>') !!}
                 <input type="text" name="email_address" id="email_address" value="{{ old('email_address') }}" class="form-control">
             </div>
             <!-- user name -->
             <div class="col-sm-6 form-group {{ $errors->has('user_name') ? 'has-error' : '' }}" id="user_name_error">
-                {!! Form::label('user_name',trans('lang.user_name')) !!}
+                <label for="user_name">{{ trans('lang.user_name') }}</label>
                 {!! $errors->first('user_name', '<spam class="help-block">:message</spam>') !!}
                 <input type="text" name="user_name" id="user_name" value="{{ old('user_name') }}" class="form-control">
             </div>
             <!-- Email name -->
             <div class="col-sm-6 form-group {!! $errors->has('email_name') ? 'has-error' : ''!!}" id="email_name_error">
-                {!! Form::label('email_name',trans('lang.from_name')) !!} <span class="text-red"> *</span>
+                <label for="email_name">{{ trans('lang.from_name') }}</label> <span class="text-red"> *</span>
                 {!! $errors->first('email_name', '<spam class="help-block">:message</spam>') !!}
                 <input type="text" name="email_name" id="email_name" value="{{ old('email_name') }}" class="form-control">
             </div>
             <!-- password -->
             <div class="col-sm-6 form-group {!! $errors->has('password') ? 'has-error' : ''!!}" id="password_error">
-                {!! Form::label('password',trans('lang.password')) !!} <span class="text-red"> *</span>
+                <label for="password">{{ trans('lang.password') }}</label> <span class="text-red"> *</span>
                 {!! $errors->first('password', '<spam class="help-block">:message</spam>') !!}
                 <input type="password" name="password" class="form-control" id="password">
             </div>
@@ -88,25 +88,61 @@ class="nav-link active"
                 <div class="row">
                     <!-- department -->
                     <div class="col-sm-4 form-group {{ $errors->has('department') ? 'has-error' : '' }}">
-                        {!! Form::label('department',trans('lang.department')) !!}
+                        <label for="department">{{ trans('lang.department') }}</label>
                         {!! $errors->first('department', '<spam class="help-block">:message</spam>') !!}
-                        {!!Form::select('department', [''=>'--System Default--','departments'=>$departments->pluck('name','id')->toArray()],null,['class' => 'form-control select']) !!}
+                        <select name="department" id="department" class="form-control select">
+    @foreach([''=>'--System Default--','departments'=>$departments->pluck('name','id')->toArray()] as $key => $value)
+        @if(is_array($value))
+            <optgroup label="{{ $key }}">
+                @foreach($value as $subKey => $subValue)
+                    <option value="{{ $subKey }}">{{ $subValue }}</option>
+                @endforeach
+            </optgroup>
+        @else
+            <option value="{{ $key }}">{{ $value }}</option>
+        @endif
+    @endforeach
+</select>
                     </div>
                     <!-- priority -->
                     <div class="col-sm-4 form-group {{ $errors->has('priority') ? 'has-error' : '' }}">
-                        {!! Form::label('priority',trans('lang.priority')) !!}
+                        <label for="priority">{{ trans('lang.priority') }}</label>
                         {!! $errors->first('priority', '<spam class="help-block">:message</spam>') !!}
-                        {!!Form::select('priority', [''=>'--System Default--','Priorities'=>$priority->pluck('priority_desc','priority_id')->toArray()],null,['class' => 'form-control select']) !!}
+                        <select name="priority" id="priority" class="form-control select">
+    @foreach([''=>'--System Default--','Priorities'=>$priority->pluck('priority_desc','priority_id')->toArray()] as $key => $value)
+        @if(is_array($value))
+            <optgroup label="{{ $key }}">
+                @foreach($value as $subKey => $subValue)
+                    <option value="{{ $subKey }}">{{ $subValue }}</option>
+                @endforeach
+            </optgroup>
+        @else
+            <option value="{{ $key }}">{{ $value }}</option>
+        @endif
+    @endforeach
+</select>
                     </div>
                     <!-- help topic -->
                     <div class="col-sm-4 form-group {{ $errors->has('help_topic') ? 'has-error' : '' }}">
-                        {!! Form::label('help_topic',trans('lang.help_topic')) !!}
+                        <label for="help_topic">{{ trans('lang.help_topic') }}</label>
                         {!! $errors->first('help_topic', '<spam class="help-block">:message</spam>') !!}
-                        {!!Form::select('help_topic', [''=>'--System Default--','Help Topics'=>$helps->pluck('topic','id')->toArray()],null,['class' => 'form-control select']) !!}
+                        <select name="help_topic" id="help_topic" class="form-control select">
+    @foreach([''=>'--System Default--','Help Topics'=>$helps->pluck('topic','id')->toArray()] as $key => $value)
+        @if(is_array($value))
+            <optgroup label="{{ $key }}">
+                @foreach($value as $subKey => $subValue)
+                    <option value="{{ $subKey }}">{{ $subValue }}</option>
+                @endforeach
+            </optgroup>
+        @else
+            <option value="{{ $key }}">{{ $value }}</option>
+        @endif
+    @endforeach
+</select>
                     </div>
                     <!-- status -->
                     <div class="col-sm-2 form-group">
-                        {!! Form::label('auto_response', trans('lang.auto_response')) !!}
+                        <label for="auto_response">{{ trans('lang.auto_response') }}</label>
                     </div>
                     <div class="col-sm-3 form-group">
                         <input type="checkbox" name="auto_response" id="auto_response" <?php
@@ -129,7 +165,7 @@ class="nav-link active"
                     <div class="form-group">
                         <!-- status -->
 
-                        {!! Form::label('fetching_status',trans('lang.status')) !!}
+                        <label for="fetching_status">{{ trans('lang.status') }}</label>
                         <input type="checkbox" name="fetching_status" id="fetching_status"  <?php
                             if ($emails->fetching_status == 1) {
                                 echo "checked='checked'";
@@ -139,22 +175,34 @@ class="nav-link active"
                 </div>
                 <div class="row">
                     <div class="col-sm-2 form-group {!! $errors->has('fetching_protocol') ? 'has-error' : ''!!}" id="fetching_protocol_error">
-                        {!! Form::label('fetching_protocol',trans('lang.fetching_protocol')) !!}
+                        <label for="fetching_protocol">{{ trans('lang.fetching_protocol') }}</label>
                         {!! $errors->first('fetching_protocol', '<spam class="help-block">:message</spam>') !!}
-                        {!!Form::select('fetching_protocol',['imap' => 'IMAP', 'pop' => 'POP3'],null,['class' => 'form-control select', 'id' => 'fetching_protocol']) !!}
+                        <select name="fetching_protocol" id="fetching_protocol" class="form-control select">
+    @foreach(['imap' => 'IMAP', 'pop' => 'POP3'] as $key => $value)
+        @if(is_array($value))
+            <optgroup label="{{ $key }}">
+                @foreach($value as $subKey => $subValue)
+                    <option value="{{ $subKey }}">{{ $subValue }}</option>
+                @endforeach
+            </optgroup>
+        @else
+            <option value="{{ $key }}">{{ $value }}</option>
+        @endif
+    @endforeach
+</select>
                     </div>
                     <div class="col-sm-2 form-group  {!! $errors->has('fetching_host') ? 'has-error' : ''!!}" id="fetching_host_error">
-                        {!! Form::label('fetching_host',trans('lang.host_name')) !!}
+                        <label for="fetching_host">{{ trans('lang.host_name') }}</label>
                         {!! $errors->first('fetching_host', '<spam class="help-block">:message</spam>') !!}
                         <input type="text" name="fetching_host" id="fetching_host" value="{{ old('fetching_host') }}" class="form-control">
                     </div>
                     <div class="col-sm-2 form-group {!! $errors->has('fetching_port') ? 'has-error' : ''!!}" id="fetching_port_error">
-                        {!! Form::label('fetching_port',trans('lang.port_number')) !!}
+                        <label for="fetching_port">{{ trans('lang.port_number') }}</label>
                         {!! $errors->first('fetching_port', '<spam class="help-block">:message</spam>') !!}
                         <input type="text" name="fetching_port" id="fetching_port" value="{{ old('fetching_port') }}" class="form-control">
                     </div>
                     <div class="col-sm-2 form-group {!! $errors->has('fetching_encryption') ? 'has-error' : ''!!}" id="fetching_encryption_error">
-                        {!! Form::label('fetching_encryption',trans('lang.encryption')) !!}
+                        <label for="fetching_encryption">{{ trans('lang.encryption') }}</label>
                         {!! $errors->first('fetching_encryption', '<spam class="help-block">:message</spam>') !!}
                         <select name="fetching_encryption" class='form-control'  id='fetching_encryption'>
                             <option value=""> -----Select----- </option>
@@ -177,8 +225,20 @@ class="nav-link active"
                         </select>
                     </div>
                     <div class="col-sm-2 form-group {!! $errors->has('imap_authentication') ? 'has-error' : ''!!}" id="imap_authentication_error">
-                        {!! Form::label('fetching_authentication',trans('lang.authentication')) !!}
-                        {!!Form::select('imap_authentication',['normal' => 'Normal Password'],null,['class' => 'form-control select', 'id' => 'imap_authentication']) !!}
+                        <label for="fetching_authentication">{{ trans('lang.authentication') }}</label>
+                        <select name="imap_authentication" id="imap_authentication" class="form-control select">
+    @foreach(['normal' => 'Normal Password'] as $key => $value)
+        @if(is_array($value))
+            <optgroup label="{{ $key }}">
+                @foreach($value as $subKey => $subValue)
+                    <option value="{{ $subKey }}">{{ $subValue }}</option>
+                @endforeach
+            </optgroup>
+        @else
+            <option value="{{ $key }}">{{ $value }}</option>
+        @endif
+    @endforeach
+</select>
                     </div>
                     <div class="col-sm-2 form-group">
                         <br>
@@ -197,7 +257,7 @@ class="nav-link active"
                 <div>
                     <!-- status -->
                     <div class="form-group">
-                         {!! Form::label('sending_status',trans('lang.status')) !!} 
+                         <label for="sending_status">{{ trans('lang.status') }}</label> 
                          <input type="checkbox" name="sending_status" id="sending_status" <?php
                             if ($emails->sending_status == 1) {
                                 echo "checked='checked'";
@@ -208,31 +268,55 @@ class="nav-link active"
                 <div class="row">
                     <!-- Encryption -->
                     <div class="col-sm-2 form-group {!! $errors->has('sending_protocol') ? 'has-error' : ''!!}" id="sending_protocol_error">
-                        {!! Form::label('sending_protocol',trans('lang.transfer_protocol')) !!}
+                        <label for="sending_protocol">{{ trans('lang.transfer_protocol') }}</label>
                         {!! $errors->first('sending_protocol', '<spam class="help-block">:message</spam>') !!} 
                         {!!Form::select('sending_protocol',[''=>'Select','Drives'=>$services],$emails->getCurrentDrive(),['class' => 'form-control select','id'=>'service']) !!}
                     </div> 
                     <!-- sending hoost -->
                     <div class="col-sm-2 form-group {!! $errors->has('sending_host') ? 'has-error' : ''!!}" id="sending_host_error">
-                        {!! Form::label('sending_host',trans('lang.host_name')) !!}
+                        <label for="sending_host">{{ trans('lang.host_name') }}</label>
                         {!! $errors->first('sending_host', '<spam class="help-block">:message</spam>') !!} 
                         <input type="text" name="sending_host" id="sending_host" value="{{ old('sending_host') }}" class="form-control">
                     </div> 
                     <!-- sending port -->
                     <div class="col-sm-2 form-group {!! $errors->has('sending_port') ? 'has-error' : ''!!}" id="sending_port_error">
-                        {!! Form::label('sending_port',trans('lang.port_number')) !!}
+                        <label for="sending_port">{{ trans('lang.port_number') }}</label>
                         {!! $errors->first('sending_port', '<spam class="help-block">:message</spam>') !!}
                         <input type="text" name="sending_port" id="sending_port" value="{{ old('sending_port') }}" class="form-control">
                     </div>
                     <!-- Encryption -->
                     <div class="col-sm-2 form-group {!! $errors->has('sending_encryption') ? 'has-error' : ''!!}" id="sending_encryption_error">
-                        {!! Form::label('sending_encryption',trans('lang.encryption')) !!}
+                        <label for="sending_encryption">{{ trans('lang.encryption') }}</label>
                         {!! $errors->first('sending_encryption', '<spam class="help-block">:message</spam>') !!} 
-                        {!!Form::select('sending_encryption',[''=>'-----Select-----','ssl' => 'SSL', 'tls' => 'TLS', 'starttls' => 'STARTTLS'],null,['class' => 'form-control select']) !!}
+                        <select name="sending_encryption" id="sending_encryption" class="form-control select">
+    @foreach([''=>'-----Select-----','ssl' => 'SSL', 'tls' => 'TLS', 'starttls' => 'STARTTLS'] as $key => $value)
+        @if(is_array($value))
+            <optgroup label="{{ $key }}">
+                @foreach($value as $subKey => $subValue)
+                    <option value="{{ $subKey }}">{{ $subValue }}</option>
+                @endforeach
+            </optgroup>
+        @else
+            <option value="{{ $key }}">{{ $value }}</option>
+        @endif
+    @endforeach
+</select>
                     </div> 
                     <div class="col-sm-2 form-group {!! $errors->has('smtp_authentication') ? 'has-error' : ''!!}" id="smtp_authentication_error">
-                        {!! Form::label('sending_authentication',trans('lang.authentication')) !!}
-                        {!!Form::select('smtp_authentication',['normal' => 'Normal Password'],null,['class' => 'form-control select', 'id' => 'smtp_authentication']) !!}
+                        <label for="sending_authentication">{{ trans('lang.authentication') }}</label>
+                        <select name="smtp_authentication" id="smtp_authentication" class="form-control select">
+    @foreach(['normal' => 'Normal Password'] as $key => $value)
+        @if(is_array($value))
+            <optgroup label="{{ $key }}">
+                @foreach($value as $subKey => $subValue)
+                    <option value="{{ $subKey }}">{{ $subValue }}</option>
+                @endforeach
+            </optgroup>
+        @else
+            <option value="{{ $key }}">{{ $value }}</option>
+        @endif
+    @endforeach
+</select>
                     </div>
                     <div class="col-sm-2 form-group">
                         <br>
@@ -242,7 +326,7 @@ class="nav-link active"
                 <div id="response"></div>
                 <!-- Internal notes -->
                 <div class="form-group">
-                    {!! Form::label('internal_notes',trans('lang.internal_notes')) !!}
+                    <label for="internal_notes">{{ trans('lang.internal_notes') }}</label>
                     <textarea name="internal_notes" id="internal_notes" class="form-control" rows="10">{{ old('internal_notes') }}</textarea>
                 </div>
             </div>

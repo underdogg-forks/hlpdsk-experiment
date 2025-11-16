@@ -61,12 +61,12 @@ class="nav-link active"
         
         <div class="form-group">
             <input type="checkbox" name="new_ticket" value="1"> &nbsp;
-            {!! Form::label('new_ticket',trans('lang.new_ticket')) !!}
+            <label for="new_ticket">{{ trans('lang.new_ticket') }}</label>
         </div>
         <!-- New Ticket by Agent: CHECKBOX	 Ticket Owner   -->
         <div>
             <input type="checkbox" name="agent_new_ticket" value="1">&nbsp;
-            {!! Form::label('agent_new_ticket',trans('lang.new_ticket_by_agent')) !!}
+            <label for="agent_new_ticket">{{ trans('lang.new_ticket_by_agent') }}</label>
         </div>
     </div>
     <div class="card-footer">

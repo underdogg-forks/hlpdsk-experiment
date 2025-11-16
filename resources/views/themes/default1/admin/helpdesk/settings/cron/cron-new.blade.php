@@ -70,7 +70,7 @@
                             
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    {!! Form::label('email_fetching',trans('lang.email_fetch')) !!}<br>
+                                    <label for="email_fetching">{{ trans('lang.email_fetch') }}</label><br>
                                     {!! Form::checkbox('email_fetching',1,$condition->checkActiveJob()['fetching'],['id'=>'email_fetching']) !!}&nbsp;{{ trans('lang.fetch_auto-corn') }}
                                 </div>
 
@@ -96,7 +96,7 @@
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
-                                {!! Form::label('notification_cron',trans('lang.notification-email')) !!}<br>
+                                <label for="notification_cron">{{ trans('lang.notification-email') }}</label><br>
                                 {!! Form::checkbox('notification_cron',1,$condition->checkActiveJob()['notification'],['id'=>'notification_cron']) !!}&nbsp;{{ trans('lang.cron_notification') }}
                             </div>
                         </div>
@@ -121,7 +121,7 @@
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
-                                {!! Form::label('condition',trans('lang.auto_close_workflow')) !!}<br>
+                                <label for="condition">{{ trans('lang.auto_close_workflow') }}</label><br>
                                 {!! Form::checkbox('condition',1,$condition->checkActiveJob()['work'],['id'=>'auto_close']) !!}
                                        {{ trans('lang.enable_workflow') }}
                             </div>

@@ -62,7 +62,7 @@ class="nav-link active"
                 <div class="row">
                     <div class="col-md-3">
                         <div class="form-group {{ $errors->has('api_enable') ? 'has-error' : '' }}">
-                            {!! Form::label('api',trans('lang.api')) !!}
+                            <label for="api">{{ trans('lang.api') }}</label>
                             {!! $errors->first('api_enable', '<spam class="help-block">:message</spam>') !!}
                             <div class="row">
                                 <div class="col-sm-5">
@@ -78,7 +78,7 @@ class="nav-link active"
                     </div>
                     <div class="col-md-3">
                         <div class="form-group {{ $errors->has('api_key_mandatory') ? 'has-error' : '' }}">
-                            {!! Form::label('api_key_mandatory',trans('lang.api_key_mandatory')) !!}
+                            <label for="api_key_mandatory">{{ trans('lang.api_key_mandatory') }}</label>
                             {!! $errors->first('api_key_mandatory', '<spam class="help-block">:message</spam>') !!}
                             <div class="row">
                                 <div class="col-sm-5">
@@ -95,7 +95,7 @@ class="nav-link active"
                     <!-- Date and Time Format: text: required: eg - 03/25/2015 7:14 am -->
                     <div class="col-md-3">
                         <div class="form-group {{ $errors->has('api_key') ? 'has-error' : '' }}">
-                            {!! Form::label('api_key',trans('lang.api_key')) !!}
+                            <label for="api_key">{{ trans('lang.api_key') }}</label>
                             {!! $errors->first('api_key', '<spam class="help-block">:message</spam>') !!}
                             <input type="text" name="api_key" id="api_key" value="$systems->api_key" class="form-control">
                         </div>

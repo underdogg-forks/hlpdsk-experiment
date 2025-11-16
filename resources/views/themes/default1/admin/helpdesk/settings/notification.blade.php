@@ -58,7 +58,7 @@ class="nav-link active"
         <div class="row">
             <div class="col-md-3 no-padding">
                 <div class="form-group">
-                    {!! Form::label('del_noti', trans('lang.delete_noti')) !!}
+                    <label for="del_noti">{{ trans('lang.delete_noti') }}</label>
                 </div>
             </div>
             <div class="col-md-6">
@@ -68,7 +68,7 @@ class="nav-link active"
         <div class="row">
             <div class="col-md-3 no-padding">
                 <div class="form-group">
-                    {!! Form::label('del_noti', trans('lang.noti_msg1')) !!}<span class="text-red"> *</span>
+                    <label for="del_noti">{{ trans('lang.noti_msg1') }}</label><span class="text-red"> *</span>
                 </div>
             </div>
             <div class="col-md-6">

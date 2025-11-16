@@ -56,7 +56,19 @@
                     <div class="col-md-6 form-group {{ $errors->has('type') ? 'has-error' : '' }}">
                         <!-- last name -->
                         {!! Form::label('type',trans('lang.template-types'),['class'=>'required']) !!}
-                        {!! Form::select('type',[''=>'Select','Type'=>$type],null,['class' => 'form-control']) !!}
+                        <select name="type" id="type" class="form-control">
+    @foreach([''=>'Select','Type'=>$type] as $key => $value)
+        @if(is_array($value))
+            <optgroup label="{{ $key }}">
+                @foreach($value as $subKey => $subValue)
+                    <option value="{{ $subKey }}">{{ $subValue }}</option>
+                @endforeach
+            </optgroup>
+        @else
+            <option value="{{ $key }}">{{ $value }}</option>
+        @endif
+    @endforeach
+</select>
 
                     </div>
                                         
@@ -65,7 +77,7 @@
 <!--                <div class="row">
                     <div class="col-md-12 form-group {{ $errors->has('subject') ? 'has-error' : '' }}">
          
-                        {!! Form::label('subject',trans('lang.subject')) !!}
+                        <label for="subject">{{ trans('lang.subject') }}</label>
                         <input type="text" name="subject" id="subject" value="{{ old('subject') }}" class="form-control">
 
                     </div>

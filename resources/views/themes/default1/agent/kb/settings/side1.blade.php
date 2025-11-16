@@ -48,14 +48,14 @@
 
         <div class="form-group {{ $errors->has('title') ? 'has-error' : '' }}">
 
-            {!! Form::label('title',trans('lang.title')) !!}
+            <label for="title">{{ trans('lang.title') }}</label>
             {!! $errors->first('title', '<spam class="help-block">:message</spam>') !!}
             <input type="text" name="title" id="title" value="{{ old('title') }}" class="form-control">
 
         </div>
 
         <div class="form-group {{ $errors->has('content') ? 'has-error' : '' }}">
-            {!! Form::label('content',trans('lang.content')) !!}
+            <label for="content">{{ trans('lang.content') }}</label>
             {!! $errors->first('content', '<spam class="help-block">:message</spam>') !!}
             <textarea name="content" id="footer" class="form-control" rows="10">{{ old('content') }}</textarea>
         </div>

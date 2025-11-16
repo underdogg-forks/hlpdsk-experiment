@@ -66,13 +66,13 @@ class="nav-link active"
         <div class="row">
             <!-- email Address : Text form : Required -->
             <div class="form-group col-sm-6 {{ $errors->has('email') ? 'has-error' : '' }}">
-                {!! Form::label('email',trans('lang.email_address')) !!} <span class="text-red"> *</span>
+                <label for="email">{{ trans('lang.email_address') }}</label> <span class="text-red"> *</span>
                 <input type="text" name="email" id="email" value="{{ old('email') }}" class="form-control">
 
             </div>
 
             <div class="form-group col-sm-6 {{ $errors->has('ban') ? 'has-error' : '' }}">
-                {!! Form::label('ban',trans('lang.ban_status')) !!} <span class="text-red"> *</span>
+                <label for="ban">{{ trans('lang.ban_status') }}</label> <span class="text-red"> *</span>
                 <div class="row">
                     <div class="col-sm-3">
                         <input type="radio" name="ban" value="1) !!} {{ trans('lang.active') }}
@@ -85,7 +85,7 @@ class="nav-link active"
         </div>
         <!-- intrnal Notes : Textarea :  -->
         <div class="form-group">
-            {!! Form::label('internal_note',trans('lang.internal_notes')) !!}
+            <label for="internal_note">{{ trans('lang.internal_notes') }}</label>
             <textarea name="internal_note" id="internal_note" class="form-control">{{ old('internal_note') }}</textarea>
         </div>
     </div>

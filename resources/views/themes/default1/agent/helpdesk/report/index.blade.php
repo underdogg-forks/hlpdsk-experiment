@@ -62,7 +62,7 @@ class="active"
                 <div class="row">
          
                     <div class='col-sm-2'>
-                        {!! Form::label('helptopic', trans('lang.help_topic')) !!}
+                        <label for="helptopic">{{ trans('lang.help_topic') }}</label>
                         <select name="help_topic" id="help_topic" class="form-control">
                             <?php $helptopics = App\Model\helpdesk\Manage\Help_topic::where('status', '=', '1')->get([ 'id', 'topic']); ?>
                             @foreach($helptopics as $helptopic)

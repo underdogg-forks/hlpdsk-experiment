@@ -57,12 +57,12 @@ class="nav-link active"
         <div class="row">
             <!-- name -->
             <div class="col-sm-4 form-group {{ $errors->has('name') ? 'has-error' : '' }}">
-                {!! Form::label('name',trans('lang.name')) !!} <span class="text-red"> *</span>
+                <label for="name">{{ trans('lang.name') }}</label> <span class="text-red"> *</span>
                 <input type="text" name="name" id="name" value="{{ old('name') }}" class="form-control">
             </div>
             <!-- group status -->
             <div class="col-sm-6 form-group {{ $errors->has('group_status') ? 'has-error' : '' }}">
-                {!! Form::label('group_status',trans('lang.status')) !!}
+                <label for="group_status">{{ trans('lang.status') }}</label>
                 <div class="row">
                     <div class="col-sm-2">
                         <input type="radio" name="group_status" value="'1'"> {{ trans('lang.active') }}

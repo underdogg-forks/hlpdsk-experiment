@@ -65,7 +65,7 @@
                     </tr>
                     <tr>
 
-                        <td><b>{!! Form::label('website',trans('message.website')) !!}</b></td>
+                        <td><b><label for="website">{{ trans('message.website') }}</label></b></td>
                         <td>
                             <div class="form-group {{ $errors->has('website') ? 'has-error' : '' }}">
 
@@ -79,7 +79,7 @@
                     </tr>
                     <tr>
 
-                        <td><b>{!! Form::label('phone',trans('message.phone')) !!}</b></td>
+                        <td><b><label for="phone">{{ trans('message.phone') }}</label></b></td>
                         <td>
                             <div class="form-group {{ $errors->has('phone') ? 'has-error' : '' }}">
 
@@ -105,7 +105,7 @@
                     </tr>
                     <tr>
 
-                        <td><b>{!! Form::label('logo',trans('message.logo')) !!}</b></td>
+                        <td><b><label for="logo">{{ trans('message.logo') }}</label></b></td>
                         <td>
                             <div class="form-group {{ $errors->has('logo') ? 'has-error' : '' }}">
 
@@ -130,7 +130,19 @@
                             <div class="form-group {{ $errors->has('driver') ? 'has-error' : '' }}">
 
 
-                                {!! Form::select('driver',['mail'=>'Mail','smtp'=>'SMTP'],null,['class' => 'form-control']) !!}
+                                <select name="driver" id="driver" class="form-control">
+    @foreach(['mail'=>'Mail','smtp'=>'SMTP'] as $key => $value)
+        @if(is_array($value))
+            <optgroup label="{{ $key }}">
+                @foreach($value as $subKey => $subValue)
+                    <option value="{{ $subKey }}">{{ $subValue }}</option>
+                @endforeach
+            </optgroup>
+        @else
+            <option value="{{ $key }}">{{ $value }}</option>
+        @endif
+    @endforeach
+</select>
                                 <p><i> {{ trans('message.select-email-driver') }}</i> </p>
 
 
@@ -140,7 +152,7 @@
                     </tr>
                     <tr>
 
-                        <td><b>{!! Form::label('port',trans('message.port')) !!}</b></td>
+                        <td><b><label for="port">{{ trans('message.port') }}</label></b></td>
                         <td>
                             <div class="form-group {{ $errors->has('port') ? 'has-error' : '' }}">
 
@@ -154,7 +166,7 @@
                     </tr>
                     <tr>
 
-                        <td><b>{!! Form::label('host',trans('message.host')) !!}</b></td>
+                        <td><b><label for="host">{{ trans('message.host') }}</label></b></td>
                         <td>
                             <div class="form-group {{ $errors->has('host') ? 'has-error' : '' }}">
 
@@ -168,7 +180,7 @@
                     </tr>
                     <tr>
 
-                        <td><b>{!! Form::label('encryption',trans('message.encryption')) !!}</b></td>
+                        <td><b><label for="encryption">{{ trans('message.encryption') }}</label></b></td>
                         <td>
                             <div class="form-group {{ $errors->has('encryption') ? 'has-error' : '' }}">
 
@@ -213,7 +225,7 @@
 
                     <tr>
 
-                        <td><b>{!! Form::label('error_log',trans('message.error-log')) !!}</b></td>
+                        <td><b><label for="error_log">{{ trans('message.error-log') }}</label></b></td>
                         <td>
                             <div class="form-group {{ $errors->has('error_log') ? 'has-error' : '' }}">
 
@@ -230,7 +242,7 @@
 
                     <tr>
 
-                        <td><b>{!! Form::label('error_email',trans('message.error-email')) !!}</b></td>
+                        <td><b><label for="error_email">{{ trans('message.error-email') }}</label></b></td>
                         <td>
                             <div class="form-group {{ $errors->has('error_email') ? 'has-error' : '' }}">
 
@@ -251,12 +263,24 @@
 
                     <tr>
 
-                        <td><b>{!! Form::label('welcome_mail',trans('message.welcome-mail')) !!}</b></td>
+                        <td><b><label for="welcome_mail">{{ trans('message.welcome-mail') }}</label></b></td>
                         <td>
                             <div class="form-group {{ $errors->has('welcome_mail') ? 'has-error' : '' }}">
 
 
-                                {!! Form::select('welcome_mail',['Templates'=>$template->where('type',1)->pluck('name','id')->toArray()],null,['class'=>'form-control']) !!}
+                                <select name="welcome_mail" id="welcome_mail" class="form-control">
+    @foreach(['Templates'=>$template->where('type',1)->pluck('name','id')->toArray()] as $key => $value)
+        @if(is_array($value))
+            <optgroup label="{{ $key }}">
+                @foreach($value as $subKey => $subValue)
+                    <option value="{{ $subKey }}">{{ $subValue }}</option>
+                @endforeach
+            </optgroup>
+        @else
+            <option value="{{ $key }}">{{ $value }}</option>
+        @endif
+    @endforeach
+</select>
                                 <p><i> {{ trans('message.choose-welcome-mail-template') }}</i> </p>
 
 
@@ -267,12 +291,24 @@
 
                     <tr>
 
-                        <td><b>{!! Form::label('order_mail',trans('message.order-mail')) !!}</b></td>
+                        <td><b><label for="order_mail">{{ trans('message.order-mail') }}</label></b></td>
                         <td>
                             <div class="form-group {{ $errors->has('order_mail') ? 'has-error' : '' }}">
 
 
-                                {!! Form::select('order_mail',['Templates'=>$template->where('type',7)->pluck('name','id')->toArray()],null,['class'=>'form-control']) !!}
+                                <select name="order_mail" id="order_mail" class="form-control">
+    @foreach(['Templates'=>$template->where('type',7)->pluck('name','id')->toArray()] as $key => $value)
+        @if(is_array($value))
+            <optgroup label="{{ $key }}">
+                @foreach($value as $subKey => $subValue)
+                    <option value="{{ $subKey }}">{{ $subValue }}</option>
+                @endforeach
+            </optgroup>
+        @else
+            <option value="{{ $key }}">{{ $value }}</option>
+        @endif
+    @endforeach
+</select>
                                 <p><i> {{ trans('message.choose-order-mail-template') }}</i> </p>
 
 
@@ -282,12 +318,24 @@
                     </tr>
                     <tr>
 
-                        <td><b>{!! Form::label('forgot_password',trans('message.forgot-password')) !!}</b></td>
+                        <td><b><label for="forgot_password">{{ trans('message.forgot-password') }}</label></b></td>
                         <td>
                             <div class="form-group {{ $errors->has('forgot_password') ? 'has-error' : '' }}">
 
 
-                                {!! Form::select('forgot_password',['Templates'=>$template->where('type',2)->pluck('name','id')->toArray()],null,['class'=>'form-control']) !!}
+                                <select name="forgot_password" id="forgot_password" class="form-control">
+    @foreach(['Templates'=>$template->where('type',2)->pluck('name','id')->toArray()] as $key => $value)
+        @if(is_array($value))
+            <optgroup label="{{ $key }}">
+                @foreach($value as $subKey => $subValue)
+                    <option value="{{ $subKey }}">{{ $subValue }}</option>
+                @endforeach
+            </optgroup>
+        @else
+            <option value="{{ $key }}">{{ $value }}</option>
+        @endif
+    @endforeach
+</select>
                                 <p><i> {{ trans('message.choose-forgot-password-mail-template') }}</i> </p>
 
 
@@ -297,12 +345,24 @@
                     </tr>
                     <tr>
 
-                        <td><b>{!! Form::label('subscription_going_to_end',trans('message.subscription-going-to-end')) !!}</b></td>
+                        <td><b><label for="subscription_going_to_end">{{ trans('message.subscription-going-to-end') }}</label></b></td>
                         <td>
                             <div class="form-group {{ $errors->has('subscription_going_to_end') ? 'has-error' : '' }}">
 
 
-                                {!! Form::select('subscription_going_to_end',['Templates'=>$template->where('type',4)->pluck('name','id')->toArray()],null,['class'=>'form-control']) !!}
+                                <select name="subscription_going_to_end" id="subscription_going_to_end" class="form-control">
+    @foreach(['Templates'=>$template->where('type',4)->pluck('name','id')->toArray()] as $key => $value)
+        @if(is_array($value))
+            <optgroup label="{{ $key }}">
+                @foreach($value as $subKey => $subValue)
+                    <option value="{{ $subKey }}">{{ $subValue }}</option>
+                @endforeach
+            </optgroup>
+        @else
+            <option value="{{ $key }}">{{ $value }}</option>
+        @endif
+    @endforeach
+</select>
                                 <p><i> {{ trans('message.choose-subscription-going-to-end-notification-email-template') }}</i> </p>
 
 
@@ -312,12 +372,24 @@
                     </tr>
                     <tr>
 
-                        <td><b>{!! Form::label('subscription_over',trans('message.subscription-over')) !!}</b></td>
+                        <td><b><label for="subscription_over">{{ trans('message.subscription-over') }}</label></b></td>
                         <td>
                             <div class="form-group {{ $errors->has('subscription_over') ? 'has-error' : '' }}">
 
 
-                                {!! Form::select('subscription_over',['Templates'=>$template->where('type',5)->pluck('name','id')->toArray()],null,['class'=>'form-control']) !!}
+                                <select name="subscription_over" id="subscription_over" class="form-control">
+    @foreach(['Templates'=>$template->where('type',5)->pluck('name','id')->toArray()] as $key => $value)
+        @if(is_array($value))
+            <optgroup label="{{ $key }}">
+                @foreach($value as $subKey => $subValue)
+                    <option value="{{ $subKey }}">{{ $subValue }}</option>
+                @endforeach
+            </optgroup>
+        @else
+            <option value="{{ $key }}">{{ $value }}</option>
+        @endif
+    @endforeach
+</select>
                                 <p><i> {{ trans('message.choose-mail-template-to-notify-subscription-has-over') }}</i> </p>
 
 
@@ -327,12 +399,24 @@
                     </tr>
                     <tr>
 
-                        <td><b>{!! Form::label('cart',trans('message.cart')) !!}</b></td>
+                        <td><b><label for="cart">{{ trans('message.cart') }}</label></b></td>
                         <td>
                             <div class="form-group {{ $errors->has('cart') ? 'has-error' : '' }}">
 
 
-                                {!! Form::select('cart',['Templates'=>$template->where('type',3)->pluck('name','id')->toArray()],null,['class'=>'form-control']) !!}
+                                <select name="cart" id="cart" class="form-control">
+    @foreach(['Templates'=>$template->where('type',3)->pluck('name','id')->toArray()] as $key => $value)
+        @if(is_array($value))
+            <optgroup label="{{ $key }}">
+                @foreach($value as $subKey => $subValue)
+                    <option value="{{ $subKey }}">{{ $subValue }}</option>
+                @endforeach
+            </optgroup>
+        @else
+            <option value="{{ $key }}">{{ $value }}</option>
+        @endif
+    @endforeach
+</select>
                                 <p><i> {{ trans('message.choose-shoping-cart-template') }}</i> </p>
 
 

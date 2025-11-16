@@ -81,35 +81,35 @@ class="nav-link active"
             <div class="col-md-4">
                 <!-- comapny name -->
                 <div class="form-group {{ $errors->has('company_name') ? 'has-error' : '' }}">
-                    {!! Form::label('company_name',trans('lang.name')) !!} <span class="text-red"> *</span>
+                    <label for="company_name">{{ trans('lang.name') }}</label> <span class="text-red"> *</span>
                     <input type="text" name="company_name" id="company_name" value="$companys->company_name" class="form-control">
                 </div>
             </div>
             <div class="col-md-4">
                 <!-- website -->
                 <div class="form-group {{ $errors->has('website') ? 'has-error' : '' }}">
-                    {!! Form::label('website',trans('lang.website')) !!}
-                    {!! Form::url('website',$companys->website,['class' => 'form-control']) !!}
+                    <label for="website">{{ trans('lang.website') }}</label>
+                    <input type="url" name="website" id="website" value="{{ old('website') }}" class="form-control">
                 </div>
             </div>
             <div class="col-md-4">
                 <!-- phone -->
                 <div class="form-group {{ $errors->has('phone') ? 'has-error' : '' }}">
-                    {!! Form::label('phone',trans('lang.phone')) !!}
+                    <label for="phone">{{ trans('lang.phone') }}</label>
                     <input type="text" name="phone" id="phone" value="$companys->phone" class="form-control">
                 </div>
             </div>
         </div>
 
          <div class="{{ $errors->has('address') ? 'has-error' : '' }}">
-            {!! Form::label('address',trans('lang.address')) !!}
+            <label for="address">{{ trans('lang.address') }}</label>
             <textarea name="address" id="address" class="form-control" rows="5">{{ old('address') }}</textarea>
         </div>
 
         <div class="row">
             <div class="col-md-2">
                 <!-- logo -->
-                {!! Form::label('logo',trans('lang.logo')) !!}
+                <label for="logo">{{ trans('lang.logo') }}</label>
                 <div class="btn bg-olive btn-file" style="color:blue"> {{ trans('lang.upload_file') }}
                     <input type="file" name="logo') !!}
                 </div>

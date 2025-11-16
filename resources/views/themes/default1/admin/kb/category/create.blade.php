@@ -35,7 +35,7 @@
 
 		<div class="col-xs-3 form-group {{ $errors->has('name') ? 'has-error' : '' }}">
 
-			{!! Form::label('name',trans('lang.name')) !!}
+			<label for="name">{{ trans('lang.name') }}</label>
 			{!! $errors->first('name', '<spam class="help-block">:message</spam>') !!}
 			<input type="text" name="name" id="name" value="{{ old('name') }}" class="form-control">
 
@@ -43,7 +43,7 @@
 
 		<div class="col-xs-3 form-group {{ $errors->has('slug') ? 'has-error' : '' }}">
 
-			{!! Form::label('slug',trans('lang.slug')) !!}
+			<label for="slug">{{ trans('lang.slug') }}</label>
 			{!! $errors->first('slug', '<spam class="help-block">:message</spam>') !!}
 			<input type="text" name="slug" id="slug" value="{{ old('slug') }}" class="form-control">
 
@@ -51,16 +51,28 @@
 
 		<div class="col-xs-3 form-group {{ $errors->has('parent') ? 'has-error' : '' }}">
 
-			{!! Form::label('parent',trans('lang.parent')) !!}
+			<label for="parent">{{ trans('lang.parent') }}</label>
 			{!! $errors->first('parent', '<spam class="help-block">:message</spam>') !!}
-			{!!Form::select('parent',[''=>'Select a Group','Categorys'=>$category->pluck('name','name')],null,['class' => 'form-control select']) !!}
+			<select name="parent" id="parent" class="form-control select">
+    @foreach([''=>'Select a Group','Categorys'=>$category->pluck('name','name')] as $key => $value)
+        @if(is_array($value))
+            <optgroup label="{{ $key }}">
+                @foreach($value as $subKey => $subValue)
+                    <option value="{{ $subKey }}">{{ $subValue }}</option>
+                @endforeach
+            </optgroup>
+        @else
+            <option value="{{ $key }}">{{ $value }}</option>
+        @endif
+    @endforeach
+</select>
 
 		</div>
 
 
 		<div class="col-xs-3 form-group {{ $errors->has('status') ? 'has-error' : '' }}">
 
-			{!! Form::label('status',trans('lang.status')) !!}
+			<label for="status">{{ trans('lang.status') }}</label>
 			{!! $errors->first('status', '<spam class="help-block">:message</spam>') !!}
 			<br/>
 			
@@ -74,7 +86,7 @@
 
 		<div class="col-md-12 form-group {{ $errors->has('description') ? 'has-error' : '' }}">
 			
-			{!! Form::label('description',trans('lang.description')) !!}
+			<label for="description">{{ trans('lang.description') }}</label>
 			{!! $errors->first('description', '<spam class="help-block">:message</spam>') !!}
 			<textarea name="description" id="description" class="form-control">{{ old('description') }}</textarea>
 			

@@ -153,7 +153,7 @@ class="nav-item d-none d-sm-inline-block active"
 				<div class="row">
 					
 					<div class='col-sm-2'>
-						{!! Form::label('date', trans('lang.start_date')) !!}
+						<label for="date">{{ trans('lang.start_date') }}</label>
 						<input type="text" name="start_date" id="datepicker4" value="{{ old('start_date') }}" class="form-control">
 					</div>
 					
@@ -184,7 +184,7 @@ class="nav-item d-none d-sm-inline-block active"
 
 					<div class='col-sm-2'>
 
-						{!! Form::label('start_time', trans('lang.end_date')) !!}
+						<label for="start_time">{{ trans('lang.end_date') }}</label>
 						<input type="text" name="end_date" id="datetimepicker3" value="{{ old('end_date') }}" class="form-control">
 					</div>
 

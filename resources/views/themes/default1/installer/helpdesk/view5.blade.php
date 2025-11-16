@@ -160,7 +160,7 @@ active
                 <div>
                     <tr>
                         <td>
-                            {!! Form::label('date',trans('lang.date_time')) !!}
+                            <label for="date">{{ trans('lang.date_time') }}</label>
                         </td>
                         <td>
                             <div class="side-by-side clearfix moveleft">
@@ -180,7 +180,7 @@ active
                     </tr>
                     <tr>
                         <td>
-                            {!! Form::label('time_zone',trans('lang.time_zone')) !!}
+                            <label for="time_zone">{{ trans('lang.time_zone') }}</label>
                         </td>
                         <?php  
 
@@ -202,7 +202,19 @@ active
                             <div class="side-by-side clearfix moveleft">
                                 <div>
 
-                     {!! Form::select('timezone', [trans('lang.choose')=>$timezones],null,['class' => 'selectpicker chosen-select','required','data-live-search'=>'true','data-live-search-placeholder'=>'Search','style'=>'width:295px;']) !!}
+                     <select name="timezone" id="timezone" class="selectpicker chosen-select">
+    @foreach([trans('lang.choose')=>$timezones] as $key => $value)
+        @if(is_array($value))
+            <optgroup label="{{ $key }}">
+                @foreach($value as $subKey => $subValue)
+                    <option value="{{ $subKey }}">{{ $subValue }}</option>
+                @endforeach
+            </optgroup>
+        @else
+            <option value="{{ $key }}">{{ $value }}</option>
+        @endif
+    @endforeach
+</select>
                                </div>
                             </div>                
                         </td>
@@ -213,7 +225,7 @@ active
                     </tr>
                     <tr>
                         <td>
-                            {!! Form::label('language',trans('lang.language')) !!}
+                            <label for="language">{{ trans('lang.language') }}</label>
                         </td>
                         <td>
                             <div class="side-by-side clearfix moveleft">

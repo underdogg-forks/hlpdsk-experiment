@@ -81,12 +81,12 @@ class="nav-link active"
         <div class="row">
             <!-- First name : first name : Required -->
             <div class="col-sm-6 form-group {{ $errors->has('first_name') ? 'has-error' : '' }}">
-                {!! Form::label('first_name',trans('lang.first_name')) !!}<span class="text-red"> *</span>
+                <label for="first_name">{{ trans('lang.first_name') }}</label><span class="text-red"> *</span>
                 <input type="text" name="first_name" id="first_name" value="{{ old('first_name') }}" class="form-control">
             </div>
             <!-- Last name : last name : Required -->
             <div class="col-sm-6 form-group {{ $errors->has('last_name') ? 'has-error' : '' }}">
-                {!! Form::label('last_name',trans('lang.last_name')) !!}
+                <label for="last_name">{{ trans('lang.last_name') }}</label>
                 <input type="text" name="last_name" id="last_name" value="{{ old('last_name') }}" class="form-control">
             </div>
             <!-- User Name : Text : Required-->
@@ -94,7 +94,7 @@ class="nav-link active"
         <div class="row">
             <!-- Email Address : Email : Required -->
             <div class="col-sm-6 form-group {{ $errors->has('email') ? 'has-error' : '' }}">
-                {!! Form::label('email',trans('lang.email')) !!}
+                <label for="email">{{ trans('lang.email') }}</label>
                 @if ($email_mandatory->status == 1 || $email_mandatory->status == '1')
                 <span class="text-red"> *</span>
                 @endif
@@ -102,20 +102,32 @@ class="nav-link active"
             </div>
             
             <div class="col-sm-6 form-group {{ $errors->has('user_name') ? 'has-error' : '' }}">
-                {!! Form::label('user_name',trans('lang.user_name')) !!}<span class="text-red"> *</span>
+                <label for="user_name">{{ trans('lang.user_name') }}</label><span class="text-red"> *</span>
                 <input type="text" name="user_name" id="user_name" value="{{ old('user_name') }}" class="form-control">
             </div>
         </div>
         <div class="row">
             <div class="col-sm-6 form-group {{ $errors->has('organization') ? 'has-error' : '' }}">
-                {!! Form::label('organization',trans('lang.organization')) !!}
-                {!! Form::select('org_id',[''=>'Select','Organization'=>$org],null,['class' => 'form-control','id'=>'org']) !!}
+                <label for="organization">{{ trans('lang.organization') }}</label>
+                <select name="org_id" id="org" class="form-control">
+    @foreach([''=>'Select','Organization'=>$org] as $key => $value)
+        @if(is_array($value))
+            <optgroup label="{{ $key }}">
+                @foreach($value as $subKey => $subValue)
+                    <option value="{{ $subKey }}">{{ $subValue }}</option>
+                @endforeach
+            </optgroup>
+        @else
+            <option value="{{ $key }}">{{ $value }}</option>
+        @endif
+    @endforeach
+</select>
                 
             </div>
         </div>
         <div class="row">
             <div class="col-sm-1 form-group {{ $errors->has('country_code') ? 'has-error' : '' }}">
-                {!! Form::label('country_code',trans('lang.country-code')) !!}
+                <label for="country_code">{{ trans('lang.country-code') }}</label>
                 @if ($email_mandatory->status == 0 || $settings->status == 1)
                      <span class="text-red"> *</span>
                 @endif
@@ -124,11 +136,11 @@ class="nav-link active"
             </div>
             <!-- mobile Number : Text :  -->
             <div class="col-md-3 form-group {{ $errors->has('mobile') ? 'has-error' : '' }}">
-                {!! Form::label('mobile',trans('lang.mobile')) !!}
+                <label for="mobile">{{ trans('lang.mobile') }}</label>
                 @if ($email_mandatory->status == 0 || $settings->status == 1)
                      <span class="text-red"> *</span>
                 @endif
-                {!! Form::input('number', 'mobile',null,['class' => 'form-control']) !!}
+                <input type="number" name="mobile" id="mobile" value="{{ old('mobile') }}" class="form-control">
             </div>
             <div class="col-sm-1 form-group {{ $errors->has('ext') ? 'has-error' : '' }}">
                 <label for="ext">{{ trans('lang.ext') }}</label>  
@@ -139,7 +151,7 @@ class="nav-link active"
                 <input type="text" name="phone_number" id="phone_number" value="{{ old('phone_number') }}" class="form-control">
             </div>
             <div class="col-md-3 form-group {{ $errors->has('active') ? 'has-error' : '' }}">
-                {!! Form::label('active',trans('lang.status')) !!}
+                <label for="active">{{ trans('lang.status') }}</label>
                 <div class="row">
                     <div class="col-sm-4">
                         <input type="radio" name="active" value="'1'"> {{ trans('lang.active') }}
@@ -152,7 +164,7 @@ class="nav-link active"
         </div>
         <!-- Internal Notes : Textarea -->
         <div class="form-group">
-            {!! Form::label('internal_note',trans('lang.internal_notes')) !!}
+            <label for="internal_note">{{ trans('lang.internal_notes') }}</label>
             <textarea name="internal_note" id="internal_note" class="form-control" rows="5">{{ old('internal_note') }}</textarea>
         </div>
         <!-- Send email to user about registration password -->

@@ -46,32 +46,44 @@
         <!-- Name text form Required -->
             <div class="row">
                 <div class="col-md-3 form-group {{ $errors->has('company_name') ? 'has-error' : '' }}">
-                    {!! Form::label('company_name',trans('lang.companyname')) !!}
+                    <label for="company_name">{{ trans('lang.companyname') }}</label>
                     {!! $errors->first('company_name', '<spam class="help-block">:message</spam>') !!}
                     <input type="text" name="company_name" id="company_name" value="$settings->company_name" class="form-control">
                 </div>
                 <div class="col-md-3 form-group {{ $errors->has('website') ? 'has-error' : '' }}">
-                    {!! Form::label('website',trans('lang.website')) !!}
+                    <label for="website">{{ trans('lang.website') }}</label>
                     {!! $errors->first('website', '<spam class="help-block">:message</spam>') !!}
                     <input type="text" name="website" id="website" value="$settings->website" class="form-control">
                 </div>
                 <div class="col-md-3 form-group {{ $errors->has('phone') ? 'has-error' : '' }}">
-                    {!! Form::label('phone',trans('lang.phone')) !!}
+                    <label for="phone">{{ trans('lang.phone') }}</label>
                     {!! $errors->first('phone', '<spam class="help-block">:message</spam>') !!}
                     <input type="text" name="phone" id="phone" value="$settings->phone" class="form-control">
                 </div>
                 {{--  <div class="col-md-3 form-group {{ $errors->has('phone') ? 'has-error' : '' }}">
-                    {!! Form::label('language',trans('lang.language')) !!}
-                        {!!Form::select('language',['en'=>'English','ch'=>'Chinese'] ,null,['class' => 'form-control select']) !!}
+                    <label for="language">{{ trans('lang.language') }}</label>
+                        <select name="language" id="language" class="form-control select">
+    @foreach(['en'=>'English','ch'=>'Chinese'] as $key => $value)
+        @if(is_array($value))
+            <optgroup label="{{ $key }}">
+                @foreach($value as $subKey => $subValue)
+                    <option value="{{ $subKey }}">{{ $subValue }}</option>
+                @endforeach
+            </optgroup>
+        @else
+            <option value="{{ $key }}">{{ $value }}</option>
+        @endif
+    @endforeach
+</select>
                 </div>
  --}}
                     <div class="col-md-12 form-group {{ $errors->has('address') ? 'has-error' : '' }}">
-                {!! Form::label('address',trans('lang.address')) !!}
+                <label for="address">{{ trans('lang.address') }}</label>
                 {!! $errors->first('address', '<spam class="help-block">:message</spam>') !!}
                     <textarea name="address" id="address" class="form-control" rows="10">{{ old('address') }}</textarea>
                 </div>
                     <div class="col-md-3 form-group">
-                           {!! Form::label('logo',trans('lang.logo')) !!}
+                           <label for="logo">{{ trans('lang.logo') }}</label>
                            <input type="file" name="logo" id="logo">
                         @if($settings->logo)
                            <img src="{{asset('lb-faveo/dist/image/'.$settings->logo)}}" />
@@ -79,12 +91,12 @@
                         @endif
                     </div>
                     <div class="col-md-3 form-group">
-                        {!! Form::label('pagination',trans('lang.numberofelementstodisplay')) !!}
+                        <label for="pagination">{{ trans('lang.numberofelementstodisplay') }}</label>
                         {!! $errors->first('pagination', '<spam class="help-block">:message</spam>') !!}
                         <input type="text" name="pagination" id="pagination" value="$settings->pagination" class="form-control">
                     </div>
                     <div class="col-md-3 form-group">
-                        {!! Form::label('timezone',trans('lang.timezone')) !!}
+                        <label for="timezone">{{ trans('lang.timezone') }}</label>
                         {!!Form::select('timezone',$time->pluck('location','location') ,null,['class' => 'form-control select']) !!}
                     </div>
                      </div>
@@ -92,32 +104,32 @@
         <div class="tab-pane" id="tab_2">
             <div class="row">
                 <div class="col-md-4 form-group {{ $errors->has('port') ? 'has-error' : '' }}">
-                    {!! Form::label('port',trans('lang.portnumber')) !!}
+                    <label for="port">{{ trans('lang.portnumber') }}</label>
                     {!! $errors->first('port', '<spam class="help-block">:message</spam>') !!}
                     <input type="text" name="port" id="port" value="$settings->port" class="form-control">
                 </div>
                 <div class="col-md-4 form-group {{ $errors->has('host') ? 'has-error' : '' }}">
-                    {!! Form::label('host',trans('lang.host')) !!}
+                    <label for="host">{{ trans('lang.host') }}</label>
                     {!! $errors->first('host', '<spam class="help-block">:message</spam>') !!}
                     <input type="text" name="host" id="host" value="$settings->host" class="form-control">
                 </div>
                 <div class="col-md-4 form-group {{ $errors->has('encryption') ? 'has-error' : '' }}">
-                    {!! Form::label('encryption',trans('lang.encryption')) !!}
+                    <label for="encryption">{{ trans('lang.encryption') }}</label>
                     {!! $errors->first('encryption', '<spam class="help-block">:message</spam>') !!}
                     <input type="text" name="encryption" id="encryption" value="$settings->encryption" class="form-control">
                 </div>
                 <div class="col-md-4 form-group {{ $errors->has('email') ? 'has-error' : '' }}">
-                    {!! Form::label('email',trans('lang.settingsemail')) !!}
+                    <label for="email">{{ trans('lang.settingsemail') }}</label>
                     {!! $errors->first('email', '<spam class="help-block">:message</spam>') !!}
                     <input type="text" name="email" id="email" value="$settings->email" class="form-control">
                 </div>
                 <div class="col-md-4 form-group {{ $errors->has('password') ? 'has-error' : '' }}">
-                    {!! Form::label('password',trans('lang.password')) !!}
+                    <label for="password">{{ trans('lang.password') }}</label>
                     {!! $errors->first('password', '<spam class="help-block">:message</spam>') !!}
                     <input type="password" name="password" id="password" class="form-control">
                 </div>
                 <div class="col-md-4 form-group">
-                        {!! Form::label('dateformat',trans('lang.dateformat')) !!}
+                        <label for="dateformat">{{ trans('lang.dateformat') }}</label>
                         {!!Form::select('dateformat',$date->pluck('format','format') ,null,['class' => 'form-control select']) !!}
                     </div>
             </div>

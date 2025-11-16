@@ -47,12 +47,12 @@ class="active"
 		<!-- Name text form Required -->
  		<div class="box-body table-responsive"style="overflow:hidden;">
             <div class="form-group {{ $errors->has('title') ? 'has-error' : '' }}">
-                {!! Form::label('title',trans('lang.title') ) !!}
+                <label for="title">{{ trans('lang.title') }}</label>
                 {!! $errors->first('title', '<spam class="help-block">:message</spam>') !!}
                 <input type="text" name="title" id="title" value="{{ old('title') }}" class="form-control">
             </div>
             <div class="form-group {{ $errors->has('footer') ? 'has-error' : '' }}">
-                {!! Form::label('footer', trans('lang.footer') ) !!}
+                <label for="footer">{{ trans('lang.footer') }}</label>
                 {!! $errors->first('footer', '<spam class="help-block">:message</spam>') !!}
                 <textarea name="footer" id="footer" class="form-control" rows="5">{{ old('footer') }}</textarea>
             </div>

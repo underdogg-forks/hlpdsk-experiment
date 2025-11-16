@@ -18,7 +18,7 @@
         <form method="POST" action="checkmyticket">
     @csrf
 
-            {!! Form::label('email',trans('lang.email')) !!}
+            <label for="email">{{ trans('lang.email') }}</label>
     		{!! $errors->first('email', '<spam class="help-block">:message</spam>') !!}
     		<input type="text" name="email" id="email" value="{{ old('email') }}" class="form-control">
 

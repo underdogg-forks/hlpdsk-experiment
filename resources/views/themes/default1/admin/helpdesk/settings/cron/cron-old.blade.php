@@ -52,7 +52,7 @@
                     <i class="fa fa-clipboard pull-right" title="{{ trans('lang.click-url-copy') }}" onclick="copyToClipboard('#p1')"></i>
                     <div class="col-md-6">
                         <div class="form-group">
-                            {!! Form::label('email_fetching',trans('lang.email_fetch')) !!}<br>
+                            <label for="email_fetching">{{ trans('lang.email_fetch') }}</label><br>
                             <input type="checkbox" name="email_fetching" value="1">&nbsp;{{ trans('lang.fetch_auto-corn') }}
                         </div>
                     </div>
@@ -71,7 +71,7 @@
                     <i class="fa fa-clipboard pull-right" title="{{ trans('lang.click-url-copy') }}" onclick="copyToClipboard('#p2')"></i>
                     <div class="col-md-8">
                         <div class="form-group">
-                            {!! Form::label('notification_cron',trans('lang.notification-email')) !!}<br>
+                            <label for="notification_cron">{{ trans('lang.notification-email') }}</label><br>
                             <input type="checkbox" name="notification_cron" value="1">&nbsp;{{ trans('lang.cron_notification') }}
                         </div>
                     </div>
@@ -90,7 +90,7 @@
                     <i class="fa fa-clipboard pull-right" title="{{ trans('lang.click-url-copy') }}" onclick="copyToClipboard('#p3')"></i>
                     <div class="col-md-8">
                         <div class="form-group">
-                            {!! Form::label('condition',trans('lang.auto_close_workflow')) !!}<br>
+                            <label for="condition">{{ trans('lang.auto_close_workflow') }}</label><br>
                             <input type="checkbox" name="condition" @if($workflow->condition == 1) checked @endif">
                             {{ trans('lang.enable_workflow') }}
                         </div>

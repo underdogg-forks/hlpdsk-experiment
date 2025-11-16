@@ -76,12 +76,12 @@ class="nav-link active"
                         <div class="form-group">
                             <!-- Admin Email -->
                             <input type="checkbox" name="ticket_admin_email" value="1">
-                            {!! Form::label('ticket_admin_email',trans('lang.admin_email_2')) !!}
+                            <label for="ticket_admin_email">{{ trans('lang.admin_email_2') }}</label>
                         </div>
                         <!-- Department Members -->
                         <div class="form-group">
                             <input type="checkbox" name="ticket_department_member" value="1">
-                            {!! Form::label('ticket_department_member',trans('lang.department_members')) !!}
+                            <label for="ticket_department_member">{{ trans('lang.department_members') }}</label>
                         </div>
                     </div><!-- /.box-body -->
                 </div><!-- /.box -->
@@ -101,12 +101,12 @@ class="nav-link active"
                         <!-- Assigned Agent / Team -->
                         <div class="form-group">
                             <input type="checkbox" name="assignment_assigned_agent" value="1">
-                            {!! Form::label('assignment_assigned_agent',trans('lang.agent')) !!}
+                            <label for="assignment_assigned_agent">{{ trans('lang.agent') }}</label>
                         </div>
                         <!-- Team Members -->
                         <div class="form-group">
                             <input type="checkbox" name="assignment_team_member" value="1">
-                            {!! Form::label('assignment_team_member',trans('lang.team_members')) !!}
+                            <label for="assignment_team_member">{{ trans('lang.team_members') }}</label>
                         </div>
                     </div><!-- /.box-body -->
                 </div><!-- /.box -->

@@ -102,12 +102,24 @@ class="nav-link active"
             <div class="row">
                 <div class="form-group col-sm-6 {!! $errors->has('execution_order') ? 'has-error' : '' !!}">
                     <label for="Exceution">{{ trans('lang.execution_order') }} <span class="text-red"> *</span></label>
-                    {!! Form::input('number', 'execution_order',null,['class' => 'form-control', 'placeholder' => trans('lang.execution_order'), 'id' => 'execution_order', 'min' => '0']) !!}
+                    <input type="number" name="execution_order" id="execution_order" value="{{ old('execution_order') }}" class="form-control">
                 </div>
 
                 <div class="form-group col-sm-6 {!! $errors->has('target_channel') ? 'has-error' : '' !!}">
                     <label>{{ trans('lang.target_channel') }} <span class="text-red"> *</span></label>
-                    {!! Form::select('target_channel', [''=> '-- '.trans('lang.select_a_channel').' --', 'A-0' => 'Any', 'A-1' => 'Web Forms', 'A-4' => 'API Calls', 'A-2' => 'Emails'], null,['class' => 'form-control', 'id' => 'execution_order']) !!}
+                    <select name="target_channel" id="execution_order" class="form-control">
+    @foreach([''=> '-- '.trans('lang.select_a_channel').' --', 'A-0' => 'Any', 'A-1' => 'Web Forms', 'A-4' => 'API Calls', 'A-2' => 'Emails'] as $key => $value)
+        @if(is_array($value))
+            <optgroup label="{{ $key }}">
+                @foreach($value as $subKey => $subValue)
+                    <option value="{{ $subKey }}">{{ $subValue }}</option>
+                @endforeach
+            </optgroup>
+        @else
+            <option value="{{ $key }}">{{ $value }}</option>
+        @endif
+    @endforeach
+</select>
                 </div>
             </div>
 

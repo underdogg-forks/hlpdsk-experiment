@@ -89,19 +89,19 @@ class="nav-item active"
 
                                 <div class="form-group {{ $errors->has('first_name') ? 'has-error' : '' }}">
                                     <!-- first name -->
-                                    {!! Form::label('first_name',trans('lang.first_name')) !!}<span class="text-red"> *</span>
+                                    <label for="first_name">{{ trans('lang.first_name') }}</label><span class="text-red"> *</span>
 
                                     <input type="text" name="first_name" id="first_name" value="{{ old('first_name') }}" class="form-control">
                                 </div>
                                 <div class="form-group {{ $errors->has('last_name') ? 'has-error' : '' }}">
                                     <!-- last name -->
-                                    {!! Form::label('last_name',trans('lang.last_name')) !!}
+                                    <label for="last_name">{{ trans('lang.last_name') }}</label>
 
                                     <input type="text" name="last_name" id="last_name" value="{{ old('last_name') }}" class="form-control">
                                 </div>
                                 <div class="form-group">
                                     <!-- gender -->
-                                    {!! Form::label('gender',trans('lang.gender')) !!}
+                                    <label for="gender">{{ trans('lang.gender') }}</label>
                                     <div class="row">
                                         <div class="col-sm-3">
                                             <input type="radio" name="gender" value="'1'">&nbsp;&nbsp;{{ trans('lang.male') }}
@@ -113,46 +113,46 @@ class="nav-item active"
                                 </div>
                                 <div class="form-group">
                                     <!-- email -->
-                                    {!! Form::label('email',trans('lang.email_address')) !!}
+                                    <label for="email">{{ trans('lang.email_address') }}</label>
                                     <div>
                                         {{$user->email}}
                                     </div>
                                 </div>
                                 <div class="form-group {{ $errors->has('company') ? 'has-error' : '' }}">
                                     <!-- company -->
-                                    {!! Form::label('company',trans('lang.company')) !!}
+                                    <label for="company">{{ trans('lang.company') }}</label>
 
                                     <input type="text" name="company" id="company" value="{{ old('company') }}" class="form-control">
                                 </div>
                                 <div class="row">
                                     <div class="col-sm-2 form-group {{ $errors->has('country_code') ? 'has-error' : '' }}">
                                         <!-- phone extensionn -->
-                                        {!! Form::label('country_code',trans('lang.country-code')) !!}
+                                        <label for="country_code">{{ trans('lang.country-code') }}</label>
                                         <input type="text" name="country_code" id="code" value="{{ old('country_code') }}" class="form-control">
 
                                     </div>
                                     <div class="col-sm-2 form-group {{ $errors->has('ext') ? 'has-error' : '' }}">
                                         <!-- phone extensionn -->
-                                        {!! Form::label('ext',trans('lang.ext')) !!}
+                                        <label for="ext">{{ trans('lang.ext') }}</label>
 
                                         <input type="text" name="ext" id="ext" value="{{ old('ext') }}" class="form-control">
                                     </div>
                                     <div class="col-sm-8 form-group {{ $errors->has('phone_number') ? 'has-error' : '' }}">
                                         <!-- phone number -->
-                                        {!! Form::label('phone_number',trans('lang.phone')) !!}
+                                        <label for="phone_number">{{ trans('lang.phone') }}</label>
 
                                         <input type="text" name="phone_number" id="phone_number" value="{{ old('phone_number') }}" class="form-control">
                                     </div>
                                 </div>
                                 <div class="form-group {{ $errors->has('mobile') ? 'has-error' : '' }}">
                                     <!-- mobile -->
-                                    {!! Form::label('mobile',trans('lang.mobile_number')) !!}
+                                    <label for="mobile">{{ trans('lang.mobile_number') }}</label>
 
-                                    {!! Form::input('number', 'mobile',null,['class' => 'form-control', 'id' => 'mobile']) !!}
+                                    <input type="number" name="mobile" id="mobile" value="{{ old('mobile') }}" class="form-control">
                                 </div>
                                 <div class="form-group {{ $errors->has('profile_pic') ? 'has-error' : '' }}">
                                     <!-- profile pic -->
-                                    {!! Form::label('profile_pic',trans('lang.profile_pic')) !!}
+                                    <label for="profile_pic">{{ trans('lang.profile_pic') }}</label>
 
                                     <input type="file" name="profile_pic') !!}
                                 </div>
@@ -173,7 +173,8 @@ class="nav-item active"
 
                 <div class="col-md-6">
 
-                    {!! Form::model($user" id="profile_pic') !!}
+                    <form method="POST">
+    @csrf
                                 </div>
 
                                 @csrf
@@ -204,19 +205,19 @@ class="nav-item active"
                             </h2>
 
                             <div>
-                                 {!! Form::label('old_password',trans('lang.old_password')) !!}<span class="text-red"> *</span>
+                                 <label for="old_password">{{ trans('lang.old_password') }}</label><span class="text-red"> *</span>
                                 <div class="form-group has-feedback {{ $errors->has('old_password') ? 'has-error' : '' }}" style="display: -webkit-box;">
                                     <input type="password" name="old_password" id="old_password" class="form-control">
                                     <span class="fa fa-lock form-control-feedback" style="top: 9px;left: -25px;color: #6c757d !important;"></span> <!--change the "glyphicon glyphicon-lock form-control-feedback" to "fa fa-lock form-control-feedback" bcoz bs5 has removed the Glyphicons icon font that was included in earlier versions of Bootstrap-->
                                 </div>
                                 <!-- new password -->
-                                  {!! Form::label('new_password',trans('lang.new_password')) !!}<span class="text-red"> *</span>
+                                  <label for="new_password">{{ trans('lang.new_password') }}</label><span class="text-red"> *</span>
                                 <div class="form-group has-feedback {{ $errors->has('new_password') ? 'has-error' : '' }}" style="display: -webkit-box;">
                                     <input type="password" name="new_password" id="new_password" class="form-control">
                                     <span class="fa fa-lock form-control-feedback" style="top: 9px;left: -25px;color: #6c757d !important;"></span>
                                 </div>
                                 <!-- cofirm password -->
-                                 {!! Form::label('confirm_password',trans('lang.confirm_password')) !!}<span class="text-red"> *</span>
+                                 <label for="confirm_password">{{ trans('lang.confirm_password') }}</label><span class="text-red"> *</span>
                                 <div class="form-group has-feedback {{ $errors->has('confirm_password') ? 'has-error' : '' }}" style="display: -webkit-box;">
                                     <input type="password" name="confirm_password" id="confirm_password" class="form-control">
                                     <span class="fa fa-lock form-control-feedback" style="top: 9px;left: -25px;color: #6c757d !important;"></span>

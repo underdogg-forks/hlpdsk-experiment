@@ -84,21 +84,33 @@ class="nav-link active"
         <div class="row">
             <!-- Default Status: Required : manual: Dropdowm  -->
             <div class="form-group col-md-6 {{ $errors->has('status') ? 'has-error' : '' }}">
-                {!! Form::label('status',trans('lang.default_status')) !!}
+                <label for="status">{{ trans('lang.default_status') }}</label>
                 <select class="form-control" id="status" name="status">
                     <option value="1" >Open</option>
                 </select>
             </div>
             <!-- Default Priority:	Required : manual : Dropdowm  -->
             <div class="form-group col-md-6 {{ $errors->has('priority') ? 'has-error' : '' }}">
-                {!! Form::label('priority',trans('lang.default_priority')) !!}
-                {!!Form::select('priority', [''=>trans('lang.select_a_priority'),trans('lang.priorities')=>$priority->pluck('priority_desc','priority_id')->toArray()],null,['class' => 'form-control']) !!}
+                <label for="priority">{{ trans('lang.default_priority') }}</label>
+                <select name="priority" id="priority" class="form-control">
+    @foreach([''=>trans('lang.select_a_priority'),trans('lang.priorities')=>$priority->pluck('priority_desc','priority_id')->toArray()] as $key => $value)
+        @if(is_array($value))
+            <optgroup label="{{ $key }}">
+                @foreach($value as $subKey => $subValue)
+                    <option value="{{ $subKey }}">{{ $subValue }}</option>
+                @endforeach
+            </optgroup>
+        @else
+            <option value="{{ $key }}">{{ $value }}</option>
+        @endif
+    @endforeach
+</select>
             </div>
         </div>
         <div class="row">
             <!-- Agent Collision Avoidance Duration: text-number   -minutes  -->
             <div class="form-group col-md-6 {{ $errors->has('collision_avoid') ? 'has-error' : '' }}">
-                {!! Form::label('collision_avoid',trans('lang.agent_collision_avoidance_duration')) !!} 
+                <label for="collision_avoid">{{ trans('lang.agent_collision_avoidance_duration') }}</label> 
                 <div class="input-group">
                     <input type="number" class="form-control" name="collision_avoid" min="0"  step="1" value="{{$tickets->collision_avoid}}" placeholder="in minutes">
                     <div class="input-group-append">
@@ -107,7 +119,7 @@ class="nav-link active"
                 </div>
             </div> 
             <div class="form-group col-md-6 {{ $errors->has('help_topic') ? 'has-error' : '' }}">
-                {!! Form::label('help_topic',trans('lang.lock_ticket_frequency')) !!}
+                <label for="help_topic">{{ trans('lang.lock_ticket_frequency') }}</label>
                 <select name='lock_ticket_frequency' class="form-control">
                     <option @if($tickets->lock_ticket_frequency == null) selected="true" @endif value="0">{{ trans('lang.no') }}</option>
                     <option @if($tickets->lock_ticket_frequency == 1) selected="true" @endif value="1">{{ trans('lang.only-once') }}</option>
@@ -117,7 +129,7 @@ class="nav-link active"
         </div>
         <div class="row">
             <div class="form-group col-md-6 {{ $errors->has('num_format') ? 'has-error' : '' }}">
-                {!! Form::label('num_format',trans('lang.format')) !!} 
+                <label for="num_format">{{ trans('lang.format') }}</label> 
                  <a href="#" data-toggle="tooltip" data-placement="right" title="{{ trans('lang.ticket-number-format') }}"><i class="fa fa-question-circle" style="padding: 0px;"></i></a>
                 <input type="text" name="num_format" id="format" value="{{ old('num_format') }}" class="form-control">
 
@@ -125,10 +137,22 @@ class="nav-link active"
             </div>
 
             <div class="form-group col-md-6 {{ $errors->has('num_sequence') ? 'has-error' : '' }}">
-                {!! Form::label('num_sequence',trans('lang.type')) !!} 
+                <label for="num_sequence">{{ trans('lang.type') }}</label> 
                 <a href="#" data-toggle="tooltip" data-placement="right" title="{{ trans('lang.ticket-number-type') }}"><i class="fa fa-question-circle" style="padding: 0px;"></i></a>
     
-                {!! Form::select('num_sequence',[''=>'Select','sequence'=>'Sequence','random'=>'Random'],null,['class'=>'form-control','id'=>'type']) !!}
+                <select name="num_sequence" id="type" class="form-control">
+    @foreach([''=>'Select','sequence'=>'Sequence','random'=>'Random'] as $key => $value)
+        @if(is_array($value))
+            <optgroup label="{{ $key }}">
+                @foreach($value as $subKey => $subValue)
+                    <option value="{{ $subKey }}">{{ $subValue }}</option>
+                @endforeach
+            </optgroup>
+        @else
+            <option value="{{ $key }}">{{ $value }}</option>
+        @endif
+    @endforeach
+</select>
 
                 <div id="result"></div>
             </div>

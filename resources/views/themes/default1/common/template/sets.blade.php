@@ -96,7 +96,8 @@ class="nav-link active"
                         <div class="modal fade" id="{{$set->id}}">
                             <div class="modal-dialog">
                                 <div class="modal-content">
-                                    {!! Form::model($set,['route'=>['template-sets.update', $set->id],'method'=>'PATCH','files' => true]) !!}
+                                    <form method="POST">
+    @csrf
                                     <div class="modal-header">
                                         <h4 class="modal-title">{{ trans('lang.edit_details') }}</h4>
                                         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>

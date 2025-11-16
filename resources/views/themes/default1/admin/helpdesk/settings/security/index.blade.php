@@ -61,7 +61,8 @@ class="nav-link active"
         <h3 class="card-title">{{ trans('lang.security_settings') }}</h3>
     </div><!-- /.card-header -->
     <div class="card-body">
-        {!! Form::model($security,['route'=>['securitys.update', $security->id],'method'=>'PATCH','files' => true]) !!}
+        <form method="POST">
+    @csrf
         <div class="form-group {{ $errors->has('lockout_message') ? 'has-error' : '' }}">
             <div class="row">
                 <div class="col-md-3">

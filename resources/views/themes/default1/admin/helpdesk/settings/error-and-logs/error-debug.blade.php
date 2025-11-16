@@ -61,7 +61,7 @@ class="nav-link active"
         <div class="row">
             <div class="col-md-4">
                 <div class="form-group">
-                    {!! Form::label('debug',trans('lang.debugging')) !!}
+                    <label for="debug">{{ trans('lang.debugging') }}</label>
                     <div class="row">
                         <div class="col-sm-3">
                             <input type="radio" name="debug" value="true" @if($debug == true) checked="true" @endif> {{ trans('lang.enable') }}
@@ -74,7 +74,7 @@ class="nav-link active"
             </div>
             <div class="col-md-6">
                 <div class="form-group">
-                    {!! Form::label('bugsnag',trans('lang.bugsnag-debugging')) !!}
+                    <label for="bugsnag">{{ trans('lang.bugsnag-debugging') }}</label>
                     <div class="row">
                         <div class="col-sm-3">
                             <input type="radio" name="bugsnag" value="true" @if($bugsnag == true) checked="true" @endif> {{ trans('lang.yes') }}

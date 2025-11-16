@@ -39,7 +39,7 @@
         <!-- first name -->
 		<div class="form-group {{ $errors->has('first_name') ? 'has-error' : '' }}">
 
-			{!! Form::label('first_name',trans('lang.first_name')) !!}
+			<label for="first_name">{{ trans('lang.first_name') }}</label>
 			{!! $errors->first('first_name', '<spam class="help-block">:message</spam>') !!}
 			<input type="text" name="first_name" id="first_name" value="{{ old('first_name') }}" class="form-control">
 
@@ -47,14 +47,14 @@
 		<!-- last name -->
 		<div class="form-group {{ $errors->has('last_name') ? 'has-error' : '' }}">
 
-			{!! Form::label('last_name',trans('lang.last_name')) !!}
+			<label for="last_name">{{ trans('lang.last_name') }}</label>
 			{!! $errors->first('last_name', '<spam class="help-block">:message</spam>') !!}
 			<input type="text" name="last_name" id="last_name" value="{{ old('last_name') }}" class="form-control">
 
 		</div>
 		<!-- gender -->
 		<div class="form-group">
-			{!! Form::label('gender',trans('lang.gender')) !!}
+			<label for="gender">{{ trans('lang.gender') }}</label>
 			<div class="row">
 				<div class="col-xs-3">
 					<input type="radio" name="gender" value="'1'">{{ trans('lang.male') }}
@@ -69,7 +69,7 @@
 
 		<div class="form-group">
 
-			{!! Form::label('email',trans('lang.email_address')) !!}
+			<label for="email">{{ trans('lang.email_address') }}</label>
 			<div>
 				{{$user->email}}
 			</div>
@@ -77,7 +77,7 @@
 		<!-- company -->
 		<div class="form-group {{ $errors->has('company') ? 'has-error' : '' }}">
 
-			{!! Form::label('company',trans('lang.company')) !!}
+			<label for="company">{{ trans('lang.company') }}</label>
 			{!! $errors->first('company', '<spam class="help-block">:message</spam>') !!}
 			<input type="text" name="company" id="company" value="{{ old('company') }}" class="form-control">
 
@@ -87,7 +87,7 @@
 			<!-- phone extension -->
 			<div class="col-xs-3 form-group {{ $errors->has('ext') ? 'has-error' : '' }}">
 
-				{!! Form::label('ext',trans('lang.ext')) !!}
+				<label for="ext">{{ trans('lang.ext') }}</label>
 				{!! $errors->first('ext', '<spam class="help-block">:message</spam>') !!}
 				<input type="text" name="ext" id="ext" value="{{ old('ext') }}" class="form-control">
 
@@ -95,7 +95,7 @@
 			<!-- phone number -->
 			<div class="col-xs-9 form-group {{ $errors->has('phone_number') ? 'has-error' : '' }}">
 
-				{!! Form::label('phone_number',trans('lang.phone')) !!}
+				<label for="phone_number">{{ trans('lang.phone') }}</label>
 				{!! $errors->first('phone_number', '<spam class="help-block">:message</spam>') !!}
 				<input type="text" name="phone_number" id="phone_number" value="{{ old('phone_number') }}" class="form-control">
 
@@ -104,16 +104,16 @@
 			<!-- mobile -->
 			<div class="form-group {{ $errors->has('mobile') ? 'has-error' : '' }}">
 
-				{!! Form::label('mobile',trans('lang.mobile_number')) !!}
+				<label for="mobile">{{ trans('lang.mobile_number') }}</label>
 				{!! $errors->first('mobile', '<spam class="help-block">:message</spam>') !!}
-				{!! Form::input('number', 'mobile',null,['class' => 'form-control']) !!}
+				<input type="number" name="mobile" id="mobile" value="{{ old('mobile') }}" class="form-control">
 
 			</div>
 
 	<!-- profile pic -->
 	<div class="form-group {{ $errors->has('profile_pic') ? 'has-error' : '' }}">
 
-		{!! Form::label('profile_pic',trans('lang.profile_pic')) !!}
+		<label for="profile_pic">{{ trans('lang.profile_pic') }}</label>
 		{!! $errors->first('profile_pic', '<spam class="help-block">:message</spam>') !!}
 		<input type="file" name="profile_pic') !!}
 
@@ -151,21 +151,21 @@
                     @endif
 	<!-- old password -->
 	<div class="form-group has-feedback {{ $errors->has('old_password') ? 'has-error' : '' }}">
-			{!! Form::label('old_password',trans('lang.old_password')) !!}
+			<label for="old_password">{{ trans('lang.old_password') }}</label>
             <input type="password" name="old_password" id="old_password" class="form-control">
 			{!! $errors->first('old_password', '<spam class="help-block">:message</spam>') !!}
             <span class="glyphicon glyphicon-lock form-control-feedback"></span>
     </div>
     <!-- new password -->
     <div class="form-group has-feedback {{ $errors->has('new_password') ? 'has-error' : '' }}">
-    		{!! Form::label('new_password',trans('lang.new_password')) !!}
+    		<label for="new_password">{{ trans('lang.new_password') }}</label>
             <input type="password" name="new_password" id="new_password" class="form-control">
 			{!! $errors->first('new_password', '<spam class="help-block">:message</spam>') !!}
             <span class="glyphicon glyphicon-lock form-control-feedback"></span>
     </div>
     <!-- confirm password -->
     <div class="form-group has-feedback {{ $errors->has('confirm_password') ? 'has-error' : '' }}">
-    		{!! Form::label('confirm_password',trans('lang.confirm_password')) !!}
+    		<label for="confirm_password">{{ trans('lang.confirm_password') }}</label>
             <input type="password" name="confirm_password" id="confirm_password" class="form-control">
 			{!! $errors->first('confirm_password', '<spam class="help-block">:message</spam>') !!}
             <span class="glyphicon glyphicon-lock form-control-feedback"></span>

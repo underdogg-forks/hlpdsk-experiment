@@ -92,13 +92,13 @@ class="nav-link active"
         <div class="row">
             <div class="col-md-4">
                 <div class="form-group">
-                    {!! Form::checkbox('attachment'">&nbsp;{{ trans('lang.attachments') }}
+                    <input type="checkbox" name="attachment'">&nbsp;{{ trans('lang.attachments') }}
                 </div>
             </div>
         </div>
     </div>
     <div class="card-footer">
-        {!! Form::submit(trans('lang.submit'),['class'=>'btn btn-primary'])!!}
+        {!! Form::submit(trans('lang.submit')" value="['class'=>'btn btn-primary']">
     </div>
 </div>
 @stop

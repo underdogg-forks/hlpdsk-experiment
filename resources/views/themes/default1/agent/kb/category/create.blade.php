@@ -83,15 +83,27 @@ class="nav-item menu-open"
         
         <div class="row">
             <div class="col-sm-3 {{ $errors->has('name') ? 'has-error' : '' }}">
-                {!! Form::label('name',trans('lang.name')) !!}<span class="text-red"> *</span>
+                <label for="name">{{ trans('lang.name') }}</label><span class="text-red"> *</span>
                 <input type="text" name="name" id="name" value="{{ old('name') }}" class="form-control">
             </div>
             <div class="col-sm-3 {{ $errors->has('parent') ? 'has-error' : '' }}">
-                {!! Form::label('parent',trans('lang.parent')) !!}
-                {!!Form::select('parent',[''=>'Select a Category','Categories'=>$category],null,['class' => 'form-control select']) !!}
+                <label for="parent">{{ trans('lang.parent') }}</label>
+                <select name="parent" id="parent" class="form-control select">
+    @foreach([''=>'Select a Category','Categories'=>$category] as $key => $value)
+        @if(is_array($value))
+            <optgroup label="{{ $key }}">
+                @foreach($value as $subKey => $subValue)
+                    <option value="{{ $subKey }}">{{ $subValue }}</option>
+                @endforeach
+            </optgroup>
+        @else
+            <option value="{{ $key }}">{{ $value }}</option>
+        @endif
+    @endforeach
+</select>
             </div>
             <div class="col-sm-3 {{ $errors->has('status') ? 'has-error' : '' }}">
-                {!! Form::label('status',trans('lang.status')) !!}
+                <label for="status">{{ trans('lang.status') }}</label>
                 <div class="row">
                     <div class="col-md-4">
                         <input type="radio" name="status" value="'1'"> {{ trans('lang.active') }}
@@ -102,7 +114,7 @@ class="nav-item menu-open"
                 </div>
             </div>
             <div class="col-md-12 {{ $errors->has('description') ? 'has-error' : '' }}">
-                {!! Form::label('description',trans('lang.description')) !!}<span class="text-red"> *</span>
+                <label for="description">{{ trans('lang.description') }}</label><span class="text-red"> *</span>
                 <textarea name="description" id="description" class="form-control">{{ old('description') }}</textarea>
             </div>
         </div>

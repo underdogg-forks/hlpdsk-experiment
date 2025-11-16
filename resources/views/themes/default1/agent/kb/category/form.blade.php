@@ -22,14 +22,14 @@
 
 		<div class="col-sm-7 form-group {{ $errors->has('name') ? 'has-error' : '' }}">
 
-			{!! Form::label('name',trans('lang.name')) !!}
+			<label for="name">{{ trans('lang.name') }}</label>
 			{!! $errors->first('name', '<spam class="help-block">:message</spam>') !!}
 			<input type="text" name="name" id="name" value="{{ old('name') }}" class="form-control">
 		</div>
 
 		<div class="col-sm-5 form-group {{ $errors->has('status') ? 'has-error' : '' }}">
 
-			{!! Form::label('status',trans('lang.status')) !!}
+			<label for="status">{{ trans('lang.status') }}</label>
 			{!! $errors->first('status', '<spam class="help-block">:message</spam>') !!}
 			
 			<div class="row">
@@ -43,7 +43,7 @@
 	</div>
 
 	<div class="form-group col-sm-12 {{ $errors->has('description') ? 'has-error' : '' }}">
-		{!! Form::label('description',trans('lang.description')) !!}
+		<label for="description">{{ trans('lang.description') }}</label>
 		{!! $errors->first('description', '<spam class="help-block">:message</spam>') !!}
 
 		<textarea name="description" id="myNicEditor" class="form-control" rows="10">{{ old('description') }}</textarea>

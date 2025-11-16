@@ -65,7 +65,8 @@ class="nav-link active"
         <h3 class="card-title">{{ trans('lang.close_ticket_workflow_settings') }}</h3>
     </div><!-- /.box-header -->
     <div class="card-body">
-        {!! Form::model($security,['route'=>['close-workflow.update', $security->id],'method'=>'PATCH','files' => true]) !!}
+        <form method="POST">
+    @csrf
         <div class="form-group {{ $errors->has('days') ? 'has-error' : '' }}">
             <div class="row">
                 <div class="col-md-3">
@@ -103,7 +104,19 @@ class="nav-link active"
                 <div class="col-md-6">
                     <div class="callout callout-default" style="font-style: oblique;">{{ trans('lang.close-msg3') }}</div>
                     <?php $user = \App\Model\helpdesk\Ticket\Ticket_Status::where('state', '=', 'closed')->get(); ?>
-                    {!! Form::select('status',[ trans('lang.status')=>$user->pluck('name','id')->toArray()],null,['class' => 'form-control']) !!}	
+                    <select name="status" id="status" class="form-control">
+    @foreach([ trans('lang.status')=>$user->pluck('name','id')->toArray()] as $key => $value)
+        @if(is_array($value))
+            <optgroup label="{{ $key }}">
+                @foreach($value as $subKey => $subValue)
+                    <option value="{{ $subKey }}">{{ $subValue }}</option>
+                @endforeach
+            </optgroup>
+        @else
+            <option value="{{ $key }}">{{ $value }}</option>
+        @endif
+    @endforeach
+</select>	
                 </div>
             </div>
         </div>

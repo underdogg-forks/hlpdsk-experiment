@@ -76,13 +76,13 @@ class="nav-item menu-open"
             <div class="card-body"> 
                 <div class="row">
                     <div class="col-md-6 form-group {{ $errors->has('name') ? 'has-error' : '' }}">
-                        {!! Form::label('name',trans('lang.name')) !!}<span class="text-red"> *</span>
+                        <label for="name">{{ trans('lang.name') }}</label><span class="text-red"> *</span>
 
                         <input type="text" name="name" id="name" value="{{ old('name') }}" class="form-control">
                     </div>
                     
                     <div class="form-group col-sm-12 {{ $errors->has('description') ? 'has-error' : '' }}">
-                        {!! Form::label('description',trans('lang.description')) !!}
+                        <label for="description">{{ trans('lang.description') }}</label>
                         <span class="text-red"> *</span>
                         <div class="form-group" style="background-color:white">
                             <textarea name="description" id="myNicEditor" class="form-control color" rows="15">{{ old('description') }}</textarea>
@@ -103,7 +103,7 @@ class="nav-item menu-open"
             
             <div class="card-body">
                 <div class="form-group {{ $errors->has('status') ? 'has-error' : '' }}">
-                    {!! Form::label('status',trans('lang.status')) !!}
+                    <label for="status">{{ trans('lang.status') }}</label>
                     <div class="row">
                         <div class="col-sm-5">
                             <input type="radio" name="status" value="'1'"> {{ trans('lang.published') }}
@@ -114,7 +114,7 @@ class="nav-item menu-open"
                     </div>
                 </div>
                 <div class="form-group {{ $errors->has('visibility') ? 'has-error' : '' }}">
-                    {!! Form::label('visibility',trans('lang.visibility')) !!}
+                    <label for="visibility">{{ trans('lang.visibility') }}</label>
                     <div class="row">
                         <div class="col-sm-5">
                             <input type="radio" name="visibility" value="'1'"> {{ trans('lang.public') }}

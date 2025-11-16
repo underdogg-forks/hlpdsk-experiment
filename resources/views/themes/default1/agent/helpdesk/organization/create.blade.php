@@ -61,28 +61,28 @@ class="nav-link active"
         <!-- name : text : Required -->
         <div class="row">
             <div class="col-sm-4 form-group {{ $errors->has('name') ? 'has-error' : '' }}">
-                {!! Form::label('name',trans('lang.name')) !!} <span class="text-red"> *</span>
+                <label for="name">{{ trans('lang.name') }}</label> <span class="text-red"> *</span>
                 <input type="text" name="name" id="name" value="{{ old('name') }}" class="form-control">
             </div>
             <!-- phone : Text : -->
             <div class="col-sm-4 form-group {{ $errors->has('phone') ? 'has-error' : '' }}">
-                {!! Form::label('phone',trans('lang.phone')) !!}
+                <label for="phone">{{ trans('lang.phone') }}</label>
                 <input type="text" name="phone" id="phone" value="{{ old('phone') }}" class="form-control">
             </div>
             <!-- website : Text :  -->
             <div class="col-sm-4 form-group {{ $errors->has('website') ? 'has-error' : '' }}">
-                {!! Form::label('website',trans('lang.website')) !!}
+                <label for="website">{{ trans('lang.website') }}</label>
                 <input type="text" name="website" id="website" value="{{ old('website') }}" class="form-control">
             </div>
         </div>
         <!-- Internal Notes : Textarea -->
         <div class="row">
             <div class="col-sm-6 form-group">
-                {!! Form::label('address',trans('lang.address')) !!}
+                <label for="address">{{ trans('lang.address') }}</label>
                 <textarea name="address" id="address" class="form-control">{{ old('address') }}</textarea>
             </div>
             <div class="col-sm-6 form-group">
-                {!! Form::label('internal_notes',trans('lang.internal_notes')) !!}
+                <label for="internal_notes">{{ trans('lang.internal_notes') }}</label>
                 <textarea name="internal_notes" id="internal_notes" class="form-control">{{ old('internal_notes') }}</textarea>
             </div>
         </div>

@@ -76,45 +76,81 @@ class="nav-link active"
     <div class="card-body">
         <div class="row">
             <div class="col-md-6 form-group {{ $errors->has('name') ? 'has-error' : '' }}">
-                {!! Form::label('name',trans('lang.rating_label')) !!}<span style="color:red;">*</span>
+                <label for="name">{{ trans('lang.rating_label') }}</label><span style="color:red;">*</span>
                 <input type="text" name="name" id="name" value="{{ old('name') }}" class="form-control">
             </div>
             <div class="col-md-6 form-group {{ $errors->has('display_order') ? 'has-error' : '' }}">
-                {!! Form::label('display_order',trans('lang.display_order')) !!}<span style="color:red;">*</span>
+                <label for="display_order">{{ trans('lang.display_order') }}</label><span style="color:red;">*</span>
                 <input type="text" name="display_order" id="display_order" value="{{ old('display_order') }}" class="form-control">
             </div>
         </div>
         <div class="form-group {{ $errors->has('rating_scale') ? 'has-error' : '' }}">
-            {!! Form::label('rating_scale',trans('lang.rating_scale')) !!}<span style="color:red;">*</span>
+            <label for="rating_scale">{{ trans('lang.rating_scale') }}</label><span style="color:red;">*</span>
             <div class="callout callout-default" style="font-style: oblique;">{{ trans('lang.rating-msg1') }}</div>
-            {!! Form::select('rating_scale',['1' => '1','2'=>'2','3'=>'3','4'=>'4','5'=>'5','6'=>'6','7'=>'7','8'=>'8'],null,['class' => 'form-control']) !!}
+            <select name="rating_scale" id="rating_scale" class="form-control">
+    @foreach(['1' => '1','2'=>'2','3'=>'3','4'=>'4','5'=>'5','6'=>'6','7'=>'7','8'=>'8'] as $key => $value)
+        @if(is_array($value))
+            <optgroup label="{{ $key }}">
+                @foreach($value as $subKey => $subValue)
+                    <option value="{{ $subKey }}">{{ $subValue }}</option>
+                @endforeach
+            </optgroup>
+        @else
+            <option value="{{ $key }}">{{ $value }}</option>
+        @endif
+    @endforeach
+</select>
         </div>
         <div class="form-group {{ $errors->has('rating_area') ? 'has-error' : '' }}">
-            {!! Form::label('rating_area',trans('lang.rating_area')) !!}<span style="color:red;">*</span>
-            {!! Form::select('rating_area',['Helpdesk Area' => 'Helpdesk Area','Comment Area'=>'Comment Area'],null,['class' => 'form-control']) !!}
+            <label for="rating_area">{{ trans('lang.rating_area') }}</label><span style="color:red;">*</span>
+            <select name="rating_area" id="rating_area" class="form-control">
+    @foreach(['Helpdesk Area' => 'Helpdesk Area','Comment Area'=>'Comment Area'] as $key => $value)
+        @if(is_array($value))
+            <optgroup label="{{ $key }}">
+                @foreach($value as $subKey => $subValue)
+                    <option value="{{ $subKey }}">{{ $subValue }}</option>
+                @endforeach
+            </optgroup>
+        @else
+            <option value="{{ $key }}">{{ $value }}</option>
+        @endif
+    @endforeach
+</select>
         </div>
         <div class="form-group {{ $errors->has('restrict') ? 'has-error' : '' }}">
             <!-- gender -->
-            {!! Form::label('gender',trans('lang.rating_restrict')) !!}<span style="color:red;">*</span>
+            <label for="gender">{{ trans('lang.rating_restrict') }}</label><span style="color:red;">*</span>
             <div class="callout callout-default" style="font-style: oblique;">{{ trans('lang.rating-msg2') }}</div>
-            {!! Form::select('restrict',['General' => 'general','Support'=>'support'],null,['class' => 'form-control']) !!}
+            <select name="restrict" id="restrict" class="form-control">
+    @foreach(['General' => 'general','Support'=>'support'] as $key => $value)
+        @if(is_array($value))
+            <optgroup label="{{ $key }}">
+                @foreach($value as $subKey => $subValue)
+                    <option value="{{ $subKey }}">{{ $subValue }}</option>
+                @endforeach
+            </optgroup>
+        @else
+            <option value="{{ $key }}">{{ $value }}</option>
+        @endif
+    @endforeach
+</select>
         </div>
         <div class="form-group {{ $errors->has('allow_modification') ? 'has-error' : '' }}">
             <!-- Email user -->
-            {!! Form::label('allow_modification',trans('lang.rating_change')) !!}<span style="color:red;">*</span>
+            <label for="allow_modification">{{ trans('lang.rating_change') }}</label><span style="color:red;">*</span>
             <div class="callout callout-default" style="font-style: oblique;">{{ trans('lang.rating-msg3') }}</div>
             <div class="row">
                 <div class="col-sm-2">
                     <input type="radio" name="allow_modification" value="'1') !!} {{ trans('lang.yes') }}
                 </div>
                 <div class="col-sm-2">
-                    {!! Form::radio('allow_modification'"> {{ trans('lang.no') }}
+                    <input type="radio" name="allow_modification'"> {{ trans('lang.no') }}
                 </div>
             </div>        
         </div>
     </div>
     <div class="card-footer">
-        {!! Form::submit(trans('lang.submit'),['class'=>'btn btn-primary'])!!}
+        {!! Form::submit(trans('lang.submit')" value="['class'=>'btn btn-primary']">
     </div>
 </div>
 @stop

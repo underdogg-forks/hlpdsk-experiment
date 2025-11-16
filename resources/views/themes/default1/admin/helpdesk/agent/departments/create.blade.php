@@ -67,12 +67,12 @@ class="nav-link active"
         <div class="row">
             <!-- name -->
             <div class="col-sm-6 form-group {{ $errors->has('name') ? 'has-error' : '' }}">
-                {!! Form::label('name',trans('lang.name')) !!}  <span class="text-red"> *</span>
+                <label for="name">{{ trans('lang.name') }}</label>  <span class="text-red"> *</span>
                 <input type="text" name="name" id="name" value="{{ old('name') }}" class="form-control">
             </div>
             <!-- account status -->
             <div class="col-sm-6 form-group {{ $errors->has('account_status') ? 'has-error' : '' }}">
-                {!! Form::label('type',trans('lang.type')) !!}
+                <label for="type">{{ trans('lang.type') }}</label>
                 <div class="row">
                     <div class="col-sm-2">
                         <input type="radio" name="type" value="'1'"> {{ trans('lang.public') }}
@@ -86,21 +86,57 @@ class="nav-link active"
         <div class="row">
             <!-- slaplan -->
             <div class="col-sm-6 form-group {{ $errors->has('sla') ? 'has-error' : '' }}">
-                {!! Form::label('sla',trans('lang.SLA_plan')) !!}
-                {!!Form::select('sla', [''=>trans('lang.select_a_sla'), trans('lang.sla_plans')=>$slas->pluck('grace_period','id')->toArray()],null,['class' => 'form-control select']) !!}
+                <label for="sla">{{ trans('lang.SLA_plan') }}</label>
+                <select name="sla" id="sla" class="form-control select">
+    @foreach([''=>trans('lang.select_a_sla'), trans('lang.sla_plans')=>$slas->pluck('grace_period','id')->toArray()] as $key => $value)
+        @if(is_array($value))
+            <optgroup label="{{ $key }}">
+                @foreach($value as $subKey => $subValue)
+                    <option value="{{ $subKey }}">{{ $subValue }}</option>
+                @endforeach
+            </optgroup>
+        @else
+            <option value="{{ $key }}">{{ $value }}</option>
+        @endif
+    @endforeach
+</select>
             </div>
             <!-- manager -->
             <div class="col-sm-6 form-group {{ $errors->has('manager') ? 'has-error' : '' }}">
-                {!! Form::label('manager',trans('lang.manager')) !!}
-                {!!Form::select('manager',[''=>trans('lang.select_a_manager'),trans('lang.manager')=>$user->pluck('full_name','id')->toArray()],null,['class' => 'form-control select']) !!}
+                <label for="manager">{{ trans('lang.manager') }}</label>
+                <select name="manager" id="manager" class="form-control select">
+    @foreach([''=>trans('lang.select_a_manager'),trans('lang.manager')=>$user->pluck('full_name','id')->toArray()] as $key => $value)
+        @if(is_array($value))
+            <optgroup label="{{ $key }}">
+                @foreach($value as $subKey => $subValue)
+                    <option value="{{ $subKey }}">{{ $subValue }}</option>
+                @endforeach
+            </optgroup>
+        @else
+            <option value="{{ $key }}">{{ $value }}</option>
+        @endif
+    @endforeach
+</select>
             </div>
         </div>
 
         <div class="row">
             <!-- sla -->
             <div class="col-sm-6 form-group {{ $errors->has('outgoing_email') ? 'has-error' : '' }}">
-                {!! Form::label('outgoing_email',trans('lang.outgoing_email')) !!}
-                {!!Form::select('outgoing_email', ['' => trans('lang.system_default'), trans('lang.emails')=>$emails->pluck('email_name','id')->toArray()],null,['class' => 'form-control select']) !!}
+                <label for="outgoing_email">{{ trans('lang.outgoing_email') }}</label>
+                <select name="outgoing_email" id="outgoing_email" class="form-control select">
+    @foreach(['' => trans('lang.system_default'), trans('lang.emails')=>$emails->pluck('email_name','id')->toArray()] as $key => $value)
+        @if(is_array($value))
+            <optgroup label="{{ $key }}">
+                @foreach($value as $subKey => $subValue)
+                    <option value="{{ $subKey }}">{{ $subValue }}</option>
+                @endforeach
+            </optgroup>
+        @else
+            <option value="{{ $key }}">{{ $value }}</option>
+        @endif
+    @endforeach
+</select>
             </div>
         </div>
         <div>

@@ -83,7 +83,7 @@ class="nav-link active"
             <!-- Helpdesk Name/Title: text Required   -->
             <div class="col-md-4">
                 <div class="form-group {{ $errors->has('name') ? 'has-error' : '' }}">
-                    {!! Form::label('name',trans('lang.name/title')) !!}
+                    <label for="name">{{ trans('lang.name/title') }}</label>
                     {!! $errors->first('name', '<spam class="help-block">:message</spam>') !!}
                     <input type="text" name="name" id="name" value="$systems->name" class="form-control">
                 </div>
@@ -91,7 +91,7 @@ class="nav-link active"
              <!-- Helpdesk URL:      text   Required -->
              <div class="col-md-4">
                 <div class="form-group {{ $errors->has('url') ? 'has-error' : '' }}">
-                    {!! Form::label('url',trans('lang.url')) !!}
+                    <label for="url">{{ trans('lang.url') }}</label>
                     {!! $errors->first('url', '<spam class="help-block">:message</spam>') !!}
                     <input type="text" name="url" id="url" value="$systems->url" class="form-control">
                 </div>
@@ -99,9 +99,21 @@ class="nav-link active"
             <!-- Default Time Zone: Drop down: timezones table : Required -->
             <div class="col-md-4">
                 <div class="form-group {{ $errors->has('time_zone') ? 'has-error' : '' }}">
-                    {!! Form::label('time_zone',trans('lang.timezone')) !!}
+                    <label for="time_zone">{{ trans('lang.timezone') }}</label>
                     {!! $errors->first('time_zone', '<spam class="help-block">:message</spam>') !!}
-                    {!!Form::select('time_zone',['Time Zones'=>$timezones->pluck('name','id')->toArray()],null,['class'=>'form-control']) !!}
+                    <select name="time_zone" id="time_zone" class="form-control">
+    @foreach(['Time Zones'=>$timezones->pluck('name','id')->toArray()] as $key => $value)
+        @if(is_array($value))
+            <optgroup label="{{ $key }}">
+                @foreach($value as $subKey => $subValue)
+                    <option value="{{ $subKey }}">{{ $subValue }}</option>
+                @endforeach
+            </optgroup>
+        @else
+            <option value="{{ $key }}">{{ $value }}</option>
+        @endif
+    @endforeach
+</select>
                 </div>
             </div>
         </div>
@@ -109,15 +121,27 @@ class="nav-link active"
             <!-- Date and Time Format: text: required: eg - 03/25/2015 7:14 am -->
             <div class="col-md-4">
                 <div class="form-group {{ $errors->has('date_time_format') ? 'has-error' : '' }}">
-                    {!! Form::label('date_time_format',trans('lang.date_time')) !!}
+                    <label for="date_time_format">{{ trans('lang.date_time') }}</label>
                     {!! $errors->first('date_time_format', '<spam class="help-block">:message</spam>') !!}
-                    {!! Form::select('date_time_format',['Date Time Formats'=>$date_time->pluck('format','id')->toArray()],null,['class' => 'form-control']) !!}
+                    <select name="date_time_format" id="date_time_format" class="form-control">
+    @foreach(['Date Time Formats'=>$date_time->pluck('format','id')->toArray()] as $key => $value)
+        @if(is_array($value))
+            <optgroup label="{{ $key }}">
+                @foreach($value as $subKey => $subValue)
+                    <option value="{{ $subKey }}">{{ $subValue }}</option>
+                @endforeach
+            </optgroup>
+        @else
+            <option value="{{ $key }}">{{ $value }}</option>
+        @endif
+    @endforeach
+</select>
                 </div>
             </div>
            
             <div class="col-md-4">
                 <div class="form-group">
-                    {!! Form::label('status',trans('lang.status')) !!}
+                    <label for="status">{{ trans('lang.status') }}</label>
                     <div class="row">
                         <div class="col-sm-5">
                             <input type="radio" name="status" value="'1'"> {{ trans('lang.online') }}
@@ -130,7 +154,7 @@ class="nav-link active"
             </div>
             <div class="col-md-4">
                 <div class="form-group">
-                    {!! Form::label('user_set_ticket_status',trans('lang.user_set_ticket_status')) !!}
+                    <label for="user_set_ticket_status">{{ trans('lang.user_set_ticket_status') }}</label>
                     <div class="row">
                         <div class="col-sm-5">
                             <input type="radio" name="user_set_ticket_status" value="0" @if($common_setting->status == '0')checked="true" @endif>&nbsp;{{ trans('lang.no') }}
@@ -145,7 +169,7 @@ class="nav-link active"
         <div class="row">    
             <div class="col-md-4" data-toggle="tooltip" title="{{ trans('lang.the_rtl_support_is_only_applicable_to_the_outgoing_mails') }}">
                 <div class="form-group">
-                    {!! Form::label('status',trans('lang.rtl')) !!}
+                    <label for="status">{{ trans('lang.rtl') }}</label>
                     <div class="row">
                         <div class="col-sm-12">
                             <?php
@@ -158,7 +182,7 @@ class="nav-link active"
             </div>
             <div class="col-md-4" data-toggle="tooltip" title="{{ trans('lang.otp_usage_info') }}">
                 <div class="form-group">
-                    {!! Form::label('send_otp',trans('lang.allow_unverified_users_to_create_ticket')) !!}
+                    <label for="send_otp">{{ trans('lang.allow_unverified_users_to_create_ticket') }}</label>
                     <div class="row">
                         <div class="col-sm-5">
                             <input type="radio" name="send_otp" value="0" @if($send_otp->status == '0')checked="true" @endif>&nbsp;{{ trans('lang.yes') }}
@@ -171,7 +195,7 @@ class="nav-link active"
             </div>
             <div class="col-md-4" data-toggle="tooltip" title="{{ trans('lang.email_man_info') }}">
                 <div class="form-group">
-                    {!! Form::label('email_mandatory',trans('lang.make-email-mandatroy')) !!}
+                    <label for="email_mandatory">{{ trans('lang.make-email-mandatroy') }}</label>
                     <div class="row">
                         <div class="col-sm-5">
                             <input type="radio" name="email_mandatory" value="1" @if($email_mandatory->status == '1')checked="true" @endif>&nbsp;{{ trans('lang.yes') }}

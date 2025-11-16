@@ -51,12 +51,12 @@ class="nav-link active"
         <div class="row">
             <!-- username -->
             <div class="col-sm-6 form-group {{ $errors->has('title') ? 'has-error' : '' }}">
-                {!! Form::label('title',trans('lang.title')) !!}         <span class="text-red"> *</span>       
+                <label for="title">{{ trans('lang.title') }}</label>         <span class="text-red"> *</span>       
                 <input type="text" name="title" id="title" value="{{ old('title') }}" class="form-control">
             </div>
             <!-- firstname -->
             <div class="col-sm-12 form-group {{ $errors->has('message') ? 'has-error' : '' }}">
-                {!! Form::label('message',trans('lang.message')) !!}         <span class="text-red"> *</span>      
+                <label for="message">{{ trans('lang.message') }}</label>         <span class="text-red"> *</span>      
                 <textarea name="message" id="message" class="form-control">{{ old('message') }}</textarea>
             </div>
         </div>

@@ -68,7 +68,8 @@ class="nav-link active"
 
     <div class="card-body">
         
-        {!! Form::model($form,['route'=>['forms.update',$form->id],'method'=>'PATCH']) !!}
+        <form method="POST">
+    @csrf
         
         <div class="row">
 
@@ -113,7 +114,19 @@ class="nav-link active"
                             <td><input type="text" name="label[]" value="{{$field->label}}" class="form-control"></td>
                             <td><input type="text" name="name[]" value="{{$field->name}}" class="form-control"></td>
                             
-                            <td>{!! Form::select('type[]',['text'=>'text','email'=>'email','password'=>'password','textarea'=>'textarea','select'=>'select','radio'=>'radio','checkbox'=>'checkbox','hidden'=>'hidden'],$field->type,['class'=>'form-control']) !!}</td>
+                            <td><select name="type[]" id="type[]" class="form-control">
+    @foreach(['text'=>'text','email'=>'email','password'=>'password','textarea'=>'textarea','select'=>'select','radio'=>'radio','checkbox'=>'checkbox','hidden'=>'hidden'] as $key => $value)
+        @if(is_array($value))
+            <optgroup label="{{ $key }}">
+                @foreach($value as $subKey => $subValue)
+                    <option value="{{ $subKey }}">{{ $subValue }}</option>
+                @endforeach
+            </optgroup>
+        @else
+            <option value="{{ $key }}">{{ $value }}</option>
+        @endif
+    @endforeach
+</select></td>
                             <td><input type="text" name="value[]" value="{{$field->valuesAsString()}}" class="form-control"></td>
                             
                             <td><input type="radio" name="required['.$key.']" value="1">&nbsp;&nbsp;{{ trans("lang.yes") }}&nbsp;&nbsp;{!! Form::radio('required['.$key.']',0,$field->nonRequiredFieldForCheck()) !!}&nbsp;&nbsp;{{ trans("lang.no") }}</td>

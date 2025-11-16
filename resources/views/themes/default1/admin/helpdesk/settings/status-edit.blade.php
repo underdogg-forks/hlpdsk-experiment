@@ -37,7 +37,8 @@ class="nav-link active"
 </style>
 
 @section('content')
-{!! Form::model($status,['route'=>['statuss.update', $status->id],'method'=>'PATCH','files' => true]) !!}
+<form method="POST">
+    @csrf
  @if(session()->has('errors'))
 <div class="alert alert-danger alert-dismissable">
     <i class="fas fa-ban"></i>
@@ -156,7 +157,7 @@ class="nav-link active"
         </div>
         <div class="form-group">
             <!-- gender -->
-            {!! Form::label('gender',trans('lang.resolved_status')) !!}
+            <label for="gender">{{ trans('lang.resolved_status') }}</label>
             <div class="callout callout-default" style="font-style: oblique;">{{ trans('lang.status_msg3') }}</div>
             <div class="row">
                 <div class="col-sm-3">
@@ -169,7 +170,7 @@ class="nav-link active"
         </div>
         <div class="form-group">
             <!-- Email user -->
-            {!! Form::label('gender',trans('lang.deleted_status')) !!}
+            <label for="gender">{{ trans('lang.deleted_status') }}</label>
             <div class="callout callout-default" style="font-style: oblique;">{{ trans('lang.status_msg2') }}</div>
             <div class="row">
                 <div class="col-sm-3">
@@ -182,20 +183,20 @@ class="nav-link active"
         </div>
         <div class="form-group">
             <!-- gender -->
-            {!! Form::label('gender',trans('lang.notify_user')) !!}
+            <label for="gender">{{ trans('lang.notify_user') }}</label>
             <div class="callout callout-default" style="font-style: oblique;">{{ trans('lang.status_msg1') }}</div>
             <div class="row">
                 <div class="col-sm-3">
                     <input type="radio" name="email_user" value="'yes') !!} {{ trans('lang.yes') }}
                 </div>
                 <div class="col-sm-3">
-                    {!! Form::radio('email_user'"> {{ trans('lang.no') }}
+                    <input type="radio" name="email_user'"> {{ trans('lang.no') }}
                 </div>
             </div>        
         </div>
     </div>
     <div class="card-footer">
-        {!! Form::submit(trans('lang.update'),['class'=>'btn btn-primary'])!!}
+        {!! Form::submit(trans('lang.update')" value="['class'=>'btn btn-primary']">
     </div>
     </form>
 </div> 

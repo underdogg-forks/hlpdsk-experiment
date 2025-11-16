@@ -65,19 +65,31 @@ class="nav-link active"
         <div class="row">
             <!-- name -->
             <div class="col-sm-5 form-group {{ $errors->has('name') ? 'has-error' : '' }}">
-                {!! Form::label('name',trans('lang.name')) !!} <span class="text-red"> *</span>
+                <label for="name">{{ trans('lang.name') }}</label> <span class="text-red"> *</span>
                 <input type="text" name="name" id="name" value="{{ old('name') }}" class="form-control">
             </div>
             <!-- team lead -->
             <div class="col-sm-4 form-group {{ $errors->has('team_lead') ? 'has-error' : '' }}">
-                {!! Form::label('team_lead',trans('lang.team_lead')) !!} 
-                {!! Form::select('team_lead',[''=>trans('lang.select_a_team_lead'), trans('lang.members')=>$user->pluck('full_name','id')->toArray()],null,['class' => 'form-control']) !!}	
+                <label for="team_lead">{{ trans('lang.team_lead') }}</label> 
+                <select name="team_lead" id="team_lead" class="form-control">
+    @foreach([''=>trans('lang.select_a_team_lead'), trans('lang.members')=>$user->pluck('full_name','id')->toArray()] as $key => $value)
+        @if(is_array($value))
+            <optgroup label="{{ $key }}">
+                @foreach($value as $subKey => $subValue)
+                    <option value="{{ $subKey }}">{{ $subValue }}</option>
+                @endforeach
+            </optgroup>
+        @else
+            <option value="{{ $key }}">{{ $value }}</option>
+        @endif
+    @endforeach
+</select>	
             </div>
 
             <div class="col-sm-3">
                 <!-- status -->
                 <div class="form-group {{ $errors->has('status') ? 'has-error' : '' }}">
-                    {!! Form::label('status',trans('lang.status')) !!}
+                    <label for="status">{{ trans('lang.status') }}</label>
                     <div class="row">
                         <div class="col-sm-6">
                             <input type="radio" name="status" value="'1'"> {{ trans('lang.active') }}
@@ -91,7 +103,7 @@ class="nav-link active"
         </div>
         <!-- admin notes -->
         <div>
-            {!! Form::label('admin_notes',trans('lang.admin_notes')) !!}
+            <label for="admin_notes">{{ trans('lang.admin_notes') }}</label>
             <textarea name="admin_notes" id="admin_notes" class="form-control" rows="5">{{ old('admin_notes') }}</textarea>
         </div>
     </div>

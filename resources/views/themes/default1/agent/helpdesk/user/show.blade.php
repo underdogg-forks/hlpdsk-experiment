@@ -1308,7 +1308,7 @@ class="nav-link active"
 <br>
                             <?php $user = App\User::where('id', $users->id)->first(); ?>
                             @if($user->role == 'agent')
-                            {!! Form::label('delete_all_content',trans('lang.delete_all_content')) !!} <span class="text-red"> *</span>
+                            <label for="delete_all_content">{{ trans('lang.delete_all_content') }}</label> <span class="text-red"> *</span>
                             <?php
                             $open = App\Model\helpdesk\Ticket\Tickets::where('assigned_to', '=', $users->id)->where('status', '=', '1')->get();
                             ?>
@@ -1396,13 +1396,37 @@ class="nav-link active"
                         ?>
 
                         <!-- <div class="col-sm-4 form-group {{ $errors->has('group') ? 'has-error' : '' }}"> -->
-                        {!! Form::label('assign_group',trans('lang.assigned_group')) !!} <span class="text-red"> *</span>
-                        {!!Form::select('group',[trans('lang.groups')=>$groups->pluck('name','id')->toArray()],null,['class' => 'form-control select']) !!}
+                        <label for="assign_group">{{ trans('lang.assigned_group') }}</label> <span class="text-red"> *</span>
+                        <select name="group" id="group" class="form-control select">
+    @foreach([trans('lang.groups')=>$groups->pluck('name','id')->toArray()] as $key => $value)
+        @if(is_array($value))
+            <optgroup label="{{ $key }}">
+                @foreach($value as $subKey => $subValue)
+                    <option value="{{ $subKey }}">{{ $subValue }}</option>
+                @endforeach
+            </optgroup>
+        @else
+            <option value="{{ $key }}">{{ $value }}</option>
+        @endif
+    @endforeach
+</select>
                         <!-- </div> -->
                         <!-- primary dept -->
                         <!-- <div class="col-sm-4 form-group {{ $errors->has('primary_department') ? 'has-error' : '' }}"> -->
-                        {!! Form::label('primary_dpt',trans('lang.primary_department')) !!} <span class="text-red"> *</span>
-                        {!! Form::select('primary_department', [trans('lang.departments')=>$departments->pluck('name','id')->toArray()],null,['class' => 'form-control select']) !!}
+                        <label for="primary_dpt">{{ trans('lang.primary_department') }}</label> <span class="text-red"> *</span>
+                        <select name="primary_department" id="primary_department" class="form-control select">
+    @foreach([trans('lang.departments')=>$departments->pluck('name','id')->toArray()] as $key => $value)
+        @if(is_array($value))
+            <optgroup label="{{ $key }}">
+                @foreach($value as $subKey => $subValue)
+                    <option value="{{ $subKey }}">{{ $subValue }}</option>
+                @endforeach
+            </optgroup>
+        @else
+            <option value="{{ $key }}">{{ $value }}</option>
+        @endif
+    @endforeach
+</select>
                         <!-- </div> -->
 
                     </div>
@@ -1468,13 +1492,37 @@ class="nav-link active"
                         ?>
 
                         <!-- <div class="col-sm-4 form-group {{ $errors->has('group') ? 'has-error' : '' }}"> -->
-                        {!! Form::label('assign_group',trans('lang.assigned_group')) !!} <span class="text-red"> *</span>
-                        {!!Form::select('group',[trans('lang.groups')=>$groups->pluck('name','id')->toArray()],null,['class' => 'form-control select']) !!}
+                        <label for="assign_group">{{ trans('lang.assigned_group') }}</label> <span class="text-red"> *</span>
+                        <select name="group" id="group" class="form-control select">
+    @foreach([trans('lang.groups')=>$groups->pluck('name','id')->toArray()] as $key => $value)
+        @if(is_array($value))
+            <optgroup label="{{ $key }}">
+                @foreach($value as $subKey => $subValue)
+                    <option value="{{ $subKey }}">{{ $subValue }}</option>
+                @endforeach
+            </optgroup>
+        @else
+            <option value="{{ $key }}">{{ $value }}</option>
+        @endif
+    @endforeach
+</select>
                         <!-- </div> -->
                         <!-- primary dept -->
                         <!-- <div class="col-sm-4 form-group {{ $errors->has('primary_department') ? 'has-error' : '' }}"> -->
-                        {!! Form::label('primary_dpt',trans('lang.primary_department')) !!} <span class="text-red"> *</span>
-                        {!! Form::select('primary_department', [trans('lang.departments')=>$departments->pluck('name','id')->toArray()],null,['class' => 'form-control select']) !!}
+                        <label for="primary_dpt">{{ trans('lang.primary_department') }}</label> <span class="text-red"> *</span>
+                        <select name="primary_department" id="primary_department" class="form-control select">
+    @foreach([trans('lang.departments')=>$departments->pluck('name','id')->toArray()] as $key => $value)
+        @if(is_array($value))
+            <optgroup label="{{ $key }}">
+                @foreach($value as $subKey => $subValue)
+                    <option value="{{ $subKey }}">{{ $subValue }}</option>
+                @endforeach
+            </optgroup>
+        @else
+            <option value="{{ $key }}">{{ $value }}</option>
+        @endif
+    @endforeach
+</select>
                         <!-- </div> -->
 
                     </div>
@@ -1509,7 +1557,7 @@ class="nav-link active"
                         <div class="form-group">
 
                             <!-- <div class="form-group {{ $errors->has('change_password') ? 'has-error' : '' }}"> -->
-                            {!! Form::label('New password',trans('lang.new_password')) !!} <span class="text-red"> *</span>
+                            <label for="New password">{{ trans('lang.new_password') }}</label> <span class="text-red"> *</span>
                             <input type="text" class="form-control" name="change_password" id="changepassword1" >
 
                             <p id="demo" style="color:red"></p>

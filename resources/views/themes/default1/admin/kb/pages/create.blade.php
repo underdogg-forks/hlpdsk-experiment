@@ -27,7 +27,7 @@
     <div class="row">
         <div class="col-md-6 form-group {{ $errors->has('name') ? 'has-error' : '' }}">
 
-            {!! Form::label('name',trans('lang.name')) !!}
+            <label for="name">{{ trans('lang.name') }}</label>
             {!! $errors->first('name', '<spam class="help-block">:message</spam>') !!}
             <input type="text" name="name" id="name" value="{{ old('name') }}" class="form-control">
 
@@ -35,7 +35,7 @@
 
         <div class="col-md-6 form-group {{ $errors->has('slug') ? 'has-error' : '' }}">
 
-            {!! Form::label('slug',trans('lang.slug')) !!}
+            <label for="slug">{{ trans('lang.slug') }}</label>
             {!! $errors->first('slug', '<spam class="help-block">:message</spam>') !!}
             <input type="text" name="slug" id="slug" value="{{ old('slug') }}" class="form-control">
 
@@ -44,7 +44,7 @@
 
 
                 <div class="form-group {{ $errors->has('description') ? 'has-error' : '' }}">
-                    {!! Form::label('description',trans('lang.description')) !!}
+                    <label for="description">{{ trans('lang.description') }}</label>
                     {!! $errors->first('description', '<spam class="help-block">:message</spam>') !!}
 
                     <div class="form-group" style="background-color:white">
@@ -64,7 +64,7 @@
                 <div class="box-body">
                     <div class="form-group {{ $errors->has('status') ? 'has-error' : '' }}">
 
-                        {!! Form::label('status',trans('lang.status')) !!}
+                        <label for="status">{{ trans('lang.status') }}</label>
                         {!! $errors->first('status', '<spam class="help-block">:message</spam>') !!}
                         <div class="row">
                             <div class="col-xs-4">
@@ -79,7 +79,7 @@
 
                     <div class="form-group {{ $errors->has('visibility') ? 'has-error' : '' }}">
 
-                        {!! Form::label('visibility',trans('lang.visibility')) !!}
+                        <label for="visibility">{{ trans('lang.visibility') }}</label>
                         {!! $errors->first('visibility', '<spam class="help-block">:message</spam>') !!}
                         <div class="row">
                             <div class="col-xs-3">

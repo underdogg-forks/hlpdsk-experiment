@@ -100,19 +100,19 @@ class="nav-item menu-open"
                 <div class="row">
                 
                     <div class="col-md-6 form-group {{ $errors->has('name') ? 'has-error' : '' }}" >
-                        {!! Form::label('name',trans('lang.name')) !!} <span class="text-red"> *</span>
+                        <label for="name">{{ trans('lang.name') }}</label> <span class="text-red"> *</span>
 
                         <input type="text" name="name" id="name" value="{{ old('name') }}" class="form-control">
                     </div>
                     <div class="col-md-6 form-group {{ $errors->has('slug') ? 'has-error' : '' }}" >
-                        {!! Form::label('slug',trans('lang.slug')) !!} <span class="text-red"> *</span>
+                        <label for="slug">{{ trans('lang.slug') }}</label> <span class="text-red"> *</span>
 
                         <input type="text" name="slug" id="slug" value="{{ old('slug') }}" class="form-control">
                     </div>
                 </div>
 
                 <div class="form-group {{ $errors->has('description') ? 'has-error' : '' }}">
-                    {!! Form::label('description',trans('lang.description')) !!} <span class="text-red"> *</span>
+                    <label for="description">{{ trans('lang.description') }}</label> <span class="text-red"> *</span>
 
                     <div class="form-group" style="background-color:white">
                         <textarea name="description" id="editor" class="form-control article_desc" rows="20">{{ old('description') }}</textarea>
@@ -133,7 +133,7 @@ class="nav-item menu-open"
             <div class="card-body">
                 
                 <div class="form-group {{ $errors->has('type') ? 'has-error' : '' }}">
-                    {!! Form::label('type',trans('lang.status')) !!}
+                    <label for="type">{{ trans('lang.status') }}</label>
                     <div class="row">
                         <div class="col-sm-1">
                             <input type="radio" name="type" value="'1'">
@@ -151,7 +151,7 @@ class="nav-item menu-open"
                 </div>
 
                 <div class="form-group {{ $errors->has('status') ? 'has-error' : '' }}">
-                    {!! Form::label('status',trans('lang.visibility')) !!}
+                    <label for="status">{{ trans('lang.visibility') }}</label>
                     <div class="row">
                         <div class="col-sm-1">
                             <input type="radio" name="status" value="'1'">
@@ -184,12 +184,20 @@ class="nav-item menu-open"
                 ?>
                 <div class="row">
                     <div class="col-md-12">
-                        {!! Form::label('month',trans('lang.publish_immediately')) !!}
+                        <label for="month">{{ trans('lang.publish_immediately') }}</label>
                     </div>
                     <div class="col-md-12">
                         <span class="d-flex">
-                            {!! Form::selectMonth('month', $month,['class'=>'form-control mr-1','style'=>'width: 120px;'])  !!}
-                            {!! Form::selectRange('day', 1, 31, $day,['class'=>'form-control mr-1','style'=>'width: 65px;'])  !!}
+                            <select name="month" id="month" class="form-control mr-1">
+    @foreach(range(1, 12) as $month)
+        <option value="{{ $month }}">{{ date('F', mktime(0, 0, 0, $month, 1)) }}</option>
+    @endforeach
+</select>
+                            <select name="day" id="day" class="form-control mr-1">
+    @for($i = 1; $i <= 31; $i++)
+        <option value="{{ $i }}">{{ $i }}</option>
+    @endfor
+</select>
                             <input type="text" name="year" id="year" value="$year" class="form-control mr-1">@
                             &nbsp;<input type="text" name="hour" value="{{$hour}}" class="form-control" style="width: 50px;">&nbsp;:&nbsp;<input type="text" name="minute" value="{{$minute}}" class="form-control" style="width: 50px;" >
                         </span>

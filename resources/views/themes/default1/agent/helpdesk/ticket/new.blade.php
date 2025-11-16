@@ -101,7 +101,7 @@ class="active"
                         <div class="col-md-4">
                             <!-- email -->
                             <div class="form-group {{ $errors->has('email') ? 'has-error' : '' }}">
-                                {!! Form::label('email',trans('lang.email')) !!}
+                                <label for="email">{{ trans('lang.email') }}</label>
                                 @if ($email_mandatory->status == 1)
                                 <span class="text-red"> *</span>
                                 @endif
@@ -113,8 +113,8 @@ class="active"
                         <div class="col-md-4">
                             <!-- email -->
                             <div class="form-group {{ $errors->has('first_name') ? 'has-error' : '' }}">
-                                {!! Form::label('email',trans('lang.first_name')) !!} <span class="text-red"> *</span>
-                               <!--  {!! Form::text('email',null,['class' => 'form-control'],['id' => 'email']) !!} -->
+                                <label for="email">{{ trans('lang.first_name') }}</label> <span class="text-red"> *</span>
+                               <!--  <input type="text" name="email',null,['class' => 'form-control'],['id' => 'email']" id="email',null,['class' => 'form-control'],['id' => 'email']" value="{{ old('email',null,['class' => 'form-control'],['id' => 'email']') }}" class="form-control"> -->
                                <input type="text" name="first_name" id="first_name" class="form-control">
                             </div>
                         </div>
@@ -122,7 +122,7 @@ class="active"
                         <div class="col-md-4">
                             <!-- full name -->
                             <div class="form-group {{ $errors->has('last_name') ? 'has-error' : '' }}">
-                                {!! Form::label('fullname',trans('lang.last_name')) !!} <span class="text-red"></span>
+                                <label for="fullname">{{ trans('lang.last_name') }}</label> <span class="text-red"></span>
                                 <input type="text" name="last_name" id="last_name" class="form-control">
                             </div>
                         </div>
@@ -130,7 +130,7 @@ class="active"
                     <div class="row">
                         <div class="col-md-1 form-group {{ session()->has('country_code_error') ? 'has-error' : '' }}">
                             <div class="form-group {{ $errors->has('code') ? 'has-error' : '' }}">
-                            {!! Form::label('code',trans('lang.country-code')) !!}
+                            <label for="code">{{ trans('lang.country-code') }}</label>
                             @if ($email_mandatory->status == 0 || $settings->status == 1)
                                  <span class="text-red"> *</span>
                             @endif
@@ -145,14 +145,14 @@ class="active"
                                 @if ($email_mandatory->status == 0 || $settings->status == 1)
                                  <span class="text-red"> *</span>
                                 @endif
-                                {!! Form::input('number','mobile',null,['class' => 'form-control', 'id' => 'mobile']) !!}
+                                <input type="number" name="mobile" id="mobile" value="{{ old('mobile') }}" class="form-control">
                             </div>
                         </div>
                         <div class="col-md-6">
                             <!-- phone -->
                             <div class="form-group {{ $errors->has('phone') ? 'has-error' : '' }}">
                                 <label>{{ trans('lang.phone') }}:</label>
-                                {!! Form::input('number','phone',null,['class' => 'form-control', 'id' => 'phone_number']) !!}
+                                <input type="number" name="phone" id="phone_number" value="{{ old('phone') }}" class="form-control">
                                 {!! $errors->first('phone', '<spam class="help-block text-red">:message</spam>') !!}
                             </div>
                         </div>
@@ -186,7 +186,19 @@ class="active"
                                 <label>{{ trans('lang.help_topic') }}:</label>
                                 <!-- helptopic -->
                                 <?php $helptopic = App\Model\helpdesk\Manage\Help_topic::where('status', '=', 1)->select('topic', 'id')->get(); ?>
-                                {!! Form::select('helptopic', ['Helptopic'=>$helptopic->pluck('topic','id')->toArray()],null,['class' => 'form-control select','id'=>'selectid']) !!}
+                                <select name="helptopic" id="selectid" class="form-control select">
+    @foreach(['Helptopic'=>$helptopic->pluck('topic','id')->toArray()] as $key => $value)
+        @if(is_array($value))
+            <optgroup label="{{ $key }}">
+                @foreach($value as $subKey => $subValue)
+                    <option value="{{ $subKey }}">{{ $subValue }}</option>
+                @endforeach
+            </optgroup>
+        @else
+            <option value="{{ $key }}">{{ $value }}</option>
+        @endif
+    @endforeach
+</select>
                             </div>
                         </div>
                         <div class="col-md-3">
@@ -194,7 +206,19 @@ class="active"
                             <div class="form-group">
                                 <label>{{ trans('lang.sla_plan') }}:</label>
                                 <?php $sla_plan = App\Model\helpdesk\Manage\Sla_plan::where('status', '=', 1)->select('grace_period', 'id')->get(); ?>
-                                {!! Form::select('sla', ['SLA'=>$sla_plan->pluck('grace_period','id')->toArray()],null,['class' => 'form-control select']) !!}
+                                <select name="sla" id="sla" class="form-control select">
+    @foreach(['SLA'=>$sla_plan->pluck('grace_period','id')->toArray()] as $key => $value)
+        @if(is_array($value))
+            <optgroup label="{{ $key }}">
+                @foreach($value as $subKey => $subValue)
+                    <option value="{{ $subKey }}">{{ $subValue }}</option>
+                @endforeach
+            </optgroup>
+        @else
+            <option value="{{ $key }}">{{ $value }}</option>
+        @endif
+    @endforeach
+</select>
                             </div>
                         </div>
                         <div class="col-md-3">
@@ -210,7 +234,19 @@ class="active"
                             <div class="form-group">
                                 <label>{{ trans('lang.assign_to') }}:</label>
                                 <?php $agents = App\User::where('role', '!=', 'user')->where('active', '=', 1)->get(); ?>
-                                {!! Form::select('assignto', [''=>'Select an Agent','Agents'=>$agents->pluck('first_name','id')->toArray()],null,['class' => 'form-control select']) !!}
+                                <select name="assignto" id="assignto" class="form-control select">
+    @foreach([''=>'Select an Agent','Agents'=>$agents->pluck('first_name','id')->toArray()] as $key => $value)
+        @if(is_array($value))
+            <optgroup label="{{ $key }}">
+                @foreach($value as $subKey => $subValue)
+                    <option value="{{ $subKey }}">{{ $subValue }}</option>
+                @endforeach
+            </optgroup>
+        @else
+            <option value="{{ $key }}">{{ $value }}</option>
+        @endif
+    @endforeach
+</select>
                             </div>
                         </div>
                         <div id="response" class="col-md-6 form-group"></div>
@@ -263,7 +299,19 @@ class="active"
                             </div>
                             <div class="col-md-5">
                                 <?php $Priority = App\Model\helpdesk\Ticket\Ticket_Priority::where('status','=',1)->get(); ?>
-                                {!! Form::select('priority', [trans('lang.priorities')=>$Priority->pluck('priority_desc','priority_id')->toArray()],null,['class' => 'form-control select']) !!}
+                                <select name="priority" id="priority" class="form-control select">
+    @foreach([trans('lang.priorities')=>$Priority->pluck('priority_desc','priority_id')->toArray()] as $key => $value)
+        @if(is_array($value))
+            <optgroup label="{{ $key }}">
+                @foreach($value as $subKey => $subValue)
+                    <option value="{{ $subKey }}">{{ $subValue }}</option>
+                @endforeach
+            </optgroup>
+        @else
+            <option value="{{ $key }}">{{ $value }}</option>
+        @endif
+    @endforeach
+</select>
                             </div>
                             
                         </div>
